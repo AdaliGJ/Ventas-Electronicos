@@ -1,6 +1,15 @@
 import './catalog.css';
 import React, {useContext} from 'react';
 import {LoginContext} from "../../context/LoginContext.js";
+import Products from './products';
+
+
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import SearchIcon from '@material-ui/icons/Search';
+
+
+import Grid from '@mui/material/Grid';
 
 class Catalog extends React.Component{
     
@@ -17,7 +26,24 @@ class Catalog extends React.Component{
         return(
             <div>
                 <div className="page">
-                    
+                <h2>Búsqueda de Dispositivos</h2>
+                    <div className="searchbar">
+                        <TextField className="outlined-required" label="Dispositivo"  name="dispositivo"/>
+                        <Button><SearchIcon/></Button>
+                    </div>
+                    <div className="catalog">
+                    <Grid container spacing={2}>
+                        <Grid item xs={4}>
+                           <Products/>
+                        </Grid>
+                        <Grid item xs={4}>
+                            <Products/>
+                        </Grid>
+                        <Grid item xs={4}>
+                            <Products/>
+                        </Grid>
+                    </Grid>
+                    </div>
                     
                 </div>
             </div>

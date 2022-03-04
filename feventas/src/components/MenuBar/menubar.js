@@ -7,7 +7,6 @@ import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import IconButton from '@material-ui/core/IconButton';
 import {useHistory} from "react-router-dom";
-
 import { LoginContext } from '../../context/LoginContext';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import './menubar.css'
@@ -19,22 +18,12 @@ import './menubar.css'
      const inicio = () =>{
         history.push('/home');
     }
-    const contact = () =>{
-        history.push('/contact');
-    }
-    const info = () =>{
-        history.push('/information');
-    }
-    const news = () =>{
-        history.push('/news');
-    }
 
     const login = ()=>{
       history.push('/login');
     }
 
    const signout=()=>{
-        setUsername(null);
         setTipoUsuario(null);
         history.push('/home');
    } 
@@ -50,7 +39,7 @@ import './menubar.css'
             Sistema de ventas
           </Typography>
           <ButtonGroup variant="contained" id="appbar_button">
-            <Button id="info_button" onClick={inicio}>Catálogo</Button>
+            <Button id="home_button" onClick={inicio}>Catálogo</Button>
             <IconButton id={tipoUsuario?"siout":"noout"} onClick={signout}>
               <ExitToAppIcon />
             </IconButton>
