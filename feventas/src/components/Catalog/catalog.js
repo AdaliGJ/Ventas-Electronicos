@@ -18,7 +18,8 @@ class Catalog extends React.Component{
     
     componentDidMount(){
         const context = this.context;
-        this.setState({tipo_usuario: context.tipoUsuario});
+        this.setState({usuario: context.username,
+            tipo_usuario: context.tipoUsuario});
         
     }
     

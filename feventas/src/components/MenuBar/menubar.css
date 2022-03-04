@@ -18,7 +18,7 @@
     /*width: 35vw;*/
 }
 
-#home_button,  #news_button, #contact_button, #siout, #nolog{
+#home_button, #siout, #nolog, #cliente_reg{
     color: rgb(148, 0, 0);
     background-color: yellow;
     border-color: orange;

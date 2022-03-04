@@ -23,8 +23,13 @@ import './menubar.css'
       history.push('/login');
     }
 
+    const cliente = ()=>{
+        history.push('/cliente_nuevo');
+      }
+
    const signout=()=>{
         setTipoUsuario(null);
+        setUsername(null);
         history.push('/home');
    } 
 
@@ -44,6 +49,7 @@ import './menubar.css'
               <ExitToAppIcon />
             </IconButton>
             <Button id={tipoUsuario? "silog":"nolog"} onClick={login}>Inicia Sesión</Button>
+            <Button id="cliente_reg" onClick={cliente}>Registro Clientes</Button>
         </ButtonGroup>
         </Toolbar>
       </AppBar>
