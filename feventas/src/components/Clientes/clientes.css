@@ -1,0 +1,61 @@
+
+
+
+.data_form {
+    color: black;
+    height: max-content;
+    width: 80vw;
+    margin: auto;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    text-align: center;
+    border-width: 1px;
+    text-align: center;
+    padding-bottom: 8px;
+}
+
+.register-data{
+    width: 77vw;
+    align-content: center;
+}
+
+.data_form .outlined-required{
+    width: 34vw;
+}
+
+
+
+
+
+.outlined-short{
+    width: 34vw;
+}
+
+#send1{
+    background-color: rgba(11, 11, 48, 0.884) ;
+    color: white;
+    width: 40vw;
+    margin: 2% auto;
+}
+
+#send2{
+    background-color: rgb(148, 0, 0);
+    color: white;
+    width: 40vw;
+    margin: 2% auto;
+}
+
+#nosend{
+    display: none;
+}
+
+.text-together{
+    display: flex;
+    justify-content: center;
+}
+
+hr{
+    margin: 1vw;
+    color: transparent;
+}
+
