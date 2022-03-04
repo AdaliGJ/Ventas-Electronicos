@@ -48,7 +48,7 @@ import './menubar.css'
             <IconButton id={tipoUsuario?"siout":"noout"} onClick={signout}>
               <ExitToAppIcon />
             </IconButton>
-            <Button id={tipoUsuario? "silog":"nolog"} onClick={login}>Inicia Sesión</Button>
+            <Button id={tipoUsuario? "silog":"nolog"} onClick={login}>Iniciar Sesión</Button>
             <Button id="cliente_reg" onClick={cliente}>Registro Clientes</Button>
         </ButtonGroup>
         </Toolbar>
