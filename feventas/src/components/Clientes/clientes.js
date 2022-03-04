@@ -26,6 +26,8 @@ class Clientes extends React.Component{
             telefono: null,
             tipo_suscricpion: null,
             vencimiento: null,
+            img: null,
+            archivo: ''
         }
 
         this.register=this.register.bind(this);
@@ -37,7 +39,15 @@ class Clientes extends React.Component{
     }
 
    
-
+    handleChange = e => {
+        if(e.target.files[0]){
+            this.setState({img:  e.target.files[0].name,
+            archivo: e.target.files[0]});
+            console.log(this.state.img);
+        }else{
+            this.setState({img: ''});
+        }
+      }
 
     
     
@@ -79,12 +89,17 @@ class Clientes extends React.Component{
                     </div>
                 </CardContent>
                 <CardActions className="action">
-                    <Grid container direction={"column"} spacing={1}>
+                    <Grid container direction={"column"} spacing={0.1}>
                         <Grid item>
-                            <Button id="send1" variant="contained" onClick={this.register}>Actualizar los datos</Button>
+                            <TextField type="file" name="img-file" id="img-file" inputProps={{ accept: '.jpg, .png, .jpeg' }} onChange={this.handleChange}/>  
+                                <label htmlFor="img-file"> 
+                                    <Button id="send1" variant="contained" component="span">Subir Patente de Comercio</Button>
+                                    <p>{this.state.img !=''? this.state.img : "Ninguna Imagen Seleccionada"}</p>
+                                </label> 
                         </Grid>
                         <Grid item>
-                            <Button  id="send2" variant="contained" onClick={this.register}>laa</Button>
+                            <Button  id="send2" variant="contained" onClick={this.register}>Aceptar</Button>
+                            
                         </Grid>
 
                     </Grid>

@@ -24,7 +24,10 @@
 }
 
 
-
+#img-file{
+    display: none;
+ 
+}
 
 
 .outlined-short{
@@ -35,14 +38,14 @@
     background-color: rgba(11, 11, 48, 0.884) ;
     color: white;
     width: 40vw;
-    margin: 2% auto;
+    
 }
 
 #send2{
     background-color: rgb(148, 0, 0);
     color: white;
     width: 40vw;
-    margin: 2% auto;
+
 }
 
 #nosend{
