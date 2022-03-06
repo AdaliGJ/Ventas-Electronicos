@@ -6,6 +6,8 @@ import Catalog from "./components/Catalog/catalog.js";
 import MenuBar from "./components/MenuBar/menubar.js";
 import Login from "./components/Login/login.js";
 import Clientes from "./components/Clientes/clientes.js";
+import Footer from "./components/Footer/footer.js";
+import Detalle from "./components/Detalle/detalle"
 
 function App() {
   const getUsername=()=>{
@@ -35,6 +37,7 @@ function App() {
     <MenuBar/> 
       { tipoUsuario == 1 ? <Switch> 
           <Route exact path="/home" component={Catalog}/>
+          <Route exact path="/productos/:id" component={Detalle}/>
           <Route exact path="/login" component={Login}/>
           <Route exact path="/cliente_nuevo" component={Clientes}/>
           <Redirect path="/" to="/home"></Redirect>
@@ -42,11 +45,13 @@ function App() {
         :
         <Switch> 
           <Route exact path="/home" component={Catalog}/>
+          <Route exact path="/productos/:id" component={Detalle}/>
           <Route exact path="/login" component={Login}/>
           <Route exact path="/cliente_nuevo" component={Clientes}/>
           <Redirect path="/" to="/home"></Redirect>
         </Switch>}
-      </LoginContext.Provider>  
+        <Footer/>
+      </LoginContext.Provider> 
   </div>
   </Router>
 

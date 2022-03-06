@@ -1,7 +1,7 @@
 import './catalog.css';
-import React, {useContext} from 'react';
+import React, {useContext, useParams} from 'react';
+import {Link} from "react-router-dom";
 import {LoginContext} from "../../context/LoginContext.js";
-
 
 import Button from '@material-ui/core/Button';
 import Card from '@mui/material/Card';
@@ -11,8 +11,19 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 
 
+
 class Products extends React.Component{
-    
+    static contextType = LoginContext;
+    constructor(props){
+      super(props);
+      this.state={
+          id: null,
+          
+      }
+      
+  }
+
+  
 
     render(){
         return(
@@ -33,7 +44,9 @@ class Products extends React.Component{
                 </CardContent>
                 <CardActions>
                     <Button size="small">Comprar</Button>
-                    <Button size="small">Ver Detalle</Button>
+                    <Link to={`/productos/${this.props.id}`}>
+                        <Button size="small">Ver Detalle</Button>
+                    </Link>
                 </CardActions>
             </Card>
         );

@@ -1,0 +1,36 @@
+.slider{
+    width: 25vw;
+    height: 25vw;
+    /*position: relative;*/
+    /*display: flex; */
+    justify-content: center;
+    align-items: center;
+     /*margin: auto;*/
+    padding: 1vw;
+    margin-right: 10vw;
+
+}
+
+.slider img {
+    width: 100%;
+    height: auto;
+    margin: auto;
+  }
+  
+  .detalle {
+    width: 85vw;
+    justify-self: center;
+    margin: 10vh auto;
+    padding: 3vw;
+    margin-top: 2vh;
+  } 
+
+  ul, h3{
+     text-align: left;
+  } 
+
+  #compra_1, #quantity{
+    float: none;
+ } 
+
+      

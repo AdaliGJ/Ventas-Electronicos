@@ -35,13 +35,13 @@ class Catalog extends React.Component{
                     <div className="catalog">
                     <Grid container spacing={2}>
                         <Grid item xs={4}>
-                           <Products/>
+                           <Products id={1}/>
                         </Grid>
                         <Grid item xs={4}>
-                            <Products/>
+                            <Products id={4}/>
                         </Grid>
                         <Grid item xs={4}>
-                            <Products/>
+                            <Products id={2}/>
                         </Grid>
                     </Grid>
                     </div>
