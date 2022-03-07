@@ -7,7 +7,8 @@ import MenuBar from "./components/MenuBar/menubar.js";
 import Login from "./components/Login/login.js";
 import Clientes from "./components/Clientes/clientes.js";
 import Footer from "./components/Footer/footer.js";
-import Detalle from "./components/Detalle/detalle"
+import Detalle from "./components/Detalle/detalle";
+import Marcas from "./components/Marcas/marcas.js";
 
 function App() {
   const getUsername=()=>{
@@ -35,11 +36,12 @@ function App() {
     <div className="App"> 
     <LoginContext.Provider value={{username, setUsername, setTipoUsuario, tipoUsuario}}> 
     <MenuBar/> 
-      { tipoUsuario == 1 ? <Switch> 
+       { tipoUsuario == 1 ? <Switch> 
           <Route exact path="/home" component={Catalog}/>
           <Route exact path="/productos/:id" component={Detalle}/>
           <Route exact path="/login" component={Login}/>
           <Route exact path="/cliente_nuevo" component={Clientes}/>
+          <Route exact path="/marcas" component={Marcas}/>
           <Redirect path="/" to="/home"></Redirect>
         </Switch>
         :
@@ -48,6 +50,7 @@ function App() {
           <Route exact path="/productos/:id" component={Detalle}/>
           <Route exact path="/login" component={Login}/>
           <Route exact path="/cliente_nuevo" component={Clientes}/>
+          <Route exact path="/marcas" component={Marcas}/>
           <Redirect path="/" to="/home"></Redirect>
         </Switch>}
         <Footer/>
