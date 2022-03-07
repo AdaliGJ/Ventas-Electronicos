@@ -52,8 +52,8 @@ class Footer extends Component{
                             <Grid item xs={4}> 
                                 <Box borderBottom={1}>Productos</Box>
                                 <FooterBox link='/home' title="Catálogo"/>
-                                <FooterBox link='/home' title="Marcas"/>
-                                <FooterBox link='/' title="Inventario"/>
+                                <FooterBox link='/marcas' title="Marcas"/>
+                                <FooterBox link='/inventario' title="Inventario"/>
                             </Grid>
                             <Grid item xs={4}> 
                                 <Box borderBottom={1}>Usuarios</Box>

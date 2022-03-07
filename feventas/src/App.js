@@ -9,6 +9,7 @@ import Clientes from "./components/Clientes/clientes.js";
 import Footer from "./components/Footer/footer.js";
 import Detalle from "./components/Detalle/detalle";
 import Marcas from "./components/Marcas/marcas.js";
+import Inventario from "./components/Inventario/inventario.js";
 
 function App() {
   const getUsername=()=>{
@@ -42,6 +43,7 @@ function App() {
           <Route exact path="/login" component={Login}/>
           <Route exact path="/cliente_nuevo" component={Clientes}/>
           <Route exact path="/marcas" component={Marcas}/>
+          <Route exact path="/inventario" component={Inventario}/>
           <Redirect path="/" to="/home"></Redirect>
         </Switch>
         :
@@ -51,6 +53,7 @@ function App() {
           <Route exact path="/login" component={Login}/>
           <Route exact path="/cliente_nuevo" component={Clientes}/>
           <Route exact path="/marcas" component={Marcas}/>
+          <Route exact path="/inventario" component={Inventario}/>
           <Redirect path="/" to="/home"></Redirect>
         </Switch>}
         <Footer/>

@@ -1,0 +1,65 @@
+#noinv{
+    /*display: none;*/
+}
+
+#actualizarInv, #agregarInv{
+    background-color: rgba(11, 11, 48, 0.884);
+    color: white;
+    margin-right: 2vw;
+}
+
+#cancelarInv{
+    background-color: rgb(148, 0, 0);
+    color: white;
+}
+
+.box{
+    position: 'absolute';
+    margin: auto;
+    margin-top: 10vh;
+    width: 60vw;
+    background-color: white;
+    border: '2px solid' rgba(11, 11, 48, 0.884);
+    box-shadow: 24;
+    padding: 3vw;
+}
+
+.modalfield{
+    
+    width: 60vw;
+}
+
+
+
+.table-header{
+    background-color: rgba(11, 11, 48, 0.884);
+}
+
+
+
+.container{
+    margin-left: 2%;
+    overflow-x: auto;
+    width: 90%; 
+    padding: 1vw;
+    margin-top: 2vh;
+}
+
+.customized-table{
+    width: 90%;
+}
+
+#aprobar{
+    background-color: yellow;
+    color: white;
+}
+
+#rechazar{
+    background-color: rgb(148, 0, 0);
+    color: white;
+}
+
+#boton-modal{
+    background-color: rgb(148, 0, 0);
+    color: white;
+}
