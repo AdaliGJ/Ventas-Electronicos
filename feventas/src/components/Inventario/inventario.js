@@ -46,7 +46,7 @@ class Inventario extends React.Component{
             producto: null,
             id: null,
             usuario: null,
-            inventario: [{serie: 1, producto: "Harold"}, {serie: 2, producto: "Jaime"}]
+            inventario: [{serie: 1, producto: 2}, {serie: 2, producto: 4}]
             
         }
 
@@ -152,7 +152,7 @@ class Inventario extends React.Component{
                                                 {inv.serie}
                                             </TableCell>
                                         <TableCell align="right">{inv.producto}</TableCell>
-                                        <TableCell align="right"><NuevoInventario titulo={<Edit/>} comp={true}/></TableCell>
+                                        <TableCell align="right"><NuevoInventario titulo={<Edit/>} comp={true} prod={inv.producto} serie={inv.serie}/></TableCell>
                                         </TableRow>
                                     ))}
                                     </TableBody>
