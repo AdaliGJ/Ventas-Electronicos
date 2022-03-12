@@ -7,6 +7,6 @@ import net.codejava.Repositorio.RepositorioPrueba;
 @RestController 
 public class MarcasControlador {
 	
-	@Autowired
-	private marcaServiceApi marcaServiceApi;
+	//@Autowired
+	//private marcaServiceApi marcaServiceApi;
 }

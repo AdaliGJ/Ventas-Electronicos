@@ -27,15 +27,14 @@ public class PruebaControlador {
 	
 	
 	@PostMapping("/insertar")
-	public @ResponseBody String insertarPrueba (@RequestParam int nValor1, @RequestParam String nValor2) {
+	public @ResponseBody Prueba insertarPrueba (@RequestParam int nValor1, @RequestParam String nValor2) {
 	
 		Prueba n = new Prueba(4,nValor1,nValor2);
 		//n.setId_prueba(4);
 		//n.setValor_1(nValor1);
 		//n.setValor_2(nValor2);
-		repositorioPrueba.save(n);
 		
-		return "ok";
+		return repositorioPrueba.save(n);
 	}
 	
 	@PostMapping("/modificar")
