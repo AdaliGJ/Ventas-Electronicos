@@ -29,6 +29,8 @@ public class Inventario {
 	@Column
 	private String modelo;
 	
+	public Inventario() {}
+	
 	
 	
 	public int getId_inventario() {

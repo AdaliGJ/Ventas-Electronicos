@@ -24,6 +24,9 @@ public class Televisores {
 	private int entradas_HDMI;
 	
 	
+	public Televisores() {}
+	
+	
 	public int getId_inventario() {
 		return id_inventario;
 	}

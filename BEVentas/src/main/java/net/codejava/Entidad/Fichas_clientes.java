@@ -28,6 +28,9 @@ public class Fichas_clientes {
 	private String fecha_de_vencimiento;
 	
 	
+	public Fichas_clientes() {}
+	
+	
 	public int getId_cliente() {
 		return id_cliente;
 	}

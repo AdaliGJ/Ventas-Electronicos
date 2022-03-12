@@ -17,6 +17,8 @@ public class Dispositivos_individuales {
 	@Column
 	private int id_inventario;
 	
+	public Dispositivos_individuales() {}
+	
 	
 	public String getSerie_dispositivo() {
 		return serie_dispositivo;

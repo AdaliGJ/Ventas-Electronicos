@@ -26,6 +26,9 @@ public class Ordenes_compra {
 	private String fecha;
 	
 	
+	public Ordenes_compra() {}
+	
+	
 	public int getId_orden() {
 		return id_orden;
 	}

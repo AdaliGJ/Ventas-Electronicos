@@ -23,6 +23,8 @@ public class Factura {
 	@Column 
 	private float precio;
 	
+	public Factura() {}
+	
 	
 	public int getId_entrada_factura() {
 		return id_entrada_factura;

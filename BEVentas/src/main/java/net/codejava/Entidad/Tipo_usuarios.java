@@ -17,6 +17,8 @@ public class Tipo_usuarios {
 	
 	@Column
 	private String nombre;
+	
+	public Tipo_usuarios() {}
 
 	public int getId_tipo_usuario() {
 		return id_tipo_usuario;

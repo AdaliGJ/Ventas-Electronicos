@@ -20,6 +20,9 @@ public class Tipo_clientes {
 	private String descuento;
 	
 	
+	public Tipo_clientes() {}
+	
+	
 	public int getId_tipo_cliente() {
 		return id_tipo_cliente;
 	}

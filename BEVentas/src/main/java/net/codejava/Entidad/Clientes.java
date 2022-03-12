@@ -20,6 +20,8 @@ public class Clientes {
 	private String contraseña;
 	
 	
+	public Clientes() {}
+	
 	public int getId_cliente() {
 		return id_cliente;
 	}

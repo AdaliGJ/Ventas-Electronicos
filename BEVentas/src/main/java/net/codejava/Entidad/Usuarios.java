@@ -20,6 +20,12 @@ public class Usuarios {
 	private String contraseña;
 	@Column 
 	private String nombre;
+	
+	
+	public Usuarios() {}
+	
+	
+	
 	public int getId_usuario() {
 		return id_usuario;
 	}

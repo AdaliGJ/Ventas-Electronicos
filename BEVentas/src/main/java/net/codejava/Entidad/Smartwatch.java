@@ -24,6 +24,9 @@ public class Smartwatch {
 	private int memoria_GB;
 	
 	
+	public Smartwatch() {}
+	
+	
 	public int getId_inventario() {
 		return id_inventario;
 	}

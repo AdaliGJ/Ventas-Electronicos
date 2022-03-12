@@ -19,6 +19,9 @@ public class Tipo_dispositivo {
 	private String nombre;
 	
 	
+	public Tipo_dispositivo() {} 
+	
+	
 	public int getId_tipo_dispositivo() {
 		return id_tipo_dispositivo;
 	}

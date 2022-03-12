@@ -22,6 +22,9 @@ public class Videojuegos {
 	private String consola;
 	
 	
+	public Videojuegos() {}
+	
+	
 	public int getId_inventario() {
 		return id_inventario;
 	}

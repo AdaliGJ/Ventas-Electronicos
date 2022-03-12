@@ -19,6 +19,8 @@ public class Imagenes_dispositivos {
 	@Column
 	private String imagen;
 	
+	public Imagenes_dispositivos() {}
+	
 	
 	public int getId_imagen() {
 		return id_imagen;

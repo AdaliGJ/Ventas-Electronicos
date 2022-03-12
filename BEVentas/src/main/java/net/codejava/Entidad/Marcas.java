@@ -18,6 +18,9 @@ public class Marcas {
 	private String nombre;
 	
 	
+	public Marcas() {}
+	
+	
 	public int getId_marca() {
 		return id_marca;
 	}

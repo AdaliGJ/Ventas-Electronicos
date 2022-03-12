@@ -24,6 +24,9 @@ public class Ventas {
 	private String fecha;
 	
 	
+	public Ventas() {}
+	
+	
 	public int getId_venta() {
 		return id_venta;
 	}
