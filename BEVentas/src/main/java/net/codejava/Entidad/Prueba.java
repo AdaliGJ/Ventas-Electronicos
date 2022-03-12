@@ -17,44 +17,54 @@ public class Prueba {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id_prueba;
 	@Column
-	private int valor_1;
+	private int valor1;
 	@Column
-	private String valor_2;
+	private String valor2;
 	
 	public Prueba() {}
+
 	
 	//Getters y Setters
 	public int getId_prueba() {
 		return id_prueba;
 	}
+
 	public void setId_prueba(int id_prueba) {
 		this.id_prueba = id_prueba;
 	}
-	public int getValor_1() {
-		return valor_1;
+
+	public int getValor1() {
+		return valor1;
 	}
-	public void setValor_1(int valor_1) {
-		this.valor_1 = valor_1;
+
+	public void setValor1(int valor1) {
+		this.valor1 = valor1;
 	}
-	public String getValor_2() {
-		return valor_2;
+
+	public String getValor2() {
+		return valor2;
 	}
-	public void setValor_2(String valor_2) {
-		this.valor_2 = valor_2;
+
+	public void setValor2(String valor2) {
+		this.valor2 = valor2;
 	}
-	
-	
-	public Prueba(int id_prueba, int valor_1, String valor_2) {
+
+
+	public Prueba(int id_prueba, int valor1, String valor2) {
 		super();
 		this.id_prueba = id_prueba;
-		this.valor_1 = valor_1;
-		this.valor_2 = valor_2;
+		this.valor1 = valor1;
+		this.valor2 = valor2;
 	}
-	
+
+
 	@Override
 	public String toString() {
-		return "Prueba [id_prueba=" + id_prueba + ", valor_1=" + valor_1 + ", valor_2=" + valor_2 + "]";
+		return "Prueba [id_prueba=" + id_prueba + ", valor1=" + valor1 + ", valor2=" + valor2 + "]";
 	}
+	
+	
+	
 	
 
 }

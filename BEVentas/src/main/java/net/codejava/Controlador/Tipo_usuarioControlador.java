@@ -17,7 +17,7 @@ public class Tipo_usuarioControlador {
 	private RepositorioTipo_usuarios repositorioTipoUsuario;
 	
 	@GetMapping("/ObtenerTodos")
-	public @ResponseBody Iterable<Tipo_usuarios> getAllPruebas(){
+	public @ResponseBody Iterable<Tipo_usuarios> getAll(){
 		return repositorioTipoUsuario.findAll();
 	}
 

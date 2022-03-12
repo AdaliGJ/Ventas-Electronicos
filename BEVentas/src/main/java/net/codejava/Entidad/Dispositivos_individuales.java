@@ -13,7 +13,8 @@ public class Dispositivos_individuales {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String serie_dispositivo;
+	@Column(name="serie_dispositivo")
+	private String serie;
 	@Column
 	private int id_inventario;
 	
@@ -21,10 +22,10 @@ public class Dispositivos_individuales {
 	
 	
 	public String getSerie_dispositivo() {
-		return serie_dispositivo;
+		return serie;
 	}
 	public void setSerie_dispositivo(String serie_dispositivo) {
-		this.serie_dispositivo = serie_dispositivo;
+		this.serie= serie_dispositivo;
 	}
 	public int getId_inventario() {
 		return id_inventario;
@@ -34,13 +35,13 @@ public class Dispositivos_individuales {
 	}
 	public Dispositivos_individuales(String serie_dispositivo, int id_inventario) {
 		super();
-		this.serie_dispositivo = serie_dispositivo;
+		this.serie = serie_dispositivo;
 		this.id_inventario = id_inventario;
 	}
 	
 	@Override
 	public String toString() {
-		return "Dispositivos_individuales [serie_dispositivo=" + serie_dispositivo + ", id_inventario=" + id_inventario
+		return "Dispositivos_individuales [serie_dispositivo=" + serie+ ", id_inventario=" + id_inventario
 				+ "]";
 	}
 	

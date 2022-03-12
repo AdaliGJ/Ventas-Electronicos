@@ -3,6 +3,7 @@ package net.codejava.Controlador;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,12 +20,28 @@ public class PruebaControlador {
 
 	@Autowired
 	private RepositorioPrueba repositorioPrueba;
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
 	
 	@GetMapping("/prueba")
 	public @ResponseBody Iterable<Prueba> getAllPruebas(){
 		return repositorioPrueba.findAll();
 	}
 	
+	/*
+	@GetMapping("/valor")
+	public void buscarValor(@RequestParam String nValor2){
+		
+		String query = "select * from prueba";
+		
+		jdbcTemplate.execute(query);
+	}
+	*/
+	
+	@GetMapping("/Obtener")
+	public @ResponseBody Optional<Prueba> getOne(@RequestParam String nValor2){
+		return repositorioPrueba.findByValor2(nValor2);
+	}
 	
 	@PostMapping("/insertar")
 	public @ResponseBody Prueba insertarPrueba (@RequestParam int nValor1, @RequestParam String nValor2) {
@@ -66,6 +83,6 @@ public class PruebaControlador {
 			
 		} else {
 			return "El usuario no existe";
-		}		
+		}	
 	}
 }
