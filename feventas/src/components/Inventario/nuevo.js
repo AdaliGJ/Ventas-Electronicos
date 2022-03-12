@@ -20,11 +20,11 @@ class NuevoInventario extends React.Component {
       super(props);
       this.state={
           open: false,
-          serie: "",
+          serie: props.comp? props.serie:"",
           producto: null,
-          id: null,
+          id: props.comp? props.prod:null,
           usuario: null,
-          productos: [{id: 1, nombre: "Harold"}, {id: 2, nombre: "Jaime"}]
+          productos: [{id: 1, nombre: 2}, {id: 2, nombre: 4}]
           
       }
       this.handleOpen=this.handleOpen.bind(this);
@@ -77,8 +77,8 @@ updateItem = ()=> {
             </Grid>
             <Grid item>
               <FormControl className="modalfield" variant ="outlined">
-                    <InputLabel>Dosis</InputLabel>
-                    <Select label="Dosis" displayEmpty onChange={e=>this.setState({dosis: e.target.value})}  value={this.state.dosis}>
+                    <InputLabel>Producto</InputLabel>
+                    <Select label="Producto" displayEmpty onChange={e=>this.setState({id: e.target.value})}  value={this.state.id}>
                     {this.state.productos.map((p) => (
                         <MenuItem value={p.id}>{p.nombre}</MenuItem>
                     ))}
