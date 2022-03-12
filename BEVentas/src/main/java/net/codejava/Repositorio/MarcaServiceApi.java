@@ -2,11 +2,11 @@ package net.codejava.Repositorio;
 
 import org.springframework.data.repository.CrudRepository;
 
-import net.codejava.Entidad.Prueba;
+import net.codejava.Entidad.Marcas;
 
 
 
-public interface MarcaServiceApi extends CrudRepository<Prueba, Integer>{
+public interface MarcaServiceApi extends CrudRepository<Marcas, Integer>{
 	
 
 
