@@ -12,12 +12,13 @@ import javax.persistence.Table;
 public class Tipo_clientes {
 	
 	@Id
+	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id_tipo_cliente;
 	@Column
 	private String nombre;
 	@Column
-	private String descuento;
+	private int descuento;
 	
 	
 	public Tipo_clientes() {}
@@ -35,13 +36,13 @@ public class Tipo_clientes {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public String getDescuento() {
+	public int getDescuento() {
 		return descuento;
 	}
-	public void setDescuento(String descuento) {
+	public void setDescuento(int descuento) {
 		this.descuento = descuento;
 	}
-	public Tipo_clientes(int id_tipo_cliente, String nombre, String descuento) {
+	public Tipo_clientes( int id_tipo_cliente ,String nombre, int descuento) {
 		super();
 		this.id_tipo_cliente = id_tipo_cliente;
 		this.nombre = nombre;
