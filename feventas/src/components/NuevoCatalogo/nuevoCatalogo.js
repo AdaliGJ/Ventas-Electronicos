@@ -29,10 +29,24 @@ class NuevoCatalogo extends React.Component {
           marca:null,
           categoria: null,
           marcas: [{id: 1, nombre: "Samsung"}, {id: 2, nombre: "Amazon"}],
-          tipo_productos: [{id_tipo_dispositivo: 1, nombre: "Televisor"}, {id_tipo_dispositivo: 2, nombre: "Videojuego"}, {id_tipo_dispositivo: 3, nombre: "Smartwatch"}, , {id_tipo_dispositivo: 4, nombre: "Otros"}],
+          tipo_productos: [],
 
           imgs: '',
-          archivos: null
+          archivos: null,
+
+         
+          res: '',
+          bits: '',
+          pulgadas:'',
+          hdmi: '',
+
+          max_jug: '',
+          graficos: '',
+          consola: '',
+
+          so: '',
+          ram:'',
+          memoria: ''
           
       }
       this.handleOpen=this.handleOpen.bind(this);
@@ -81,13 +95,13 @@ updateItem = ()=> {
   this.setState({usuario: context.username,
     tipo_usuario: context.tipoUsuario});
 
-  const url= 'http://localhost:8080/Marca/ObtenerTodos'
+  const url= 'http://localhost:8080/Tipo_dispositivo/ObtenerTodos'
 
   axios.get(url).then(response => response.data)
     .then((data) => {
       this.setState({tipo_productos: data});
       
-      console.log(this.state.data);
+      console.log(data);
     });
  }
 
@@ -140,18 +154,41 @@ updateItem = ()=> {
                   <p>{this.state.imgs !=null? this.state.imgs : "Ninguna Imagen Seleccionada"}</p>
                 </label> 
             </Grid>
-            {this.state.categoria==1?<div>
-            <Grid item className="text-together">
-              <TextField className="modalfield-short" label="Meses de Garantía"  type="number" variant="outlined" onInput={e=>this.setState({garantia: e.target.value})}  value={this.state.garantia}/> 
-              <hr/>
-              <TextField className="modalfield-short" label="Costo (Q)" type="number" variant="outlined" onInput={e=>this.setState({precio: e.target.value})}  value={this.state.precio}/> 
+            {this.state.categoria==1? <Grid container direction={"column"} spacing={2}>
+              <Grid item className="text-together">
+                <TextField className="modalfield-short" label="Resolución"  type="text" variant="outlined" onInput={e=>this.setState({res: e.target.value})}  value={this.state.res}/> 
+                <hr/>
+                <TextField className="modalfield-short" label="Bits de Profundidad" type="number" variant="outlined" onInput={e=>this.setState({bits: e.target.value})}  value={this.state.bits}/> 
+              </Grid>
+              <Grid item className="text-together">
+                <TextField className="modalfield-short" label="Pantalla (pulgadas)"  type="number" variant="outlined" onInput={e=>this.setState({pulgadas: e.target.value})}  value={this.state.pulgadas}/> 
+                <hr/>
+                <TextField className="modalfield-short" label="Entradas HDMI" type="number" variant="outlined" onInput={e=>this.setState({hdmi: e.target.value})}  value={this.state.hdmi}/> 
+              </Grid>
             </Grid>
+            :this.state.categoria==2?<Grid container direction={"column"} spacing={2}>
+            <Grid item className="text-together">
+              <TextField className="modalfield-short" label="Máximo de Jugadores"  type="number" variant="outlined" onInput={e=>this.setState({max_jug: e.target.value})}  value={this.state.max_jug}/> 
+              <hr/>
+              <TextField className="modalfield-short" label="Gráficos" type="text" variant="outlined" onInput={e=>this.setState({graficos: e.target.value})}  value={this.state.graficos}/> 
+            </Grid>
+            <Grid item className="text-together">
+              <TextField className="modalfield" label="Consola"  type="text" variant="outlined" onInput={e=>this.setState({consola: e.target.value})}  value={this.state.consola}/> 
+            </Grid>
+          </Grid>
 
-            </div>
-            
-            :this.state.categoria==2?<div></div>
-
-            :this.state.categoria==3?<div></div>:null
+            :this.state.categoria==3?<Grid container direction={"column"} spacing={2}>
+              <Grid item className="text-together">
+                <TextField className="modalfield-short" label="Sistema Operativo"  type="text" variant="outlined" onInput={e=>this.setState({so: e.target.value})}  value={this.state.so}/> 
+                <hr/>
+                <TextField className="modalfield-short" label="RAM (MB)" type="number" variant="outlined" onInput={e=>this.setState({ram: e.target.value})}  value={this.state.ram}/> 
+              </Grid>
+              <Grid item className="text-together">
+                <TextField className="modalfield-short" label="Pantalla (pulgadas)"  type="number" variant="outlined" onInput={e=>this.setState({pulgadas: e.target.value})}  value={this.state.pulgadas}/> 
+                <hr/>
+                <TextField className="modalfield-short" label="Memoria (GB)" type="number" variant="outlined" onInput={e=>this.setState({memoria: e.target.value})}  value={this.state.memoria}/> 
+              </Grid>
+            </Grid>:null
               
             }
 
