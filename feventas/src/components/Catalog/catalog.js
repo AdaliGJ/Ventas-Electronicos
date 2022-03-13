@@ -8,7 +8,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import SearchIcon from '@material-ui/icons/Search';
 
-
+import NuevoCatalogo from '../NuevoCatalogo/nuevoCatalogo';
 import Grid from '@mui/material/Grid';
 
 class Catalog extends React.Component{
@@ -32,6 +32,7 @@ class Catalog extends React.Component{
                         <TextField className="outlined-required" label="Dispositivo"  name="dispositivo"/>
                         <Button><SearchIcon/></Button>
                     </div>
+                    <NuevoCatalogo comp={false} titulo={"Añadir producto"}/>
                     <div className="catalog">
                     <Grid container spacing={2}>
                         <Grid item xs={4}>

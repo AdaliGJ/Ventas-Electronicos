@@ -1,0 +1,61 @@
+#actualizarCat, #agregarCat{
+    background-color: rgba(11, 11, 48, 0.884);
+    color: white;
+    margin-right: 2vw;
+}
+
+#cancelarCat{
+    background-color: rgb(148, 0, 0);
+    color: white;
+}
+
+#nocat{
+    /*display: none;*/
+    margin-top: 2vh;
+
+}
+
+#sicat{
+    margin-top: 2vh;
+   
+}
+
+#modal-flow{
+    margin-top: 2vh;
+    overflow-y: scroll;
+    max-height: 90vh;
+}
+
+
+
+#boton-modal-cat{
+    background-color: rgb(148, 0, 0);
+    color: white;
+}
+
+#short-margin{
+    margin-left: 4vw;
+}
+.modalfield-short{
+    
+    width: 29vw;
+    float: left;
+   
+}
+
+#send-prod-img{
+    background-color: yellow ;
+    color: rgb(148, 0, 0);
+    width: 60vw;
+    justify-self: center;
+    
+}
+
+.text-together{
+    display: flex;
+    justify-content: center;
+}
+
+.float-modal{
+    display: flex;
+}
