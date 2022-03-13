@@ -12,7 +12,6 @@ import javax.persistence.Table;
 public class Televisores {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id_inventario;
 	@Column
 	private String resolucion;

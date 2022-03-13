@@ -105,3 +105,36 @@ select * from Marcas;
 insert into marcas(id_marca,nombre) values(null, 'HP');
 
 commit;
+
+select * from tipo_dispositivo order by id_tipo_dispositivo;
+
+Insert into SYSTEM.TIPO_DISPOSITIVO (ID_TIPO_DISPOSITIVO,NOMBRE) values ('1','Televisor');
+Insert into SYSTEM.TIPO_DISPOSITIVO (ID_TIPO_DISPOSITIVO,NOMBRE) values ('2','Videojuego');
+Insert into SYSTEM.TIPO_DISPOSITIVO (ID_TIPO_DISPOSITIVO,NOMBRE) values ('3','Smartwatch');
+Insert into SYSTEM.TIPO_DISPOSITIVO (ID_TIPO_DISPOSITIVO,NOMBRE) values ('4','Computadora');
+Insert into SYSTEM.TIPO_DISPOSITIVO (ID_TIPO_DISPOSITIVO,NOMBRE) values ('5','Monitor');
+Insert into SYSTEM.TIPO_DISPOSITIVO (ID_TIPO_DISPOSITIVO,NOMBRE) values ('6','Celular');
+Insert into SYSTEM.TIPO_DISPOSITIVO (ID_TIPO_DISPOSITIVO,NOMBRE) values ('7','Equipo de Sonido');
+
+
+
+
+
+CREATE SEQUENCE ORDENES_COMPRA_SEQ;
+
+CREATE TRIGGER ORDENES_COMPRA_TRG 
+BEFORE INSERT ON ORDENES_COMPRA 
+FOR EACH ROW 
+BEGIN
+  <<COLUMN_SEQUENCES>>
+  BEGIN
+    IF INSERTING AND :NEW.ID_ORDEN IS NULL THEN
+      SELECT ORDENES_COMPRA_SEQ.NEXTVAL INTO :NEW.ID_ORDEN FROM SYS.DUAL;
+    END IF;
+  END COLUMN_SEQUENCES;
+END;
+/
+
+
+select * from tipo_clientes;
+

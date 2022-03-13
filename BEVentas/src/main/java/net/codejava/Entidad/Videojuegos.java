@@ -12,7 +12,6 @@ import javax.persistence.Table;
 public class Videojuegos {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id_inventario;
 	@Column
 	private int max_jugadores;

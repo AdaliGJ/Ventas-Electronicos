@@ -13,42 +13,42 @@ public class Inventario {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id_inventario;
-	@Column
-	private int categoria_dispositivo;
+	@Column(name="id_inventario")
+	private int idInventario;
+	@Column(name="categoria_dispositivo")
+	private int categoriaDispositivo;
 	@Column
 	private int marca;
 	@Column 
 	private int existencias;
-	@Column
-	private float precio_lista;
+	@Column(name="precio_lista")
+	private float precioLista;
 	@Column
 	private String color;
 	@Column
 	private String descripcion;
 	@Column
 	private String modelo;
-	@Column 
-	private int meses_garantia;
+	@Column (name="meses_garantia")
+	private int mesesGarantia;
 	
 	public Inventario() {}
+
 	
-	
-
-	public int getId_inventario() {
-		return id_inventario;
+	public int getIdInventario() {
+		return idInventario;
 	}
 
-	public void setId_inventario(int id_inventario) {
-		this.id_inventario = id_inventario;
+	public void setIdInventario(int idInventario) {
+		this.idInventario = idInventario;
 	}
 
-	public int getCategoria_dispositivo() {
-		return categoria_dispositivo;
+	public int getCategoriaDispositivo() {
+		return categoriaDispositivo;
 	}
 
-	public void setCategoria_dispositivo(int categoria_dispositivo) {
-		this.categoria_dispositivo = categoria_dispositivo;
+	public void setCategoriaDispositivo(int categoriaDispositivo) {
+		this.categoriaDispositivo = categoriaDispositivo;
 	}
 
 	public int getMarca() {
@@ -67,12 +67,12 @@ public class Inventario {
 		this.existencias = existencias;
 	}
 
-	public float getPrecio_lista() {
-		return precio_lista;
+	public float getPrecioLista() {
+		return precioLista;
 	}
 
-	public void setPrecio_lista(float precio_lista) {
-		this.precio_lista = precio_lista;
+	public void setPrecioLista(float precioLista) {
+		this.precioLista = precioLista;
 	}
 
 	public String getColor() {
@@ -99,41 +99,37 @@ public class Inventario {
 		this.modelo = modelo;
 	}
 
-	public int getMeses_garantia() {
-		return meses_garantia;
+	public int getMesesGarantia() {
+		return mesesGarantia;
 	}
 
-	public void setMeses_garantia(int meses_garantia) {
-		this.meses_garantia = meses_garantia;
+	public void setMesesGarantia(int mesesGarantia) {
+		this.mesesGarantia = mesesGarantia;
 	}
 
-	public Inventario(int id_inventario, int categoria_dispositivo, int marca, int existencias, float precio_lista,
-			String color, String descripcion, String modelo, int meses_garantia) {
+
+	public Inventario(int idInventario, int categoriaDispositivo, int marca, int existencias, float precioLista,
+			String color, String descripcion, String modelo, int mesesGarantia) {
 		super();
-		this.id_inventario = id_inventario;
-		this.categoria_dispositivo = categoria_dispositivo;
+		this.idInventario = idInventario;
+		this.categoriaDispositivo = categoriaDispositivo;
 		this.marca = marca;
 		this.existencias = existencias;
-		this.precio_lista = precio_lista;
+		this.precioLista = precioLista;
 		this.color = color;
 		this.descripcion = descripcion;
 		this.modelo = modelo;
-		this.meses_garantia = meses_garantia;
+		this.mesesGarantia = mesesGarantia;
 	}
+
 
 	@Override
 	public String toString() {
-		return "Inventario [id_inventario=" + id_inventario + ", categoria_dispositivo=" + categoria_dispositivo
-				+ ", marca=" + marca + ", existencias=" + existencias + ", precio_lista=" + precio_lista + ", color="
-				+ color + ", descripcion=" + descripcion + ", modelo=" + modelo + ", meses_garantia=" + meses_garantia
+		return "Inventario [idInventario=" + idInventario + ", categoriaDispositivo=" + categoriaDispositivo
+				+ ", marca=" + marca + ", existencias=" + existencias + ", precioLista=" + precioLista + ", color="
+				+ color + ", descripcion=" + descripcion + ", modelo=" + modelo + ", mesesGarantia=" + mesesGarantia
 				+ "]";
 	}
-	
-	
-	
-	
-	
-	
 	
 	
 	

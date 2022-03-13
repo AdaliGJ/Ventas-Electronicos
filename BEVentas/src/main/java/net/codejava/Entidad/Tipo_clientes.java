@@ -12,9 +12,8 @@ import javax.persistence.Table;
 public class Tipo_clientes {
 	
 	@Id
-	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id_tipo_cliente;
+	private int id;
 	@Column
 	private String nombre;
 	@Column
@@ -22,37 +21,53 @@ public class Tipo_clientes {
 	
 	
 	public Tipo_clientes() {}
-	
-	
-	public int getId_tipo_cliente() {
-		return id_tipo_cliente;
+
+
+	public int getId() {
+		return id;
 	}
-	public void setId_tipo_cliente(int id_tipo_cliente) {
-		this.id_tipo_cliente = id_tipo_cliente;
+
+
+	public void setId(int id) {
+		this.id = id;
 	}
+
+
 	public String getNombre() {
 		return nombre;
 	}
+
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
+
 	public int getDescuento() {
 		return descuento;
 	}
+
+
 	public void setDescuento(int descuento) {
 		this.descuento = descuento;
 	}
-	public Tipo_clientes( int id_tipo_cliente ,String nombre, int descuento) {
+
+
+	public Tipo_clientes(int id, String nombre, int descuento) {
 		super();
-		this.id_tipo_cliente = id_tipo_cliente;
+		this.id = id;
 		this.nombre = nombre;
 		this.descuento = descuento;
 	}
+
+
 	@Override
 	public String toString() {
-		return "Tipo_clientes [id_tipo_cliente=" + id_tipo_cliente + ", nombre=" + nombre + ", descuento=" + descuento
-				+ "]";
+		return "Tipo_clientes [id=" + id + ", nombre=" + nombre + ", descuento=" + descuento + "]";
 	}
+	
+	
+	
 	
 	
 

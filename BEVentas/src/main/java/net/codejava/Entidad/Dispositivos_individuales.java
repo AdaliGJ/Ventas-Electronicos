@@ -33,9 +33,9 @@ public class Dispositivos_individuales {
 	public void setId_inventario(int id_inventario) {
 		this.id_inventario = id_inventario;
 	}
-	public Dispositivos_individuales(String serie_dispositivo, int id_inventario) {
+	public Dispositivos_individuales(String serie, int id_inventario) {
 		super();
-		this.serie = serie_dispositivo;
+		this.serie = serie;
 		this.id_inventario = id_inventario;
 	}
 	

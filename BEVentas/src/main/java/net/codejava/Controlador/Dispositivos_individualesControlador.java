@@ -1,10 +1,13 @@
 package net.codejava.Controlador;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,6 +34,21 @@ public class Dispositivos_individualesControlador {
 	public @ResponseBody Optional<Dispositivos_individuales> getOne(@RequestParam String nSerial){
 		return repositorioDispositivosIndividuales.findBySerie(nSerial);
 	}
+	
+	
+	@PostMapping("/Registrar")
+	public @ResponseBody List<Dispositivos_individuales> registrar(@RequestParam int nIdInventario, @RequestParam int nCantidad) {
+	
+		List<Dispositivos_individuales> nList = new ArrayList<Dispositivos_individuales>();
+		
+		for(int i = 0; i < nCantidad; i++) {
+			Dispositivos_individuales n = new Dispositivos_individuales("0",nIdInventario);
+			nList.add(repositorioDispositivosIndividuales.save(n));	
+		}
+		
+		return nList;
+	}
+	
 	
 	
 }
