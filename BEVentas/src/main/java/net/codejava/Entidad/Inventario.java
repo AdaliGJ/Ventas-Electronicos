@@ -28,61 +28,87 @@ public class Inventario {
 	private String descripcion;
 	@Column
 	private String modelo;
+	@Column 
+	private int meses_garantia;
 	
 	public Inventario() {}
 	
 	
-	
+
 	public int getId_inventario() {
 		return id_inventario;
 	}
+
 	public void setId_inventario(int id_inventario) {
 		this.id_inventario = id_inventario;
 	}
+
 	public int getCategoria_dispositivo() {
 		return categoria_dispositivo;
 	}
+
 	public void setCategoria_dispositivo(int categoria_dispositivo) {
 		this.categoria_dispositivo = categoria_dispositivo;
 	}
+
 	public int getMarca() {
 		return marca;
 	}
+
 	public void setMarca(int marca) {
 		this.marca = marca;
 	}
+
 	public int getExistencias() {
 		return existencias;
 	}
+
 	public void setExistencias(int existencias) {
 		this.existencias = existencias;
 	}
+
 	public float getPrecio_lista() {
 		return precio_lista;
 	}
+
 	public void setPrecio_lista(float precio_lista) {
 		this.precio_lista = precio_lista;
 	}
+
 	public String getColor() {
 		return color;
 	}
+
 	public void setColor(String color) {
 		this.color = color;
 	}
+
 	public String getDescripcion() {
 		return descripcion;
 	}
+
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+
 	public String getModelo() {
 		return modelo;
 	}
+
 	public void setModelo(String modelo) {
 		this.modelo = modelo;
 	}
+
+	public int getMeses_garantia() {
+		return meses_garantia;
+	}
+
+	public void setMeses_garantia(int meses_garantia) {
+		this.meses_garantia = meses_garantia;
+	}
+
 	public Inventario(int id_inventario, int categoria_dispositivo, int marca, int existencias, float precio_lista,
-			String color, String descripcion, String modelo) {
+			String color, String descripcion, String modelo, int meses_garantia) {
 		super();
 		this.id_inventario = id_inventario;
 		this.categoria_dispositivo = categoria_dispositivo;
@@ -92,13 +118,20 @@ public class Inventario {
 		this.color = color;
 		this.descripcion = descripcion;
 		this.modelo = modelo;
+		this.meses_garantia = meses_garantia;
 	}
+
 	@Override
 	public String toString() {
 		return "Inventario [id_inventario=" + id_inventario + ", categoria_dispositivo=" + categoria_dispositivo
 				+ ", marca=" + marca + ", existencias=" + existencias + ", precio_lista=" + precio_lista + ", color="
-				+ color + ", descripcion=" + descripcion + ", modelo=" + modelo + "]";
+				+ color + ", descripcion=" + descripcion + ", modelo=" + modelo + ", meses_garantia=" + meses_garantia
+				+ "]";
 	}
+	
+	
+	
+	
 	
 	
 	
