@@ -13,55 +13,79 @@ public class Usuarios {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id_usuario;
+	@Column(name="id_usuario")
+	private int idUsuario;
 	@Column
 	private int tipo_usuario;
 	@Column
-	private String contraseña;
+	private String password;
 	@Column 
 	private String nombre;
 	
 	
 	public Usuarios() {}
-	
-	
-	
-	public int getId_usuario() {
-		return id_usuario;
+
+
+	public int getIdUsuario() {
+		return idUsuario;
 	}
-	public void setId_usuario(int id_usuario) {
-		this.id_usuario = id_usuario;
+
+
+	public void setIdUsuario(int idUsuario) {
+		this.idUsuario = idUsuario;
 	}
+
+
 	public int getTipo_usuario() {
 		return tipo_usuario;
 	}
+
+
 	public void setTipo_usuario(int tipo_usuario) {
 		this.tipo_usuario = tipo_usuario;
 	}
-	public String getContraseña() {
-		return contraseña;
+
+
+	public String getPassword() {
+		return password;
 	}
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
+
+
 	public String getNombre() {
 		return nombre;
 	}
+
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public Usuarios(int id_usuario, int tipo_usuario, String contraseña, String nombre) {
+
+
+	public Usuarios(int idUsuario, int tipo_usuario, String password, String nombre) {
 		super();
-		this.id_usuario = id_usuario;
+		this.idUsuario = idUsuario;
 		this.tipo_usuario = tipo_usuario;
-		this.contraseña = contraseña;
+		this.password = password;
 		this.nombre = nombre;
 	}
+
+
 	@Override
 	public String toString() {
-		return "Usuarios [id_usuario=" + id_usuario + ", tipo_usuario=" + tipo_usuario + ", contraseña=" + contraseña
+		return "Usuarios [idUsuario=" + idUsuario + ", tipo_usuario=" + tipo_usuario + ", password=" + password
 				+ ", nombre=" + nombre + "]";
 	}
+
+
+	
+	
+	
+	
 	
 
 }

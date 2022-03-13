@@ -14,44 +14,61 @@ public class Clientes {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id_cliente;
+	@Column(name="id_cliente")
+	private int idCliente;
 	@Column
 	private int tipo_cliente;
-	@Column(name="password")
-	private String contraseña;
+	@Column
+	private String password;
 	
 	
 	public Clientes() {}
-	
-	public int getId_cliente() {
-		return id_cliente;
+
+
+	public int getIdCliente() {
+		return idCliente;
 	}
-	public void setId_cliente(int id_cliente) {
-		this.id_cliente = id_cliente;
+
+
+	public void setIdCliente(int idCliente) {
+		this.idCliente = idCliente;
 	}
+
+
 	public int getTipo_cliente() {
 		return tipo_cliente;
 	}
+
+
 	public void setTipo_cliente(int tipo_cliente) {
 		this.tipo_cliente = tipo_cliente;
 	}
-	public String getContraseña() {
-		return contraseña;
+
+
+	public String getPassword() {
+		return password;
 	}
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
-	public Clientes(int id_cliente, int tipo_cliente, String contraseña) {
+
+
+	public Clientes(int idCliente, int tipo_cliente, String password) {
 		super();
-		this.id_cliente = id_cliente;
+		this.idCliente = idCliente;
 		this.tipo_cliente = tipo_cliente;
-		this.contraseña = contraseña;
+		this.password = password;
 	}
+
+
 	@Override
 	public String toString() {
-		return "Clientes [id_cliente=" + id_cliente + ", tipo_cliente=" + tipo_cliente + ", contraseña=" + contraseña
-				+ "]";
+		return "Clientes [idCliente=" + idCliente + ", tipo_cliente=" + tipo_cliente + ", password=" + password + "]";
 	}
+	
+	
 	
 	
 }

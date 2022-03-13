@@ -1,5 +1,7 @@
 package net.codejava.Controlador;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +40,36 @@ public class ClientesControlador {
 		Clientes n = new Clientes(4,nTipoCliente,nContraseña);
 		
 		return repositorioClientes.save(n);
+	}
+	
+	@GetMapping("/Login")
+	public @ResponseBody Map<String,String> registrar(@RequestParam int nIdCliente, @RequestParam String nPassword) {
+	
+		HashMap<String,String> response = new HashMap<>();
+		
+		Optional<Clientes> n = repositorioClientes.findByIdClienteAndPassword(nIdCliente,nPassword);
+		//Clientes _n = n.get();
+		
+		/*
+		String usuarioPassword = _n.getContraseña();
+		
+		if( usuarioPassword == nPassword) {
+			response.put("respuesta", "ok");
+		}else {
+			response.put("respuesta", "error");
+			response.put("contraseña", _n.getContraseña());
+		}
+		*/
+		
+		if(n.isEmpty()) {
+			
+			response.put("respuesta", "error");
+		}else {
+			response.put("respuesta", "ok");
+		}
+		
+		
+		return response;
 	}
 	
 }

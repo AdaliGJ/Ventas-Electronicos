@@ -24,7 +24,8 @@ public class VentasApplication {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**").allowedOrigins("http://localhost:3000");
+				registry.addMapping("/**").allowedOrigins("http://localhost:3000").allowedMethods("POST","GET").allowedHeaders("Access-Control-Allow-Headers",
+	                    "Access-Control-Allow-Origin, Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
 			}
 		};
 	}
