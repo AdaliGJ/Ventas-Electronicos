@@ -3,6 +3,7 @@ package net.codejava.Controlador;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,11 +11,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import net.codejava.Entidad.Prueba;
 import net.codejava.Entidad.Tipo_dispositivo;
-import net.codejava.Entidad.Tipo_usuarios;
 import net.codejava.Repositorio.RepositorioTipo_dispositivo;
 
+@CrossOrigin
 @RestController
 @RequestMapping(path="/Tipo_dispositivo")
 public class Tipo_dispositivoControlador {
@@ -35,7 +35,7 @@ public class Tipo_dispositivoControlador {
 	@PostMapping("/Insertar")
 	public @ResponseBody Tipo_dispositivo insertar(@RequestParam String nNombre) {
 	
-		Tipo_dispositivo n = new Tipo_dispositivo(1,nNombre);
+		Tipo_dispositivo n = new Tipo_dispositivo(0,nNombre);
 		
 		return repositorioTipoDispositivo.save(n);
 	}

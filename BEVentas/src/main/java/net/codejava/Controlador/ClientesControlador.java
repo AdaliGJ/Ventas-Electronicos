@@ -3,6 +3,7 @@ package net.codejava.Controlador;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,9 +12,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import net.codejava.Entidad.Clientes;
-import net.codejava.Entidad.Prueba;
 import net.codejava.Repositorio.RepositorioClientes;
 
+@CrossOrigin
 @RestController
 @RequestMapping(path="/Clientes")
 public class ClientesControlador {

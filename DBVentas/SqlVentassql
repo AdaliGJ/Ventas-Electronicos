@@ -59,4 +59,11 @@ END;
 
 select * from Tipo_usuarios;
 
+
+
+
+select * from Marcas;
+
+insert into marcas(id_marca,nombre) values(null, 'HP');
+
 commit;

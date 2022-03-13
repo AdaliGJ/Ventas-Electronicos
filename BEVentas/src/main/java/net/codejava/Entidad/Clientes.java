@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+
 @Entity
 @Table(name = "clientes")
 public class Clientes {
@@ -16,7 +17,7 @@ public class Clientes {
 	private int id_cliente;
 	@Column
 	private int tipo_cliente;
-	@Column
+	@Column(name="password")
 	private String contraseña;
 	
 	

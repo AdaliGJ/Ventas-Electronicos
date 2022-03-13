@@ -2,6 +2,7 @@ package net.codejava.Controlador;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import net.codejava.Entidad.Marcas;
 import net.codejava.Repositorio.RepositorioMarcas;
 
+@CrossOrigin
 @RestController 
 @RequestMapping(path="/Marca")
 public class MarcasControlador {
@@ -32,7 +34,7 @@ public class MarcasControlador {
 	@PostMapping("/Insertar")
 	public @ResponseBody Marcas insertar(@RequestParam String nNombre) {
 	
-		Marcas n = new Marcas(1,nNombre);
+		Marcas n = new Marcas(4,nNombre);
 		
 		return repositorioMarcas.save(n);
 	}
