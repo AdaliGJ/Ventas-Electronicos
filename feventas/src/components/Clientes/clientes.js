@@ -11,6 +11,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import { LoginContext } from '../../context/LoginContext.js';
 import './clientes.css';
+import axios from 'axios'
 
 
 class Clientes extends React.Component{
@@ -27,7 +28,9 @@ class Clientes extends React.Component{
             tipo_suscricpion: null,
             vencimiento: null,
             img: null,
-            archivo: ''
+            archivo: '', 
+            pass: '',
+            tipos_clientes: null
         }
 
         this.register=this.register.bind(this);
@@ -35,6 +38,24 @@ class Clientes extends React.Component{
 
 
     register(){
+        const url = 'localhost:8080/Clientes/Insertar';
+
+        let formData = new FormData();
+        formData.append('nTipoCliente', this.state.tipo_suscricpion);
+        formData.append('nContraseña', this.state.pass);
+
+
+
+        axios.post(url, formData, {headers: {"Content-Type": "application/json"}})
+        .then((response)=>{
+            console.log(response);
+            this.setState({open: true});
+        })
+        .catch((response)=>{
+            console.log(response);
+        });
+
+
         console.log("Hola");
     }
 
@@ -53,7 +74,23 @@ class Clientes extends React.Component{
     
     componentDidMount(){
 
-   
+        const context = this.context;
+        this.setState({usuario: context.username,
+            tipo_usuario: context.tipoUsuario});
+
+
+        const url = 'localhost:8080/Tipo_clientes/ObtenerTodos';
+
+        axios.get(url).then(response => response.data)
+        .then((data) => {
+          this.setState({tipos_clientes: data});
+          
+          console.log(data);
+        }) .catch((response)=>{
+            console.log(response);
+        });
+
+    
     }
     
     render(){
@@ -80,10 +117,13 @@ class Clientes extends React.Component{
                             <FormControl className="outlined-required"  >
                                 <InputLabel InputLabelProps={{shrink: true }}>Tipo de Suscripción</InputLabel>
                                 <Select label="Tipo de Suscripció" displayEmpty onChange={e=>this.setState({tipo_suscricpion: e.target.value})} value={this.state.tipo_suscricpion} >
-                                    <MenuItem  value={1} type="number">Mayorista</MenuItem>
+                                    <MenuItem  value={3} type="number">Mayorista</MenuItem>
                                     <MenuItem  value={2} type="number">Gran Cliente</MenuItem>
                                 </Select>
                             </FormControl> 
+                        </Grid>
+                        <Grid item className="text-together">    
+                            <TextField className="outlined-required" label="Contraseña" type="password"  onInput={e=>this.setState({pass: e.target.value})}  value={this.state.pass}/>    
                         </Grid>
                     </Grid>
                     </div>

@@ -10,6 +10,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import {CheckCircle, DeleteForever} from '@material-ui/icons/';
 import {Edit} from '@material-ui/icons/';
+import axios from 'axios';
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -99,6 +100,23 @@ class Inventario extends React.Component{
             console.log(response);
         });*/
     }
+
+    componentDidMount(){
+        const context = this.context;
+        this.setState({usuario: context.username,
+            tipo_usuario: context.tipoUsuario});
+
+      
+        /*const url= 'http://localhost:8080/Inventario/ObtenerTodos'
+      
+        axios.get(url).then(response => response.data)
+          .then((data) => {
+            this.setState({inventario: data});
+            
+            console.log(data);
+          });*/
+      
+       }
     
     render(){
         return(

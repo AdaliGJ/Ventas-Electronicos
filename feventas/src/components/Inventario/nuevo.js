@@ -7,6 +7,8 @@ import { Grid } from '@material-ui/core';
 import { LoginContext } from '../../context/LoginContext';
 import './inventario.css';
 
+import axios from 'axios';
+
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -47,8 +49,25 @@ class NuevoInventario extends React.Component {
 
 
 addItem = ()=>{
-   /* var submitItem = this.props.submit;
-    submitItem(this.state.serie);*/
+  /*const url = 'localhost:8080/Dispositivos_Indiviuales/Insertar';
+
+  let formData = new FormData();
+  formData.append('nCategoriaDispositivo', this.state.categoria);
+  formData.append('nMarca', this.state.marca);
+
+
+
+  axios.post(url, formData, {headers: {"Content-Type": "application/json"}})
+  .then((response)=>{
+      console.log(response);
+      this.setState({open: true});
+  })
+  .catch((response)=>{
+    console.log(response);
+});*/
+
+
+
     this.handleOpen();
  }
 
@@ -61,6 +80,16 @@ updateItem = ()=> {
  componentDidMount(){
   const context = this.context;
   this.setState({usuario: context.tipoUsuario});
+
+  const url= 'http://localhost:8080/Inventario/ObtenerTodos'
+
+  axios.get(url).then(response => response.data)
+    .then((data) => {
+      this.setState({productos: data});
+      
+      console.log(data);
+    });
+
  }
 
   render(){
@@ -80,7 +109,7 @@ updateItem = ()=> {
                     <InputLabel>Producto</InputLabel>
                     <Select label="Producto" displayEmpty onChange={e=>this.setState({id: e.target.value})}  value={this.state.id}>
                     {this.state.productos.map((p) => (
-                        <MenuItem value={p.id}>{p.nombre}</MenuItem>
+                        <MenuItem value={p.id_inventario}>{p.descripcion}</MenuItem>
                     ))}
                     </Select>
                 </FormControl>

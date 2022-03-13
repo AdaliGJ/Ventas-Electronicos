@@ -21,6 +21,8 @@ class NuevoCatalogo extends React.Component {
   constructor(props){
       super(props);
       this.state={
+          open: false,
+
           color:"",
           descripcion:"",
           garantia: null,
@@ -81,7 +83,48 @@ class NuevoCatalogo extends React.Component {
 addItem = ()=>{
    /* var submitItem = this.props.submit;
     submitItem(this.state.serie);*/
+    const url = 'localhost:8080/Inventario/Insertar';
+
+        let formData = new FormData();
+        formData.append('nCategoriaDispositivo', this.state.categoria);
+        formData.append('nMarca', this.state.marca);
+        formData.append('nExistencias', 0);
+        formData.append('nPrecioLista', this.state.precio);
+        formData.append('nColor', this.state.color);
+        formData.append('nDescripcion', this.state.descripcion);
+        formData.append('nModelo', this.state.modelo);
+        formData.append('nMesesGarantia', this.state.garantia);
+
+        const inv ={
+          nCategoriaDispositivo: this.state.categoria,
+          nMarca: this.state.marca,
+          nExistencias: 0,
+          nPrecioLista: this.state.precio,
+          nColor: this.state.color,
+          Descripcion: this.state.descripcion,
+          nModelo: this.state.modelo,
+          nMesesGarantia: this.state.garantia
+        }
+
+        axios.post(url, formData, {headers: {"Content-Type": "application/json"}})
+        .then((response)=>{
+            console.log(response);
+            this.setState({open: true});
+        })
+        .catch((response)=>{
+          console.log(response);
+      });
+
+   
+
+        
+
+
+
+
     this.handleOpen();
+
+    console.log(this.state.precio);
  }
 
 updateItem = ()=> {
@@ -103,6 +146,16 @@ updateItem = ()=> {
       
       console.log(data);
     });
+
+    const url2= 'http://localhost:8080/Marca/ObtenerTodos'
+
+    axios.get(url2).then(response => response.data)
+      .then((data) => {
+        this.setState({marcas: data});
+        
+        console.log(data);
+      });
+
  }
 
   render(){
@@ -129,7 +182,7 @@ updateItem = ()=> {
                     <InputLabel>Marca</InputLabel>
                     <Select label="Marca" displayEmpty onChange={e=>this.setState({marca: e.target.value})}  value={this.state.marca}>
                     {this.state.marcas.map((m) => (
-                        <MenuItem value={m.id}>{m.nombre}</MenuItem>
+                        <MenuItem value={m.id_marca}>{m.nombre}</MenuItem>
                     ))}
                     </Select>
                 </FormControl>

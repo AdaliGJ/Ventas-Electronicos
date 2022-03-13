@@ -31,15 +31,15 @@ class Products extends React.Component{
                 <CardMedia
                     component="img"
                     height="140"
-                    image="https://definicion.de/wp-content/uploads/2009/06/producto.png"
-                    alt="green iguana"
+                    image={this.props.image}
+                    alt="producto"
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
-                        Producto
+                       {this.props.modelo}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                        Descripción del producto
+                       {this.props.desc}
                     </Typography>
                 </CardContent>
                 <CardActions>
