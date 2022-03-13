@@ -1,0 +1,23 @@
+#noerror{
+    display: none;
+}
+
+
+#enviar{
+    color: white;
+    background-color: rgb(148, 0, 0);
+    border-color: orange;
+    font-size: 10px;
+    width: 40%;
+    font-size: large;
+    margin-top: 5vh;
+}
+
+#login_tit{
+    margin-top: 15vh;
+
+}
+
+.standard-basic{
+    width: 40%;
+ }

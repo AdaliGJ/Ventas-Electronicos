@@ -5,6 +5,7 @@ import './App.css';
 import Catalog from "./components/Catalog/catalog.js";
 import MenuBar from "./components/MenuBar/menubar.js";
 import Login from "./components/Login/login.js";
+import Signup from "./components/SignUp/signup.js";
 import Clientes from "./components/Clientes/clientes.js";
 import Footer from "./components/Footer/footer.js";
 import Detalle from "./components/Detalle/detalle";
@@ -44,6 +45,7 @@ function App() {
           <Route exact path="/cliente_nuevo" component={Clientes}/>
           <Route exact path="/marcas" component={Marcas}/>
           <Route exact path="/inventario" component={Inventario}/>
+          <Route exact path="/signUp" component={Signup}/>
           <Redirect path="/" to="/home"></Redirect>
         </Switch>
         :
@@ -54,6 +56,7 @@ function App() {
           <Route exact path="/cliente_nuevo" component={Clientes}/>
           <Route exact path="/marcas" component={Marcas}/>
           <Route exact path="/inventario" component={Inventario}/>
+          <Route exact path="/signUp" component={Signup}/>
           <Redirect path="/" to="/home"></Redirect>
         </Switch>}
         <Footer/>

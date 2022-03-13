@@ -11,15 +11,41 @@ import SearchIcon from '@material-ui/icons/Search';
 import NuevoCatalogo from '../NuevoCatalogo/nuevoCatalogo';
 import Grid from '@mui/material/Grid';
 
+import axios from 'axios';
+
 class Catalog extends React.Component{
     
     static contextType = LoginContext;
    
+    constructor(props){
+        super(props);
+        this.state={
+            serie: "",
+            producto: null,
+            id: null,
+            usuario: null,
+            inventario: []
+            
+        }
+    }
     
     componentDidMount(){
         const context = this.context;
         this.setState({usuario: context.username,
             tipo_usuario: context.tipoUsuario});
+
+      
+        const url= 'http://localhost:8080/Inventario/ObtenerTodos'
+      
+        axios.get(url).then(response => response.data)
+          .then((data) => {
+            this.setState({inventario: data});
+            
+            console.log(data);
+            console.log(this.state.inventario);
+          });
+      
+       
         
     }
     
@@ -35,15 +61,11 @@ class Catalog extends React.Component{
                     <NuevoCatalogo comp={false} titulo={"Añadir producto"}/>
                     <div className="catalog">
                     <Grid container spacing={2}>
+                    {this.state.inventario.map((inv) => (
                         <Grid item xs={4}>
-                           <Products id={1}/>
+                           <Products id={inv.id_inventario}  image={"https://definicion.de/wp-content/uploads/2009/06/producto.png"} desc={inv.descripcion} modelo={inv.modelo}/>
                         </Grid>
-                        <Grid item xs={4}>
-                            <Products id={4}/>
-                        </Grid>
-                        <Grid item xs={4}>
-                            <Products id={2}/>
-                        </Grid>
+                    ))}
                     </Grid>
                     </div>
                     

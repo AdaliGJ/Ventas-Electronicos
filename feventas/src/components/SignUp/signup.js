@@ -2,7 +2,7 @@ import React, {useRef, useContext, useState} from 'react';
 import {LoginContext} from "../../context/LoginContext.js";
 import { Link, useHistory} from "react-router-dom";
 import Alert from '@material-ui/lab/Alert';
-import './marcas.css'
+import './signup.css'
 import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
@@ -15,7 +15,7 @@ import Button from '@material-ui/core/Button';
 
 
 
-function Marcas(props){
+function SignUp(props){
 
     const { setUsername, username, tipoUsuario, setTipoUsuario }=useContext(LoginContext);
     const [msg, setMsg]=useState('');
@@ -39,10 +39,10 @@ function Marcas(props){
 
         return(
             <div className="page">
-                    <h1 id="login_tit">Registro Marcas</h1>
+                    <h1 id="login_tit">Registro</h1>
                     <Grid container direction={"column"} spacing={7}>
                         <Grid item>
-                            <TextField className="standard-basic" label="Marca" placeholder="Marca" InputProps={{
+                            <TextField className="standard-basic" label="Nombre de usuario" placeholder="Usuario" InputProps={{
                                 startAdornment: (
                                   <InputAdornment position="start">
                                     <AccountCircleIcon />
@@ -50,14 +50,31 @@ function Marcas(props){
                                 ),
                               }} inputRef={usuarioRef}/>
                         </Grid>
-                        
+                        <Grid item>
+                            <TextField className="standard-basic" label="Contraseña" type="password"  InputProps={{
+                                startAdornment: (
+                                  <InputAdornment position="start">
+                                    <LockIcon />
+                                  </InputAdornment>
+                                ),
+                              }} inputRef={contRef}/>
+                        </Grid>
+                        <Grid item>
+                            <TextField className="standard-basic" label="Tipo de usuario" type="Apellido"  InputProps={{
+                                startAdornment: (
+                                  <InputAdornment position="start">
+                                    <LockIcon />
+                                  </InputAdornment>
+                                ),
+                              }} inputRef={contRef}/>
+                        </Grid>
                     </Grid>
                     <Grid container direction={"column"} spacing={8}>
                         <Grid item id={error ? "error": "noerror"}>
                             <Alert severity="error">Error</Alert>
                         </Grid>
                         <Grid item>
-                            <Button id="enviar" variant="contained" onClick={handleLogin}>Registrar Marca</Button>
+                            <Button id="enviar" variant="contained" onClick={handleLogin}>Registrar</Button>
                         </Grid>
                     </Grid>
             </div>
@@ -65,4 +82,4 @@ function Marcas(props){
 
 }
 
-export default Marcas;
+export default SignUp;
