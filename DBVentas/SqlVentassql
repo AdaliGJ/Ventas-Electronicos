@@ -60,6 +60,44 @@ END;
 select * from Tipo_usuarios;
 
 
+insert into inventario(
+        id_inventario, 
+        categoria_dispositivo,
+        marca,
+        existencias,
+        precio_lista,
+        color,
+        descripcion,
+        modelo,
+        meses_garantia)
+        
+        values(
+        null,
+        1,
+        41,
+        100,
+        49.5,
+        'rojo',
+        'compu rapida',
+        'ABC123',
+        12
+        );
+
+
+CREATE SEQUENCE INVENTARIO_SEQ1;
+
+CREATE TRIGGER INVENTARIO_TRG1 
+BEFORE INSERT ON INVENTARIO 
+FOR EACH ROW 
+BEGIN
+  <<COLUMN_SEQUENCES>>
+  BEGIN
+    IF INSERTING AND :NEW.ID_INVENTARIO IS NULL THEN
+      SELECT INVENTARIO_SEQ1.NEXTVAL INTO :NEW.ID_INVENTARIO FROM SYS.DUAL;
+    END IF;
+  END COLUMN_SEQUENCES;
+END;
+/
 
 
 select * from Marcas;
