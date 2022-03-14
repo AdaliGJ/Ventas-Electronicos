@@ -1,0 +1,14 @@
+#cancelar-comprar{
+    background-color: rgba(11, 11, 48, 0.884);
+    color: white;
+    margin-right: 2vw;
+}
+
+#comprar{
+    background-color: rgb(148, 0, 0);
+    color: white;
+}
+
+.box{
+   overflow-y: scroll;
+}

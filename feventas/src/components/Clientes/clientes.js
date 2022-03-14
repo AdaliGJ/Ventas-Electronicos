@@ -116,7 +116,7 @@ class Clientes extends React.Component{
                             <hr/>
                             <FormControl className="outlined-required"  >
                                 <InputLabel InputLabelProps={{shrink: true }}>Tipo de Suscripción</InputLabel>
-                                <Select label="Tipo de Suscripció" displayEmpty onChange={e=>this.setState({tipo_suscricpion: e.target.value})} value={this.state.tipo_suscricpion} >
+                                <Select label="Tipo de Suscripción" displayEmpty onChange={e=>this.setState({tipo_suscricpion: e.target.value})} value={this.state.tipo_suscricpion} >
                                     <MenuItem  value={3} type="number">Mayorista</MenuItem>
                                     <MenuItem  value={2} type="number">Gran Cliente</MenuItem>
                                 </Select>
