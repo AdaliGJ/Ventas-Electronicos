@@ -49,7 +49,7 @@ class NuevoInventario extends React.Component {
 
 
 addItem = ()=>{
-  /*const url = 'localhost:8080/Dispositivos_Indiviuales/Insertar';
+  const url = 'localhost:8080/Dispositivos_Indiviuales/Insertar';
 
   let formData = new FormData();
   formData.append('nCategoriaDispositivo', this.state.categoria);
@@ -64,7 +64,7 @@ addItem = ()=>{
   })
   .catch((response)=>{
     console.log(response);
-});*/
+});
 
 
 
