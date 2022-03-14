@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import net.codejava.Entidad.Dispositivos_individuales;
 import net.codejava.Entidad.Inventario;
 import net.codejava.Repositorio.RepositorioInventario;
 
@@ -26,6 +25,11 @@ public class InventarioControlador {
 	@GetMapping("/ObtenerTodos")
 	public @ResponseBody Iterable<Inventario> getAll(){
 		return repositorioInventario.findAll();
+	}
+	
+	@GetMapping("/Obtener")
+	public @ResponseBody Optional<Inventario> getOne(@RequestParam int nIdInventario){
+		return repositorioInventario.findById(nIdInventario);
 	}
 	
 	@GetMapping("/ObtenerCategoria")
