@@ -1,0 +1,20 @@
+#cancelar-comprar{
+    background-color: rgba(11, 11, 48, 0.884);
+    color: white;
+    margin-right: 2vw;
+}
+
+#comprar{
+    background-color: rgb(148, 0, 0);
+    color: white;
+}
+
+#comprar-modal{
+    margin-top: 2vh;
+    overflow-y: scroll;
+    max-height: 90vh;
+}
+
+/*.box{
+   overflow-y: scroll;
+}*/

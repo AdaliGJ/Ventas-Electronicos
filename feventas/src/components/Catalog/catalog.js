@@ -63,7 +63,7 @@ class Catalog extends React.Component{
                     <Grid container spacing={2}>
                     {this.state.inventario.map((inv) => (
                         <Grid item xs={4}>
-                           <Products id={inv.id_inventario}  image={"https://definicion.de/wp-content/uploads/2009/06/producto.png"} desc={inv.descripcion} modelo={inv.modelo}/>
+                           <Products id={inv.idInventario}  image={"https://definicion.de/wp-content/uploads/2009/06/producto.png"} desc={inv.descripcion} modelo={inv.modelo}/>
                         </Grid>
                     ))}
                     </Grid>

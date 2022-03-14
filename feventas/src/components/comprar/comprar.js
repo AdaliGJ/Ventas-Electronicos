@@ -5,7 +5,7 @@ import  Modal from '@material-ui/core/Modal';
 import TextField from '@material-ui/core/TextField';
 import { Grid } from '@material-ui/core';
 import { LoginContext } from '../../context/LoginContext';
-import './inventario.css';
+import './comprar.css';
 
 import axios from 'axios';
 
@@ -16,17 +16,17 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 
 
-class NuevoInventario extends React.Component {
+class Comprar extends React.Component {
   static contextType = LoginContext;
   constructor(props){
       super(props);
       this.state={
           open: false,
-          serie: props.comp? props.serie:"",
-          producto: null,
-          id: props.comp? props.prod:null,
-          usuario: null,
-          productos: [{id: 1, nombre: 2}, {id: 2, nombre: 4}]
+          sus: null,
+          pass: null,
+          total: props.total,
+          producto: props.producto,
+          nombre: ''
           
       }
       this.handleOpen=this.handleOpen.bind(this);
@@ -49,7 +49,7 @@ class NuevoInventario extends React.Component {
 
 
 addItem = ()=>{
-  const url = 'localhost:8080/Dispositivos_Indiviuales/Insertar';
+  /*const url = 'localhost:8080/Dispositivos_Indiviuales/Insertar';
 
   let formData = new FormData();
   formData.append('nCategoriaDispositivo', this.state.categoria);
@@ -64,7 +64,7 @@ addItem = ()=>{
   })
   .catch((response)=>{
     console.log(response);
-});
+});*/
 
 
 
@@ -95,33 +95,48 @@ updateItem = ()=> {
   render(){
     
   return (
-    <div id={this.state.usuario==1? "siinv": "noinv"}>
-      <Button onClick={this.handleOpen} id="boton-modal">{this.props.titulo}</Button>
-      <Modal open={this.state.open} onClose={this.handleOpen}>
+    <div >
+      <Button onClick={this.handleOpen} id="boton-modal-comprar">Comprar</Button>
+      <Modal open={this.state.open} onClose={this.handleOpen} id="comprar-modal">
         <Box className="box">
-          <h2>Ingresar los datos</h2>
-          <Grid container direction={"column"} spacing={2}>
-            <Grid item>
-              <TextField className="modalfield" label="Serie" type="text" variant="outlined" onInput={e=>this.setState({serie: e.target.value})}  value={this.state.serie}/> 
-            </Grid>
-            <Grid item>
-              <FormControl className="modalfield" variant ="outlined">
-                    <InputLabel>Producto</InputLabel>
-                    <Select label="Producto" displayEmpty onChange={e=>this.setState({id: e.target.value})}  value={this.state.id}>
-                    {this.state.productos.map((p) => (
-                        <MenuItem value={p.id_inventario}>{p.descripcion}</MenuItem>
-                    ))}
+        <div>
+              <h2>Detalle Compra: </h2>
+              <p>{"Producto: " + this.props.producto}</p>
+              <p>{"Total: "+this.state.total}</p>
+          </div>
+          <h4>¿Está suscrito a nuestra página?</h4>
+          <FormControl className="modalfield" variant ="outlined">
+                    <InputLabel></InputLabel>
+                    <Select label="" displayEmpty onChange={e=>this.setState({sus: e.target.value})}  value={this.state.sus}>
+                    
+                        <MenuItem value={1}>Sí</MenuItem>
+                        <MenuItem value={2}>No</MenuItem>
+                    
                     </Select>
                 </FormControl>
-            </Grid>
+          {this.state.sus==1?  
+          <Grid container direction={"column"} spacing={2}>
+            <h2>Ingrese sus datos</h2>
             <Grid item>
-            {this.props.comp?
-              <Button id="actualizarInv" onClick={this.updateItem}>Actualizar</Button> :
-              <Button id="agregarInv" onClick={this.addItem}>Agregar</Button>
-            }
-              <Button id="cancelarInv" onClick={this.props.comp? this.handleOpen: this.cancel }>Cancelar</Button>
+                <TextField className="outlined-required" label="NIT" type="number"  onInput={e=>this.setState({nit: e.target.value})}  value={this.state.nit}/>
+            </Grid>
+            <Grid item> 
+                <TextField className="outlined-required" label="Contraseña" type="password"  onInput={e=>this.setState({pass: e.target.value})}  value={this.state.pass}/>
+            </Grid>
+             <Grid item>
+              <Button id="comprar" onClick={this.addItem}>Comprar</Button>
+              <Button id="cancelar-comprar" onClick={this.cancel}>Cancelar</Button>
+            </Grid>
+            <div>
+              <h3>{"Cliente: "+ this.state.nombre}</h3>
+          </div>
+          </Grid>: <Grid container direction={"column"} spacing={2}>
+          <Grid item>
+              <Button id="comprar" onClick={this.addItem}>Comprar</Button>
+              <Button id="cancelar-comprar" onClick={this.cancel}>Cancelar</Button>
             </Grid>
           </Grid>
+          }
         </Box>
       </Modal>
     </div>
@@ -129,4 +144,4 @@ updateItem = ()=> {
 }
 }
 
-export default NuevoInventario;
+export default Comprar;

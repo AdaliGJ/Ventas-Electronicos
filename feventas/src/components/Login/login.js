@@ -17,8 +17,6 @@ import Button from '@material-ui/core/Button';
 
 function Login(props){
 
-    const { setUsername, username, tipoUsuario, setTipoUsuario }=useContext(LoginContext);
-    const [msg, setMsg]=useState('');
     const[error, setError]=useState(false);
         
     const usuarioRef = useRef(null);
