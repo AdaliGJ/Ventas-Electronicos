@@ -24,7 +24,9 @@ class Comprar extends React.Component {
           open: false,
           sus: null,
           pass: null,
-          total: props.total
+          total: props.total,
+          producto: props.producto,
+          nombre: ''
           
       }
       this.handleOpen=this.handleOpen.bind(this);
@@ -93,14 +95,14 @@ updateItem = ()=> {
   render(){
     
   return (
-    <div>
+    <div >
       <Button onClick={this.handleOpen} id="boton-modal-comprar">Comprar</Button>
-      <Modal open={this.state.open} onClose={this.handleOpen}>
+      <Modal open={this.state.open} onClose={this.handleOpen} id="comprar-modal">
         <Box className="box">
         <div>
-              <h2>Detalle Compra</h2>
-              <p>Producto: {this.state.producto}</p>
-              <p>Total: {this.state.total}</p>
+              <h2>Detalle Compra: </h2>
+              <p>{"Producto: " + this.props.producto}</p>
+              <p>{"Total: "+this.state.total}</p>
           </div>
           <h4>¿Está suscrito a nuestra página?</h4>
           <FormControl className="modalfield" variant ="outlined">
@@ -125,6 +127,9 @@ updateItem = ()=> {
               <Button id="comprar" onClick={this.addItem}>Comprar</Button>
               <Button id="cancelar-comprar" onClick={this.cancel}>Cancelar</Button>
             </Grid>
+            <div>
+              <h3>{"Cliente: "+ this.state.nombre}</h3>
+          </div>
           </Grid>: <Grid container direction={"column"} spacing={2}>
           <Grid item>
               <Button id="comprar" onClick={this.addItem}>Comprar</Button>

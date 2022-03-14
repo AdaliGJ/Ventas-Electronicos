@@ -9,6 +9,12 @@
     color: white;
 }
 
-.box{
-   overflow-y: scroll;
+#comprar-modal{
+    margin-top: 2vh;
+    overflow-y: scroll;
+    max-height: 90vh;
 }
+
+/*.box{
+   overflow-y: scroll;
+}*/

@@ -18,11 +18,11 @@ class Detalle extends React.Component{
         super(props);
         this.state={
             id: this.props.match.params.id,
-            marca: "marca",
+            marca: "",
            
             tipo_disp: '3',
            
-            precionum: 100,
+           /* precionum: 100,
             precio: "",
             garantia: "1 año",
             res: "2x100",
@@ -35,7 +35,7 @@ class Detalle extends React.Component{
             so: "Android",
             hd: 512,
             ram: 8, 
-            existencias: 5,
+            existencias: 5,*/
             total: 0,
 
             inventario: '',
@@ -53,15 +53,16 @@ class Detalle extends React.Component{
             const url2= 'http://localhost:8080/Marca/Obtener'
             const url3= 'http://localhost:8080/Tipo_dispositivo/Obtener'
       
-            axios.get(url, {params: {nId: this.state.id}}).then(response => response.data)
+            axios.get(url, {params: {nIdInventario: this.state.id}}).then(response => response.data)
               .then((data) => {
                 this.setState({inventario: data});
                 console.log(data);
+                console.log(data.marca);
                 axios.get(url2, {params: {nIdMarca: data.marca}}).then((data2) => {
                     this.setState({marca: data2.data.nombre});
                     console.log(data2);
                 });
-                axios.get(url3, {params: {nIdTipoDispositivo: data.categoria_dispositivo}}).then((data3) => {
+                axios.get(url3, {params: {nIdTipoDispositivo: data.categoriaDispositivo}}).then((data3) => {
                     this.setState({tipo_disp: data3.data.nombre});
                     console.log(data3);
                 });
@@ -97,23 +98,23 @@ class Detalle extends React.Component{
                                     <li>{"Marca: "+this.state.marca}</li>
                                     <li>{"Modelo: "+this.state.inventario.modelo}</li>
                                     <li>{"Color: "+this.state.inventario.color}</li>
-                                    <li>{"Precio: Q"+this.state.inventario.precio_lista}</li>
-                                    <li>{"Garantía: "+this.state.inventario.meses_garantia+" meses"}</li>
+                                    <li>{"Precio: Q"+this.state.inventario.precioLista}</li>
+                                    <li>{"Garantía: "+this.state.inventario.mesesGarantia+" meses"}</li>
                                 </ul>
-                                {this.state.inventario.categoria_dispositivo==1?<ul>
+                                {this.state.inventario.categoriaDispositivo==1?<ul>
                                     <h4>Extras:</h4>
                                     <li>{"Resolución: "+this.state.res}</li>
                                     <li>{"Bits de Profundidad: "+this.state.bits}</li>
                                     <li>{"Pulgadas: "+this.state.pantalla}</li>
                                     <li>{"Entradas HDMI: "+this.state.hdmi}</li>
                                 </ul>
-                                    :this.state.inventario.categoria_dispositivo==2?<ul>
+                                    :this.state.inventario.categoriaDispositivo==2?<ul>
                                     <h4>Extras:</h4>
                                     <li>{"Máximo de Jugadores: "+this.state.jugadores}</li>
                                     <li>{"Gráficos: "+this.state.graficos}</li>
                                     <li>{"Consola: "+this.state.consola}</li>
                                 </ul>:
-                                    this.state.inventario.categoria_dispositivo==3?<ul>
+                                    this.state.inventario.categoriaDispositivo==3?<ul>
                                     <h4>Extras:</h4>
                                     <li>{"Pulgadas: "+this.state.pantalla}</li>
                                     <li>{"Sistema Operativo: "+this.state.so}</li>
@@ -128,9 +129,9 @@ class Detalle extends React.Component{
                                 <h3>Cantidad de productos:</h3>
                                 <TextField type="number" id="quantity" name="quantity" InputProps={{ inputProps: { min: 1, max: this.state.inventario.existencias } }} onChange={e=>this.setState({total: e.target.value})}  value={this.state.total}/>
                                 <br/>
-                                <h2>{"Total: Q"+this.state.inventario.precio_lista*this.state.total}</h2>
+                                <h2>{"Total: Q"+this.state.inventario.precioLista*this.state.total}</h2>
                                 <br/>
-                                <br/><Comprar/>
+                                <br/><Comprar producto={this.state.tipo_disp+" "+this.state.marca+" "+this.state.inventario.modelo} total={this.state.inventario.precioLista*this.state.total}/>
                             </div>
                         </Grid>
                     </Grid>
