@@ -47,12 +47,12 @@ public class VistaCatalogoControlador {
 	
 	@GetMapping("/BuscarMenorMayor")
 	public @ResponseBody Iterable<VistaCatalogo> buscarMenorMayor(@RequestParam String nBusqueda){
-		return repositorioVistaCatalogo.findByTipodispositivoContainingOrNombremarcaContainingOrDescripcionContainingOrModeloContainingOrderByPreciolistaAsc(nBusqueda,nBusqueda,nBusqueda,nBusqueda);
+		return repositorioVistaCatalogo.findByTipodispositivoContainingOrNombremarcaContainingOrDescripcionContainingOrModeloContainingOrColorContainingOrderByPreciolistaAsc(nBusqueda,nBusqueda,nBusqueda,nBusqueda,nBusqueda);
 	}
 	
 	@GetMapping("/BuscarMayorMenor")
 	public @ResponseBody Iterable<VistaCatalogo> buscar(@RequestParam String nBusqueda){
-		return repositorioVistaCatalogo.findByTipodispositivoContainingOrNombremarcaContainingOrDescripcionContainingOrModeloContainingOrderByPreciolistaDesc(nBusqueda,nBusqueda,nBusqueda,nBusqueda);
+		return repositorioVistaCatalogo.findByTipodispositivoContainingOrNombremarcaContainingOrDescripcionContainingOrModeloContainingOrColorContainingOrderByPreciolistaDesc(nBusqueda,nBusqueda,nBusqueda,nBusqueda,nBusqueda);
 	}
 	
 	

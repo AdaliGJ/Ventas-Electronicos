@@ -217,4 +217,7 @@ inner join fichas_clientes fc on fc.id_cliente = cs.id_cliente;
 
 
 
-
+CREATE OR REPLACE VIEW IMGS
+AS select i.tipodispositivo tipodispositivo, i.nombremarca, i.preciolista preciolista, i.modelo, i.idinventario, i.descripcion, d.imagen 
+from catalogo i 
+inner join imagenes_dispositivos d on i.idinventario=d.id_inventario;

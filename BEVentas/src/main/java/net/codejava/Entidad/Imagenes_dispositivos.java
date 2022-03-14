@@ -15,42 +15,52 @@ public class Imagenes_dispositivos {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id_imagen;
 	@Column
-	private int inventario;
+	private int id_inventario;
 	@Column
 	private String imagen;
 	
 	public Imagenes_dispositivos() {}
-	
+
 	
 	public int getId_imagen() {
 		return id_imagen;
 	}
+
 	public void setId_imagen(int id_imagen) {
 		this.id_imagen = id_imagen;
 	}
-	public int getInventario() {
-		return inventario;
+
+	public int getId_inventario() {
+		return id_inventario;
 	}
-	public void setInventario(int inventario) {
-		this.inventario = inventario;
+
+	public void setId_inventario(int id_inventario) {
+		this.id_inventario = id_inventario;
 	}
+
 	public String getImagen() {
 		return imagen;
 	}
+
 	public void setImagen(String imagen) {
 		this.imagen = imagen;
 	}
-	public Imagenes_dispositivos(int id_imagen, int inventario, String imagen) {
+
+	public Imagenes_dispositivos(int id_imagen, int id_inventario, String imagen) {
 		super();
 		this.id_imagen = id_imagen;
-		this.inventario = inventario;
+		this.id_inventario = id_inventario;
 		this.imagen = imagen;
 	}
+
 	@Override
 	public String toString() {
-		return "Imagenes_dispositivos [id_imagen=" + id_imagen + ", inventario=" + inventario + ", imagen=" + imagen
-				+ "]";
+		return "Imagenes_dispositivos [id_imagen=" + id_imagen + ", id_inventario=" + id_inventario + ", imagen="
+				+ imagen + "]";
 	}
+	
+	
+	
 	
 	
 	
