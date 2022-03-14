@@ -57,7 +57,7 @@ function SignUp(props){
                                     <AccountCircleIcon />
                                   </InputAdornment>
                                 ),
-                              }} inputRef={usuarioRef}/>
+                              }} inputRef={nombre}/>
                         </Grid>
                         <Grid item>
                             <TextField onChange={e=>this.setState({password: e.target.value})} className="standard-basic" label="Contraseña" type="password"  InputProps={{
