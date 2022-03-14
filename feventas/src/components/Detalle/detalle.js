@@ -67,11 +67,11 @@ class Detalle extends React.Component{
                     console.log(data3);
                 });
                 if(data.categoria_dispositivo==1){
-                  /*  const url4='http://localhost:8080/Televisores/Obtener'
-                    axios.get(url4, {params: {nIdInventario: data.id_inventario}}).then((data4) => {
+                  const url4='http://localhost:8080/Televisores/Obtener'
+                    axios.get(url4, {params: {nIdInventario: data.idInventario}}).then((data4) => {
                         this.setState({televisor: data4.data});
                         console.log(data4);
-                    });*/
+                    });
                 }else if(data.categoria_dispositivo==2){
                     /*url4=*/
                 }else if(data.categoria_dispositivo==3){
@@ -103,7 +103,7 @@ class Detalle extends React.Component{
                                 </ul>
                                 {this.state.inventario.categoriaDispositivo==1?<ul>
                                     <h4>Extras:</h4>
-                                    <li>{"Resolución: "+this.state.res}</li>
+                                    <li>{"Resolución: "+this.state.televisor.res}</li>
                                     <li>{"Bits de Profundidad: "+this.state.bits}</li>
                                     <li>{"Pulgadas: "+this.state.pantalla}</li>
                                     <li>{"Entradas HDMI: "+this.state.hdmi}</li>
@@ -126,12 +126,10 @@ class Detalle extends React.Component{
                         </Grid>
                         <Grid item xs={4}>
                             <div className="compra_1">
-                                <h3>Cantidad de productos:</h3>
-                                <TextField type="number" id="quantity" name="quantity" InputProps={{ inputProps: { min: 1, max: this.state.inventario.existencias } }} onChange={e=>this.setState({total: e.target.value})}  value={this.state.total}/>
+                               
+                                <h2>{"Total: Q"+this.state.inventario.precioLista/**this.state.total*/}</h2>
                                 <br/>
-                                <h2>{"Total: Q"+this.state.inventario.precioLista*this.state.total}</h2>
-                                <br/>
-                                <br/><Comprar producto={this.state.tipo_disp+" "+this.state.marca+" "+this.state.inventario.modelo} total={this.state.inventario.precioLista*this.state.total}/>
+                                <br/><Comprar producto={this.state.tipo_disp+" "+this.state.marca+" "+this.state.inventario.modelo} total={this.state.inventario.precioLista}/>
                             </div>
                         </Grid>
                     </Grid>

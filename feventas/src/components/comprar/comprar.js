@@ -24,9 +24,9 @@ class Comprar extends React.Component {
           open: false,
           sus: null,
           pass: null,
-          total: props.total,
           producto: props.producto,
-          nombre: ''
+          nombre: '',
+          cliente: null
           
       }
       this.handleOpen=this.handleOpen.bind(this);
@@ -49,26 +49,22 @@ class Comprar extends React.Component {
 
 
 addItem = ()=>{
-  /*const url = 'localhost:8080/Dispositivos_Indiviuales/Insertar';
+  const url= 'http://localhost:8080/Clientes/Login'
 
-  let formData = new FormData();
-  formData.append('nCategoriaDispositivo', this.state.categoria);
-  formData.append('nMarca', this.state.marca);
-
-
-
-  axios.post(url, formData, {headers: {"Content-Type": "application/json"}})
-  .then((response)=>{
-      console.log(response);
-      this.setState({open: true});
-  })
-  .catch((response)=>{
-    console.log(response);
-});*/
+  axios.get(url, {params: {nIdCliente: this.state.nit, nPassword: this.state.pass}}).then(response => response.data)
+    .then((data) => {
+      this.setState({cliente: data});
+      if(data.respuesta=="ok"){
+        console.log(data);
+      }else{
+        console.log(data);
+        this.handleOpen();
+      }
+    });
 
 
 
-    this.handleOpen();
+    
  }
 
 updateItem = ()=> {
@@ -79,7 +75,12 @@ updateItem = ()=> {
 
  componentDidMount(){
   const context = this.context;
-  this.setState({usuario: context.tipoUsuario});
+  this.setState({usuario: context.username,
+    tipo_usuario: context.tipoUsuario,
+  total: this.props.total});
+
+  
+console.log(this.props.total);
 
   const url= 'http://localhost:8080/Inventario/ObtenerTodos'
 
@@ -89,6 +90,8 @@ updateItem = ()=> {
       
       console.log(data);
     });
+
+
 
  }
 
@@ -102,7 +105,7 @@ updateItem = ()=> {
         <div>
               <h2>Detalle Compra: </h2>
               <p>{"Producto: " + this.props.producto}</p>
-              <p>{"Total: "+this.state.total}</p>
+              <p>{"Precio: Q"+this.props.total}</p>
           </div>
           <h4>¿Está suscrito a nuestra página?</h4>
           <FormControl className="modalfield" variant ="outlined">
@@ -118,7 +121,7 @@ updateItem = ()=> {
           <Grid container direction={"column"} spacing={2}>
             <h2>Ingrese sus datos</h2>
             <Grid item>
-                <TextField className="outlined-required" label="NIT" type="number"  onInput={e=>this.setState({nit: e.target.value})}  value={this.state.nit}/>
+                <TextField className="outlined-required" label="ID" type="number"  onInput={e=>this.setState({nit: e.target.value})}  value={this.state.nit}/>
             </Grid>
             <Grid item> 
                 <TextField className="outlined-required" label="Contraseña" type="password"  onInput={e=>this.setState({pass: e.target.value})}  value={this.state.pass}/>
