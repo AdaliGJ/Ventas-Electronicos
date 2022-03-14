@@ -32,4 +32,7 @@ public class Tipo_clientesControlador {
 	public @ResponseBody Optional<Tipo_clientes> getOne(@RequestParam int nIdTipoCliente){
 		return repositorioTipoClientes.findById(nIdTipoCliente);
 	}
+	
+	
+	
 }

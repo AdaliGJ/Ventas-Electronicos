@@ -86,6 +86,8 @@ insert into inventario(
 
 CREATE SEQUENCE INVENTARIO_SEQ1;
 
+Drop trigger inventario_trg1;
+
 CREATE TRIGGER INVENTARIO_TRG1 
 BEFORE INSERT ON INVENTARIO 
 FOR EACH ROW 
@@ -154,3 +156,65 @@ END;
 /
 
 select * from usuarios;
+
+
+
+CREATE SEQUENCE USUARIOS_SEQ1;
+
+Drop trigger Usuarios_trg1;
+
+
+
+CREATE TRIGGER USUARIOS_TRG1 
+BEFORE INSERT ON USUARIOS 
+FOR EACH ROW 
+BEGIN
+  <<COLUMN_SEQUENCES>>
+  BEGIN
+    IF INSERTING AND :NEW.ID_USUARIO IS NULL THEN
+      SELECT USUARIOS_SEQ1.NEXTVAL INTO :NEW.ID_USUARIO FROM SYS.DUAL;
+    END IF;
+  END COLUMN_SEQUENCES;
+END;
+/
+
+
+
+
+
+ALTER TABLE USUARIOS  
+MODIFY (ID_USUARIO INT );
+
+ALTER TABLE USUARIOS  
+MODIFY (TIPO_USUARIO INT );
+
+
+CREATE OR REPLACE VIEW CATALOGO
+AS select tdi."IDTIPODISPOSITIVO",tdi."TIPODISPOSITIVO",tdi."IDINVENTARIO",tdi."CATEGORIADISPOSITIVO",tdi."MARCA",tdi."EXISTENCIAS",tdi."PRECIOLISTA",tdi."COLOR",tdi."DESCRIPCION",tdi."MODELO",tdi."MESESGARANTIA", m.nombre nombremarca from (select td.id_tipo_dispositivo idtipodispositivo, td.nombre tipodispositivo , i.id_inventario idinventario, i.categoria_dispositivo categoriadispositivo, i.marca, i.existencias, i.precio_lista preciolista, i.color, i.descripcion, i.modelo, i.meses_garantia mesesgarantia 
+from tipo_dispositivo td 
+inner join inventario i on td.id_tipo_dispositivo=i.categoria_dispositivo) tdi 
+inner join marcas m on tdi.marca = m.id_marca;
+
+
+DROP VIEW DISPOSITIVOS_VENDIDOS;
+
+CREATE VIEW DISPOSITIVOSVENDIDOS
+AS select vc.serie, vc.fecha, vc.id_propietario idpropietario, vc.nombre_propietario nombrepropietario, di.id_inventario dispositivo from (select v.serie, v.fecha, cs.* 
+from (select fc.id_cliente id_propietario, fc.nombre nombre_propietario, o.id_orden from fichas_clientes fc 
+inner join ordenes_compra o on fc.id_cliente=o.id_cliente) cs 
+inner join ventas v on cs.id_orden=v.id_orden) vc 
+inner join dispositivos_individuales di on di.serie_dispositivo = vc.serie; la 2
+
+
+
+DROP VIEW INFO_CLIENTE;
+
+CREATE VIEW INFOCLIENTE
+AS select cs."ID_CLIENTE" idcliente ,cs."TIPO_CLIENTE" tipocliente,cs."NOMBRE_TIPO_CLIENTE" nombretipocliente, fc.patente_de_comercio patente,fc.fecha_de_vencimiento vencimiento, fc.nombre nombrecliente, fc.nit 
+from (select c.id_cliente, c.tipo_cliente, tc.nombre nombre_tipo_cliente from clientes c 
+inner join tipo_clientes tc on c.tipo_cliente=tc.id) cs 
+inner join fichas_clientes fc on fc.id_cliente = cs.id_cliente;
+
+
+
+

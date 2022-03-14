@@ -1,5 +1,7 @@
 package net.codejava.Controlador;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import net.codejava.Entidad.Clientes;
+import net.codejava.Entidad.Marcas;
 import net.codejava.Entidad.Ordenes_compra;
 import net.codejava.Repositorio.RepositorioOrdenes_compra;
 
@@ -24,6 +27,11 @@ public class Ordenes_compraControlador {
 	@GetMapping("/ObtenerTodos")
 	public @ResponseBody Iterable<Ordenes_compra> getAll(){
 		return repositorioOrdenesCompra.findAll();
+	}
+	
+	@GetMapping("/Obtener")
+	public @ResponseBody Optional<Ordenes_compra> getOne(@RequestParam int nIdOrden){
+		return repositorioOrdenesCompra.findById(nIdOrden);
 	}
 	
 	@PostMapping("/Insertar")
