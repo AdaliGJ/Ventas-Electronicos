@@ -16,8 +16,9 @@ import axios from 'axios'
 
 function SignUp(props){
 
-  const usuarioRef = useRef(null);
+  const user_type = useRef(null);
   const contRef = useRef(null);
+  const nombre = useRef(null);
 
 
   const register=()=>{
@@ -25,9 +26,9 @@ function SignUp(props){
     const url = 'localhost:8080/Usuarios/Insertar';
 
     let formData = new FormData();
-    formData.append('nTipoCliente', this.state.nombre);
-    formData.append('nContraseña', this.state.password);
-    formData.append('nContraseña', this.state.user_type);
+    formData.append('nTipoUsuario', user_type);
+    formData.append('nPassword', contRef);
+    formData.append('nNombre', nombre);
 
     
 
