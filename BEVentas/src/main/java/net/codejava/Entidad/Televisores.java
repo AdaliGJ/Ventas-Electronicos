@@ -16,7 +16,7 @@ public class Televisores {
 	@Column
 	private String resolucion;
 	@Column
-	private int bits_profundidad_color;
+	private int bits_profundidad;
 	@Column
 	private int pulgadas_pantalla;
 	@Column
@@ -39,10 +39,10 @@ public class Televisores {
 		this.resolucion = resolucion;
 	}
 	public int getBits_profundidad_color() {
-		return bits_profundidad_color;
+		return bits_profundidad;
 	}
 	public void setBits_profundidad_color(int bits_profundidad_color) {
-		this.bits_profundidad_color = bits_profundidad_color;
+		this.bits_profundidad = bits_profundidad_color;
 	}
 	public int getPulgadas_pantalla() {
 		return pulgadas_pantalla;
@@ -61,14 +61,14 @@ public class Televisores {
 		super();
 		this.id_inventario = id_inventario;
 		this.resolucion = resolucion;
-		this.bits_profundidad_color = bits_profundidad_color;
+		this.bits_profundidad = bits_profundidad_color;
 		this.pulgadas_pantalla = pulgadas_pantalla;
 		this.entradas_HDMI = entradas_HDMI;
 	}
 	@Override
 	public String toString() {
 		return "Televisores [id_inventario=" + id_inventario + ", resolucion=" + resolucion
-				+ ", bits_profundidad_color=" + bits_profundidad_color + ", pulgadas_pantalla=" + pulgadas_pantalla
+				+ ", bits_profundidad_color=" + bits_profundidad + ", pulgadas_pantalla=" + pulgadas_pantalla
 				+ ", entradas_HDMI=" + entradas_HDMI + "]";
 	}
 	
