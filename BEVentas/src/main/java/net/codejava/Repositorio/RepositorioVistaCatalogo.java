@@ -24,8 +24,8 @@ public interface RepositorioVistaCatalogo extends CrudRepository<VistaCatalogo, 
 	Iterable<VistaCatalogo> findByOrderByNombremarcaAsc();
 	Iterable<VistaCatalogo> findByOrderByNombremarcaDesc();
 	
-	Iterable<VistaCatalogo> findByTipodispositivoContainingOrNombremarcaContainingOrDescripcionContainingOrModeloContainingOrderByPreciolistaAsc(String Busqueda1,String Busqueda2,String Busqueda3,String Busqueda4);
-	Iterable<VistaCatalogo> findByTipodispositivoContainingOrNombremarcaContainingOrDescripcionContainingOrModeloContainingOrderByPreciolistaDesc(String Busqueda1,String Busqueda2,String Busqueda3,String Busqueda4);
+	Iterable<VistaCatalogo> findByTipodispositivoContainingOrNombremarcaContainingOrDescripcionContainingOrModeloContainingOrColorContainingOrderByPreciolistaAsc(String Busqueda1,String Busqueda2,String Busqueda3,String Busqueda4,String Busqueda5);
+	Iterable<VistaCatalogo> findByTipodispositivoContainingOrNombremarcaContainingOrDescripcionContainingOrModeloContainingOrColorContainingOrderByPreciolistaDesc(String Busqueda1,String Busqueda2,String Busqueda3,String Busqueda4, String Busqueda5);
 	/*
 	@Query("SELECT * FROM vistacatalogo where nombremarca = :Nombremarca")
 	Iterable<VistaCatalogo> findByNombremarca(@Param("Nombremarca") String Nombremarca);  
