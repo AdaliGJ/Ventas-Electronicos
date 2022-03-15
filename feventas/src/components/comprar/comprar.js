@@ -5,9 +5,12 @@ import  Modal from '@material-ui/core/Modal';
 import TextField from '@material-ui/core/TextField';
 import { Grid } from '@material-ui/core';
 import { LoginContext } from '../../context/LoginContext';
+import Alert from '@material-ui/lab/Alert';
 import './comprar.css';
 
 import axios from 'axios';
+
+import jsPDF from 'jspdf';
 
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
@@ -25,14 +28,17 @@ class Comprar extends React.Component {
           sus: null,
           pass: null,
           producto: props.producto,
-          nombre: '',
-          cliente: null
+          nombre: 'N/A',
+          cliente: null,
+          registrado: false,
+          persona: {nit:'CF',nombre: 'N/A'},
+          today: new Date()
           
       }
       this.handleOpen=this.handleOpen.bind(this);
       this.cancel=this.cancel.bind(this);
       this.addItem=this.addItem.bind(this);
-      this.updateItem=this.updateItem.bind(this);
+      this.generarFactura=this.generarFactura.bind(this);
   }
   
   handleOpen=(e)=>{
@@ -50,11 +56,18 @@ class Comprar extends React.Component {
 
 addItem = ()=>{
   const url= 'http://localhost:8080/Clientes/Login'
+  const url2= 'http://localhost:8080/Fichas_clientes/Obtener'
 
   axios.get(url, {params: {nIdCliente: this.state.nit, nPassword: this.state.pass}}).then(response => response.data)
     .then((data) => {
       this.setState({cliente: data});
       if(data.respuesta=="ok"){
+        this.setState({registrado: true});
+        axios.get(url2, {params: {nIdCliente: this.state.nit}}).then(response => response.data)
+          .then((data) => {
+            this.setState({nombre: data.nombre});
+          });
+
         console.log(data);
       }else{
         console.log(data);
@@ -63,13 +76,52 @@ addItem = ()=>{
     });
 
 
-
     
  }
 
-updateItem = ()=> {
-    /*var actItem = this.props.update;
-    actItem(this.state.serie);*/
+generarFactura = ()=> {
+
+  const url= 'http://localhost:8080/Fichas_clientes/Obtener'
+
+  axios.get(url, {params: {nIdCliente: this.state.nit}}).then(response => response.data)
+    .then((data) => {
+      this.setState({persona: data});
+
+      const doc = new jsPDF();
+
+      doc.setFontSize(12);
+      doc.text(20, 60, 'NIT: '+ this.state.persona.nit);
+      doc.text(20, 70, 'Nombre: '+ this.state.persona.nombre);
+      doc.text(20, 80, 'Serie: '+ this.state.persona.nit+this.state.today.getDay()+this.state.today.getTime());
+      doc.text(115, 50,'Total: Q'+ this.props.total);
+
+    
+      doc.save('factura.pdf');
+          
+          console.log(data);
+        });
+  
+    this.handleOpen();
+}
+
+
+generarFactura2 = ()=> {
+
+ 
+
+      const doc = new jsPDF();
+
+      doc.setFontSize(12);
+      doc.text(20, 60, 'NIT: '+ this.state.persona.nit);
+      doc.text(20, 70, 'Nombre: '+ this.state.persona.nombre);
+      doc.text(20, 80, 'Serie: '+ this.state.persona.nit+this.state.today.getDay()+this.state.today.getTime());
+      doc.text(115, 50,'Total: Q'+ this.props.total);
+
+    
+      doc.save('factura.pdf');
+          
+     
+       
     this.handleOpen();
 }
 
@@ -135,11 +187,12 @@ console.log(this.props.total);
           </div>
           </Grid>: <Grid container direction={"column"} spacing={2}>
           <Grid item>
-              <Button id="comprar" onClick={this.addItem}>Comprar</Button>
+              <Button id="comprar" onClick={this.generarFactura2}>Comprar</Button>
               <Button id="cancelar-comprar" onClick={this.cancel}>Cancelar</Button>
             </Grid>
           </Grid>
           }
+           <Alert severity="success" id={this.state.registrado? "sidoc": "nodoc"}>Compra realizada exitosamente. <a onClick={this.generarFactura}>Generar Factura</a></Alert>
         </Box>
       </Modal>
     </div>

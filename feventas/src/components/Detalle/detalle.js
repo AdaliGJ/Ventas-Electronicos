@@ -39,7 +39,8 @@ class Detalle extends React.Component{
             total: 0,
 
             inventario: '',
-            televisor:''
+            televisor:'',
+            imgs: ''
         }
     } 
    
@@ -52,6 +53,7 @@ class Detalle extends React.Component{
             const url= 'http://localhost:8080/Inventario/Obtener'
             const url2= 'http://localhost:8080/Marca/Obtener'
             const url3= 'http://localhost:8080/Tipo_dispositivo/Obtener'
+            const url5= 'http://localhost:8080/VistaImgs/Obtener'
       
             axios.get(url, {params: {nIdInventario: this.state.id}}).then(response => response.data)
               .then((data) => {
@@ -66,16 +68,28 @@ class Detalle extends React.Component{
                     this.setState({tipo_disp: data3.data.nombre});
                     console.log(data3);
                 });
-                if(data.categoria_dispositivo==1){
+                axios.get(url5, {params: {nIdInventario: this.state.id}}).then((data5) => {
+                    this.setState({imgs: data5.data});
+                    console.log(data5);
+                });
+                if(data.categoriaDispositivo==1){
                   const url4='http://localhost:8080/Televisores/Obtener'
                     axios.get(url4, {params: {nIdInventario: data.idInventario}}).then((data4) => {
                         this.setState({televisor: data4.data});
                         console.log(data4);
                     });
-                }else if(data.categoria_dispositivo==2){
-                    /*url4=*/
-                }else if(data.categoria_dispositivo==3){
-                   /* url4=*/
+                }else if(data.categoriaDispositivo==2){
+                    const url4='http://localhost:8080/Videojuegos/Obtener'
+                    axios.get(url4, {params: {nIdInventario: data.idInventario}}).then((data4) => {
+                        this.setState({televisor: data4.data});
+                        console.log(data4);
+                    });
+                }else if(data.categoriaDispositivo==3){
+                    const url4='http://localhost:8080/Smartwatch/Obtener'
+                    axios.get(url4, {params: {nIdInventario: data.idInventario}}).then((data4) => {
+                        this.setState({televisor: data4.data});
+                        console.log(data4);
+                    });
                 }
 
               });
@@ -103,23 +117,23 @@ class Detalle extends React.Component{
                                 </ul>
                                 {this.state.inventario.categoriaDispositivo==1?<ul>
                                     <h4>Extras:</h4>
-                                    <li>{"Resolución: "+this.state.televisor.res}</li>
-                                    <li>{"Bits de Profundidad: "+this.state.bits}</li>
-                                    <li>{"Pulgadas: "+this.state.pantalla}</li>
-                                    <li>{"Entradas HDMI: "+this.state.hdmi}</li>
+                                    <li>{"Resolución: "+this.state.televisor.resolucion}</li>
+                                    <li>{"Bits de Profundidad: "+this.state.televisor.bits_profundidad_color}</li>
+                                    <li>{"Pulgadas: "+this.state.televisor.pulgadas_pantalla}</li>
+                                    <li>{"Entradas HDMI: "+this.state.televisor.entradas_HDMI}</li>
                                 </ul>
                                     :this.state.inventario.categoriaDispositivo==2?<ul>
                                     <h4>Extras:</h4>
-                                    <li>{"Máximo de Jugadores: "+this.state.jugadores}</li>
-                                    <li>{"Gráficos: "+this.state.graficos}</li>
-                                    <li>{"Consola: "+this.state.consola}</li>
+                                    <li>{"Máximo de Jugadores: "+this.state.televisor.max_jugadores}</li>
+                                    <li>{"Gráficos: "+this.state.televisor.graficos}</li>
+                                    <li>{"Consola: "+this.state.televisor.consola}</li>
                                 </ul>:
                                     this.state.inventario.categoriaDispositivo==3?<ul>
                                     <h4>Extras:</h4>
-                                    <li>{"Pulgadas: "+this.state.pantalla}</li>
-                                    <li>{"Sistema Operativo: "+this.state.so}</li>
-                                    <li>{"Disco Duro (GB): "+this.state.hd}</li>
-                                    <li>{"RAM (MB): "+this.state.ram}</li>
+                                    <li>{"Pulgadas: "+this.state.televisor.pulgadas_pantalla}</li>
+                                    <li>{"Sistema Operativo: "+this.state.televisor.sistema_operativo}</li>
+                                    <li>{"Disco Duro (GB): "+this.state.televisor_memoria_GB}</li>
+                                    <li>{"RAM (MB): "+this.state.televisor.ram_MB}</li>
                                 </ul>:
                                     null}
                             </div>

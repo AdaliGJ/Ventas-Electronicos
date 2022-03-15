@@ -72,7 +72,7 @@ class Footer extends Component{
                                     }
                             </Grid>
                             <Grid item xs={4}> 
-                                <Box borderBottom={1}>Compras</Box>
+                                <Box borderBottom={1}>Pedidos</Box>
                             </Grid>
                         </Grid>
                     </Container>

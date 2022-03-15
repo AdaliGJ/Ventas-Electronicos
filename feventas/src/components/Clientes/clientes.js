@@ -55,8 +55,13 @@ class Clientes extends React.Component{
             console.log(response);
         });
 
+        /*axios.get(url, {params: {nTipoCliente: "1", nContraseña: "2"}}).then(response => response.data)
+          .then((data) => {
+            console.log(data);
+          });
 
-        console.log("Hola");
+
+        console.log("Hola");*/
     }
 
    
