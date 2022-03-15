@@ -71,7 +71,7 @@ addItem = ()=>{
         console.log(data);
       }else{
         console.log(data);
-        this.handleOpen();
+        this.setState({sus: 2})
       }
     });
 
