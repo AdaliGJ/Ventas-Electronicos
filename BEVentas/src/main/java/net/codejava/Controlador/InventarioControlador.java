@@ -43,6 +43,16 @@ public class InventarioControlador {
 		return repositorioInventario.findByOrderByCategoriaDispositivoDesc();
 	}
 	
+	@PostMapping("/PruebaPost")
+	public String pruebaPost() {
+		return "el post funciono";
+	}
+	
+	@PostMapping("PruebaPost2")
+	public @ResponseBody Iterable<Inventario> pruebaPost2(){
+		return repositorioInventario.findAll();
+	}
+	
 	@PostMapping("/Insertar")
 	public @ResponseBody Inventario insertar(
 			@RequestParam int nCategoriaDispositivo,
