@@ -12,12 +12,10 @@ import javax.persistence.Table;
 public class Fichas_clientes {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id_cliente;
-	@Column
-	private String nombre;
 	@Column
 	private int nit;
+	@Column
+	private String nombre;
 	@Column
 	private String email;
 	@Column
@@ -31,13 +29,13 @@ public class Fichas_clientes {
 	public Fichas_clientes() {}
 
 
-	public int getId_cliente() {
-		return id_cliente;
+	public int getNit() {
+		return nit;
 	}
 
 
-	public void setId_cliente(int id_cliente) {
-		this.id_cliente = id_cliente;
+	public void setNit(int nit) {
+		this.nit = nit;
 	}
 
 
@@ -48,16 +46,6 @@ public class Fichas_clientes {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-
-
-	public int getNit() {
-		return nit;
-	}
-
-
-	public void setNit(int nit) {
-		this.nit = nit;
 	}
 
 
@@ -101,12 +89,11 @@ public class Fichas_clientes {
 	}
 
 
-	public Fichas_clientes(int id_cliente, String nombre, int nit, String email, int telefono,
-			String patente_de_comercio, String fecha_de_vencimiento) {
+	public Fichas_clientes(int nit, String nombre, String email, int telefono, String patente_de_comercio,
+			String fecha_de_vencimiento) {
 		super();
-		this.id_cliente = id_cliente;
-		this.nombre = nombre;
 		this.nit = nit;
+		this.nombre = nombre;
 		this.email = email;
 		this.telefono = telefono;
 		this.patente_de_comercio = patente_de_comercio;
@@ -116,13 +103,12 @@ public class Fichas_clientes {
 
 	@Override
 	public String toString() {
-		return "Fichas_clientes [id_cliente=" + id_cliente + ", nombre=" + nombre + ", nit=" + nit + ", email=" + email
-				+ ", telefono=" + telefono + ", patente_de_comercio=" + patente_de_comercio + ", fecha_de_vencimiento="
-				+ fecha_de_vencimiento + "]";
+		return "Fichas_clientes [nit=" + nit + ", nombre=" + nombre + ", email=" + email + ", telefono=" + telefono
+				+ ", patente_de_comercio=" + patente_de_comercio + ", fecha_de_vencimiento=" + fecha_de_vencimiento
+				+ "]";
 	}
-	
-	
-	
+
+
 	
 
 }

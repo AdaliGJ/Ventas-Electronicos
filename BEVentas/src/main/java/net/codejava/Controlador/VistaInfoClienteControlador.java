@@ -28,8 +28,8 @@ public class VistaInfoClienteControlador {
 	}
 	
 	@GetMapping("/Obtener")
-	public @ResponseBody Optional<VistaInfoCliente> getOne(@RequestParam int nIdCliente){
-		return repositorioVistaInfoCliente.findById(nIdCliente);
+	public @ResponseBody Optional<VistaInfoCliente> getOne(@RequestParam int nNit){
+		return repositorioVistaInfoCliente.findById(nNit);
 	}
 	
 }

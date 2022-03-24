@@ -15,7 +15,7 @@ public class VistaInfoCliente {
 	
 	@Id
 	@Column
-	private int idcliente;
+	private int nit;
 	@Column 
 	private int tipocliente;
 	@Column 
@@ -26,13 +26,10 @@ public class VistaInfoCliente {
 	private String vencimiento;
 	@Column
 	private String nombrecliente;
-	@Column
-	private int nit;
 	
 	
-	
-	public int getIdcliente() {
-		return idcliente;
+	public int getNit() {
+		return nit;
 	}
 	public int getTipocliente() {
 		return tipocliente;
@@ -49,17 +46,15 @@ public class VistaInfoCliente {
 	public String getNombrecliente() {
 		return nombrecliente;
 	}
-	public int getNit() {
-		return nit;
-	}
 	
 	
 	@Override
 	public String toString() {
-		return "VistaInfoCliente [idcliente=" + idcliente + ", tipocliente=" + tipocliente + ", nombretipocliente="
+		return "VistaInfoCliente [nit=" + nit + ", tipocliente=" + tipocliente + ", nombretipocliente="
 				+ nombretipocliente + ", patente=" + patente + ", vencimiento=" + vencimiento + ", nombrecliente="
-				+ nombrecliente + ", nit=" + nit + "]";
+				+ nombrecliente + "]";
 	}
+	
 	
 	
 	

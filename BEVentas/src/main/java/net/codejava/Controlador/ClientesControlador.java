@@ -30,27 +30,29 @@ public class ClientesControlador {
 	}
 	
 	@GetMapping("/Obtener")
-	public @ResponseBody Optional<Clientes> getOne(@RequestParam int nId_cliente){
-		return repositorioClientes.findById(nId_cliente);
+	public @ResponseBody Optional<Clientes> getOne(@RequestParam int nNit){
+		return repositorioClientes.findById(nNit);
 	}
 	
 	@PostMapping("/Insertar")
-	public @ResponseBody Clientes insertar(@RequestParam int nTipoCliente, @RequestParam int nNit) {
+	public @ResponseBody Clientes insertar(@RequestParam int nNit, @RequestParam int nTipoCliente) {
 	
-		Clientes n = new Clientes(4,nTipoCliente,nNit);
+		Clientes n = new Clientes(nNit, nTipoCliente);
 		
 		return repositorioClientes.save(n);
 	}
 	
+	
+	/*
 	@GetMapping("/Login")
-	public @ResponseBody Map<String,String> registrar(@RequestParam int nIdCliente, @RequestParam String nPassword) {
+	public @ResponseBody Map<String,String> registrar(@RequestParam int nNit, @RequestParam String nPassword) {
 	
 		HashMap<String,String> response = new HashMap<>();
 		
-		Optional<Clientes> n = repositorioClientes.findByIdClienteAndPassword(nIdCliente,nPassword);
+		Optional<Clientes> n = repositorioClientes.findByIdClienteAndPassword(nNit,nPassword);
 		//Clientes _n = n.get();
 		
-		/*
+		
 		String usuarioPassword = _n.getContraseña();
 		
 		if( usuarioPassword == nPassword) {
@@ -59,7 +61,7 @@ public class ClientesControlador {
 			response.put("respuesta", "error");
 			response.put("contraseña", _n.getContraseña());
 		}
-		*/
+		
 		
 		if(n.isEmpty()) {
 			
@@ -70,6 +72,6 @@ public class ClientesControlador {
 		
 		
 		return response;
-	}
+	}*/
 	
 }

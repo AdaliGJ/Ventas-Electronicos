@@ -29,21 +29,21 @@ public class Fichas_clienteControlador {
 	}
 	
 	@GetMapping("/Obtener")
-	public @ResponseBody Optional<Fichas_clientes> getOne(@RequestParam int nIdCliente){
-		return repositorioFichasClientes.findById(nIdCliente);
+	public @ResponseBody Optional<Fichas_clientes> getOne(@RequestParam int nNit){
+		return repositorioFichasClientes.findById(nNit);
 	}
 	
 	@PostMapping("/Insertar")
 	public @ResponseBody Fichas_clientes insertar(
-			@RequestParam String nNombre,
 			@RequestParam int nNit,
+			@RequestParam String nNombre,
 			@RequestParam String nEmail,
 			@RequestParam int nTelefono,
 			@RequestParam String nPatenteDeComercio,
 			@RequestParam String nFechaDeVencimiento
 			) {
 	
-		Fichas_clientes n = new Fichas_clientes(4,nNombre,nNit,nEmail, nTelefono, nPatenteDeComercio, nFechaDeVencimiento);
+		Fichas_clientes n = new Fichas_clientes(nNit,nNombre,nEmail, nTelefono, nPatenteDeComercio, nFechaDeVencimiento);
 		
 		return repositorioFichasClientes.save(n);
 	}

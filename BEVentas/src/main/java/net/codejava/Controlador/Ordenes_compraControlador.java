@@ -36,14 +36,14 @@ public class Ordenes_compraControlador {
 	
 	@PostMapping("/Insertar")
 	public @ResponseBody Ordenes_compra insertar(
-			@RequestParam int nIdCliente, 
+			@RequestParam int nNit, 
 			@RequestParam boolean nCredito,
 			@RequestParam String nEntregaEstimada,
 			@RequestParam float nPrecio,
 			@RequestParam String nFecha
 			) {
 	
-		Ordenes_compra n = new Ordenes_compra(4,nIdCliente,nCredito,nEntregaEstimada,nPrecio,nFecha);
+		Ordenes_compra n = new Ordenes_compra(4,nNit,nCredito,nEntregaEstimada,nPrecio,nFecha);
 		
 		return repositorioOrdenesCompra.save(n);
 	}

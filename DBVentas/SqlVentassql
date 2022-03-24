@@ -221,3 +221,43 @@ CREATE OR REPLACE VIEW IMGS
 AS select i.tipodispositivo tipodispositivo, i.nombremarca, i.preciolista preciolista, i.modelo, i.idinventario, i.descripcion, d.imagen 
 from catalogo i 
 inner join imagenes_dispositivos d on i.idinventario=d.id_inventario;
+
+
+
+
+ALTER TABLE CLIENTES 
+DROP COLUMN PASSWORD;
+
+ALTER TABLE CLIENTES RENAME COLUMN ID_CLIENTE TO NIT;
+
+CREATE OR REPLACE TRIGGER CLIENTES_TRG 
+BEFORE INSERT ON CLIENTES 
+FOR EACH ROW 
+BEGIN
+  <<COLUMN_SEQUENCES>>
+  BEGIN
+    NULL;
+  END COLUMN_SEQUENCES;
+END;
+/
+
+
+ALTER TABLE FICHAS_CLIENTES
+ADD CONSTRAINT FICHAS_CLIENTES_FK2 FOREIGN KEY
+(
+  NIT 
+)
+REFERENCES CLIENTES
+(
+  NIT 
+)
+ENABLE;
+
+
+
+
+
+
+
+
+
