@@ -35,9 +35,9 @@ public class ClientesControlador {
 	}
 	
 	@PostMapping("/Insertar")
-	public @ResponseBody Clientes insertar(@RequestParam int nTipoCliente, @RequestParam String nContraseña) {
+	public @ResponseBody Clientes insertar(@RequestParam int nTipoCliente, @RequestParam int nNit) {
 	
-		Clientes n = new Clientes(4,nTipoCliente,nContraseña);
+		Clientes n = new Clientes(4,nTipoCliente,nNit);
 		
 		return repositorioClientes.save(n);
 	}

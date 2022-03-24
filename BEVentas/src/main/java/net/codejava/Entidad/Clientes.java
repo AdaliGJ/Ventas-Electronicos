@@ -19,7 +19,7 @@ public class Clientes {
 	@Column
 	private int tipo_cliente;
 	@Column
-	private String password;
+	private int nit;
 	
 	
 	public Clientes() {}
@@ -45,27 +45,27 @@ public class Clientes {
 	}
 
 
-	public String getPassword() {
-		return password;
+	public int getNit() {
+		return nit;
 	}
 
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setNit(int nit) {
+		this.nit = nit;
 	}
 
 
-	public Clientes(int idCliente, int tipo_cliente, String password) {
+	public Clientes(int idCliente, int tipo_cliente, int nit) {
 		super();
 		this.idCliente = idCliente;
 		this.tipo_cliente = tipo_cliente;
-		this.password = password;
+		this.nit = nit;
 	}
 
 
 	@Override
 	public String toString() {
-		return "Clientes [idCliente=" + idCliente + ", tipo_cliente=" + tipo_cliente + ", password=" + password + "]";
+		return "Clientes [idCliente=" + idCliente + ", tipo_cliente=" + tipo_cliente + ", nit=" + nit + "]";
 	}
 	
 	
