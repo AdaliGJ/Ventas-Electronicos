@@ -48,7 +48,7 @@ public class InventarioControlador {
 		return "el post funciono";
 	}
 	
-	@PostMapping("PruebaPost2")
+	@PostMapping("/PruebaPost2")
 	public @ResponseBody Iterable<Inventario> pruebaPost2(){
 		return repositorioInventario.findAll();
 	}
