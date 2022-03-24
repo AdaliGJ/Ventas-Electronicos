@@ -83,7 +83,7 @@ class NuevoCatalogo extends React.Component {
 addItem = ()=>{
    /* var submitItem = this.props.submit;
     submitItem(this.state.serie);*/
-    const url = 'localhost:8080/Inventario/Insertar';
+    const url = 'http://localhost:8080/Inventario/Insertar';
 
         let formData = new FormData();
         formData.append('nCategoriaDispositivo', this.state.categoria);
@@ -106,7 +106,7 @@ addItem = ()=>{
           nMesesGarantia: this.state.garantia
         }
 
-        axios.post(url, formData, {headers: {"Content-Type": "application/json"}})
+        axios.post(url, formData, {headers: {"Content-Type": "multipart/form-data"}})
         .then((response)=>{
             console.log(response);
             this.setState({open: true});
