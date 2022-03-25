@@ -38,7 +38,7 @@ class Clientes extends React.Component{
 
 
     register(){
-        const url = 'localhost:8080/Clientes/Insertar';
+        const url = 'http://localhost:8080/Clientes/Insertar';
 
         let formData = new FormData();
         formData.append('nTipoCliente', this.state.tipo_suscricpion);
@@ -46,10 +46,12 @@ class Clientes extends React.Component{
 
 
 
-        axios.post(url, formData, {headers: {"Content-Type": "application/json"}})
+        axios.post(url, formData,  {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            }})
         .then((response)=>{
             console.log(response);
-            this.setState({open: true});
         })
         .catch((response)=>{
             console.log(response);

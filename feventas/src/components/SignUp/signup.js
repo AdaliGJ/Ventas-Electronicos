@@ -23,7 +23,7 @@ function SignUp(props){
 
   const register=()=>{
 
-    const url = 'localhost:8080/Usuarios/Insertar';
+    const url = 'http://localhost:8080/Usuarios/Insertar';
 
     let formData = new FormData();
     formData.append('nTipoUsuario', user_type);
@@ -32,7 +32,7 @@ function SignUp(props){
 
     
 
-    axios.post(url, formData, {headers: {"Content-Type": "application/json"}})
+    axios.post(url, {params: {'nTipoUsuario': user_type, 'nPassword': contRef, 'nNombre': nombre}})
     .then((response)=>{
         console.log(response);
         this.setState({open: true});

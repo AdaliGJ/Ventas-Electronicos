@@ -46,7 +46,16 @@ class Catalog extends React.Component{
             console.log(data);
             console.log(this.state.inventario);
           });
+
+        const url2 = 'http://localhost:8080/Inventario/PruebaPost';
       
+        axios.post(url2)
+        .then((response)=>{
+            console.log(response);
+        })
+        .catch((response)=>{
+          console.log(response);
+      });
        
         
     }
