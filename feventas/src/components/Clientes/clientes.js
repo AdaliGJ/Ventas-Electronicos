@@ -29,7 +29,6 @@ class Clientes extends React.Component{
             vencimiento: null,
             img: null,
             archivo: '', 
-            pass: '',
             tipos_clientes: null
         }
 
@@ -42,7 +41,7 @@ class Clientes extends React.Component{
 
         let formData = new FormData();
         formData.append('nTipoCliente', this.state.tipo_suscricpion);
-        formData.append('nContraseña', this.state.pass);
+        formData.append('nNit', this.state.nit);
 
 
 
@@ -86,7 +85,7 @@ class Clientes extends React.Component{
             tipo_usuario: context.tipoUsuario});
 
 
-        const url = 'localhost:8080/Tipo_clientes/ObtenerTodos';
+        const url = 'http://localhost:8080/Tipo_clientes/ObtenerTodos';
 
         axios.get(url).then(response => response.data)
         .then((data) => {
@@ -128,9 +127,6 @@ class Clientes extends React.Component{
                                     <MenuItem  value={2} type="number">Gran Cliente</MenuItem>
                                 </Select>
                             </FormControl> 
-                        </Grid>
-                        <Grid item className="text-together">    
-                            <TextField className="outlined-required" label="Contraseña" type="password"  onInput={e=>this.setState({pass: e.target.value})}  value={this.state.pass}/>    
                         </Grid>
                     </Grid>
                     </div>
