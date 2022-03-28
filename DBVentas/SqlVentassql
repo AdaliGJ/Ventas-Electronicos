@@ -224,6 +224,7 @@ inner join imagenes_dispositivos d on i.idinventario=d.id_inventario;
 
 
 
+select * from  clientes;
 
 ALTER TABLE CLIENTES 
 DROP COLUMN PASSWORD;
@@ -258,6 +259,10 @@ ENABLE;
 
 
 
+select * from fichas_clientes;
 
+select * from Tipo_usuarios;
 
+insert into usuarios(id_usuario,tipo_usuario,password,nombre)
+values (Null, 1,'abc123','Juan');
 
