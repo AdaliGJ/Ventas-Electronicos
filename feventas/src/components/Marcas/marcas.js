@@ -12,31 +12,45 @@ import LockIcon from '@material-ui/icons/Lock';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
+import axios from 'axios';
 
 
+class Marcas extends React.Component{
+    
+    static contextType = LoginContext;
 
-function Marcas(props){
+    constructor(props){
+        super(props);
+        this.state={
+            marca: ''
+        }
+    } 
 
-    const { setUsername, username, tipoUsuario, setTipoUsuario }=useContext(LoginContext);
-    const [msg, setMsg]=useState('');
-    const[error, setError]=useState(false);
-        
-    const usuarioRef = useRef(null);
-    const contRef = useRef(null);
+    
+    
 
-    const history = useHistory();
-
-       const handleLogin=()=>{
+    handleLogin=()=>{
                 
+        const url = 'http://localhost:8080/Marca/Insertar';
 
+        let formData = new FormData();
+        formData.append('nNombre', this.state.marca);
                
-                /*console.log(username);
-                console.log(tipoUsuario);*/
-                console.log("Hola");
+        axios.post(url, formData,  {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            }})
+            .then((response)=>{
+            console.log(response);
+            })
+            .catch((response)=>{
+            console.log(response);
+            });
+    
 
         }
 
-
+        render(){
         return(
             <div className="page">
                     <h1 id="login_tit">Registro Marcas</h1>
@@ -48,21 +62,18 @@ function Marcas(props){
                                     <AccountCircleIcon />
                                   </InputAdornment>
                                 ),
-                              }} inputRef={usuarioRef}/>
+                              }} onChange={e=>this.setState({marca: e.target.value})} value={this.state.marca} />
                         </Grid>
                         
                     </Grid>
                     <Grid container direction={"column"} spacing={8}>
-                        <Grid item id={error ? "error": "noerror"}>
-                            <Alert severity="error">Error</Alert>
-                        </Grid>
                         <Grid item>
-                            <Button id="enviar" variant="contained" onClick={handleLogin}>Registrar Marca</Button>
+                            <Button id="enviar" variant="contained" onClick={this.handleLogin}>Registrar Marca</Button>
                         </Grid>
                     </Grid>
             </div>
         );
-
+    }
 }
 
 export default Marcas;

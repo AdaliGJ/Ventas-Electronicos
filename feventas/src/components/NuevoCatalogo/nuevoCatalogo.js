@@ -85,6 +85,7 @@ addItem = ()=>{
     submitItem(this.state.serie);*/
     const url = 'http://localhost:8080/Inventario/Insertar';
 
+        
         let formData = new FormData();
         formData.append('nCategoriaDispositivo', this.state.categoria);
         formData.append('nMarca', this.state.marca);
@@ -94,6 +95,22 @@ addItem = ()=>{
         formData.append('nDescripcion', this.state.descripcion);
         formData.append('nModelo', this.state.modelo);
         formData.append('nMesesGarantia', this.state.garantia);
+        if(this.state.categoria==1){
+          formData.append('nIdInventario', 1);
+          formData.append('nResolucion', this.state.res);
+          formData.append('nBitsProfundidad', this.state.bits);
+          formData.append('nPulgadasPantalla', this.state.pulgadas);
+          formData.append('nEntradasHDMI', this.state.hdmi);
+        }else if(this.state.categoria==2){
+          formData.append('nIdInventario', 2);
+          formData.append('nMaxJugadores', this.state.max_jug);
+          formData.append('nGraficos', this.state.graficos);
+          formData.append('nConsola', this.state.consola);
+
+        }else if(this.state.categoria==3){
+
+        }
+
 
         const inv ={
           nCategoriaDispositivo: this.state.categoria,
@@ -106,14 +123,17 @@ addItem = ()=>{
           nMesesGarantia: this.state.garantia
         }
 
-        axios.post(url, formData, {headers: {"Content-Type": "multipart/form-data"}})
+      axios.post(url, formData,  {
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+        }})
         .then((response)=>{
-            console.log(response);
-            this.setState({open: true});
+        console.log(response);
+        this.setState({open: false});
         })
         .catch((response)=>{
-          console.log(response);
-      });
+        console.log(response);
+        });
 
    
 
