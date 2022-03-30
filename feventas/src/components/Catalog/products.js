@@ -59,18 +59,16 @@ class Products extends React.Component{
     render(){
         return(
             <Card className="productos_cat">
-                <CardMedia
-                    component="img"
-                    height="140"
-                    image={this.props.image}
-                    alt="producto"
-                />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
                        {this.props.modelo}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
                        {this.props.desc}
+                    </Typography>
+                    <br/>
+                    <Typography variant="body2" color="text.secondary">
+                       {"Precio: Q"+this.props.precio}
                     </Typography>
                 </CardContent>
                 <CardActions>

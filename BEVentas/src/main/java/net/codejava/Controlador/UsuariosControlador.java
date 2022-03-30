@@ -30,11 +30,16 @@ public class UsuariosControlador {
 		return repositorioUsuarios.findAll();
 	}
 	
+	@GetMapping("/Obtener")
+	public @ResponseBody Optional<Usuarios> getOne(@RequestParam int nNit){
+		return repositorioUsuarios.findById(nNit);
+	}
+	
 	
 	@PostMapping("/Insertar")
-	public @ResponseBody Usuarios insertar(@RequestParam int nTipoUsuario ,@RequestParam String nPassword, @RequestParam String nNombre) {
+	public @ResponseBody Usuarios insertar(@RequestParam int nNit, @RequestParam int nTipoUsuario ,@RequestParam String nPassword, @RequestParam String nNombre) {
 	
-		Usuarios n = new Usuarios(4,nTipoUsuario,nPassword,nNombre);
+		Usuarios n = new Usuarios(nNit,nTipoUsuario,nPassword,nNombre);
 		
 		return repositorioUsuarios.save(n);
 	}

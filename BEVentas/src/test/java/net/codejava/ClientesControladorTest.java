@@ -1,4 +1,4 @@
-package net.codejava.Controlador;
+package net.codejava;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertThat;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -54,7 +54,7 @@ public class ClientesControladorTest {
 	            .get("/Clientes/ObtenerTodos")
 	            .contentType(APPLICATION_JSON))
 	            .andExpect(status().isOk())
-	            .andExpect(jsonPath("$[2].nit", is(9639831)));
+	            .andExpect(jsonPath("$[1].nit", is(9639831)));
 	}
 	
 	

@@ -37,7 +37,7 @@ function Login(props){
             setError(true);
           }else {
             setUsername(usuarioRef.current.value);
-            axios.get(url2, {params: {nIdUsuario: usuarioRef.current.value}}).then(response => response.data)
+            axios.get(url2, {params: {nNit: usuarioRef.current.value}}).then(response => response.data)
             .then((data) => {
               setTipoUsuario(data.tipo_usuario);
             });
@@ -78,7 +78,7 @@ function Login(props){
                               }} inputRef={contRef}/>
                         </Grid>
                     </Grid>
-                    <Grid container direction={"column"} spacing={8}>
+                    <Grid container direction={"column"} spacing={0}>
                         <Grid item id={error ? "error": "noerror"}>
                             <Alert className="alerta "severity="error">Error: usuario o contraseña incorrectos</Alert>
                         </Grid>

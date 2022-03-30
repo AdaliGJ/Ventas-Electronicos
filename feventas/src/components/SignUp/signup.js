@@ -30,6 +30,7 @@ class SignUp extends React.Component{
          user_type: null,
          password: '',
          nombre: '',
+         nit: '',
          usuarios: []
       }
 
@@ -56,6 +57,7 @@ class SignUp extends React.Component{
     const url = 'http://localhost:8080/Usuarios/Insertar';
 
     let formData = new FormData();
+    formData.append('nNit', this.state.nit);
     formData.append('nTipoUsuario', this.state.user_type);
     formData.append('nPassword', this.state.password);
     formData.append('nNombre', this.state.nombre);
@@ -63,6 +65,7 @@ class SignUp extends React.Component{
     console.log(this.state.user_type);
     console.log(this.state.password);
     console.log(this.state.nombre);
+    console.log(this.state.nit);
 
     axios.post(url, formData,  {
       headers: {
@@ -83,9 +86,18 @@ class SignUp extends React.Component{
         return(
             <div className="page">
                     <h1 id="login_tit">Registro</h1>
-                    <Grid container direction={"column"} spacing={7}>
+                    <Grid container direction={"column"} spacing={5}>
                         <Grid item>
-                            <TextField onChange={e=>this.setState({nombre: e.target.value})} className="standard-basic" label="Nombre de usuario" placeholder="Usuario" InputProps={{
+                            <TextField type="number" onChange={e=>this.setState({nit: e.target.value})} className="standard-basic" label="NIT del Usuario" placeholder="NIT" InputProps={{
+                                startAdornment: (
+                                  <InputAdornment position="start">
+                                    <AccountCircleIcon />
+                                  </InputAdornment>
+                                ),
+                              }} />
+                        </Grid>
+                        <Grid item>
+                            <TextField onChange={e=>this.setState({nombre: e.target.value})} className="standard-basic" label="Nombre de la persona" placeholder="Usuario" InputProps={{
                                 startAdornment: (
                                   <InputAdornment position="start">
                                     <AccountCircleIcon />
