@@ -2,6 +2,10 @@
     display: none;
 }
 
+.alerta{
+   width: 40%;
+   margin-left: 29%;
+}
 
 #enviar{
     color: white;

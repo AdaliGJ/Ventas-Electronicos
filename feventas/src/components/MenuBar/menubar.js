@@ -44,12 +44,12 @@ import './menubar.css'
             Sistema de ventas
           </Typography>
           <ButtonGroup variant="contained" id="appbar_button">
-            <Button id="home_button" onClick={inicio}>Catálogo</Button>
+            <Button id={tipoUsuario? "home_button":"nohome"} onClick={inicio}>Catálogo</Button>
+            <Button id={tipoUsuario==1? "cliente_reg":"nocliente"} onClick={cliente}>Registro Clientes</Button>
             <IconButton id={tipoUsuario?"siout":"noout"} onClick={signout}>
               <ExitToAppIcon />
             </IconButton>
             <Button id={tipoUsuario? "silog":"nolog"} onClick={login}>Iniciar Sesión</Button>
-            <Button id="cliente_reg" onClick={cliente}>Registro Clientes</Button>
         </ButtonGroup>
         </Toolbar>
       </AppBar>

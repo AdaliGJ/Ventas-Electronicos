@@ -1,4 +1,4 @@
-#noout, #silog{
+#noout, #silog, #nohome, #nocliente{
     display: none;
 }
 

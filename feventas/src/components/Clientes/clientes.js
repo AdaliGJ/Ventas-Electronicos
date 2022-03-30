@@ -128,18 +128,15 @@ class Clientes extends React.Component{
                                 </Select>
                             </FormControl> 
                         </Grid>
+                        <Grid item>
+                            <TextField className="link" label="Link Patente de Comercio" onChange={e=>this.setState({archivo: e.target.value})} value={this.state.archivo}/>
+                        </Grid>
                     </Grid>
                     </div>
                 </CardContent>
                 <CardActions className="action">
                     <Grid container direction={"column"} spacing={0.1}>
-                        <Grid item>
-                            <TextField type="file" name="img-file" id="img-file" inputProps={{ accept: '.jpg, .png, .jpeg' }} onChange={this.handleChange}/>  
-                                <label htmlFor="img-file"> 
-                                    <Button id="send1" variant="contained" component="span">Subir Patente de Comercio</Button>
-                                    <p>{this.state.img !=''? this.state.img : "Ninguna Imagen Seleccionada"}</p>
-                                </label> 
-                        </Grid>
+                        
                         <Grid item>
                             <Button  id="send2" variant="contained" onClick={this.register}>Aceptar</Button>
                             

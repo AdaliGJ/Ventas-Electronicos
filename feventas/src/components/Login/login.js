@@ -12,12 +12,14 @@ import LockIcon from '@material-ui/icons/Lock';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
+import axios from 'axios';
 
 
 
 function Login(props){
 
     const[error, setError]=useState(false);
+    const { setUsername, username, tipoUsuario, setTipoUsuario }=useContext(LoginContext);
         
     const usuarioRef = useRef(null);
     const contRef = useRef(null);
@@ -26,9 +28,27 @@ function Login(props){
 
        const handleLogin=()=>{
                 
-
+        const url = 'http://localhost:8080/Usuarios/Login';
+        const url2 = 'http://localhost:8080/Usuarios/Obtener';
                
-                /*console.log(username);
+        axios.get(url, {params: {nIdUsuario: usuarioRef.current.value, nPassword: contRef.current.value}}).then(response => response.data)
+        .then((data) => {
+          if(data.respuesta=="error"){
+            setError(true);
+          }else {
+            setUsername(usuarioRef.current.value);
+            axios.get(url2, {params: {nIdUsuario: usuarioRef.current.value}}).then(response => response.data)
+            .then((data) => {
+              setTipoUsuario(data.tipo_usuario);
+            });
+          }
+          
+          console.log(data);
+        }) .catch((response)=>{
+            console.log(response);
+        });
+ 
+              /*console.log(username);
                 console.log(tipoUsuario);*/
                 console.log("Hola");
 
@@ -40,13 +60,13 @@ function Login(props){
                     <h1 id="login_tit">Login</h1>
                     <Grid container direction={"column"} spacing={7}>
                         <Grid item>
-                            <TextField className="standard-basic" label="Nombre de usuario" placeholder="Usuario" InputProps={{
+                            <TextField className="standard-basic" label="NIT del usuario" placeholder="Usuario" InputProps={{
                                 startAdornment: (
                                   <InputAdornment position="start">
                                     <AccountCircleIcon />
                                   </InputAdornment>
                                 ),
-                              }} inputRef={usuarioRef}/>
+                              }} inputRef={usuarioRef} type="number"/>
                         </Grid>
                         <Grid item>
                             <TextField className="standard-basic" label="Contraseña" type="password"  InputProps={{
@@ -60,7 +80,7 @@ function Login(props){
                     </Grid>
                     <Grid container direction={"column"} spacing={8}>
                         <Grid item id={error ? "error": "noerror"}>
-                            <Alert severity="error">Error</Alert>
+                            <Alert className="alerta "severity="error">Error: usuario o contraseña incorrectos</Alert>
                         </Grid>
                         <Grid item>
                             <Button id="enviar" variant="contained" onClick={handleLogin}>Inicar Sesión</Button>

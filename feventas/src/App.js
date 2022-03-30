@@ -41,23 +41,22 @@ function App() {
        { tipoUsuario == 1 ? <Switch> 
           <Route exact path="/home" component={Catalog}/>
           <Route exact path="/productos/:id" component={Detalle}/>
-          <Route exact path="/login" component={Login}/>
           <Route exact path="/cliente_nuevo" component={Clientes}/>
           <Route exact path="/marcas" component={Marcas}/>
           <Route exact path="/inventario" component={Inventario}/>
           <Route exact path="/signUp" component={Signup}/>
           <Redirect path="/" to="/home"></Redirect>
         </Switch>
-        :
+        : tipoUsuario == 2 ?
         <Switch> 
           <Route exact path="/home" component={Catalog}/>
           <Route exact path="/productos/:id" component={Detalle}/>
-          <Route exact path="/login" component={Login}/>
-          <Route exact path="/cliente_nuevo" component={Clientes}/>
           <Route exact path="/marcas" component={Marcas}/>
           <Route exact path="/inventario" component={Inventario}/>
-          <Route exact path="/signUp" component={Signup}/>
           <Redirect path="/" to="/home"></Redirect>
+        </Switch>: <Switch> 
+          <Route exact path="/login" component={Login}/>
+          <Redirect path="/" to="/login"></Redirect>
         </Switch>}
         <Footer/>
       </LoginContext.Provider> 
