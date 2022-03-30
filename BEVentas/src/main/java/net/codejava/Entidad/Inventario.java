@@ -11,8 +11,9 @@ import javax.persistence.Table;
 @Table(name = "inventario")
 public class Inventario {
 
-	@Id
+	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
 	@Column(name="id_inventario")
 	private int idInventario;
 	@Column(name="categoria_dispositivo")

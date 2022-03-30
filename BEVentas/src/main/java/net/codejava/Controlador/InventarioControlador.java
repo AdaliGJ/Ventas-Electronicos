@@ -29,8 +29,8 @@ public class InventarioControlador {
 	}
 	
 	@GetMapping("/Obtener")
-	public @ResponseBody Optional<Inventario> getOne(@RequestParam int nIdInventario){
-		return repositorioInventario.findById(nIdInventario);
+	public @ResponseBody Optional<Inventario> getOne(@RequestParam int nId){
+		return repositorioInventario.findById(nId);
 	}
 	
 	@GetMapping("/ObtenerCategoria")

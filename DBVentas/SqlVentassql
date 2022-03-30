@@ -255,7 +255,7 @@ REFERENCES CLIENTES
 ENABLE;
 
 
-
+select * from inventario;
 
 
 
@@ -265,4 +265,18 @@ select * from Tipo_usuarios;
 
 insert into usuarios(id_usuario,tipo_usuario,password,nombre)
 values (Null, 1,'abc123','Juan');
+
+
+update inventario set descripcion = 'Telefono rapido' where id_inventario = 41;
+
+
+CREATE OR REPLACE PROCEDURE PruebaJava(nIdInventario IN number, nDescripcion IN VARCHAR2)
+AS
+BEGIN
+    update inventario set descripcion = nDescripcion where id_inventario = nIdInventario;
+END;
+/
+
+call PruebaJava(41,'Telefono de gama baja');
+
 
