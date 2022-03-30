@@ -55,7 +55,7 @@ class Detalle extends React.Component{
             const url3= 'http://localhost:8080/Tipo_dispositivo/Obtener'
             const url5= 'http://localhost:8080/VistaImgs/Obtener'
       
-            axios.get(url, {params: {nIdInventario: this.state.id}}).then(response => response.data)
+            axios.get(url, {params: {nId: this.state.id}}).then(response => response.data)
               .then((data) => {
                 this.setState({inventario: data});
                 console.log(data);
