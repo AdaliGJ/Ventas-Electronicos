@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import net.codejava.Entidad.Dispositivos_individuales;
+import net.codejava.Entidad.Ventas;
 import net.codejava.Repositorio.RepositorioDispositivos_individuales;
 
 @CrossOrigin
@@ -48,6 +49,17 @@ public class Dispositivos_individualesControlador {
 		
 		return nList;
 	}
+	
+	/*@PostMapping("/Insertar")
+	public @ResponseBody Dispositivos_individuales insertar(
+			@RequestParam int nId,
+			@RequestParam String nSerie
+			) {
+	
+		Dispositivos_individuales n = new Dispositivos_individuales(nSerie,nId);
+		
+		return RepositorioDispositivos_individuales.save(n);
+	}*/
 	
 	
 	

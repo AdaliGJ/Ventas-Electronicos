@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import net.codejava.Entidad.Ventas;
+
 @CrossOrigin
 @RestController
 @RequestMapping(path="/Procedimiento")
@@ -25,6 +27,7 @@ public class ProcedimientosControlador {
 		jdbcTemplate.update(Sql, nIdInventario, nDescripcion);
 		
 	}
+	
 	
 	@PostMapping("/Insertar")
 	@ResponseBody
@@ -59,4 +62,9 @@ public class ProcedimientosControlador {
 		
 	}
 	
+	
+	
+	
 }
+
+

@@ -25,30 +25,34 @@ class NuevoCatalogo extends React.Component {
 
           color:"",
           descripcion:"",
-          garantia: null,
-          precio:"",
+          garantia: 0,
+          precio:'',
           modelo: "",
-          marca:null,
-          categoria: null,
+          marca:0,
+          categoria: 0,
           marcas: [{id: 1, nombre: "Samsung"}, {id: 2, nombre: "Amazon"}],
           tipo_productos: [],
 
           imgs: '',
-          archivos: null,
+          archivos: '',
 
          
           res: '',
-          bits: '',
-          pulgadas:'',
-          hdmi: '',
+          bits: 0,
+          pulgadas:0,
+          hdmi: 0,
 
-          max_jug: '',
+          max_jug: 0,
           graficos: '',
           consola: '',
 
           so: '',
-          ram:'',
-          memoria: ''
+          ram:0,
+          memoria: 0,
+
+          img1: '',
+          img2: '',
+          img3: ''
           
       }
       this.handleOpen=this.handleOpen.bind(this);
@@ -83,7 +87,7 @@ class NuevoCatalogo extends React.Component {
 addItem = ()=>{
    /* var submitItem = this.props.submit;
     submitItem(this.state.serie);*/
-    const url = 'http://localhost:8080/Inventario/Insertar';
+    const url = 'http://localhost:8080/Procedimiento/Insertar';
 
         
         let formData = new FormData();
@@ -95,33 +99,29 @@ addItem = ()=>{
         formData.append('nDescripcion', this.state.descripcion);
         formData.append('nModelo', this.state.modelo);
         formData.append('nMesesGarantia', this.state.garantia);
-        if(this.state.categoria==1){
-          formData.append('nIdInventario', 1);
-          formData.append('nResolucion', this.state.res);
-          formData.append('nBitsProfundidad', this.state.bits);
-          formData.append('nPulgadasPantalla', this.state.pulgadas);
-          formData.append('nEntradasHDMI', this.state.hdmi);
-        }else if(this.state.categoria==2){
-          formData.append('nIdInventario', 2);
-          formData.append('nMaxJugadores', this.state.max_jug);
-          formData.append('nGraficos', this.state.graficos);
-          formData.append('nConsola', this.state.consola);
+        
 
-        }else if(this.state.categoria==3){
+        formData.append('nResolucion', this.state.res);
+        formData.append('nBitsProfundidad', this.state.bits);
+        formData.append('nPulgadasPantalla', this.state.pulgadas);
+        formData.append('nEntradasHDMI', this.state.hdmi);
+        
+        formData.append('nSistemaOperativo', this.state.so);
+        formData.append('nRamMB', this.state.ram);
+        formData.append('nMemoriaGB', this.state.memoria);
 
-        }
+        formData.append('nMaxJugadores', this.state.max_jug);
+        formData.append('nGraficos', this.state.graficos);
+        formData.append('nConsola', this.state.consola);
 
+        formData.append('nAccion', "ins");
 
-        const inv ={
-          nCategoriaDispositivo: this.state.categoria,
-          nMarca: this.state.marca,
-          nExistencias: 0,
-          nPrecioLista: this.state.precio,
-          nColor: this.state.color,
-          Descripcion: this.state.descripcion,
-          nModelo: this.state.modelo,
-          nMesesGarantia: this.state.garantia
-        }
+        formData.append('nImg1', this.state.img1);
+        formData.append('nImg2', this.state.img2);
+        formData.append('nImg3', this.state.img3);
+
+        
+
 
       axios.post(url, formData,  {
         headers: {
@@ -215,17 +215,19 @@ updateItem = ()=> {
             <Grid item className="text-together">
               <TextField className="modalfield-short" label="Meses de Garantía"  type="number" variant="outlined" onInput={e=>this.setState({garantia: e.target.value})}  value={this.state.garantia}/> 
               <hr/>
-              <TextField className="modalfield-short" label="Costo (Q)" type="number" variant="outlined" onInput={e=>this.setState({precio: e.target.value})}  value={this.state.precio}/> 
+              <TextField className="modalfield-short" label="Costo (Q)" type="text" variant="outlined" onInput={e=>this.setState({precio: e.target.value})}  value={this.state.precio}/> 
             </Grid>
             <Grid item className="text-together">
               <TextField className="modalfield" label="Descripción"  type="text" multiline rows={4} variant="outlined" onInput={e=>this.setState({descripcion: e.target.value})}  value={this.state.descripcion}/> 
             </Grid>
-            <Grid item>
-              <TextField type="file" name="img-file" id="img-file" inputProps={{ accept: '.jpg, .png, .jpeg' }} onChange={this.handleChange}/>  
-                <label htmlFor="img-file"> 
-                  <Button id="send-prod-img" variant="contained" component="span">Subir Imagen del producto</Button>
-                  <p>{this.state.imgs !=null? this.state.imgs : "Ninguna Imagen Seleccionada"}</p>
-                </label> 
+            <Grid item className="text-together">
+                <TextField className="modalfield" label="Link Imagen 1"  type="text" variant="outlined" onInput={e=>this.setState({img1: e.target.value})}  value={this.state.img1}/> 
+            </Grid>
+            <Grid item className="text-together">
+                <TextField className="modalfield" label="Link Imagen 2"  type="text" variant="outlined" onInput={e=>this.setState({img2: e.target.value})}  value={this.state.img2}/> 
+            </Grid>
+            <Grid item className="text-together">
+                <TextField className="modalfield" label="Link Imagen 3"  type="text" variant="outlined" onInput={e=>this.setState({img3: e.target.value})}  value={this.state.img3}/> 
             </Grid>
             {this.state.categoria==1? <Grid container direction={"column"} spacing={2}>
               <Grid item className="text-together">

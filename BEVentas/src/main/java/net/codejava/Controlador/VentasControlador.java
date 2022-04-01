@@ -3,6 +3,7 @@ package net.codejava.Controlador;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +24,9 @@ public class VentasControlador {
 
 	@Autowired
 	private RepositorioVentas repositorioVentas;
+	
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
 	
 	@GetMapping("/ObtenerTodos")
 	public @ResponseBody Iterable<Ventas> getAll(){
@@ -46,5 +50,18 @@ public class VentasControlador {
 		
 		return repositorioVentas.save(n);
 	}
+	
+	@PostMapping("/Orden")
+	@ResponseBody
+	public void ordenar(
+			@RequestParam char nCredito,
+			@RequestParam String nFecha,
+			@RequestParam int nCategoria
+			) {
+	
+		String Sql = "call insertarinv(?, ?, ?)";
+		jdbcTemplate.update(Sql, nCredito, nFecha, nCategoria);
+	}
+	
 	
 }

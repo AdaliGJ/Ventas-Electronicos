@@ -63,11 +63,11 @@ class Footer extends Component{
                                     </div>:
                                     this.state.usuario==1?
                                     <div>
-                                        <FooterBox link='/clientes' title="Clientes"/>
-                                        <FooterBox link='/permisos_usuario' title="Usuarios"/>
+                                        <FooterBox link='/cliente_nuevo' title="Clientes"/>
+                                        <FooterBox link='/signUp' title="Usuarios"/>
                                     </div>:
                                     <div>
-                                        <FooterBox link='/clientes' title="Clientes"/>
+                                        <FooterBox link='/cliente_nuevo' title="Clientes"/>
                                     </div>
                                     }
                             </Grid>

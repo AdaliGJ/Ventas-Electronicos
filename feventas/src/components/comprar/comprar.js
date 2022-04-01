@@ -6,6 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import { Grid } from '@material-ui/core';
 import { LoginContext } from '../../context/LoginContext';
 import Alert from '@material-ui/lab/Alert';
+import SearchIcon from '@material-ui/icons/Search';
 import './comprar.css';
 
 import axios from 'axios';
@@ -32,7 +33,10 @@ class Comprar extends React.Component {
           cliente: null,
           registrado: false,
           persona: {nit:'CF',nombre: 'N/A'},
-          today: new Date()
+          today: new Date().getDate().toString(),
+          tipo_cliente: '',
+          total: this.props.total,
+          credito: 0
           
       }
       this.handleOpen=this.handleOpen.bind(this);
@@ -53,28 +57,57 @@ class Comprar extends React.Component {
     this.handleOpen();
   }
 
+  change=()=>{
 
-addItem = ()=>{
-  const url= 'http://localhost:8080/Clientes/Login'
-  const url2= 'http://localhost:8080/Fichas_clientes/Obtener'
+    const url= 'http://localhost:8080/Clientes/Obtener'
+    const url2= 'http://localhost:8080/Fichas_clientes/Obtener'
+    const url3= 'http://localhost:8080/Tipo_clientes/Obtener'
+    
 
-  axios.get(url, {params: {nIdCliente: this.state.nit, nPassword: this.state.pass}}).then(response => response.data)
+    axios.get(url, {params: {nNit: this.state.nit}}).then(response => response.data)
     .then((data) => {
       this.setState({cliente: data});
-      if(data.respuesta=="ok"){
-        this.setState({registrado: true});
-        axios.get(url2, {params: {nIdCliente: this.state.nit}}).then(response => response.data)
+        axios.get(url2, {params: {nNit: this.state.nit}}).then(response => response.data)
           .then((data) => {
             this.setState({nombre: data.nombre});
           });
+          axios.get(url3, {params: {nIdTipoCliente: data.tipo_cliente}}).then(response => response.data)
+          .then((data) => {
+            this.setState({tipo_cliente: data.descuento,
+            total: this.props.total-this.props.total*data.descuento*0.01});
+            console.log(data);
+          });
 
         console.log(data);
-      }else{
-        console.log(data);
-        this.setState({sus: 2})
-      }
+      
+    });
+  }
+
+
+addItem = ()=>{
+  const url= 'http://localhost:8080/Ventas/Orden'
+
+
+    let formData = new FormData();
+    formData.append("nCredito", this.state.credito);
+    formData.append("nFecha", this.state.today);
+    formData.append("nCategoria", this.props.tipo);
+
+    axios.post(url, formData,  {
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+        }})
+    .then((response)=>{
+        console.log(response);
+    })
+    .catch((response)=>{
+        console.log(response);
+        
     });
 
+    this.setState({registrado:true});
+
+    
 
     
  }
@@ -93,7 +126,7 @@ generarFactura = ()=> {
       doc.text(20, 60, 'NIT: '+ this.state.persona.nit);
       doc.text(20, 70, 'Nombre: '+ this.state.persona.nombre);
       doc.text(20, 80, 'Serie: '+ this.state.persona.nit+this.state.today.getDay()+this.state.today.getTime());
-      doc.text(115, 50,'Total: Q'+ this.props.total);
+      doc.text(115, 50,'Total: Q'+ this.state.total);
 
     
       doc.save('factura.pdf');
@@ -115,7 +148,7 @@ generarFactura2 = ()=> {
       doc.text(20, 60, 'NIT: '+ this.state.persona.nit);
       doc.text(20, 70, 'Nombre: '+ this.state.persona.nombre);
       doc.text(20, 80, 'Serie: '+ this.state.persona.nit+this.state.today.getDay()+this.state.today.getTime());
-      doc.text(115, 50,'Total: Q'+ this.props.total);
+      doc.text(115, 50,'Total: Q'+ this.state.total);
 
     
       doc.save('factura.pdf');
@@ -157,26 +190,19 @@ console.log(this.props.total);
         <div>
               <h2>Detalle Compra: </h2>
               <p>{"Producto: " + this.props.producto}</p>
-              <p>{"Precio: Q"+this.props.total}</p>
+              <p>{"Precio: Q"+this.state.total}</p>
           </div>
-          <h4>¿Está suscrito a nuestra página?</h4>
-          <FormControl className="modalfield" variant ="outlined">
-                    <InputLabel></InputLabel>
-                    <Select label="" displayEmpty onChange={e=>this.setState({sus: e.target.value})}  value={this.state.sus}>
-                    
-                        <MenuItem value={1}>Sí</MenuItem>
-                        <MenuItem value={2}>No</MenuItem>
-                    
-                    </Select>
-                </FormControl>
-          {this.state.sus==1?  
           <Grid container direction={"column"} spacing={2}>
             <h2>Ingrese sus datos</h2>
             <Grid item>
-                <TextField className="outlined-required" label="ID" type="number"  onInput={e=>this.setState({nit: e.target.value})}  value={this.state.nit}/>
+              <div className="searchbar">
+                        <TextField className="outlined-required" label="ID" type="number"  onInput={e=>this.setState({nit: e.target.value})}  value={this.state.nit}/>
+                        <Button onClick={this.change}><SearchIcon/></Button>
+                    </div>
+                
             </Grid>
             <Grid item> 
-                <TextField className="outlined-required" label="Contraseña" type="password"  onInput={e=>this.setState({pass: e.target.value})}  value={this.state.pass}/>
+                <TextField className="outlined-required" label="Cliente" type="text"  onInput={e=>this.setState({nombre: e.target.value})}  value={this.state.nombre}/>
             </Grid>
              <Grid item>
               <Button id="comprar" onClick={this.addItem}>Comprar</Button>
@@ -185,13 +211,7 @@ console.log(this.props.total);
             <div>
               <h3>{"Cliente: "+ this.state.nombre}</h3>
           </div>
-          </Grid>: <Grid container direction={"column"} spacing={2}>
-          <Grid item>
-              <Button id="comprar" onClick={this.generarFactura2}>Comprar</Button>
-              <Button id="cancelar-comprar" onClick={this.cancel}>Cancelar</Button>
-            </Grid>
           </Grid>
-          }
            <Alert severity="success" id={this.state.registrado? "sidoc": "nodoc"}>Compra realizada exitosamente. <a onClick={this.generarFactura}>Generar Factura</a></Alert>
         </Box>
       </Modal>

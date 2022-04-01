@@ -10,6 +10,7 @@ import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import { LoginContext } from '../../context/LoginContext.js';
+import Alert from '@material-ui/lab/Alert';
 import './clientes.css';
 import axios from 'axios'
 
@@ -29,7 +30,10 @@ class Clientes extends React.Component{
             vencimiento: null,
             img: null,
             archivo: '', 
-            tipos_clientes: null
+            tipos_clientes: null,
+            success: false,
+            mg: true,
+            sev: true
         }
 
         this.register=this.register.bind(this);
@@ -39,9 +43,19 @@ class Clientes extends React.Component{
     register(){
         const url = 'http://localhost:8080/Clientes/Insertar';
 
+        const url2 = 'http://localhost:8080/Fichas_clientes/Insertar';
+
         let formData = new FormData();
         formData.append('nTipoCliente', this.state.tipo_suscricpion);
         formData.append('nNit', this.state.nit);
+
+        let formData2 = new FormData();
+        formData2.append('nNit', this.state.nit);
+        formData2.append('nNombre', this.state.full_name);
+        formData2.append('nEmail', this.state.email);
+        formData2.append('nTelefono', this.state.telefono);
+        formData2.append('nPatenteDeComercio', this.state.archivo);
+        formData2.append('nFechaDeVencimiento', this.state.vencimiento.toString());
 
 
 
@@ -54,7 +68,39 @@ class Clientes extends React.Component{
         })
         .catch((response)=>{
             console.log(response);
+            this.setState({
+                success: true,
+                sev: false,
+                mg: false})
         });
+
+        axios.post(url2, formData2,  {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            }})
+        .then((response)=>{
+            console.log(response);
+            this.setState({nit: '',
+                full_name: '',
+                email:'',
+                telefono: '',
+                tipo_suscricpion: '',
+                vencimiento: '',
+                img: '',
+                archivo: '', 
+                tipos_clientes: '',
+                success: true,
+                sev: true,
+                mg: true})
+        })
+        .catch((response)=>{
+            console.log(response);
+            this.setState({
+                success: true,
+                sev: false,
+                mg: false})
+        });
+
 
         /*axios.get(url, {params: {nTipoCliente: "1", nContraseña: "2"}}).then(response => response.data)
           .then((data) => {
@@ -82,7 +128,11 @@ class Clientes extends React.Component{
 
         const context = this.context;
         this.setState({usuario: context.username,
-            tipo_usuario: context.tipoUsuario});
+            tipo_usuario: context.tipoUsuario,
+        });
+
+        
+
 
 
         const url = 'http://localhost:8080/Tipo_clientes/ObtenerTodos';
@@ -104,7 +154,7 @@ class Clientes extends React.Component{
             <div className="data">
                 <Card className="data_form" mt={5}>
                 <CardContent className="content">
-                    <h1>Regístrese como cliente</h1>
+                    <h1>Registrar cliente</h1>
                     <div className="register-data">
                     <Grid container direction={"column"} spacing={3}>
                         <Grid item className="text-together">
@@ -139,7 +189,9 @@ class Clientes extends React.Component{
                         
                         <Grid item>
                             <Button  id="send2" variant="contained" onClick={this.register}>Aceptar</Button>
-                            
+                        </Grid>
+                        <Grid item id={this.state.success ? "errorc": "noerrorc"}>
+                            <Alert className="alerta "severity={this.state.sev ? "success": "error"}>{this.state.mg ? "Cliente Ingresado Correctamente": "Error"}</Alert>
                         </Grid>
 
                     </Grid>

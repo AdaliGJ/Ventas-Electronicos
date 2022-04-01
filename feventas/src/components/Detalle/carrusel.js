@@ -44,7 +44,7 @@ const ImgCarousel = ({ slides }) => {
       {SliderData.map((slide, index) => {
         return (
           <div className={index === actual ? 'slide-active' : 'slide'} key={index}>
-            {index === actual && (<img src={slide.image} className='carousel-image' />) 
+            {index === actual && (<img src={slide.imagen} className='carousel-image' />) 
            }
           </div>
         );

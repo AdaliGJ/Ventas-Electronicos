@@ -101,6 +101,27 @@ class Inventario extends React.Component{
         });*/
     }
 
+    agregar=()=>{
+        const url='http://localhost:8080/Dispositivos_individuales/Insertar'
+
+        let formData = new FormData();
+        
+        axios.post(url, formData,  {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            }})
+        .then((response)=>{
+            console.log(response);
+        })
+        .catch((response)=>{
+            console.log(response);
+            this.setState({
+                success: true,
+                sev: false,
+                mg: false})
+        });
+    }
+
     componentDidMount(){
         const context = this.context;
         this.setState({usuario: context.username,

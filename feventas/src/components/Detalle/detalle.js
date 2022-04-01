@@ -40,7 +40,7 @@ class Detalle extends React.Component{
 
             inventario: '',
             televisor:'',
-            imgs: ''
+            imgs: [{imagen: ''}]
         }
     } 
    
@@ -58,37 +58,39 @@ class Detalle extends React.Component{
             axios.get(url, {params: {nId: this.state.id}}).then(response => response.data)
               .then((data) => {
                 this.setState({inventario: data});
-                console.log(data);
-                console.log(data.marca);
+                //console.log(data);
+                //console.log(data.marca);
                 axios.get(url2, {params: {nIdMarca: data.marca}}).then((data2) => {
                     this.setState({marca: data2.data.nombre});
-                    console.log(data2);
+                    //console.log(data2);
                 });
                 axios.get(url3, {params: {nIdTipoDispositivo: data.categoriaDispositivo}}).then((data3) => {
                     this.setState({tipo_disp: data3.data.nombre});
-                    console.log(data3);
+                    //console.log(data3);
                 });
                 axios.get(url5, {params: {nIdInventario: this.state.id}}).then((data5) => {
+                   
                     this.setState({imgs: data5.data});
                     console.log(data5);
+                    
                 });
                 if(data.categoriaDispositivo==1){
                   const url4='http://localhost:8080/Televisores/Obtener'
                     axios.get(url4, {params: {nIdInventario: data.idInventario}}).then((data4) => {
                         this.setState({televisor: data4.data});
-                        console.log(data4);
+                        //console.log(data4);
                     });
                 }else if(data.categoriaDispositivo==2){
                     const url4='http://localhost:8080/Videojuegos/Obtener'
                     axios.get(url4, {params: {nIdInventario: data.idInventario}}).then((data4) => {
                         this.setState({televisor: data4.data});
-                        console.log(data4);
+                        //console.log(data4);
                     });
                 }else if(data.categoriaDispositivo==3){
                     const url4='http://localhost:8080/Smartwatch/Obtener'
                     axios.get(url4, {params: {nIdInventario: data.idInventario}}).then((data4) => {
                         this.setState({televisor: data4.data});
-                        console.log(data4);
+                        //console.log(data4);
                     });
                 }
 
@@ -102,7 +104,7 @@ class Detalle extends React.Component{
                 <Card className="detalle">
                 <Grid container spacing={4}>
                         <Grid item xs={4}>
-                            <ImgCarousel slides={SliderData}/>
+                            <ImgCarousel slides={this.state.imgs}/>
                         </Grid>
                         <Grid item xs={4}>
                             <div className='Especificaciones'>
@@ -143,7 +145,7 @@ class Detalle extends React.Component{
                                
                                 <h2>{"Total: Q"+this.state.inventario.precioLista/**this.state.total*/}</h2>
                                 <br/>
-                                <br/><Comprar producto={this.state.tipo_disp+" "+this.state.marca+" "+this.state.inventario.modelo} total={this.state.inventario.precioLista}/>
+                                <br/><Comprar tipo={this.state.id} producto={this.state.tipo_disp+" "+this.state.marca+" "+this.state.inventario.modelo} total={this.state.inventario.precioLista}/>
                             </div>
                         </Grid>
                     </Grid>
