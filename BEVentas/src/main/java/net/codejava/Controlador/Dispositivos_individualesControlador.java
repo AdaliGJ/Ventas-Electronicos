@@ -65,12 +65,12 @@ public class Dispositivos_individualesControlador {
 		List<Dispositivos_individuales> nList = new ArrayList<Dispositivos_individuales>();
 		
 		for(int i = 0; i < nCantidad; i++) {
-			Dispositivos_individuales n = new Dispositivos_individuales("0",nIdInventario);
+			Dispositivos_individuales n = new Dispositivos_individuales("0",nIdInventario,0);
 			nList.add(repositorioDispositivosIndividuales.save(n));	
 		}
 		
 		return nList;
-	}*/
+	}
 	
 	@PostMapping("/Insertar")
 	public @ResponseBody Dispositivos_individuales insertar(
