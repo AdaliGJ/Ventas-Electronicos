@@ -61,7 +61,7 @@ addItem = ()=>{
   axios.post(url, formData, {headers: {"Content-Type": "application/json"}})
   .then((response)=>{
       console.log(response);
-      this.setState({open: true,
+      this.setState({open: false,
       serie: ''});
   })
   .catch((response)=>{

@@ -73,10 +73,15 @@ class SignUp extends React.Component{
       }})
     .then((response)=>{
         console.log(response);
+        this.setState({
+          user_type: null,
+          password: '',
+          nombre: '',
+          nit: ''})
     })
     .catch((response)=>{
         console.log(response);
-    });
+      });
 
 
     console.log("Hola");
