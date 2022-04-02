@@ -107,9 +107,9 @@ updateItem = ()=> {
             <Grid item>
               <FormControl className="modalfield" variant ="outlined">
                     <InputLabel>Producto</InputLabel>
-                    <Select label="Producto" displayEmpty onChange={e=>this.setState({id: e.target.value})}  value={this.state.id}>
+                    <Select label="Producto" displayEmpty onChange={e=>this.setState({id: e.target.value})}>
                     {this.state.productos.map((p) => (
-                        <MenuItem value={p.id_inventario}>{p.descripcion}</MenuItem>
+                        <MenuItem value={p.id_inventario}>{p.id_inventario+" "+p.marca+" "+p.descripcion}</MenuItem>
                     ))}
                     </Select>
                 </FormControl>
