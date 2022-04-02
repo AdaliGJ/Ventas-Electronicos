@@ -14,8 +14,8 @@ public class Imagenes_dispositivos {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id_imagen;
-	@Column
-	private int id_inventario;
+	@Column(name="id_inventario")
+	private int idInventario;
 	@Column
 	private String imagen;
 	
@@ -31,11 +31,11 @@ public class Imagenes_dispositivos {
 	}
 
 	public int getId_inventario() {
-		return id_inventario;
+		return idInventario;
 	}
 
 	public void setId_inventario(int id_inventario) {
-		this.id_inventario = id_inventario;
+		this.idInventario = id_inventario;
 	}
 
 	public String getImagen() {
@@ -49,13 +49,13 @@ public class Imagenes_dispositivos {
 	public Imagenes_dispositivos(int id_imagen, int id_inventario, String imagen) {
 		super();
 		this.id_imagen = id_imagen;
-		this.id_inventario = id_inventario;
+		this.idInventario = id_inventario;
 		this.imagen = imagen;
 	}
 
 	@Override
 	public String toString() {
-		return "Imagenes_dispositivos [id_imagen=" + id_imagen + ", id_inventario=" + id_inventario + ", imagen="
+		return "Imagenes_dispositivos [id_imagen=" + id_imagen + ", id_inventario=" + idInventario + ", imagen="
 				+ imagen + "]";
 	}
 	

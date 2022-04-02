@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,13 +22,16 @@ import net.codejava.Repositorio.RepositorioDispositivos_individuales;
 @RestController
 @RequestMapping(path="/Dispositivos_individuales")
 public class Dispositivos_individualesControlador {
+	
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
 
 	@Autowired
 	private RepositorioDispositivos_individuales repositorioDispositivosIndividuales;
 	
 	@GetMapping("/ObtenerTodos")
 	public @ResponseBody Iterable<Dispositivos_individuales> getAll(){
-		return repositorioDispositivosIndividuales.findAll();
+		return repositorioDispositivosIndividuales.findByVendido(0);
 	}
 	
 	
@@ -37,7 +41,7 @@ public class Dispositivos_individualesControlador {
 	}
 	
 	
-	@PostMapping("/Registrar")
+	/*@PostMapping("/Registrar")
 	public @ResponseBody List<Dispositivos_individuales> registrar(@RequestParam int nIdInventario, @RequestParam int nCantidad) {
 	
 		List<Dispositivos_individuales> nList = new ArrayList<Dispositivos_individuales>();
@@ -48,18 +52,26 @@ public class Dispositivos_individualesControlador {
 		}
 		
 		return nList;
-	}
+	}*/
 	
-	/*@PostMapping("/Insertar")
+	@PostMapping("/Insertar")
 	public @ResponseBody Dispositivos_individuales insertar(
 			@RequestParam int nId,
 			@RequestParam String nSerie
 			) {
 	
-		Dispositivos_individuales n = new Dispositivos_individuales(nSerie,nId);
+		Dispositivos_individuales n = new Dispositivos_individuales(nSerie,nId,0);
 		
-		return RepositorioDispositivos_individuales.save(n);
-	}*/
+		return repositorioDispositivosIndividuales.save(n);
+	}
+	
+	@PostMapping("/Prueba")
+	@ResponseBody
+	public void prueba(@RequestParam String nSerie, @RequestParam String nId) {
+		String Sql = "call insertdi(?,?)";
+		jdbcTemplate.update(Sql, nSerie, nId);
+		
+	}
 	
 	
 	
