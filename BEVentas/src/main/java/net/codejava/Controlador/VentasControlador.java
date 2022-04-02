@@ -42,7 +42,7 @@ public class VentasControlador {
 	public @ResponseBody Ventas insertar(
 			@RequestParam int nIdOrden,
 			@RequestParam String nSerie,
-			@RequestParam boolean nCredito,
+			@RequestParam boolean nCredito, 
 			@RequestParam String nFecha
 			) {
 	
@@ -56,11 +56,14 @@ public class VentasControlador {
 	public void ordenar(
 			@RequestParam char nCredito,
 			@RequestParam String nFecha,
-			@RequestParam int nCategoria
+			@RequestParam int nCategoria,
+			@RequestParam int nCliente,
+			@RequestParam String nPrecio,
+			@RequestParam String nFactura
 			) {
 	
-		String Sql = "call insertarinv(?, ?, ?)";
-		jdbcTemplate.update(Sql, nCredito, nFecha, nCategoria);
+		String Sql = "call orden_ventas(?, ?, ?, ?, ?, ?)";
+		jdbcTemplate.update(Sql, nCredito, nFecha, nCategoria, nCliente, nPrecio, nFactura);
 	}
 	
 	

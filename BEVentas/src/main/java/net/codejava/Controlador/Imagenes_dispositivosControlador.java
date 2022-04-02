@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import net.codejava.Entidad.Dispositivos_individuales;
 import net.codejava.Entidad.Fichas_clientes;
 import net.codejava.Entidad.Imagenes_dispositivos;
 import net.codejava.Repositorio.RepositorioImagenes_dispositivos;
@@ -43,6 +44,11 @@ public class Imagenes_dispositivosControlador {
 		Imagenes_dispositivos n = new Imagenes_dispositivos(4,nIdInventario,nImagen);
 		
 		return repositorioImagenesDispositivo.save(n);
+	}
+	
+	@GetMapping("/ObtenerA")
+	public @ResponseBody Iterable<Imagenes_dispositivos> getArray(@RequestParam int nIdInventario){
+		return repositorioImagenesDispositivo.findByidInventario(nIdInventario);
 	}
 	
 	

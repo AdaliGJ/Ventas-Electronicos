@@ -47,7 +47,8 @@ class Inventario extends React.Component{
             producto: null,
             id: null,
             usuario: null,
-            inventario: [{serie: 1, producto: 2}, {serie: 2, producto: 4}]
+            inventario: [{serie: 1, producto: 2}, {serie: 2, producto: 4}],
+            inventario2: [{serie: 1, producto: 2}, {serie: 2, producto: 4}]
             
         }
 
@@ -109,14 +110,14 @@ class Inventario extends React.Component{
             tipo_usuario: context.tipoUsuario});
 
       
-        /*const url= 'http://localhost:8080/Inventario/ObtenerTodos'
+        const url= 'http://localhost:8080/Dispositivos_individuales/ObtenerTodos'
       
         axios.get(url).then(response => response.data)
           .then((data) => {
             this.setState({inventario: data});
             
             console.log(data);
-          });*/
+          });
       
        }
     
@@ -147,7 +148,7 @@ class Inventario extends React.Component{
                                     </TableHead>
                                     {this.state.tipo_usuario == 1?
                                     <TableBody>
-                                    {this.state.inventario.map((inv) => (
+                                    {this.state.inventario2.map((inv) => (
                                         <TableRow key={inv.serie}>
                                             <TableCell align="right" component="th" scope="row">
                                                 {inv.serie}
@@ -159,7 +160,7 @@ class Inventario extends React.Component{
                                     ))}
                                     </TableBody>:
                                      <TableBody>
-                                     {this.state.inventario.map((inv) => (
+                                     {this.state.inventario2.map((inv) => (
                                          <TableRow key={inv.serie}>
                                              <TableCell align="right" component="th" scope="row">
                                                  {inv.serie}
@@ -184,11 +185,11 @@ class Inventario extends React.Component{
                                     </TableHead>
                                     <TableBody>
                                     {this.state.inventario.map((inv) => (
-                                        <TableRow key={inv.serie}>
+                                        <TableRow key={inv.serie_dispositivo}>
                                             <TableCell align="right" component="th" scope="row">
-                                                {inv.serie}
+                                                {inv.serie_dispositivo}
                                             </TableCell>
-                                        <TableCell align="right">{inv.producto}</TableCell>
+                                        <TableCell align="right">{inv.id_inventario}</TableCell>
                                         
                                         </TableRow>
                                     ))}
