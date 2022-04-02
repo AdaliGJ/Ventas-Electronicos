@@ -30,13 +30,15 @@ class Comprar extends React.Component {
           pass: null,
           producto: props.producto,
           nombre: 'N/A',
-          cliente: null,
+          cliente: 0,
           registrado: false,
           persona: {nit:'CF',nombre: 'N/A'},
-          today: new Date().getDate().toString(),
-          tipo_cliente: '',
+          today: new Date(),
+          tipo_cliente: 0,
           total: this.props.total,
-          credito: 0
+          credito: '0',
+          cat: this.props.tipo,
+          nit: 0
           
       }
       this.handleOpen=this.handleOpen.bind(this);
@@ -87,11 +89,17 @@ class Comprar extends React.Component {
 addItem = ()=>{
   const url= 'http://localhost:8080/Ventas/Orden'
 
+  console.log(this.state.today.getDate()+'-'+this.state.today.getMonth()+'-'+this.state.today.getFullYear());
+  console.log(this.props.total-this.props.total*this.state.tipo_cliente*0.01.toString());
+  console.log(this.props.tipo)
 
     let formData = new FormData();
     formData.append("nCredito", this.state.credito);
-    formData.append("nFecha", this.state.today);
+    formData.append("nFecha", this.state.today.getDate().toString()+'-'+this.state.today.getMonth().toString()+'-'+this.state.today.getFullYear().toString());
     formData.append("nCategoria", this.props.tipo);
+    formData.append("nCliente", this.state.nit);
+    formData.append("nPrecio", this.props.total-this.props.total*this.state.tipo_cliente*0.01);
+    formData.append('nFactura', this.state.nit+this.state.today.getDay().toString()+this.state.today.getTime().toString());
 
     axios.post(url, formData,  {
         headers: {
@@ -99,13 +107,15 @@ addItem = ()=>{
         }})
     .then((response)=>{
         console.log(response);
+        this.setState({registrado:true});
     })
     .catch((response)=>{
         console.log(response);
         
     });
 
-    this.setState({registrado:true});
+    this.generarFactura();
+    this.handleOpen();
 
     
 
@@ -114,27 +124,19 @@ addItem = ()=>{
 
 generarFactura = ()=> {
 
-  const url= 'http://localhost:8080/Fichas_clientes/Obtener'
-
-  axios.get(url, {params: {nIdCliente: this.state.nit}}).then(response => response.data)
-    .then((data) => {
-      this.setState({persona: data});
 
       const doc = new jsPDF();
 
       doc.setFontSize(12);
-      doc.text(20, 60, 'NIT: '+ this.state.persona.nit);
-      doc.text(20, 70, 'Nombre: '+ this.state.persona.nombre);
-      doc.text(20, 80, 'Serie: '+ this.state.persona.nit+this.state.today.getDay()+this.state.today.getTime());
+      doc.text(20, 60, 'NIT: '+ this.state.nit);
+      doc.text(20, 70, 'Nombre: '+ this.state.nombre);
+      doc.text(20, 80, 'Serie: '+ this.state.nit+this.state.today.getDay()+this.state.today.getTime());
       doc.text(115, 50,'Total: Q'+ this.state.total);
 
     
       doc.save('factura.pdf');
-          
-          console.log(data);
-        });
+
   
-    this.handleOpen();
 }
 
 
@@ -145,9 +147,9 @@ generarFactura2 = ()=> {
       const doc = new jsPDF();
 
       doc.setFontSize(12);
-      doc.text(20, 60, 'NIT: '+ this.state.persona.nit);
-      doc.text(20, 70, 'Nombre: '+ this.state.persona.nombre);
-      doc.text(20, 80, 'Serie: '+ this.state.persona.nit+this.state.today.getDay()+this.state.today.getTime());
+      doc.text(20, 60, 'NIT: '+ this.state.nit);
+      doc.text(20, 70, 'Nombre: '+ this.state.nombre);
+      doc.text(20, 80, 'Serie: '+ this.state.nit+this.state.today.getDay()+this.state.today.getTime());
       doc.text(115, 50,'Total: Q'+ this.state.total);
 
     
@@ -190,13 +192,13 @@ console.log(this.props.total);
         <div>
               <h2>Detalle Compra: </h2>
               <p>{"Producto: " + this.props.producto}</p>
-              <p>{"Precio: Q"+this.state.total}</p>
+              <p>{"Precio: Q"+this.props.total}</p>
           </div>
           <Grid container direction={"column"} spacing={2}>
             <h2>Ingrese sus datos</h2>
             <Grid item>
               <div className="searchbar">
-                        <TextField className="outlined-required" label="ID" type="number"  onInput={e=>this.setState({nit: e.target.value})}  value={this.state.nit}/>
+                        <TextField className="outlined-required" label="NIT" type="number"  onInput={e=>this.setState({nit: e.target.value})}  value={this.state.nit}/>
                         <Button onClick={this.change}><SearchIcon/></Button>
                     </div>
                 
@@ -209,10 +211,10 @@ console.log(this.props.total);
               <Button id="cancelar-comprar" onClick={this.cancel}>Cancelar</Button>
             </Grid>
             <div>
-              <h3>{"Cliente: "+ this.state.nombre}</h3>
+              <h3>{"Precio Final: "+ (this.props.total-this.props.total*this.state.tipo_cliente*0.01)}</h3>
           </div>
           </Grid>
-           <Alert severity="success" id={this.state.registrado? "sidoc": "nodoc"}>Compra realizada exitosamente. <a onClick={this.generarFactura}>Generar Factura</a></Alert>
+           <Alert severity="success" id={this.state.registrado? "sidoc": "nodoc"}>Compra realizada exitosamente. <a onClick={this.generarFactura2}>Generar Factura</a></Alert>
         </Box>
       </Modal>
     </div>

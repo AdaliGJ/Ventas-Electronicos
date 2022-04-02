@@ -49,11 +49,12 @@ class Detalle extends React.Component{
         this.setState({usuario: context.username,
             tipo_usuario: context.tipoUsuario,
             precio: "Q"+this.state.precionum}); 
+            console.log(SliderData);
 
             const url= 'http://localhost:8080/Inventario/Obtener'
             const url2= 'http://localhost:8080/Marca/Obtener'
             const url3= 'http://localhost:8080/Tipo_dispositivo/Obtener'
-            const url5= 'http://localhost:8080/VistaImgs/Obtener'
+            const url5= 'http://localhost:8080/Imagenes_dispositivos/ObtenerA'
       
             axios.get(url, {params: {nId: this.state.id}}).then(response => response.data)
               .then((data) => {
@@ -72,6 +73,7 @@ class Detalle extends React.Component{
                    
                     this.setState({imgs: data5.data});
                     console.log(data5);
+                    console.log(this.state.imgs);
                     
                 });
                 if(data.categoriaDispositivo==1){
@@ -104,7 +106,9 @@ class Detalle extends React.Component{
                 <Card className="detalle">
                 <Grid container spacing={4}>
                         <Grid item xs={4}>
-                            <ImgCarousel slides={this.state.imgs}/>
+                            {this.state.imgs.map((p) => (
+                                <img src={p.imagen} width="50%"/>
+                        ))}
                         </Grid>
                         <Grid item xs={4}>
                             <div className='Especificaciones'>
@@ -145,7 +149,7 @@ class Detalle extends React.Component{
                                
                                 <h2>{"Total: Q"+this.state.inventario.precioLista/**this.state.total*/}</h2>
                                 <br/>
-                                <br/><Comprar tipo={this.state.id} producto={this.state.tipo_disp+" "+this.state.marca+" "+this.state.inventario.modelo} total={this.state.inventario.precioLista}/>
+                                <br/><Comprar tipo={this.props.match.params.id} producto={this.state.tipo_disp+" "+this.state.marca+" "+this.state.inventario.modelo} total={this.state.inventario.precioLista}/>
                             </div>
                         </Grid>
                     </Grid>

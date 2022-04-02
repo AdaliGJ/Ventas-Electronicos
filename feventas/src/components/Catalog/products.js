@@ -72,7 +72,7 @@ class Products extends React.Component{
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <Comprar tipo={this.props.id} producto={this.state.tipo_disp+" "+this.state.marca+" "+this.props.modelo} total={this.state.inventario.precioLista}/>
+                    <Comprar tipo={this.props.id} producto={this.state.tipo_disp+" "+this.state.marca+" "+this.props.modelo} total={this.props.precio}/>
                     <Link to={`/productos/${this.props.id}`}>
                         <Button size="small">Ver Detalle</Button>
                     </Link>

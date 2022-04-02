@@ -6,15 +6,16 @@ import Card from '@material-ui/core/Card';
 
 export const SliderData = [
     {
-      image:
+      id:1,
+      imagen:
       "https://t-mobile.scene7.com/is/image/Tmusprod/fg-iphone-13-pink_750x750_nologo-2?wid=750&hei=750&fmt=png-alpha"
     },
     {
-      image:
+      imagen:
       "https://www.eluniverso.com/resizer/hMv5jI4dIDDDEDyrVxfOLQnWPSk=/1004x670/smart/filters:quality(70)/cloudfront-us-east-1.images.arcpublishing.com/eluniverso/5ZMYXYI2ORDLLLNE3RORUY33SQ.jpg"
     },
     {
-      image:
+      imagen:
       'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/telefonos-plegables-portada-1634393440.jpg?crop=0.564xw:1.00xh;0.171xw,0&resize=640:*'
     }
   ];

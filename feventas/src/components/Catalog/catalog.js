@@ -114,7 +114,8 @@ class Catalog extends React.Component{
                         <TextField className="outlined-short" label="Dispositivo"  name="dispositivo" onChange={e=>this.setState({busc: e.target.value})}/>
                         <Button onClick={this.buscar}><SearchIcon/></Button>
                     </div>
-                    <NuevoCatalogo comp={false} titulo={"Añadir producto"}/>
+                    {this.state.tipo_usuario == 1?
+                    <NuevoCatalogo comp={false} titulo={"Añadir producto"}/>:null}
                     <div className="catalog">
                     <Grid container spacing={2}>
                     {this.state.inventario.map((inv) => (

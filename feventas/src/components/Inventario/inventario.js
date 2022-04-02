@@ -101,26 +101,7 @@ class Inventario extends React.Component{
         });*/
     }
 
-    agregar=()=>{
-        const url='http://localhost:8080/Dispositivos_individuales/Insertar'
-
-        let formData = new FormData();
-        
-        axios.post(url, formData,  {
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-            }})
-        .then((response)=>{
-            console.log(response);
-        })
-        .catch((response)=>{
-            console.log(response);
-            this.setState({
-                success: true,
-                sev: false,
-                mg: false})
-        });
-    }
+    
 
     componentDidMount(){
         const context = this.context;
@@ -144,20 +125,27 @@ class Inventario extends React.Component{
             <div>
                 <div className="page">
                 <h2>Inventario</h2>
-                    <NuevoInventario titulo="Añadir Producto"/>
+                {this.state.tipo_usuario == 1?
+                    <NuevoInventario titulo="Añadir Producto"/>:null}
                     <Grid container spacing={1}>
                         <Grid item xs={6}>
                             <Paper className="container">
                                 <h3>Pedidos recibidos</h3>
                                 <StyledTable className="customized-table">
                                     <TableHead >
+                                    {this.state.tipo_usuario == 1?
                                     <TableRow className="table-header">
                                         <StyledTableCell align="right">Serie</StyledTableCell>
                                         <StyledTableCell align="right">Producto</StyledTableCell>
                                         <StyledTableCell align="right">Dar de Alta</StyledTableCell>
                                         <StyledTableCell align="right">Rechazar</StyledTableCell>
-                                    </TableRow>
+                                    </TableRow>:
+                                    <TableRow className="table-header">
+                                        <StyledTableCell align="right">Serie</StyledTableCell>
+                                        <StyledTableCell align="right">Producto</StyledTableCell>
+                                    </TableRow>}
                                     </TableHead>
+                                    {this.state.tipo_usuario == 1?
                                     <TableBody>
                                     {this.state.inventario.map((inv) => (
                                         <TableRow key={inv.serie}>
@@ -169,7 +157,17 @@ class Inventario extends React.Component{
                                         <TableCell align="right"><Button id="rechazar" onClick={()=>this.deleteData(inv)}><DeleteForever/></Button></TableCell>
                                         </TableRow>
                                     ))}
-                                    </TableBody>
+                                    </TableBody>:
+                                     <TableBody>
+                                     {this.state.inventario.map((inv) => (
+                                         <TableRow key={inv.serie}>
+                                             <TableCell align="right" component="th" scope="row">
+                                                 {inv.serie}
+                                             </TableCell>
+                                         <TableCell align="right">{inv.producto}</TableCell>
+                                         </TableRow>
+                                     ))}
+                                     </TableBody>}
                                 </StyledTable>
                             </Paper>
                         </Grid>
@@ -181,7 +179,7 @@ class Inventario extends React.Component{
                                     <TableRow className="table-header">
                                         <StyledTableCell align="right">Serie</StyledTableCell>
                                         <StyledTableCell align="right">Producto</StyledTableCell>
-                                        <StyledTableCell align="right">Editar</StyledTableCell>
+                                    
                                     </TableRow>
                                     </TableHead>
                                     <TableBody>
@@ -191,7 +189,7 @@ class Inventario extends React.Component{
                                                 {inv.serie}
                                             </TableCell>
                                         <TableCell align="right">{inv.producto}</TableCell>
-                                        <TableCell align="right"><NuevoInventario titulo={<Edit/>} comp={true} prod={inv.producto} serie={inv.serie}/></TableCell>
+                                        
                                         </TableRow>
                                     ))}
                                     </TableBody>
