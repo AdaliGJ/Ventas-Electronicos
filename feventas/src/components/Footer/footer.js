@@ -61,7 +61,7 @@ class Footer extends Component{
                                     <div>
                                         <FooterBox link='/login' title="Login" />
                                     </div>:
-                                    this.state.usuario==1?
+                                    this.context.tipoUsuario==1?
                                     <div>
                                         <FooterBox link='/cliente_nuevo' title="Clientes"/>
                                         <FooterBox link='/signUp' title="Usuarios"/>
