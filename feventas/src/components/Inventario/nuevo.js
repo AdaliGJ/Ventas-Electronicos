@@ -49,18 +49,20 @@ class NuevoInventario extends React.Component {
 
 
 addItem = ()=>{
-  const url = 'localhost:8080/Dispositivos_Indiviuales/Insertar';
+  const url = 'http://localhost:8080/Dispositivos_individuales/Prueba';
 
   let formData = new FormData();
-  formData.append('nCategoriaDispositivo', this.state.categoria);
-  formData.append('nMarca', this.state.marca);
+  formData.append('nId', this.state.id);
+  formData.append('nSerie', this.state.serie);
+ 
 
 
 
   axios.post(url, formData, {headers: {"Content-Type": "application/json"}})
   .then((response)=>{
       console.log(response);
-      this.setState({open: true});
+      this.setState({open: true,
+      serie: ''});
   })
   .catch((response)=>{
     console.log(response);
@@ -68,7 +70,7 @@ addItem = ()=>{
 
 
 
-    this.handleOpen();
+
  }
 
 updateItem = ()=> {
@@ -109,7 +111,7 @@ updateItem = ()=> {
                     <InputLabel>Producto</InputLabel>
                     <Select label="Producto" displayEmpty onChange={e=>this.setState({id: e.target.value})}>
                     {this.state.productos.map((p) => (
-                        <MenuItem value={p.id_inventario}>{p.id_inventario+" "+p.marca+" "+p.descripcion}</MenuItem>
+                        <MenuItem value={p.idInventario}>{"ID: "+p.idInventario+" Marca: "+p.marca+" Descripción: "+p.descripcion}</MenuItem>
                     ))}
                     </Select>
                 </FormControl>
