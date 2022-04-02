@@ -100,7 +100,10 @@ class Marcas extends React.Component{
         render(){
         return(
             <div className="page">
+                       {this.state.tipo_usuario == 1?
+                    <div>
                     <h1 id="login_tit">Registro Marcas</h1>
+                 
                     <Grid container direction={"column"} spacing={7}>
                         <Grid item>
                             <TextField className="standard-basic" label="Marca" placeholder="Marca" InputProps={{
@@ -117,7 +120,7 @@ class Marcas extends React.Component{
                         <Grid item>
                             <Button id="enviar" variant="contained" onClick={this.handleLogin}>Registrar Marca</Button>
                         </Grid>
-                    </Grid>
+                    </Grid></div>:null}
                     <Paper className="container">
                             <h2>Catálogo</h2>
                                 <StyledTable className="customized-table">
