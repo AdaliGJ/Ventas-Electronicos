@@ -19,20 +19,35 @@ import net.codejava.Repositorio.RepositorioSmartwatch;
 @RestController
 @RequestMapping(path="/Smartwatch")
 public class SmartwatchControlador {
-
 	@Autowired
 	private RepositorioSmartwatch repositorioSmartwatch;
-	
+	/**
+	 * Peticion a la base de datos para obtener todos los elementos que sean Smart Watch
+	 * y que esten registgrados en la base de datos
+	 * @return
+	 */
 	@GetMapping("/ObtenerTodos")
 	public @ResponseBody Iterable<Smartwatch> getAll(){
 		return repositorioSmartwatch.findAll();
 	}
-	
+	/**
+	 * Peticion para obtener un solo electronico de tipo smartwatch
+	 * @param nIdInventario Identificador unico
+	 * @return
+	 */
 	@GetMapping("/Obtener")
 	public @ResponseBody Optional<Smartwatch> getOne(@RequestParam int nIdInventario){
 		return repositorioSmartwatch.findById(nIdInventario);
 	}
-	
+	/**
+	 * Peticion para la creacion de un nuevo electronico de tipo SmartWatch con su respectiva informacion importante
+	 * @param nIdInventario Identificador 
+	 * @param nPulgadasPantalla Inf importante
+	 * @param nSistemaOperativo Inf importante
+	 * @param nRamMB Inf importante
+	 * @param nMemoriaGB Inf importante
+	 * @return
+	 */
 	@PostMapping("/Insertar")
 	public @ResponseBody Smartwatch insertar(
 			@RequestParam int nIdInventario,
@@ -41,9 +56,7 @@ public class SmartwatchControlador {
 			@RequestParam int nRamMB,
 			@RequestParam int nMemoriaGB
 			) {
-	
 		Smartwatch n = new Smartwatch(nIdInventario, nPulgadasPantalla, nSistemaOperativo, nRamMB, nMemoriaGB);
-		
 		return repositorioSmartwatch.save(n);
 	}
 }
