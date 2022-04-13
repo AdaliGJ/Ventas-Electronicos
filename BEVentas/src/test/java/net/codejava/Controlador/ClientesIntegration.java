@@ -1,4 +1,4 @@
-package Integration;
+package net.codejava.Controlador;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -50,8 +50,8 @@ public class ClientesIntegration {
 			
 			
 			//Resultados
-			assertThat("2").isEqualTo(responseG.getTipo_cliente());
-			assertThat("1234567").isEqualTo(responseG.getNit());
+			assertThat(2).isEqualTo(responseG.getTipo_cliente());
+			assertThat(1234567).isEqualTo(responseG.getNit());
 			
 	
 		

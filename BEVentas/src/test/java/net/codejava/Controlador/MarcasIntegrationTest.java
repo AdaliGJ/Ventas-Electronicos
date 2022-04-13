@@ -20,7 +20,6 @@ import net.codejava.Entidad.Marcas;
 @SpringBootTest
 @AutoConfigureMockMvc
 public class MarcasIntegrationTest {
-
 	@Autowired
 	MockMvc mockMvc;
 	
