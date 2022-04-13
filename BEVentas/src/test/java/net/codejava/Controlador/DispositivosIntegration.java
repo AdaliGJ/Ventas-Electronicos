@@ -1,4 +1,4 @@
-package Integration;
+package net.codejava.Controlador;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -18,43 +18,47 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import net.codejava.Entidad.Clientes;
 import net.codejava.Entidad.Marcas;
 import net.codejava.Entidad.Tipo_clientes;
+import net.codejava.Entidad.Tipo_dispositivo;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class ClientesIntegration {
+public class DispositivosIntegration {
 	
 	@Autowired
 	MockMvc mockMvc;
+
 	
 	
 	@Test
-	void clientesIntegracion() throws Exception {
+	void dispositivosIntegracion() throws Exception {
 		
-		LinkedMultiValueMap<String,String> params = new LinkedMultiValueMap<>();
-		params.add("nNit", "1234567");
-		params.add("nTipoCliente","2");
+    String tipo_dispositivo = "Electrodomestico";
 		
-			//Prueba post
-			MvcResult post = mockMvc.perform(MockMvcRequestBuilders.post("/Clientes/Insertar").params(params)).andReturn();
+			
+			
+			MvcResult resultPost = mockMvc.perform(MockMvcRequestBuilders.post("/Tipo_dispositivo/Insertar").param("nNombre", tipo_dispositivo)).andReturn();
 			
 			
 			ObjectMapper mapper = new ObjectMapper();
-			Clientes responseP = mapper.readValue(post.getResponse().getContentAsString(), Clientes.class);
-			
-			//Prueba get
-			MvcResult get = mockMvc.perform(MockMvcRequestBuilders.get("/Clientes/Obtener").param("nNit", String.valueOf(responseP.getNit()) )).andReturn();
-			
-			ObjectMapper mapper2 = new ObjectMapper();
-			Clientes responseG = mapper2.readValue(get.getResponse().getContentAsString(), Clientes.class);
+			Tipo_dispositivo responsePost = mapper.readValue(resultPost.getResponse().getContentAsString(), Tipo_dispositivo.class);
 			
 			
-			//Resultados
-			assertThat("2").isEqualTo(responseG.getTipo_cliente());
-			assertThat("1234567").isEqualTo(responseG.getNit());
+			MvcResult resultGet = mockMvc.perform(MockMvcRequestBuilders.get("/Tipo_dispositivo/Obtener").param("nIdTipoDispositivo", String.valueOf(responsePost.getId_tipo_dispositivo()) )).andReturn();
 			
-	
+			ObjectMapper mapperGet = new ObjectMapper();
+			Tipo_dispositivo responseGet = mapperGet.readValue(resultGet.getResponse().getContentAsString(), Tipo_dispositivo.class);
+			
+			
+			
+			assertThat(tipo_dispositivo).isEqualTo(responseGet.getNombre());
+			
+			
+			
+		}
+			
+			
 		
-	}
+	
 
 }
