@@ -16,18 +16,26 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import net.codejava.Entidad.Marcas;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import net.codejava.Entidad.Tipo_clientes;
 =======
 >>>>>>> c0c73af9d568b990af201a2760f9bb199ef52a8a
+=======
+import net.codejava.Entidad.Tipo_clientes;
+>>>>>>> c194fd2cf166540dd5d7027ec9ecbec9adb368dd
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
 public class MarcasIntegrationTest {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
 =======
 >>>>>>> c0c73af9d568b990af201a2760f9bb199ef52a8a
+=======
+	
+>>>>>>> c194fd2cf166540dd5d7027ec9ecbec9adb368dd
 	@Autowired
 	MockMvc mockMvc;
 	
@@ -67,8 +75,11 @@ public class MarcasIntegrationTest {
 		
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 	
 >>>>>>> c0c73af9d568b990af201a2760f9bb199ef52a8a
+=======
+>>>>>>> c194fd2cf166540dd5d7027ec9ecbec9adb368dd
 }
