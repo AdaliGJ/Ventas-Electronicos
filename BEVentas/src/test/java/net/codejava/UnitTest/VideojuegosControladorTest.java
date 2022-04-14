@@ -1,4 +1,4 @@
-package net.codejava.Controlador;
+package net.codejava.UnitTest;
 
 import static org.hamcrest.core.Is.is;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
@@ -19,6 +19,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import net.codejava.Controlador.VideojuegosControlador;
 import net.codejava.Entidad.Videojuegos;
 import net.codejava.Repositorio.RepositorioVideojuegos;
 
