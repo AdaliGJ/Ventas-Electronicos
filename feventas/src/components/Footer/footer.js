@@ -73,6 +73,9 @@ class Footer extends Component{
                             </Grid>
                             <Grid item xs={4}> 
                                 <Box borderBottom={1}>Pedidos</Box>
+                                    <div>
+                                        <FooterBox link='/pedir' title="Pedir"/>
+                                    </div>
                             </Grid>
                         </Grid>
                     </Container>

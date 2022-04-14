@@ -44,7 +44,8 @@ class Marcas extends React.Component{
         super(props);
         this.state={
             marca: '',
-            marcas: []
+            marcas: [],
+            ip: ''
         }
     } 
 
@@ -53,10 +54,11 @@ class Marcas extends React.Component{
 
     handleLogin=()=>{
                 
-        const url = 'http://localhost:8080/Marca/Insertar';
+        const url = 'http://localhost:8080/Marca/Insertar2';
 
         let formData = new FormData();
         formData.append('nNombre', this.state.marca);
+        formData.append('nIP', this.state.ip);
                
         axios.post(url, formData,  {
             headers: {
@@ -70,7 +72,8 @@ class Marcas extends React.Component{
             });
 
             this.getData();
-            this.setState({marca: ''});
+            this.setState({marca: '',
+            ip: ''});
 
         }
 
@@ -114,6 +117,15 @@ class Marcas extends React.Component{
                                 ),
                               }} onChange={e=>this.setState({marca: e.target.value})} value={this.state.marca} />
                         </Grid>
+                        <Grid item>
+                            <TextField className="standard-basic" label="Dirección IP" placeholder="IP" InputProps={{
+                                startAdornment: (
+                                  <InputAdornment position="start">
+                                    <AccountCircleIcon />
+                                  </InputAdornment>
+                                ),
+                              }} onChange={e=>this.setState({ip: e.target.value})} value={this.state.ip} />
+                        </Grid>
                         
                     </Grid>
                     <Grid container direction={"column"} spacing={8}>
@@ -128,6 +140,7 @@ class Marcas extends React.Component{
                                     <TableRow className="table-header">
                                         <StyledTableCell align="right">Id</StyledTableCell>
                                         <StyledTableCell align="right">Marca</StyledTableCell>
+                                        <StyledTableCell align="right">IP</StyledTableCell>
                                     </TableRow>
                                     </TableHead>
                                     <TableBody>
@@ -137,6 +150,7 @@ class Marcas extends React.Component{
                                                 {m.id_marca}
                                             </TableCell>
                                         <TableCell align="right">{m.nombre}</TableCell>
+                                        <TableCell align="right">{m.ip}</TableCell>
                                         
                                         </TableRow>
                                     ))}
