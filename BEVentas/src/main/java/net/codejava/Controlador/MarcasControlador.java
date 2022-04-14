@@ -2,6 +2,7 @@ package net.codejava.Controlador;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +22,9 @@ public class MarcasControlador {
 	@Autowired
 	private RepositorioMarcas repositorioMarcas;
 	
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
+	
 	@GetMapping("/ObtenerTodos")
 	public @ResponseBody Iterable<Marcas> getAll(){
 		return repositorioMarcas.findAll();
@@ -32,10 +36,20 @@ public class MarcasControlador {
 	}
 	
 	@PostMapping("/Insertar")
-	public @ResponseBody Marcas insertar(@RequestParam String nNombre) {
+	public @ResponseBody Marcas insertar(@RequestParam String nNombre, @RequestParam String nIP) {
 	
-		Marcas n = new Marcas(4,nNombre);
+		Marcas n = new Marcas(4,nNombre, nIP);
 		
 		return repositorioMarcas.save(n);
+	}
+	
+	@PostMapping("/Insertar2")
+	@ResponseBody
+	public void insertarP(@RequestParam String nNombre, @RequestParam String nIP) {
+	
+		String Sql = "call marcanueva(?, ?)";
+		jdbcTemplate.update(Sql, nNombre, nIP);
+		
+		
 	}
 }

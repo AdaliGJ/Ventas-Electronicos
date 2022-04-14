@@ -415,3 +415,87 @@ MODIFY (ID_FACTURA VARCHAR(30) );
 
 
 
+/*Entrega 3*/
+ALTER TABLE MARCAS 
+ADD (IP VARCHAR2(20) );
+
+CREATE OR REPLACE TRIGGER MARCAS_TRG 
+BEFORE INSERT ON MARCAS 
+FOR EACH ROW 
+BEGIN
+  <<COLUMN_SEQUENCES>>
+  BEGIN
+    NULL;
+  END COLUMN_SEQUENCES;
+END;
+/
+
+CREATE SEQUENCE MARCAS_SEQ1;
+
+CREATE TRIGGER MARCAS_TRG1 
+before insert on marcas 
+for each row 
+begin
+  <<COLUMN_SEQUENCES>>
+  BEGIN
+    IF INSERTING THEN
+      SELECT MARCAS_SEQ1.NEXTVAL INTO :NEW.ID_MARCA FROM SYS.DUAL;
+    END IF;
+  END COLUMN_SEQUENCES;
+end;
+/
+
+CREATE SEQUENCE MARCAS_SEQ2;
+
+CREATE OR REPLACE TRIGGER MARCAS_TRG1 
+before insert on marcas 
+for each row 
+begin
+  <<COLUMN_SEQUENCES>>
+  BEGIN
+    NULL;
+  END COLUMN_SEQUENCES;
+end;
+/
+
+CREATE TRIGGER MARCAS_TRG2 
+before insert on marcas 
+for each row 
+begin
+  <<COLUMN_SEQUENCES>>
+  BEGIN
+    IF INSERTING AND :NEW.ID_MARCA IS NULL THEN
+      SELECT MARCAS_SEQ2.NEXTVAL INTO :NEW.ID_MARCA FROM SYS.DUAL;
+    END IF;
+  END COLUMN_SEQUENCES;
+end;
+/
+
+ALTER TABLE MARCAS  
+MODIFY (IP NOT NULL);
+
+
+create or replace procedure marcanueva 
+(
+  marcap in varchar2 
+, ipp in varchar2 
+) as 
+begin
+ declare idv int;
+     begin
+         select id_marca into idv FROM marcas ORDER BY id_marca desc FETCH NEXT 1 ROWS ONLY;
+         insert into marcas values(idv+1, marcap, ipp);
+         
+         commit;
+     end;
+  
+end marcanueva;
+
+
+
+
+
+
+
+
+

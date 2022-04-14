@@ -11,6 +11,8 @@ import Footer from "./components/Footer/footer.js";
 import Detalle from "./components/Detalle/detalle";
 import Marcas from "./components/Marcas/marcas.js";
 import Inventario from "./components/Inventario/inventario.js";
+import FabricaLog from "./components/FabricaLog/fabricaLog.js";
+import CatalogoFabrica from "./components/CatalogoFabrica/catalogoFabrica.js";
 
 function App() {
   const getUsername=()=>{
@@ -45,6 +47,8 @@ function App() {
           <Route exact path="/marcas" component={Marcas}/>
           <Route exact path="/inventario" component={Inventario}/>
           <Route exact path="/signUp" component={Signup}/>
+          <Route exact path="/pedir" component={FabricaLog}/>
+          <Route exact path="/catalogo-fabrica" component={CatalogoFabrica}/>
           <Redirect path="/" to="/home"></Redirect>
         </Switch>
         : tipoUsuario == 2 ?
