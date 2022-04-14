@@ -15,13 +15,19 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import net.codejava.Entidad.Marcas;
+<<<<<<< HEAD
 import net.codejava.Entidad.Tipo_clientes;
+=======
+>>>>>>> c0c73af9d568b990af201a2760f9bb199ef52a8a
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
 public class MarcasIntegrationTest {
+<<<<<<< HEAD
 	
+=======
+>>>>>>> c0c73af9d568b990af201a2760f9bb199ef52a8a
 	@Autowired
 	MockMvc mockMvc;
 	
@@ -60,5 +66,9 @@ public class MarcasIntegrationTest {
 		}
 		
 	}
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> c0c73af9d568b990af201a2760f9bb199ef52a8a
 }
