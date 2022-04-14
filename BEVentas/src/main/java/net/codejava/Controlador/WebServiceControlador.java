@@ -7,6 +7,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -80,6 +82,7 @@ public class WebServiceControlador {
 	}
 	
 	
+<<<<<<< Updated upstream
 	@PostMapping("/AutCliente")
 	public Object autCliente(
 			@RequestParam String nCliente,
@@ -115,6 +118,53 @@ public class WebServiceControlador {
 		Object[] forObject = restTemplate.getForObject(url, Object[].class);
 		System.out.println("Result: "+ forObject);
 		return Arrays.asList(forObject);
+=======
+	//Electronicos
+	@GetMapping("/Electronicos")
+	public Object getElectronicos(@RequestParam String nIP) {
+		String url = "http://"+nIP+":4000/api/electronico";
+		Object forObject = restTemplate.getForObject(url, Object.class);
+		System.out.println("Result: "+ forObject);
+		return forObject;
+		
+	}
+	
+	
+	@PostMapping("/Reporteria")
+	public Object createPedidos(@RequestParam String nSerie, @RequestParam String nPrecioVenta ) {
+		
+		HashMap<String,String> body = new HashMap<>();
+		
+		body.put("serie", nSerie);
+		body.put("precioVenta", nPrecioVenta);
+		
+	    String url = "http://localhost:4000/api/reporteria";
+
+	    return restTemplate.postForObject(url, body, Object.class);
+	}
+	
+	@PostMapping("/EstadoPedido")
+	public Object estadoPedidos(@RequestParam String nIdPedido,@RequestParam String nEstado) {
+		
+		HashMap<String,String> body = new HashMap<>();
+		
+		body.put("idPedidos", nIdPedido);
+		body.put("estado", nEstado);
+		
+	    String url = "http://localhost:4000/api/pedidos/estado/";
+
+	    return restTemplate.postForObject(url, body, Object.class);
+	}
+	
+	
+	@GetMapping("/ValidarGarantia")
+	public Object validarGarantia(@RequestParam String nIP, @RequestParam String nSerie) {
+		String url = "http://"+nIP+":4000/api/garantia/dispositivo/" + nSerie;
+		Object forObject = restTemplate.getForObject(url, Object.class);
+		System.out.println("Result: "+ forObject);
+		return forObject;
+		
+>>>>>>> Stashed changes
 	}
 	
 	
