@@ -7,8 +7,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -82,7 +80,6 @@ public class WebServiceControlador {
 	}
 	
 	
-<<<<<<< Updated upstream
 	@PostMapping("/AutCliente")
 	public Object autCliente(
 			@RequestParam String nCliente,
@@ -118,7 +115,12 @@ public class WebServiceControlador {
 		Object[] forObject = restTemplate.getForObject(url, Object[].class);
 		System.out.println("Result: "+ forObject);
 		return Arrays.asList(forObject);
-=======
+	}
+	
+
+	
+	
+	
 	//Electronicos
 	@GetMapping("/Electronicos")
 	public Object getElectronicos(@RequestParam String nIP) {
@@ -164,8 +166,8 @@ public class WebServiceControlador {
 		System.out.println("Result: "+ forObject);
 		return forObject;
 		
->>>>>>> Stashed changes
 	}
+	
 	
 	
 }
