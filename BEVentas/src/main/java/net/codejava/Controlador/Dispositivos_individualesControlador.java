@@ -29,48 +29,46 @@ public class Dispositivos_individualesControlador {
 	@Autowired
 	private RepositorioDispositivos_individuales repositorioDispositivosIndividuales;
 	
-	
-	
-	
 	/**
-	 * Query para obtener todos los dispositivos en la base de datos
-	 * 
-	 * @return Lista de todos los dispositivos individuales en formato Json
+	 * Query a la tabla DISPOSITIVOS_INDIVIDUALES para obtener todos los datos de la tabla DISPOSITIVOS_INDIVIDUALES
+	 * @return objeto JSON con todos los registros
 	 */
+	
 	@GetMapping("/ObtenerTodos")
 	public @ResponseBody Iterable<Dispositivos_individuales> getAll(){
 		return repositorioDispositivosIndividuales.findByVendido(0);
 	}
 	
 	/**
-	 * Query para obtener el registro de un solo dispositivo individual por medio de su numero de serie
-	 * 
-	 * @param nSerial Consta de un string de 20 digitos el cual corresponde a un numero serial del dispositvo en la base de datos
-	 * @return Al ingresar un numero serial valido, devuelve el registro correspondiente a ese dispositivo en formato Json
+	 * Obtener un solo registro de la tabla DISPOSITIVOS_INDIVIDUALES con la ayuda de su identificador
+	 * @param nSerial Numero Serial del DISPOSITIVOS_INDIVIDUALES el cual es el identificador de la tupla
+	 * @return Un DISPOSITIVOS_INDIVIDUALES segun el nSerial
 	 */
 	@GetMapping("/Obtener")
 	public @ResponseBody Optional<Dispositivos_individuales> getOne(@RequestParam String nSerial){
 		return repositorioDispositivosIndividuales.findBySerie(nSerial);
 	}
 	
-	/**
-	 * Query iterativo que se va a encargar de registrar nuevos dispositivos individuales en la base de datos
-	 * @param nIdInventario Es el numero de inventario del cual corresponde al nuevo dispositivo ingresado en la base de datos
-	 * @param nCantidad Cantidad de dispositivos que se desean ingresar en la base de datos
-	 * @return Devuelve todos los dipositivos generados con su numero de serie en un Json
-	 */
-	@PostMapping("/Registrar")
+	
+	/*@PostMapping("/Registrar")
 	public @ResponseBody List<Dispositivos_individuales> registrar(@RequestParam int nIdInventario, @RequestParam int nCantidad) {
 	
 		List<Dispositivos_individuales> nList = new ArrayList<Dispositivos_individuales>();
 		
 		for(int i = 0; i < nCantidad; i++) {
-			Dispositivos_individuales n = new Dispositivos_individuales("0",nIdInventario,0);
+			Dispositivos_individuales n = new Dispositivos_individuales("0",nIdInventario);
 			nList.add(repositorioDispositivosIndividuales.save(n));	
 		}
 		
 		return nList;
-	}
+	}*/
+	
+	/**
+	 * Creacion de un nuevo DISPOSITIVOS_INDIVIDUAL en la tabla en la base de datos
+	 * @param nId Identificador del DISPOSITIVOS_INDIVIDUAL
+	 * @param nSerie Numero de serie del  DISPOSITIVOS_INDIVIDUAL
+	 * @return
+	 */
 	
 	@PostMapping("/Insertar")
 	public @ResponseBody Dispositivos_individuales insertar(
@@ -82,7 +80,7 @@ public class Dispositivos_individualesControlador {
 		
 		return repositorioDispositivosIndividuales.save(n);
 	}
-	
+
 	@PostMapping("/Prueba")
 	@ResponseBody
 	public void prueba(@RequestParam String nSerie, @RequestParam String nId) {

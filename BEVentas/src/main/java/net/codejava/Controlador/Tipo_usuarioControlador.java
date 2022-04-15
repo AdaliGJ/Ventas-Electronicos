@@ -21,11 +21,21 @@ public class Tipo_usuarioControlador {
 	@Autowired
 	private RepositorioTipo_usuarios repositorioTipoUsuario;
 	
+	
+	/**
+	 * Query a la tabla TIPO_USUARIO para obtener todos los datos de la tabla TIPO_USUARIO
+	 * @return objeto JSON con todos los registros
+	 */
 	@GetMapping("/ObtenerTodos")
 	public @ResponseBody Iterable<Tipo_usuarios> getAll(){
 		return repositorioTipoUsuario.findAll();
 	}
 	
+	/**
+	 * Obtener un solo registro de la tabla TIPO_USUARIO con la ayuda de su identificador
+	 * @param nIdTipoUsuario
+	 * @return Un solo objeto de la tabla
+	 */
 	@GetMapping("/Obtener")
 	public @ResponseBody Optional<Tipo_usuarios> getOne(@RequestParam int nIdTipoUsuario){
 		return repositorioTipoUsuario.findById(nIdTipoUsuario);

@@ -23,11 +23,19 @@ public class Tipo_clientesControlador {
 	@Autowired
 	private RepositorioTipo_clientes repositorioTipoClientes;
 	
+	/**
+	 * Query a la tabla TIPO_CLIENTES para obtener todos los datos de la tabla TIPO_CLIENTES
+	 * @return objeto JSON con todos los registros
+	 */
 	@GetMapping("/ObtenerTodos")
 	public @ResponseBody Iterable<Tipo_clientes> getAll(){
 		return repositorioTipoClientes.findAll();
 	}
-	
+	/**
+	 * Obtener un solo registro de la tabla TIPO_CLIENTES con la ayuda de su identificador
+	 * @param nIdTipoCliente
+	 * @return Un solo objeto de la tabla
+	 */
 	@GetMapping("/Obtener")
 	public @ResponseBody Optional<Tipo_clientes> getOne(@RequestParam int nIdTipoCliente){
 		return repositorioTipoClientes.findById(nIdTipoCliente);

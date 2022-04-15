@@ -24,16 +24,33 @@ public class Ordenes_compraControlador {
 	@Autowired
 	private RepositorioOrdenes_compra repositorioOrdenesCompra;
 	
+	/**
+	 * Query a la tabla ORDENES_COMPRA para obtener todos los datos de la tabla ORDENES_COMPRA
+	 * @return objeto JSON con todos los registros
+	 */
+	
 	@GetMapping("/ObtenerTodos")
 	public @ResponseBody Iterable<Ordenes_compra> getAll(){
 		return repositorioOrdenesCompra.findAll();
 	}
-	
+	/**
+	 * Obtener un solo registro de la tabla ORDENES_COMPRA con la ayuda de su identificador
+	 * @param nIdOrden
+	 * @return  Un solo objeto de la tabla 
+	 */
 	@GetMapping("/Obtener")
 	public @ResponseBody Optional<Ordenes_compra> getOne(@RequestParam int nIdOrden){
 		return repositorioOrdenesCompra.findById(nIdOrden);
 	}
-	
+	/**
+	 * Creacion de una nueva ORDEN_COMPRA en la tabla en la base de datos
+	 * @param nNit
+	 * @param nCredito
+	 * @param nEntregaEstimada
+	 * @param nPrecio
+	 * @param nFecha
+	 * @return Registro de lo insertado en formato JSON
+	 */
 	@PostMapping("/Insertar")
 	public @ResponseBody Ordenes_compra insertar(
 			@RequestParam int nNit, 

@@ -22,11 +22,19 @@ public class VistaInfoClienteControlador {
 	@Autowired
 	private RepositorioVistaInfoCliente repositorioVistaInfoCliente;
 	
+	/**
+	 *  Query a la tabla VISTAINFO para obtener todos los datos de la tabla VISTAINFO
+	 * @return objeto JSON con todos los registros
+	 */
 	@GetMapping("/ObtenerTodos")
 	public @ResponseBody Iterable<VistaInfoCliente> getAll(){
 		return repositorioVistaInfoCliente.findAll();
 	}
-	
+	/**
+	 * Obtener un solo registro de la tabla VISTAINFOCLIENTE con la ayuda de su identificador
+	 * @param nNit
+	 * @return Un solo objeto de la tabla
+	 */
 	@GetMapping("/Obtener")
 	public @ResponseBody Optional<VistaInfoCliente> getOne(@RequestParam int nNit){
 		return repositorioVistaInfoCliente.findById(nNit);

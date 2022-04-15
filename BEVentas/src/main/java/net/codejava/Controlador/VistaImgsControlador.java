@@ -21,11 +21,19 @@ public class VistaImgsControlador {
 	@Autowired
 	private RepositorioVistaImgs repositorioVistaImgs;
 	
+	/**
+	 * Query a la tabla VISTAIMGS para obtener todos los datos de la tabla VISTAIMGS
+	 * @return objeto JSON con todos los registros
+	 */
 	@GetMapping("/ObtenerTodos")
 	public @ResponseBody Iterable<VistaImgs> getAll(){
 		return repositorioVistaImgs.findAll();
 	}
-	
+	/**
+	 * Obtener un solo registro de la tabla VISTAIMGS con la ayuda de su identificador
+	 * @param nIdInventario
+	 * @return Un solo objeto de la tabla
+	 */
 	@GetMapping("/Obtener")
 	public @ResponseBody Optional<VistaImgs> getOne(@RequestParam int nIdInventario){
 		return repositorioVistaImgs.findById(nIdInventario);

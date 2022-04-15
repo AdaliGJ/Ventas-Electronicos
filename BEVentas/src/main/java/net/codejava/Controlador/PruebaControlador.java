@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import net.codejava.Entidad.Prueba;
+import net.codejava.Entidad.Usuarios;
 import net.codejava.Repositorio.RepositorioPrueba;
 
 @CrossOrigin
@@ -21,9 +22,10 @@ public class PruebaControlador {
 
 	@Autowired
 	private RepositorioPrueba repositorioPrueba;
+	/*
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
-	
+	*/
 	@GetMapping("/prueba")
 	public @ResponseBody Iterable<Prueba> getAllPruebas(){
 		return repositorioPrueba.findAll();
@@ -42,6 +44,11 @@ public class PruebaControlador {
 	@GetMapping("/Obtener")
 	public @ResponseBody Optional<Prueba> getOne(@RequestParam String nValor2){
 		return repositorioPrueba.findByValor2(nValor2);
+	}
+	
+	@GetMapping("/ObtenerTodos")
+	public @ResponseBody Iterable<Prueba> getAll(){
+		return repositorioPrueba.findAll();
 	}
 	
 	@PostMapping("/Insertar")

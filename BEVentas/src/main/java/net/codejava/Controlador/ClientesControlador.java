@@ -24,16 +24,31 @@ public class ClientesControlador {
 	@Autowired
 	private RepositorioClientes repositorioClientes;
 	
+	
+	/**
+	 * Realizacion de query a la tabla CLIENTES para obtener todos los datos de la tabla CLIENTES
+	 * @return objeto JSON con todos los registros
+	 */
 	@GetMapping("/ObtenerTodos")
 	public @ResponseBody Iterable<Clientes> getAll(){
 		return repositorioClientes.findAll();
 	}
-	
+	/**
+	 * Obtener un solo registro de la tabla CLIENTES con la ayuda de su identificador
+	 * @param nNit NIT del CLIENTE el cual es el identificador de la tupla
+	 * @return Un CLIENTE segun el ID
+	 */
 	@GetMapping("/Obtener")
 	public @ResponseBody Optional<Clientes> getOne(@RequestParam int nNit){
 		return repositorioClientes.findById(nNit);
 	}
 	
+	/**
+	 * Creacion de un nuevo CLIENTE en la tabla en la base de datos
+	 * @param nNit Identificador del CLIENTE
+	 * @param nTipoCliente Puede ser: Mayorista, Grandes CLIENTE y CLIENTE individual
+	 * @return
+	 */
 	@PostMapping("/Insertar")
 	public @ResponseBody Clientes insertar(@RequestParam int nNit, @RequestParam int nTipoCliente) {
 	

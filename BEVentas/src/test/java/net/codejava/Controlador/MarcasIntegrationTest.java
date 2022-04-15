@@ -15,11 +15,13 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import net.codejava.Entidad.Marcas;
+import net.codejava.Entidad.Tipo_clientes;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
 public class MarcasIntegrationTest {
+	
 	@Autowired
 	MockMvc mockMvc;
 	
@@ -58,5 +60,5 @@ public class MarcasIntegrationTest {
 		}
 		
 	}
-	
+
 }

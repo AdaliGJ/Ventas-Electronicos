@@ -22,16 +22,28 @@ public class Tipo_dispositivoControlador {
 	@Autowired
 	private RepositorioTipo_dispositivo repositorioTipoDispositivo;
 	
+	/**
+	 * Query a la tabla TIPO_DISPOSITIVO para obtener todos los datos de la tabla TIPO_DISPOSITIVO
+	 * @return objeto JSON con todos los registros
+	 */
 	@GetMapping("/ObtenerTodos")
 	public @ResponseBody Iterable<Tipo_dispositivo> getAll(){
 		return repositorioTipoDispositivo.findAll();
 	}
-	
+	/**
+	 * Obtener un solo registro de la tabla TIPO_DISPOSITIVO con la ayuda de su identificador
+	 * @param nIdTipoDispositivo
+	 * @return Un solo objeto de la tabla
+	 */
 	@GetMapping("/Obtener")
 	public @ResponseBody Optional<Tipo_dispositivo> getOne(@RequestParam int nIdTipoDispositivo){
 		return repositorioTipoDispositivo.findById(nIdTipoDispositivo);
 	}
-	
+	/**
+	 * Creacion de un elemento en la tabla TIPO_DISPOSITIVO en la tabla en la base de datos
+	 * @param nNombre
+	 * @return Registro de lo insertado en formato JSON
+	 */
 	@PostMapping("/Insertar")
 	public @ResponseBody Tipo_dispositivo insertar(@RequestParam String nNombre) {
 	

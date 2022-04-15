@@ -22,17 +22,32 @@ public class VideojuegosControlador {
 	@Autowired
 	private RepositorioVideojuegos repositorioVideojuegos;
 	
+	/**
+	 * Query a la tabla VIDEOJUEGOS para obtener todos los datos de la tabla VIDEOJUEGOS
+	 * @return objeto JSON con todos los registros
+	 */
 	@GetMapping("/ObtenerTodos")
 	public @ResponseBody Iterable<Videojuegos> getAll(){
 		return repositorioVideojuegos.findAll();
 	}
 	
-	
+	/**
+	 * Obtener un solo registro de la tabla VIDEOJUEGOS con la ayuda de su identificador
+	 * @param nIdInventario
+	 * @return Un solo objeto de la tabla
+	 */
 	@GetMapping("/Obtener")
 	public @ResponseBody Optional<Videojuegos> getOne(@RequestParam int nIdInventario){
 		return repositorioVideojuegos.findById(nIdInventario);
 	}
-	
+	/**
+	 * Creacion de un elemento en la tabla VIDEOJUEGOS en la tabla en la base de datos
+	 * @param nIdInventario
+	 * @param nMaxJugadores
+	 * @param nGraficos
+	 * @param nConsola
+	 * @return Registro de lo insertado en formato JSON
+	 */
 	@PostMapping("/Insertar")
 	public @ResponseBody Videojuegos insertar(
 			@RequestParam int nIdInventario,

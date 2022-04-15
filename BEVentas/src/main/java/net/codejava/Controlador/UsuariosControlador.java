@@ -25,17 +25,33 @@ public class UsuariosControlador {
 	@Autowired
 	private RepositorioUsuarios repositorioUsuarios;
 	
+	
+	/**]
+	 * Query a la tabla USUARIOS para obtener todos los datos de la tabla USUARIOS
+	 * @return objeto JSON con todos los registros
+	 */
 	@GetMapping("/ObtenerTodos")
 	public @ResponseBody Iterable<Usuarios> getAll(){
 		return repositorioUsuarios.findAll();
 	}
-	
+	/**
+	 * Obtener un solo registro de la tabla USUARIOS con la ayuda de su identificador
+	 * @param nNit
+	 * @return Un solo objeto de la tabla
+	 */
 	@GetMapping("/Obtener")
 	public @ResponseBody Optional<Usuarios> getOne(@RequestParam int nNit){
 		return repositorioUsuarios.findById(nNit);
 	}
 	
-	
+	/**
+	 *  Creacion de un elemento en la tabla USUARIOS en la tabla en la base de datos
+	 * @param nNit
+	 * @param nTipoUsuario
+	 * @param nPassword
+	 * @param nNombre
+	 * @return Registro de lo insertado en formato JSON
+	 */
 	@PostMapping("/Insertar")
 	public @ResponseBody Usuarios insertar(@RequestParam int nNit, @RequestParam int nTipoUsuario ,@RequestParam String nPassword, @RequestParam String nNombre) {
 	
@@ -44,7 +60,12 @@ public class UsuariosControlador {
 		return repositorioUsuarios.save(n);
 	}
 	
-	
+	/**
+	 * Query para obtener datos del usuario y poder comparar los datos enviados con los datos de la tabla
+	 * @param nIdUsuario
+	 * @param nPassword
+	 * @return Retorna una respuesta si los datos son correctos o no
+	 */
 	@GetMapping("/Login")
 	public @ResponseBody Map<String,String> registrar(@RequestParam int nIdUsuario, @RequestParam String nPassword) {
 	

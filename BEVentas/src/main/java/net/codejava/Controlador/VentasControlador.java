@@ -28,16 +28,31 @@ public class VentasControlador {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
+	/**
+	 * Query a la tabla VENTAS para obtener todos los datos de la tabla VENTAS
+	 * @return objeto JSON con todos los registros
+	 */
 	@GetMapping("/ObtenerTodos")
 	public @ResponseBody Iterable<Ventas> getAll(){
 		return repositorioVentas.findAll();
 	}
-	
+	/**
+	 * Obtener un solo registro de la tabla VENTAS con la ayuda de su identificador
+	 * @param nIdVenta
+	 * @return Un solo objeto de la tabla
+	 */
 	@GetMapping("/Obtener")
 	public @ResponseBody Optional<Ventas> getOne(@RequestParam int nIdVenta){
 		return repositorioVentas.findById(nIdVenta);
 	}
-	
+	/**
+	 * Creacion de un elemento en la tabla VENTAS en la tabla en la base de datos
+	 * @param nIdOrden
+	 * @param nSerie
+	 * @param nCredito
+	 * @param nFecha
+	 * @return Registro de lo insertado en formato JSON
+	 */
 	@PostMapping("/Insertar")
 	public @ResponseBody Ventas insertar(
 			@RequestParam int nIdOrden,

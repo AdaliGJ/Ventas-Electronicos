@@ -22,17 +22,34 @@ public class Factura_controlador {
 	@Autowired
 	private RepositorioFactura repositorioFactura;
 	
+	
+	/**
+	 * Query a la tabla FACTURA para obtener todos los datos de la tabla FACTURA
+	 * @return  objeto JSON con todos los registros
+	 */
 	@GetMapping("/ObtenerTodos")
 	public @ResponseBody Iterable<Factura> getAll(){
 		return repositorioFactura.findAll();
 	}
 	
+	/**
+	 *  Obtener un solo registro de la tabla FACTURA con la ayuda de su identificador
+	 * @param nIdEntradaFactura Identificador de la tupla
+	 * @return Un solo objeto de la tabla FACTURA
+	 */
 	@GetMapping("/Obtener")
 	public @ResponseBody Optional<Factura> getOne(@RequestParam int nIdEntradaFactura){
 		return repositorioFactura.findById(nIdEntradaFactura);
 	}
 
-	
+	/**
+	 * Creacion de una nueva FACTURA en la tabla en la base de datos
+	 * @param nIdFactura  
+	 * @param nIdVenta
+	 * @param nNitCliente
+	 * @param nPrecio
+	 * @return Registro de lo insertado en formato JSON
+	 */
 	@PostMapping("/Insertar")
 	public @ResponseBody Factura insertar(
 			@RequestParam String nIdFactura, 

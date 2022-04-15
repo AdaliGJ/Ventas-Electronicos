@@ -1,4 +1,4 @@
-package net.codejava.Controlador;
+package net.codejava.UnitTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertThat;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -19,16 +19,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.util.LinkedMultiValueMap;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import net.codejava.Controlador.ClientesControlador;
+import net.codejava.Controlador.Factura_controlador;
 import net.codejava.Entidad.Clientes;
+import net.codejava.Entidad.Factura;
 import net.codejava.Repositorio.RepositorioClientes;
+import net.codejava.Repositorio.RepositorioFactura;
 
-@WebMvcTest(ClientesControlador.class)
-public class ClientesControladorTest {
+@WebMvcTest(Factura_controlador.class)
+public class FacturaControladorTest {
 
 	@Autowired
     MockMvc mockMvc;
@@ -36,41 +41,47 @@ public class ClientesControladorTest {
     ObjectMapper mapper;
     
     @MockBean
-    RepositorioClientes repositorioClientes;
+    RepositorioFactura repositorioFactura;
 	
-	Clientes RECORD_1 = new Clientes(8434832,1);
-	Clientes RECORD_2= new Clientes(9639831,2);
-	Clientes RECORD_3= new Clientes(5678960,2);
+	Factura RECORD_1 = new Factura(1, "256fr3", 32, 6789652, 10/6);
+	Factura RECORD_2 = new Factura(2, "834hju", 6, 8434832, 10);
+	Factura RECORD_3 = new Factura(3, "09l9ju", 67, 9030033, 5/2);
 	
 	@Test
 	public void obtenerRegistros_success() throws Exception {
-	    List<Clientes> records = new ArrayList<>(Arrays.asList(RECORD_1, RECORD_2, RECORD_3));
+	    List<Factura> records = new ArrayList<>(Arrays.asList(RECORD_1, RECORD_2, RECORD_3));
 	    
 	    
 	    
-	    Mockito.when(repositorioClientes.findAll()).thenReturn(records);
+	    Mockito.when(repositorioFactura.findAll()).thenReturn(records);
 	    
 	    mockMvc.perform(MockMvcRequestBuilders
-	            .get("/Clientes/ObtenerTodos")
+	            .get("/Factura/ObtenerTodos")
 	            .contentType(APPLICATION_JSON))
 	            .andExpect(status().isOk())
-	            .andExpect(jsonPath("$[2].nit", is(9639831)));
+	            .andExpect(jsonPath("$[0].id_entrada_factura", is(1)))
+	            .andExpect(jsonPath("$[1].precio", is(10.0)))
+	            .andExpect(jsonPath("$[2].nit_cliente", is(9030033)));
 	}
 	
 	@Test
-	public void obtener2() throws Exception {
-	    List<Clientes> records = new ArrayList<>(Arrays.asList(RECORD_1, RECORD_2, RECORD_3));
+	public void insertarRegistro() throws Exception {
 	    
-	    
-	    
-	    Mockito.when(repositorioClientes.findAll()).thenReturn(records);
+	    LinkedMultiValueMap<String,String> params = new LinkedMultiValueMap<>();
+		params.add("nIdFactura", "57fwd");
+		params.add("nIdVenta","2");
+		params.add("nNitCliente","9030033");
+		params.add("nPrecio","22");
+		
+		
 	    
 	    mockMvc.perform(MockMvcRequestBuilders
-	            .get("/Clientes/ObtenerTodos")
+	            .post("/Factura/Insertar")
+	            .params(params)
 	            .contentType(APPLICATION_JSON))
-	            .andExpect(status().isOk())
-	            .andExpect(jsonPath("$[2].nit", is(9639831)));
+	            .andExpect(status().isOk());
 	}
+	
 	
 	
 }
