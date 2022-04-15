@@ -19,36 +19,35 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import net.codejava.Controlador.VideojuegosControlador;
-import net.codejava.Entidad.Videojuegos;
-import net.codejava.Repositorio.RepositorioVideojuegos;
+import net.codejava.Controlador.TelevisoresControlador;
+import net.codejava.Entidad.Televisores;
+import net.codejava.Repositorio.RepositorioTelevisores;
 
-@WebMvcTest(VideojuegosControlador.class)
-public class VideojuegosControladorTest {
+@WebMvcTest(TelevisoresControlador.class)
+public class TelevisoresControladorTest {
 	@Autowired
     MockMvc mockMvc;
     @Autowired
     ObjectMapper mapper;
     
     @MockBean
-    RepositorioVideojuegos repositorio;
+    RepositorioTelevisores repositorio;
 	
-	Videojuegos RECORD_1 = new Videojuegos(1,1,"1440p","PlayStation");
-	Videojuegos RECORD_2 = new Videojuegos(2,4,"720p","Nintendo");
-	Videojuegos RECORD_3 = new Videojuegos(3,2,"1080p","Xbox");
+	Televisores RECORD_1 = new Televisores(1,"4k",128,56,2);
+	Televisores RECORD_2 = new Televisores(2,"2k",128,32,2);
+	Televisores RECORD_3 = new Televisores(3,"8k",128,64,3);
 	
 	@Test
 	public void obtenerRegistros_success() throws Exception {
 		
-		List<Videojuegos> records = new ArrayList<>(Arrays.asList(RECORD_1, RECORD_2, RECORD_3));
+		List<Televisores> records = new ArrayList<>(Arrays.asList(RECORD_1, RECORD_2, RECORD_3));
 	    
 	    Mockito.when(repositorio.findAll()).thenReturn(records);
 	    
 	    mockMvc.perform(MockMvcRequestBuilders
-	            .get("/Videojuegos/ObtenerTodos")
+	            .get("/Televisores/ObtenerTodos")
 	            .contentType(APPLICATION_JSON))
 	            .andExpect(status().isOk())
-	            .andExpect(jsonPath("$[2].consola", is("Xbox")));
+	            .andExpect(jsonPath("$[2].resolucion", is("8k")));
 	}
-	
 }
