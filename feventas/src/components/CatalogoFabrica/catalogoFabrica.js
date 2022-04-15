@@ -7,7 +7,26 @@ import { withRouter } from "react-router";
 import { Button, TextField } from '@material-ui/core';
 import axios from 'axios';
 import Comprar from '../comprar/comprar';
+import Table from '@material-ui/core/Table';
+import {  withStyles } from '@material-ui/core/styles';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import Paper from "@material-ui/core/Paper";
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 
+const StyledTableCell = withStyles({
+    root: {
+      color: "#ffffff"
+    }
+  })(TableCell);
+
+  const StyledTable = withStyles({
+    root: {
+      /*width: "95%",*/
+      overflow: 'scroll'
+    }
+  })(Table);
 
 class CatalogoFabrica extends React.Component{
     
@@ -18,14 +37,12 @@ class CatalogoFabrica extends React.Component{
         this.state={
             id: this.props.match.params.id,
             marca: "",
-           
             tipo_disp: '3',
-           
             total: 0,
-
             inventario: '',
             televisor:'',
-            imgs: [{imagen: ''}]
+            imgs: [{imagen: ''}],
+            inventario: [{}]
         }
     } 
    
@@ -49,38 +66,26 @@ class CatalogoFabrica extends React.Component{
             <div className='page'>
                 <h1>{this.state.tipo_disp+" "+this.state.marca+" "+this.state.inventario.modelo}</h1>
                 <Card className="detalle">
-                <Grid container spacing={4}>
-                        <Grid item xs={4}>
-                            {this.state.imgs.map((p) => (
-                                <img src={p.imagen} width="50%"/>
-                        ))}
-                        </Grid>
-                        <Grid item xs={4}>
-                            <div className='Especificaciones'>
-                                <h3>Especificaciones: </h3>
-                                <ul>
-                                    <li>{"Dispositivo: "+this.state.tipo_disp}</li>
-                                    <li>{"Marca: "+this.state.marca}</li>
-                                    <li>{"Modelo: "+this.state.inventario.modelo}</li>
-                                    <li>{"Color: "+this.state.inventario.color}</li>
-                                    <li>{"Precio: Q"+this.state.inventario.precioLista}</li>
-                                    <li>{"Garantía: "+this.state.inventario.mesesGarantia+" meses"}</li>
-                                </ul>
-                            
-                            </div>
-                        </Grid>
-                        <Grid item xs={4}>
-                            <div className="compra_1">
-                               
-                                <h2>{"Total: Q"+this.state.inventario.precioLista/**this.state.total*/}</h2>
-                                <br/>
-                                <br/><Comprar tipo={this.props.match.params.id} producto={this.state.tipo_disp+" "+this.state.marca+" "+this.state.inventario.modelo} total={this.state.inventario.precioLista}/>
-                            </div>
-                        </Grid>
-                    </Grid>
-                   
-                    
-
+                <h3>Inventario Actual</h3>
+                                <StyledTable className="customized-table">
+                                    <TableHead >
+                                    <TableRow className="table-header">
+                                        <StyledTableCell align="right">Serie</StyledTableCell>
+                                        <StyledTableCell align="right">Producto</StyledTableCell>
+                                    
+                                    </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                    {this.state.inventario.map((inv) => (
+                                        <TableRow>
+                                            <TableCell align="right" component="th" scope="row">
+                                            </TableCell>
+                                        <TableCell align="right"></TableCell>
+                                        
+                                        </TableRow>
+                                    ))}
+                                    </TableBody>
+                                </StyledTable>
                 </Card>
             </div>
         );

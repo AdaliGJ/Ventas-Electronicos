@@ -25,20 +25,39 @@ function App() {
     return localTipoUsuario ? JSON.parse(localTipoUsuario) : null;
   }
 
+  const getCliente=()=>{
+    const localCliente = localStorage.getItem('cliente');
+    return localCliente ? JSON.parse(localCliente) : null;
+  }
+  const getPuerto=()=>{
+    const localPuerto = localStorage.getItem('puerto');
+    return localPuerto ? JSON.parse(localPuerto) : null;
+  }
+  const getIP=()=>{
+    const localIp = localStorage.getItem('ip');
+    return localIp ? JSON.parse(localIp) : null;
+  }
+
 
   const[username, setUsername] = useState(getUsername);
   const[tipoUsuario, setTipoUsuario]=useState(getTipoUsuario);
+  const[cliente, setCliente] = useState(getCliente);
+  const[puerto, setPuerto]=useState(getPuerto);
+  const[ip, setIp]=useState(getIP);
 
   useEffect(()=>{
     localStorage.setItem('username', JSON.stringify(username));
     localStorage.setItem('tipoUsuario', JSON.stringify(tipoUsuario));
+    localStorage.setItem('cliente', JSON.stringify(cliente));
+    localStorage.setItem('puerto', JSON.stringify(puerto));
+    localStorage.setItem('ip', JSON.stringify(ip));
   })
   
   
   return (
     <Router>
     <div className="App"> 
-    <LoginContext.Provider value={{username, setUsername, setTipoUsuario, tipoUsuario}}> 
+    <LoginContext.Provider value={{username, setUsername, setTipoUsuario, tipoUsuario, setCliente, cliente, setIp, ip, setPuerto, puerto}}> 
     <MenuBar/> 
        { tipoUsuario == 1 ? <Switch> 
           <Route exact path="/home" component={Catalog}/>
