@@ -64,15 +64,22 @@ class CatalogoFabrica extends React.Component{
     render(){
         return(
             <div className='page'>
-                <h1>{this.state.tipo_disp+" "+this.state.marca+" "+this.state.inventario.modelo}</h1>
                 <Card className="detalle">
-                <h3>Inventario Actual</h3>
+                <h3>Catálogo Fábrica</h3>
                                 <StyledTable className="customized-table">
                                     <TableHead >
                                     <TableRow className="table-header">
-                                        <StyledTableCell align="right">Serie</StyledTableCell>
-                                        <StyledTableCell align="right">Producto</StyledTableCell>
-                                    
+                                        <StyledTableCell align="right">ID</StyledTableCell>
+                                        <StyledTableCell align="right">Categoría</StyledTableCell>
+                                        <StyledTableCell align="right">Marca</StyledTableCell>
+                                        <StyledTableCell align="right">Existencias</StyledTableCell>
+                                        <StyledTableCell align="right">Precio Lista</StyledTableCell>
+                                        <StyledTableCell align="right">Color</StyledTableCell>
+                                        <StyledTableCell align="right">Descripcion</StyledTableCell>
+                                        <StyledTableCell align="right">Modelo</StyledTableCell>
+                                        <StyledTableCell align="right">Meses Garantía</StyledTableCell>
+                                        <StyledTableCell align="right">Extras</StyledTableCell>
+                                        <StyledTableCell align="right">Comprar</StyledTableCell>
                                     </TableRow>
                                     </TableHead>
                                     <TableBody>
@@ -80,8 +87,16 @@ class CatalogoFabrica extends React.Component{
                                         <TableRow>
                                             <TableCell align="right" component="th" scope="row">
                                             </TableCell>
-                                        <TableCell align="right"></TableCell>
-                                        
+                                            <StyledTableCell align="right"></StyledTableCell>
+                                            <StyledTableCell align="right"></StyledTableCell>
+                                            <StyledTableCell align="right"></StyledTableCell>
+                                            <StyledTableCell align="right"></StyledTableCell>
+                                            <StyledTableCell align="right"></StyledTableCell>
+                                            <StyledTableCell align="right"></StyledTableCell>
+                                            <StyledTableCell align="right"></StyledTableCell>
+                                            <StyledTableCell align="right"></StyledTableCell>
+                                            <StyledTableCell align="right"></StyledTableCell>
+                                            <StyledTableCell align="right"></StyledTableCell>
                                         </TableRow>
                                     ))}
                                     </TableBody>
