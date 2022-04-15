@@ -80,7 +80,7 @@ class Comprar extends React.Component {
             console.log(data);
           });
 
-        console.log(data);
+        console.log(data.existencias);
       
     });
   }

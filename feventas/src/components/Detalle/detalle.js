@@ -37,7 +37,7 @@ class Detalle extends React.Component{
             ram: 8, 
             existencias: 5,*/
             total: 0,
-
+            cantidad: 0,
             inventario: '',
             televisor:'',
             imgs: [{imagen: ''}]
@@ -147,9 +147,11 @@ class Detalle extends React.Component{
                         <Grid item xs={4}>
                             <div className="compra_1">
                                
-                                <h2>{"Total: Q"+this.state.inventario.precioLista/**this.state.total*/}</h2>
+                                <h2>{"Precio: Q"+this.state.inventario.precioLista/**this.state.total*/}</h2>
+                                <h4>{"Existencias: "+this.state.inventario.existencias/**this.state.total*/}</h4>
+                                <TextField className="outlined-required" label="Cantidad" type="number"  onInput={e=>this.setState({cantidad: e.target.value, total: e.target.value*this.state.inventario.precioLista})}  value={this.state.cantidad}/>
                                 <br/>
-                                <br/><Comprar tipo={this.props.match.params.id} producto={this.state.tipo_disp+" "+this.state.marca+" "+this.state.inventario.modelo} total={this.state.inventario.precioLista}/>
+                                <br/><Comprar tipo={this.props.match.params.id} producto={this.state.tipo_disp+" "+this.state.marca+" "+this.state.inventario.modelo} total={this.state.total}/>
                             </div>
                         </Grid>
                     </Grid>
