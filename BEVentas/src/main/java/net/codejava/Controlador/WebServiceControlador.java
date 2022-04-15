@@ -48,12 +48,12 @@ public class WebServiceControlador {
 	
 	@PostMapping("/WebServicePost")
 	public Object createPedidos(//@RequestParam String nfecha,
+			@RequestParam int nIdPedidoVentas,
 			@RequestParam String nCliente,
 			@RequestParam String nIdInventario,
-			@RequestParam int nCantidad,
-			@RequestParam String nEstado,
-			@RequestParam int nEntrega/*,
-			@RequestParam String nFechaEntrega*/) {
+			@RequestParam int nCantidad
+			//@RequestParam String nEstado,
+			/*@RequestParam String nFechaEntrega*/) {
 		
 	    String url = "http://localhost:4000/api/pedidos";
 
@@ -68,11 +68,12 @@ public class WebServiceControlador {
 	    //HttpEntity<Pedidos> entity = new HttpEntity<>(post);
 	    
 	    HashMap<String,Object> post = new HashMap<>();
+	    post.put("idPedidoVentas",nIdPedidoVentas);
 	    post.put("cliente", nCliente);
 	    post.put("idInventario",nIdInventario);
 	    post.put("cantidad", nCantidad);
-	    post.put("estado", nEstado);
-	    post.put("entrega", nEntrega);
+	    //post.put("estado", nEstado);
+	    post.put("fechaEntrega","");
 	    
 
 	    // send POST request
@@ -161,7 +162,7 @@ public class WebServiceControlador {
 	
 	@GetMapping("/ValidarGarantia")
 	public Object validarGarantia(@RequestParam String nIP, @RequestParam String nSerie) {
-		String url = "http://"+nIP+":4000/api/garantia/dispositivo/" + nSerie;
+		String url = "http://"+nIP+":4000/api/garantia/devolver/" + nSerie;
 		Object forObject = restTemplate.getForObject(url, Object.class);
 		System.out.println("Result: "+ forObject);
 		return forObject;
