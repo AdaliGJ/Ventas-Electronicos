@@ -20,6 +20,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -60,6 +62,26 @@ public class FichasClienteControladorTest {
 	            .andExpect(jsonPath("$[0].nit", is(9887675)))
 	            .andExpect(jsonPath("$[1].nombre", is("Jorge Guerrero")))
 	            .andExpect(jsonPath("$[2].fecha_de_vencimiento", is("23/06/2022")));
+	}
+	
+	@Test
+	public void insertarRegistro() throws Exception {
+	    
+	    LinkedMultiValueMap<String,String> params = new LinkedMultiValueMap<>();
+		params.add("nNit", "998622");
+		params.add("nNombre","Juana Pérez");
+		params.add("nEmail","kks@gmail.com");
+		params.add("nTelefono","34567892");
+		params.add("nPatenteDeComercio", "patente4.png");
+		params.add("nFechaDeVencimiento", "22/09/2023");
+		
+		
+	    
+	    mockMvc.perform(MockMvcRequestBuilders
+	            .post("/Fichas_clientes/Insertar")
+	            .params(params)
+	            .contentType(APPLICATION_JSON))
+	            .andExpect(status().isOk());
 	}
 	
 	

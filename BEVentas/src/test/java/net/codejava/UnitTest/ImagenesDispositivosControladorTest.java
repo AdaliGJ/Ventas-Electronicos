@@ -20,6 +20,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -57,6 +59,22 @@ public class ImagenesDispositivosControladorTest {
 	            .andExpect(jsonPath("$[0].id_imagen", is(1)))
 	            .andExpect(jsonPath("$[1].id_inventario", is(4)))
 	            .andExpect(jsonPath("$[2].imagen", is("imagen2-4.jpg")));
+	}
+	
+	@Test
+	public void insertarRegistro() throws Exception {
+	    
+	    LinkedMultiValueMap<String,String> params = new LinkedMultiValueMap<>();
+		params.add("nIdInventario", "3");
+		params.add("nImagen", "imagen3-1");
+		
+		
+	    
+	    mockMvc.perform(MockMvcRequestBuilders
+	            .post("/Imagenes_dispositivos/Insertar")
+	            .params(params)
+	            .contentType(APPLICATION_JSON))
+	            .andExpect(status().isOk());
 	}
 	
 	

@@ -57,5 +57,20 @@ public class ClientesControladorTest {
 	            .andExpect(jsonPath("$[2].nit", is(9639831)));
 	}
 	
+	@Test
+	public void obtener2() throws Exception {
+	    List<Clientes> records = new ArrayList<>(Arrays.asList(RECORD_1, RECORD_2, RECORD_3));
+	    
+	    
+	    
+	    Mockito.when(repositorioClientes.findAll()).thenReturn(records);
+	    
+	    mockMvc.perform(MockMvcRequestBuilders
+	            .get("/Clientes/ObtenerTodos")
+	            .contentType(APPLICATION_JSON))
+	            .andExpect(status().isOk())
+	            .andExpect(jsonPath("$[2].nit", is(9639831)));
+	}
+	
 	
 }

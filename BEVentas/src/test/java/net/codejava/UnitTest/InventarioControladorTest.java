@@ -17,24 +17,20 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import net.codejava.Controlador.ClientesControlador;
-import net.codejava.Entidad.Clientes;
-import net.codejava.Repositorio.RepositorioClientes;
+import net.codejava.Controlador.InventarioControlador;
+import net.codejava.Entidad.Inventario;
+import net.codejava.Repositorio.RepositorioInventario;
 
-
-@WebMvcTest(ClientesControlador.class)
-public class ClientesControladorTest {
+@WebMvcTest(InventarioControlador.class)
+public class InventarioControladorTest {
 
 	@Autowired
     MockMvc mockMvc;
@@ -42,39 +38,46 @@ public class ClientesControladorTest {
     ObjectMapper mapper;
     
     @MockBean
-    RepositorioClientes repositorioClientes;
+    RepositorioInventario repositorioInventario;
 	
-	Clientes RECORD_1 = new Clientes(8434832,1);
-	Clientes RECORD_2= new Clientes(9639831,2);
-	Clientes RECORD_3= new Clientes(5678960,2);
+	Inventario RECORD_1 = new Inventario(1, 2, 3, 100, 10/6, "rojo", "descripcion1", "xer3a",24);
+	Inventario RECORD_2 = new Inventario(2, 8, 1, 45, 89/3, "verde", "descripcion2", "igr2b",36);
+	Inventario RECORD_3 = new Inventario(3, 1, 6, 78, 50, "negro", "descripcion3", "89juy",12);
 	
 	@Test
 	public void obtenerRegistros_success() throws Exception {
-	    List<Clientes> records = new ArrayList<>(Arrays.asList(RECORD_1, RECORD_2, RECORD_3));
+	    List<Inventario> records = new ArrayList<>(Arrays.asList(RECORD_1, RECORD_2, RECORD_3));
 	    
 	    
 	    
-	    Mockito.when(repositorioClientes.findAll()).thenReturn(records);
+	    Mockito.when(repositorioInventario.findAll()).thenReturn(records);
 	    
 	    mockMvc.perform(MockMvcRequestBuilders
-	            .get("/Clientes/ObtenerTodos")
+	            .get("/Inventario/ObtenerTodos")
 	            .contentType(APPLICATION_JSON))
 	            .andExpect(status().isOk())
-	            .andExpect(jsonPath("$[1].nit", is(9639831)))
-	            .andReturn();
+	            .andExpect(jsonPath("$[0].categoriaDispositivo", is(2)))
+	            .andExpect(jsonPath("$[1].modelo", is("igr2b")))
+	            .andExpect(jsonPath("$[2].mesesGarantia", is(12)));
 	}
 	
 	@Test
 	public void insertarRegistro() throws Exception {
 	    
-	    LinkedMultiValueMap<String,String> params = new LinkedMultiValueMap<>();
-		params.add("nNit", "1234567");
-		params.add("nTipoCliente","2");
+	    LinkedMultiValueMap<String,String> params = new LinkedMultiValueMap<>();		
+		params.add("nCategoriaDispositivo", "6");
+		params.add("nMarca", "3");
+		params.add("nExistencias", "43");
+		params.add("nPrecioLista", "595.59");
+		params.add("nColor", "amarillo");
+		params.add("nDescripcion", "Dispositivo Amarillo");
+		params.add("nModelo", "shd32d");
+		params.add("nMesesGarantia", "48");
 		
 		
 	    
 	    mockMvc.perform(MockMvcRequestBuilders
-	            .post("/Clientes/Insertar")
+	            .post("/Inventario/Insertar")
 	            .params(params)
 	            .contentType(APPLICATION_JSON))
 	            .andExpect(status().isOk());

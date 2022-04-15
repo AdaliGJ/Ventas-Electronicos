@@ -19,7 +19,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.util.LinkedMultiValueMap;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -61,6 +63,25 @@ public class FacturaControladorTest {
 	            .andExpect(jsonPath("$[1].precio", is(10.0)))
 	            .andExpect(jsonPath("$[2].nit_cliente", is(9030033)));
 	}
+	
+	@Test
+	public void insertarRegistro() throws Exception {
+	    
+	    LinkedMultiValueMap<String,String> params = new LinkedMultiValueMap<>();
+		params.add("nIdFactura", "57fwd");
+		params.add("nIdVenta","2");
+		params.add("nNitCliente","9030033");
+		params.add("nPrecio","22");
+		
+		
+	    
+	    mockMvc.perform(MockMvcRequestBuilders
+	            .post("/Factura/Insertar")
+	            .params(params)
+	            .contentType(APPLICATION_JSON))
+	            .andExpect(status().isOk());
+	}
+	
 	
 	
 }
