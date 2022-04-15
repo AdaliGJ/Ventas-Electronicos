@@ -25,6 +25,7 @@ public class VistaDispositivosVendidos {
 	private int dispositivo;
 	
 	
+	public VistaDispositivosVendidos() {}
 	
 	public String getSerie() {
 		return serie;
@@ -41,6 +42,39 @@ public class VistaDispositivosVendidos {
 	public int getDispositivo() {
 		return dispositivo;
 	}
+	
+	
+	public void setSerie(String serie) {
+		this.serie = serie;
+	}
+
+	public void setFecha(String fecha) {
+		this.fecha = fecha;
+	}
+
+	public void setIdpropietario(int idpropietario) {
+		this.idpropietario = idpropietario;
+	}
+
+	public void setNombrepropietario(String nombrepropietario) {
+		this.nombrepropietario = nombrepropietario;
+	}
+
+	public void setDispositivo(int dispositivo) {
+		this.dispositivo = dispositivo;
+	}
+
+	
+	public VistaDispositivosVendidos(String serie, String fecha, int idpropietario, String nombrepropietario,
+			int dispositivo) {
+		super();
+		this.serie = serie;
+		this.fecha = fecha;
+		this.idpropietario = idpropietario;
+		this.nombrepropietario = nombrepropietario;
+		this.dispositivo = dispositivo;
+	}
+
 	@Override
 	public String toString() {
 		return "VistaDispositivosVendidos [serie=" + serie + ", fecha=" + fecha + ", idpropietario=" + idpropietario

@@ -8,7 +8,6 @@ import TextField from '@material-ui/core/TextField';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import LockIcon from '@material-ui/icons/Lock';
-
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
 
@@ -17,10 +16,12 @@ import axios from 'axios';
 function FabricaLog(props){
 
     const[error, setError]=useState(false);
-    const { setUsername, username, tipoUsuario, setTipoUsuario }=useContext(LoginContext);
+    const { setIp, setPuerto, setCliente}=useContext(LoginContext);
         
     const usuarioRef = useRef('');
     const contRef = useRef('');
+    const portRef = useRef('1FF');
+    const ipRef = useRef('2FF2');
 
     const history = useHistory();
 
@@ -33,8 +34,8 @@ function FabricaLog(props){
         let formData = new FormData();
         formData.append('nCliente', usuarioRef.current.value);
         formData.append('nPassword', contRef.current.value);
-        formData.append('nIP', "1");
-        formData.append('nPort', "22");
+        formData.append('nIP', ipRef.current.value);
+        formData.append('nPort', portRef.current.value);
                
         axios.post(url, formData,  {
             headers: {
@@ -42,10 +43,13 @@ function FabricaLog(props){
             }})
             .then((response)=>{
                 console.log(response);
-                if(response._id=="error"){
+                if(response.data._id=="error"){
                     setError(true);
                 }else{
-                    history.push("/caralogo-fabrica");
+                    history.push("/catalogo-fabrica");
+                    setCliente(response.data._id);
+                    setIp(ipRef.current.value);
+                    setPuerto(portRef.current.value);
                 }    
             })
             .catch((response)=>{
@@ -54,11 +58,11 @@ function FabricaLog(props){
             });
 
             history.push("/catalogo-fabrica");
+            setIp(ipRef.current.value);
+            setPuerto(portRef.current.value);
 
         }
  
-
-
 
         return(
             <div className="page">
@@ -81,6 +85,12 @@ function FabricaLog(props){
                                   </InputAdornment>
                                 ),
                               }} inputRef={contRef}/>
+                        </Grid>
+                        <Grid item>
+                            <TextField className="standard-basic" label="Dirección IP de la Fábrica" type="text" inputRef={ipRef}/>
+                        </Grid>
+                        <Grid item>
+                            <TextField className="standard-basic" label="Puerto a conectarse" type="text" inputRef={portRef}/>
                         </Grid>
                     </Grid>
                     <Grid container direction={"column"} spacing={0}>
