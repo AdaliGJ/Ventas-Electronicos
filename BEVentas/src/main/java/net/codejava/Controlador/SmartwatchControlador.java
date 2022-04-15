@@ -18,6 +18,7 @@ import net.codejava.Repositorio.RepositorioSmartwatch;
 @CrossOrigin
 @RestController
 @RequestMapping(path="/Smartwatch")
+
 public class SmartwatchControlador {
 
 	@Autowired

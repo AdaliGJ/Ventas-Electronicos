@@ -22,11 +22,18 @@ public class VistaCatalogoControlador {
 	@Autowired
 	private RepositorioVistaCatalogo repositorioVistaCatalogo;
 	
+	/**
+	 * 
+	 * @return
+	 */
 	@GetMapping("/ObtenerInventarioAsc")
 	public @ResponseBody Iterable<VistaCatalogo> getInventarioAsc(){
 		return repositorioVistaCatalogo.findByOrderByIdinventarioAsc();
 	}
-	
+	/**
+	 * 
+	 * @return
+	 */
 	@GetMapping("/ObtenerInventarioDesc")
 	public @ResponseBody Iterable<VistaCatalogo> getInventarioDesc(){
 		return repositorioVistaCatalogo.findByOrderByIdinventarioDesc();

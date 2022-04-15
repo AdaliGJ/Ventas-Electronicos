@@ -22,16 +22,32 @@ public class TelevisoresControlador {
 	@Autowired
 	private RepositorioTelevisores repositorioTelevisores;
 	
+	/**
+	 * Query a la tabla TELEVISORES para obtener todos los datos de la tabla TELEVISORES
+	 * @return objeto JSON con todos los registros
+	 */
 	@GetMapping("/ObtenerTodos")
 	public @ResponseBody Iterable<Televisores> getAll(){
 		return repositorioTelevisores.findAll();
 	}
-	
+	/**
+	 * Obtener un solo registro de la tabla TELEVISORES con la ayuda de su identificador
+	 * @param nIdInventario
+	 * @return Un solo objeto de la tabla
+	 */
 	@GetMapping("/Obtener")
 	public @ResponseBody Optional<Televisores> getOne(@RequestParam int nIdInventario){
 		return repositorioTelevisores.findById(nIdInventario);
 	}
-	
+	/**
+	 * Creacion de un elemento en la tabla INVENTARIO en la tabla en la base de datos
+	 * @param nIdInventario
+	 * @param nResolucion
+	 * @param nBitsProfundidad
+	 * @param nPulgadasPantalla
+	 * @param nEntradasHDMI
+	 * @return Registro de lo insertado en formato JSON
+	 */
 	@PostMapping("/Insertar")
 	public @ResponseBody Televisores insertar(
 			@RequestParam int nIdInventario,

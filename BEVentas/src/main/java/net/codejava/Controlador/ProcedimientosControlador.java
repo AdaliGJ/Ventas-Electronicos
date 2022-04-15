@@ -27,7 +27,31 @@ public class ProcedimientosControlador {
 		jdbcTemplate.update(Sql, nIdInventario, nDescripcion);
 		
 	}
-	
+	/**
+	 * Procedimiento almacenado para insertar electronicos en el catalogo ingresando los datos en todas las tablas necesarias
+	 * @param nCategoriaDispositivo
+	 * @param nMarca
+	 * @param nExistencias
+	 * @param nPrecioLista
+	 * @param nColor
+	 * @param nDescripcion
+	 * @param nModelo
+	 * @param nMesesGarantia
+	 * @param nResolucion
+	 * @param nBitsProfundidad
+	 * @param nPulgadasPantalla
+	 * @param nEntradasHDMI
+	 * @param nSistemaOperativo
+	 * @param nRamMB
+	 * @param nMemoriaGB
+	 * @param nMaxJugadores
+	 * @param nGraficos
+	 * @param nConsola
+	 * @param nAccion
+	 * @param nImg1
+	 * @param nImg2
+	 * @param nImg3
+	 */ 
 	
 	@PostMapping("/Insertar")
 	@ResponseBody

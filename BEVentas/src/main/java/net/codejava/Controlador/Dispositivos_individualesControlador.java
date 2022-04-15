@@ -29,12 +29,21 @@ public class Dispositivos_individualesControlador {
 	@Autowired
 	private RepositorioDispositivos_individuales repositorioDispositivosIndividuales;
 	
+	/**
+	 * Query a la tabla DISPOSITIVOS_INDIVIDUALES para obtener todos los datos de la tabla DISPOSITIVOS_INDIVIDUALES
+	 * @return objeto JSON con todos los registros
+	 */
+	
 	@GetMapping("/ObtenerTodos")
 	public @ResponseBody Iterable<Dispositivos_individuales> getAll(){
 		return repositorioDispositivosIndividuales.findByVendido(0);
 	}
 	
-	
+	/**
+	 * Obtener un solo registro de la tabla DISPOSITIVOS_INDIVIDUALES con la ayuda de su identificador
+	 * @param nSerial Numero Serial del DISPOSITIVOS_INDIVIDUALES el cual es el identificador de la tupla
+	 * @return Un DISPOSITIVOS_INDIVIDUALES segun el nSerial
+	 */
 	@GetMapping("/Obtener")
 	public @ResponseBody Optional<Dispositivos_individuales> getOne(@RequestParam String nSerial){
 		return repositorioDispositivosIndividuales.findBySerie(nSerial);
@@ -54,6 +63,13 @@ public class Dispositivos_individualesControlador {
 		return nList;
 	}*/
 	
+	/**
+	 * Creacion de un nuevo DISPOSITIVOS_INDIVIDUAL en la tabla en la base de datos
+	 * @param nId Identificador del DISPOSITIVOS_INDIVIDUAL
+	 * @param nSerie Numero de serie del  DISPOSITIVOS_INDIVIDUAL
+	 * @return
+	 */
+	
 	@PostMapping("/Insertar")
 	public @ResponseBody Dispositivos_individuales insertar(
 			@RequestParam int nId,
@@ -64,7 +80,7 @@ public class Dispositivos_individualesControlador {
 		
 		return repositorioDispositivosIndividuales.save(n);
 	}
-	
+
 	@PostMapping("/Prueba")
 	@ResponseBody
 	public void prueba(@RequestParam String nSerie, @RequestParam String nId) {

@@ -25,16 +25,29 @@ public class MarcasControlador {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
+	/**
+	 * Query a la tabla MARCAS para obtener todos los datos de la tabla MARCAS
+	 * @return objeto JSON con todos los registros
+	 */
 	@GetMapping("/ObtenerTodos")
 	public @ResponseBody Iterable<Marcas> getAll(){
 		return repositorioMarcas.findAll();
 	}
-	
+	/**
+	 * Obtener un solo registro de la tabla MARCAS con la ayuda de su identificador
+	 * @param nIdMarca
+	 * @return Un solo objeto de la tabla 
+	 */
 	@GetMapping("/Obtener")
 	public @ResponseBody Optional<Marcas> getOne(@RequestParam int nIdMarca){
 		return repositorioMarcas.findById(nIdMarca);
 	}
-	
+	/**
+	 * Creacion de una nueva MARCA en la tabla en la base de datos
+	 * @param nNombre
+	 * @param nIP
+	 * @return Registro de lo insertado en formato JSON
+	 */
 	@PostMapping("/Insertar")
 	public @ResponseBody Marcas insertar(@RequestParam String nNombre, @RequestParam String nIP) {
 	
@@ -42,6 +55,13 @@ public class MarcasControlador {
 		
 		return repositorioMarcas.save(n);
 	}
+	
+	/**
+	 * Creacion de una nueva MARCA en la tabla en la base de datos(Procedimiento almacenado)
+	 * @param nNombre
+	 * @param nIP
+	 * @return Registro de lo insertado en formato JSON
+	 */
 	
 	@PostMapping("/Insertar2")
 	@ResponseBody
