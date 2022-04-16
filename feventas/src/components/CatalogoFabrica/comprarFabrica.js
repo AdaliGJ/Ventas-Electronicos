@@ -12,6 +12,10 @@ import axios from 'axios';
 
 import Icon from '@mui/material/Icon';
 
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
 
 
 class ComprarFabrica extends React.Component {
@@ -25,7 +29,9 @@ class ComprarFabrica extends React.Component {
           id: props.id,
           usuario: null,
           today: new Date(),
-          cliente: ''
+          cliente: '',
+          inventario:  [ ],
+          producto:''
           
       }
       this.handleOpen=this.handleOpen.bind(this);
@@ -72,7 +78,7 @@ addItem = ()=>{
   let formData2 = new FormData();
   formData2.append('nidpedido', this.state.idVentas + 1);
   formData2.append('nfecha', this.state.today.getDate().toString()+'-'+this.state.today.getMonth().toString()+'-'+this.state.today.getFullYear().toString());
-  formData2.append('nidInventario', 2);
+  formData2.append('nidInventario', 4);
   formData2.append('ncantidad', this.state.cantidad);
   formData2.append('nestado', 'registrado');
   formData2.append('nfechaEntrega', '');
@@ -104,6 +110,16 @@ addItem = ()=>{
                 this.setState({idVentas: 0});
             });
 
+            const url2= 'http://localhost:8080/VistaCatalogo/ObtenerInventarioAsc'
+      
+            axios.get(url2).then(response => response.data)
+              .then((data) => {
+                this.setState({inventario: data});
+                
+                console.log(data);
+                console.log(this.state.inventario);
+              });
+
  }
 
   render(){
@@ -119,9 +135,17 @@ addItem = ()=>{
               <TextField className="modalfield" label="ID Producto" type="text" variant="outlined" onInput={e=>this.setState({id: e.target.value})}  value={this.state.id}/> 
             </Grid>
             <Grid item>
+              <FormControl className="modalfield" variant ="outlined">
+                    <InputLabel>ID Inventario</InputLabel>
+                    <Select label="ID Inventario" displayEmpty onChange={e=>this.setState({categoria: e.target.value})}  value={this.state.categoria}>
+                    {this.state.inventario.map((p) => (
+                        <MenuItem value={p.idinventario}>{p.idinventario+"-"+p.tipodispositivo+" "+p.nombremarca+" "+p.modelo+" "+p.color}</MenuItem>
+                    ))}
+                    </Select>
+                </FormControl>
+            </Grid>
             <Grid item>
               <TextField className="modalfield" label="Cantidad" type="number" variant="outlined" onInput={e=>this.setState({cantidad: e.target.value})}  value={this.state.cantidad}/> 
-            </Grid>
             </Grid>
             <Grid item>
               <Button id="agregarPed" onClick={this.addItem}>Agregar</Button>

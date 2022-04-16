@@ -88,7 +88,7 @@ public class WebServiceControlador {
 			@RequestParam String nIP,
 			@RequestParam String nPort) {
 		
-	    String url = "http://localhost:4000/api/clientes/login";
+	    String url = "http://localhost:4000/api/cliente/login";
 
 	    HttpHeaders headers;
 	   // headers.setContentType(APPLICATION_JSON);
@@ -112,7 +112,7 @@ public class WebServiceControlador {
 	
 	@GetMapping("/CatalogoFabrica")
 	public Iterable<Object> getElectronicos() {
-		 String url = "http://localhost:4000/api/electronicos";
+		 String url = "http://localhost:4000/api/electronico";
 		Object[] forObject = restTemplate.getForObject(url, Object[].class);
 		System.out.println("Result: "+ forObject);
 		return Arrays.asList(forObject);
