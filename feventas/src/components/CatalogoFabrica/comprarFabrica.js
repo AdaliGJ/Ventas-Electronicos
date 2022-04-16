@@ -78,7 +78,7 @@ addItem = ()=>{
   let formData2 = new FormData();
   formData2.append('nidpedido', this.state.idVentas + 1);
   formData2.append('nfecha', this.state.today.getDate().toString()+'-'+this.state.today.getMonth().toString()+'-'+this.state.today.getFullYear().toString());
-  formData2.append('nidInventario', 4);
+  formData2.append('nidInventario', this.state.producto);
   formData2.append('ncantidad', this.state.cantidad);
   formData2.append('nestado', 'registrado');
   formData2.append('nfechaEntrega', '');
@@ -137,7 +137,7 @@ addItem = ()=>{
             <Grid item>
               <FormControl className="modalfield" variant ="outlined">
                     <InputLabel>ID Inventario</InputLabel>
-                    <Select label="ID Inventario" displayEmpty onChange={e=>this.setState({categoria: e.target.value})}  value={this.state.categoria}>
+                    <Select label="ID Inventario" displayEmpty onChange={e=>this.setState({producto: e.target.value})}  value={this.state.producto}>
                     {this.state.inventario.map((p) => (
                         <MenuItem value={p.idinventario}>{p.idinventario+"-"+p.tipodispositivo+" "+p.nombremarca+" "+p.modelo+" "+p.color}</MenuItem>
                     ))}

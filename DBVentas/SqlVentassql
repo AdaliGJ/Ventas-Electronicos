@@ -528,7 +528,22 @@ begin
    commit;
 end actualizarestado;
 
-insert into pedidos values(1,'22/01/2021',1, 23, 'registrado', '22/09/2022');
+
+
+
+
+create or replace NONEDITIONABLE procedure insertpedido 
+(
+  id_p in number 
+, fecha_p in varchar2 
+, idinv_p in number 
+, cantidad_p in number 
+, estado_p in varchar2 
+, fecha_entrega_p in varchar2 
+) as 
+begin
+  insert into pedidos values (id_p, fecha_p, idinv_p, cantidad_p, estado_p, fecha_entrega_p);
+end insertpedido;
 
 
 
