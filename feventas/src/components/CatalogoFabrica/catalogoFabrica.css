@@ -1,0 +1,15 @@
+#agregarPed{
+    background-color: rgba(11, 11, 48, 0.884);
+    color: white;
+    margin-right: 2vw;
+}
+
+#cancelarPed{
+    background-color: rgb(148, 0, 0);
+    color: white;
+}
+
+#boton-modal-fabrica{
+    background-color: rgb(148, 0, 0);
+    color: white;
+}

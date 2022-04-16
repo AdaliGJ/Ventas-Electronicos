@@ -17,11 +17,14 @@ function FabricaLog(props){
 
     const[error, setError]=useState(false);
     const { setIp, setPuerto, setCliente}=useContext(LoginContext);
+
+    const [dirip, setDirIp]=useState('');
+    const [port, setPort]=useState('');
         
     const usuarioRef = useRef('');
     const contRef = useRef('');
-    const portRef = useRef('1FF');
-    const ipRef = useRef('2FF2');
+    const portRef = useRef('');
+    const ipRef = useRef('');
 
     const history = useHistory();
 
@@ -48,18 +51,17 @@ function FabricaLog(props){
                 }else{
                     history.push("/catalogo-fabrica");
                     setCliente(response.data._id);
-                    setIp(ipRef.current.value);
-                    setPuerto(portRef.current.value);
+                    setIp(dirip);
+                    setPuerto(port);
                 }    
             })
             .catch((response)=>{
                 console.log(response);
                 setError(true);
+                setCliente(null);
+                setIp(null);
+                setPuerto(null);
             });
-
-            history.push("/catalogo-fabrica");
-            setIp(ipRef.current.value);
-            setPuerto(portRef.current.value);
 
         }
  
@@ -87,10 +89,10 @@ function FabricaLog(props){
                               }} inputRef={contRef}/>
                         </Grid>
                         <Grid item>
-                            <TextField className="standard-basic" label="Dirección IP de la Fábrica" type="text" inputRef={ipRef}/>
+                            <TextField className="standard-basic" label="Dirección IP de la Fábrica" onChange={e=>setDirIp(e.target.value)}/>
                         </Grid>
                         <Grid item>
-                            <TextField className="standard-basic" label="Puerto a conectarse" type="text" inputRef={portRef}/>
+                            <TextField className="standard-basic" label="Puerto a conectarse" type="text" onChange={e=>setPort(e.target.value)}/>
                         </Grid>
                     </Grid>
                     <Grid container direction={"column"} spacing={0}>

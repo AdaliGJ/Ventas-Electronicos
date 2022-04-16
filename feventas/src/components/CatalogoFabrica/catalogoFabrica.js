@@ -14,6 +14,8 @@ import TableCell from '@material-ui/core/TableCell';
 import Paper from "@material-ui/core/Paper";
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import ComprarFabrica from './comprarFabrica'
+import Icon from '@mui/material/Icon';
 
 const StyledTableCell = withStyles({
     root: {
@@ -24,7 +26,8 @@ const StyledTableCell = withStyles({
   const StyledTable = withStyles({
     root: {
       /*width: "95%",*/
-      overflow: 'scroll'
+      overflow: 'scroll',
+      color: "#ffffff"
     }
   })(Table);
 
@@ -55,7 +58,8 @@ class CatalogoFabrica extends React.Component{
             
             axios.get(url).then(response => response.data)
               .then((data) => {
-                    this.setState({inventario: data})
+                    this.setState({inventario: data});
+                    console.log(data);
                 }
             
               );
@@ -69,7 +73,6 @@ class CatalogoFabrica extends React.Component{
                                 <StyledTable className="customized-table">
                                     <TableHead >
                                     <TableRow className="table-header">
-                                        <StyledTableCell align="right">ID</StyledTableCell>
                                         <StyledTableCell align="right">Categoría</StyledTableCell>
                                         <StyledTableCell align="right">Marca</StyledTableCell>
                                         <StyledTableCell align="right">Existencias</StyledTableCell>
@@ -78,25 +81,38 @@ class CatalogoFabrica extends React.Component{
                                         <StyledTableCell align="right">Descripcion</StyledTableCell>
                                         <StyledTableCell align="right">Modelo</StyledTableCell>
                                         <StyledTableCell align="right">Meses Garantía</StyledTableCell>
-                                        <StyledTableCell align="right">Extras</StyledTableCell>
+                                        <StyledTableCell align="center">Extras</StyledTableCell>
                                         <StyledTableCell align="right">Comprar</StyledTableCell>
                                     </TableRow>
                                     </TableHead>
                                     <TableBody>
                                     {this.state.inventario.map((inv) => (
-                                        <TableRow>
-                                            <TableCell align="right" component="th" scope="row">
-                                            </TableCell>
-                                            <StyledTableCell align="right"></StyledTableCell>
-                                            <StyledTableCell align="right"></StyledTableCell>
-                                            <StyledTableCell align="right"></StyledTableCell>
-                                            <StyledTableCell align="right"></StyledTableCell>
-                                            <StyledTableCell align="right"></StyledTableCell>
-                                            <StyledTableCell align="right"></StyledTableCell>
-                                            <StyledTableCell align="right"></StyledTableCell>
-                                            <StyledTableCell align="right"></StyledTableCell>
-                                            <StyledTableCell align="right"></StyledTableCell>
-                                            <StyledTableCell align="right"></StyledTableCell>
+                                        <TableRow key={inv._id}> 
+                                            <TableCell align="right">{inv.categoria}</TableCell>
+                                            <TableCell align="right">{inv.marca}</TableCell>
+                                            <TableCell align="right">{inv.existencia}</TableCell>
+                                            <TableCell align="right">{inv.precio}</TableCell>
+                                            <TableCell align="right">{inv.color}</TableCell>
+                                            <TableCell align="right">{inv.descripcion}</TableCell>
+                                            <TableCell align="right">{inv.modelo}</TableCell>
+                                            <TableCell align="right">{inv.diasEnvio}</TableCell>
+                                            {inv.categoria=="Televisor"?
+                                                <TableCell align="right">{<ul><li>{"Entradas HDMI: "+inv.hdmi}</li> 
+                                                                                    <li>{"Bits de profundidad: "+inv.bits}</li>
+                                                                                    <li>{"Pulgadas Pantalla: "+inv.pulgadas}</li>
+                                                                                    <li>{"Resolución: "+inv.resolucion}</li></ul>}</TableCell>
+                                            :inv.categoria=="Videojuego"?
+                                            <TableCell align="right">{<ul><li>{"Jugadores: "+inv.maximoJugadores}</li> 
+                                                                                    <li>{"Gráficos: "+inv.graficos}</li>
+                                                                                    <li>{"Consola: "+inv.consola}</li></ul>}</TableCell>
+                                            :inv.categoria=="Smartwatch"?
+                                            <TableCell align="right">{<ul><li>{"Memoria: "+inv.memoria}</li> 
+                                                                                    <li>{"Pulgadas pantalla: "+inv.pulgadasReloj}</li>
+                                                                                    <li>{"MB de Ram: "+inv.ram}</li>
+                                                                                    <li>{"Sistema Operativo: "+inv.sistemaOperativo}</li></ul>}</TableCell>
+
+                                            :<TableCell></TableCell>}
+                                            <StyledTableCell align="right">{<ComprarFabrica id={inv._id}/>}</StyledTableCell>
                                         </TableRow>
                                     ))}
                                     </TableBody>
