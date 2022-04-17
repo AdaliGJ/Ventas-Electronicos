@@ -22,7 +22,8 @@ class Products extends React.Component{
           id: props.id,
           inventario:'',
           tipo_disp:'',
-          marca:''
+          marca:'',
+          existencias: 0
           
       }
       
@@ -36,6 +37,7 @@ class Products extends React.Component{
         const url= 'http://localhost:8080/Inventario/Obtener'
         const url2= 'http://localhost:8080/Marca/Obtener'
         const url3= 'http://localhost:8080/Tipo_dispositivo/Obtener'
+        const url6= 'http://localhost:8080/Dispositivos_individuales/ObtenerCantidad'
   
         axios.get(url, {params: {nIdInventario: this.props.id}}).then(response => response.data)
           .then((data) => {
@@ -49,6 +51,10 @@ class Products extends React.Component{
             axios.get(url3, {params: {nIdTipoDispositivo: data.categoriaDispositivo}}).then((data3) => {
                 this.setState({tipo_disp: data3.data.nombre});
                 console.log(data3);
+            });
+            axios.get(url6, {params: {nId: this.props.id}}).then((response) => {
+                this.setState({existencias: response.data});
+                console.log(response.data);
             });
 
           });
@@ -72,7 +78,7 @@ class Products extends React.Component{
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <Comprar tipo={this.props.id} producto={this.state.tipo_disp+" "+this.state.marca+" "+this.props.modelo} total={this.props.precio}/>
+                    <Comprar tipo={this.props.id} producto={this.state.tipo_disp+" "+this.state.marca+" "+this.props.modelo} total={this.props.precio} cantidad={1} existencias={this.state.existencias}/>
                     <Link to={`/productos/${this.props.id}`}>
                         <Button size="small">Ver Detalle</Button>
                     </Link>

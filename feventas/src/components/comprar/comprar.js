@@ -27,7 +27,6 @@ class Comprar extends React.Component {
       this.state={
           open: false,
           sus: null,
-          pass: null,
           producto: props.producto,
           nombre: 'N/A',
           cliente: 0,
@@ -38,7 +37,27 @@ class Comprar extends React.Component {
           total: this.props.total,
           credito: '0',
           cat: this.props.tipo,
-          nit: 0
+          nit: 0,
+          cantidad: this.props.cantidad,
+          existencias: this.props.existencias,
+          pedido: true,
+
+          cl: '',
+          pass: '',
+          ip: '',
+          port:'',
+
+          serie: '',
+
+          error: false,
+          succ: false,
+
+          clienteFab: '',
+
+          inv: [],
+          idFab: '',
+
+          idVentas:0
           
       }
       this.handleOpen=this.handleOpen.bind(this);
@@ -49,6 +68,53 @@ class Comprar extends React.Component {
   
   handleOpen=(e)=>{
        this.setState({open: !this.state.open})  
+  }
+
+  autenticar=(e)=>{
+    const context = this.context;
+    const url2 = 'http://localhost:8080/AutCliente';
+    //const url2 = 'http://localhost:8080/Usuarios/Obtener';
+
+     
+     let formData = new FormData();
+     formData.append('nCliente', this.state.cl);
+     formData.append('nPassword', this.state.pass);
+     formData.append('nIP', this.state.ip);
+     formData.append('nPort', this.state.port);
+            
+     axios.post(url2, formData,  {
+         headers: {
+             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+         }})
+         .then((response)=>{
+             console.log(response);
+             if(response.data._id=="error"){
+                 this.setState({error: true});
+             }else{
+                 context.setCliente(response.data._id);
+                 context.setIp(this.state.ip);
+                 context.setPuerto(this.state.port);
+                 this.setState({succ: true});
+
+                 const url= 'http://localhost:8080/CatalogoFabrica'
+            
+                 axios.get(url).then(response => response.data)
+                   .then((data) => {
+                         this.setState({inv: data});
+                         console.log(data);
+                     }
+                 
+                   );
+
+             }    
+         })
+         .catch((response)=>{
+             console.log(response);
+             this.setState({error: true});;
+             context.setCliente(null);
+             context.setIp(null);
+             context.setPuerto(null);
+         });
   }
 
   cancel=()=>{
@@ -114,6 +180,101 @@ addItem = ()=>{
         
     });
 
+   /*Cambiar*/
+   const url2= 'http://localhost:8080/Ventas/Orden2'
+   const url3= 'http://localhost:8080/Dispositivos_individuales/ObtenerSerie'
+   const url4= 'http://localhost:8080/Reporteria'
+    for(var i = 0; i<this.props.cantidad;i++){
+      if(this.props.existencias>=i){
+        formData.delete('nSuma');
+        formData.append('nSuma', i+1);
+
+        
+        axios.get(url3, {params: {nId: this.props.tipo}}).then(response => response.data)
+        .then((data) => {
+          this.setState({serie: data});
+          let formData2 = new FormData();
+          formData2.append("nSerie", data);
+          formData2.append("nPrecioVenta", this.props.total/this.props.cantidad);
+
+          axios.post(url4, formData2,  {
+              headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+              }})
+          .then((response)=>{
+              console.log(response);
+              
+          })
+          .catch((response)=>{
+              console.log(response);
+              
+          });
+
+
+        });
+       
+
+        axios.post(url2, formData,  {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            }})
+        .then((response)=>{
+            console.log(response);
+           
+        })
+        .catch((response)=>{
+            console.log(response);
+            
+        });
+      }
+      this.setState({cantidad:this.state.cantidad-1});
+    }
+
+    console.log(this.props.cantidad);
+    console.log(this.props.existencias);
+
+    if(this.state.cantidad>0){
+      const url5 = 'http://localhost:8080/WebServicePost';
+
+      let formData5 = new FormData();
+      formData5.append('nIdPedidoVentas', this.state.idVentas + 1);
+      formData5.append('nCliente', this.context.cliente);
+      formData5.append('nIdInventario', this.state.idFab);
+      formData5.append('nCantidad', this.state.cantidad);
+      formData5.append('nIdInventarioVentas', this.props.tipo);
+     
+    
+    
+    
+      axios.post(url5, formData5, {headers: {"Content-Type": "application/json"}})
+      .then((response)=>{
+          console.log(response);
+          
+      })
+      .catch((response)=>{
+        console.log(response);
+      });
+    
+      const url6 = 'http://localhost:8080/Pedidos/Insertar';
+      let formData6 = new FormData();
+      formData6.append('nidpedido', this.state.idVentas + 1);
+      formData6.append('nfecha', this.state.today.getDate().toString()+'-'+this.state.today.getMonth().toString()+'-'+this.state.today.getFullYear().toString());
+      formData6.append('nidInventario', this.state.idFab);
+      formData6.append('ncantidad', this.state.cantidad);
+      formData6.append('nestado', 'registrado');
+      formData6.append('nfechaEntrega', '');
+    
+      axios.post(url6, formData6, {headers: {"Content-Type": "application/json"}})
+      .then((response)=>{
+          console.log(response);
+      })
+      .catch((response)=>{
+        console.log(response);
+      });
+
+    }
+
+
     this.generarFactura();
     this.handleOpen();
 
@@ -176,9 +337,31 @@ console.log(this.props.total);
       this.setState({productos: data});
       
       console.log(data);
+      console.log(this.props.existencias);
+
     });
 
+    if(this.state.cantidad>this.props.existencias){
+      this.setState({pedido:true});
 
+     
+
+
+    }
+
+    console.log(this.state.cantidad);
+    console.log(this.state.existencias);
+
+    const url4= 'http://localhost:8080/Pedidos/ObtenerId'
+          
+            axios.get(url4).then(response => response.data)
+              .then((data) => {
+                this.setState({idVentas: data});
+                
+                console.log(data);
+              }).catch((response)=>{
+                this.setState({idVentas: 0});
+            });
 
  }
 
@@ -206,6 +389,39 @@ console.log(this.props.total);
             <Grid item> 
                 <TextField className="outlined-required" label="Cliente" type="text"  onInput={e=>this.setState({nombre: e.target.value})}  value={this.state.nombre}/>
             </Grid>
+            {this.state.tipo_cliente == 15?
+            <Grid item> 
+               <FormControl className="outlined-required">
+                    <InputLabel>¿Comprar al Crédito?</InputLabel>
+                    <Select label="ID Inventario" displayEmpty onChange={e=>this.setState({credito: e.target.value})}  value={this.state.credito}>
+                        <MenuItem value={'0'}>No</MenuItem>
+                        <MenuItem value={'1'}>Sí</MenuItem>
+                    </Select>
+                </FormControl> </Grid>:null}
+                {this.state.pedido == true?
+                <div>
+                <Grid item> 
+                  <TextField className="outlined-required" label="Cliente" type="text"  onInput={e=>this.setState({cl: e.target.value})}  value={this.state.cl}/>
+                  <TextField className="outlined-required" label="Contraseña" type="password"  onInput={e=>this.setState({pass: e.target.value})}  value={this.state.pass}/>
+                </Grid>
+                <Grid item> 
+                  <TextField className="outlined-required" label="Dirección IP" type="text"  onInput={e=>this.setState({ip: e.target.value})}  value={this.state.ip}/>
+                  <TextField className="outlined-required" label="Puerto" type="text"  onInput={e=>this.setState({port: e.target.value})}  value={this.state.port}/>
+                </Grid>
+                <Grid item>
+                  <Button id="autenticar" onClick={this.autenticar}>Autenticarse</Button>
+                </Grid></div>:null}
+                {this.state.succ == true?
+                 <Grid item>
+                <FormControl className="outlined-required" variant ="outlined">
+                    <InputLabel>Producto</InputLabel>
+                    <Select label="Producto" displayEmpty onChange={e=>this.setState({idFab: e.target.value})}>
+                    {this.state.inv.map((p) => (
+                        <MenuItem value={p._id}>{"ID: "+p._id+" Marca: "+p.marca+" Descripción: "+p.descripcion}</MenuItem>
+                    ))}
+                    </Select>
+                </FormControl></Grid>
+                :null}
              <Grid item>
               <Button id="comprar" onClick={this.addItem}>Comprar</Button>
               <Button id="cancelar-comprar" onClick={this.cancel}>Cancelar</Button>

@@ -54,6 +54,7 @@ addItem = ()=>{
   let formData = new FormData();
   formData.append('nId', this.state.id);
   formData.append('nSerie', this.state.serie);
+  formData.append('nVendido', 0);
  
 
 
