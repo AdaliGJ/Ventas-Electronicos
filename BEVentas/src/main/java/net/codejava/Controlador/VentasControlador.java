@@ -81,5 +81,21 @@ public class VentasControlador {
 		jdbcTemplate.update(Sql, nCredito, nFecha, nCategoria, nCliente, nPrecio, nFactura);
 	}
 	
+	@PostMapping("/Orden2")
+	@ResponseBody
+	public void ordenar2(
+			@RequestParam char nCredito,
+			@RequestParam String nFecha,
+			@RequestParam int nCategoria,
+			@RequestParam int nCliente,
+			@RequestParam String nPrecio,
+			@RequestParam String nFactura,
+			@RequestParam String nSuma
+			) {
+	
+		String Sql = "call venta(?, ?, ?, ?, ?, ?, ?)";
+		jdbcTemplate.update(Sql, nCredito, nFecha, nCategoria, nCliente, nPrecio, nFactura, nSuma);
+	}
+	
 	
 }

@@ -61,6 +61,7 @@ addItem = ()=>{
   formData.append('nCliente', this.state.cliente);
   formData.append('nIdInventario', this.props.id);
   formData.append('nCantidad', this.state.cantidad);
+  formData.append('nIdInventarioVentas', this.state.producto);
  
 
 

@@ -37,10 +37,11 @@ class Detalle extends React.Component{
             ram: 8, 
             existencias: 5,*/
             total: 0,
-            cantidad: 0,
+            cantidad: 1,
             inventario: '',
             televisor:'',
-            imgs: [{imagen: ''}]
+            imgs: [{imagen: ''}],
+            existencias: 0
         }
     } 
    
@@ -55,12 +56,18 @@ class Detalle extends React.Component{
             const url2= 'http://localhost:8080/Marca/Obtener'
             const url3= 'http://localhost:8080/Tipo_dispositivo/Obtener'
             const url5= 'http://localhost:8080/Imagenes_dispositivos/ObtenerA'
+            const url6= 'http://localhost:8080/Dispositivos_individuales/ObtenerCantidad'
       
             axios.get(url, {params: {nId: this.state.id}}).then(response => response.data)
               .then((data) => {
                 this.setState({inventario: data});
-                //console.log(data);
+                console.log(data.existencias);
                 //console.log(data.marca);
+                axios.get(url6, {params: {nId: this.state.id}}).then((response) => {
+                    this.setState({existencias: response.data});
+                    console.log(response.data);
+                });
+
                 axios.get(url2, {params: {nIdMarca: data.marca}}).then((data2) => {
                     this.setState({marca: data2.data.nombre});
                     //console.log(data2);
@@ -148,10 +155,10 @@ class Detalle extends React.Component{
                             <div className="compra_1">
                                
                                 <h2>{"Precio: Q"+this.state.inventario.precioLista/**this.state.total*/}</h2>
-                                <h4>{"Existencias: "+this.state.inventario.existencias/**this.state.total*/}</h4>
+                                <h4>{"Existencias: "+this.state.existencias/**this.state.total*/}</h4>
                                 <TextField className="outlined-required" label="Cantidad" type="number"  onInput={e=>this.setState({cantidad: e.target.value, total: e.target.value*this.state.inventario.precioLista})}  value={this.state.cantidad}/>
                                 <br/>
-                                <br/><Comprar tipo={this.props.match.params.id} producto={this.state.tipo_disp+" "+this.state.marca+" "+this.state.inventario.modelo} total={this.state.total}/>
+                                <br/><Comprar existencias={this.state.existencias} tipo={this.props.match.params.id} producto={this.state.tipo_disp+" "+this.state.marca+" "+this.state.inventario.modelo} total={this.state.inventario.precioLista*this.state.cantidad} cantidad={this.state.cantidad}/>
                             </div>
                         </Grid>
                     </Grid>

@@ -83,10 +83,26 @@ public class Dispositivos_individualesControlador {
 
 	@PostMapping("/Prueba")
 	@ResponseBody
-	public void prueba(@RequestParam String nSerie, @RequestParam String nId) {
-		String Sql = "call insertdi(?,?)";
-		jdbcTemplate.update(Sql, nSerie, nId);
+	public void prueba(@RequestParam String nSerie, @RequestParam String nId, @RequestParam int nVendido) {
+		String Sql = "call insertdi(?,?,?)";
+		jdbcTemplate.update(Sql, nSerie, nId, nVendido);
 		
+	}
+	
+	@GetMapping("/ObtenerCantidad")
+	public @ResponseBody int getCant(@RequestParam int nId){
+		 String sql = "SELECT count(*) FROM dispositivos_individuales where vendido = 0 and id_inventario = ?";
+		
+		 return jdbcTemplate.queryForObject(
+	                sql, new Object[]{nId}, int.class);
+	}
+	
+	@GetMapping("/ObtenerSerie")
+	public @ResponseBody String getSerie(@RequestParam int nId){
+		 String sql = "SELECT serie_dispositivo FROM dispositivos_individuales where vendido = 0 and id_inventario = ? FETCH NEXT 1 ROWS ONLY";
+		
+		 return jdbcTemplate.queryForObject(
+	                sql, new Object[]{nId}, String.class);
 	}
 	
 	

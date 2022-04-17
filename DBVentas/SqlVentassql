@@ -546,7 +546,16 @@ begin
 end insertpedido;
 
 
-
+create or replace NONEDITIONABLE procedure insertdi 
+(
+  nserie in varchar2 
+, nid in int
+, nvendido in int
+) as 
+begin
+  insert into dispositivos_individuales values(nserie, nid, nvendido);
+  commit;
+end insertdi;
 
 
 

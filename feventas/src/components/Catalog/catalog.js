@@ -120,7 +120,7 @@ class Catalog extends React.Component{
                     <Grid container spacing={2}>
                     {this.state.inventario.map((inv) => (
                         <Grid item xs={4}>
-                           <Products id={inv.idinventario} precio={inv.preciolista}  image={inv.imagen} desc={inv.descripcion} modelo={inv.tipodispositivo +" " +inv.nombremarca+" " +inv.modelo} marca={inv.marca}/>
+                           <Products id={inv.idinventario} precio={inv.preciolista} existencias={inv.existencias} image={inv.imagen} desc={inv.descripcion} modelo={inv.tipodispositivo +" " +inv.nombremarca+" " +inv.modelo} marca={inv.marca}/>
                         </Grid>
                     ))}
                     </Grid>
