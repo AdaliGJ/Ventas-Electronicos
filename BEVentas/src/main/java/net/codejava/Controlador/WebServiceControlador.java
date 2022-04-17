@@ -149,12 +149,13 @@ public class WebServiceControlador {
 	}
 	
 	@PostMapping("/EstadoPedido")
-	public Object estadoPedidos(@RequestParam String nIdPedido,@RequestParam String nEstado) {
+	public Object estadoPedidos(@RequestParam String nIdPedido,@RequestParam String nEstado,@RequestParam String nResponsable) {
 		
 		HashMap<String,String> body = new HashMap<>();
 		
 		body.put("idPedidos", nIdPedido);
 		body.put("estado", nEstado);
+		body.put("responsable", nResponsable);
 		
 	    String url = "http://localhost:4000/api/pedidos/estado/";
 
