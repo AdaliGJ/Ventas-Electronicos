@@ -49,6 +49,7 @@ public class WebServiceControlador {
 	@PostMapping("/WebServicePost")
 	public Object createPedidos(//@RequestParam String nfecha,
 			@RequestParam int nIdPedidoVentas,
+			@RequestParam int nIdInventarioVentas,
 			@RequestParam String nCliente,
 			@RequestParam String nIdInventario,
 			@RequestParam int nCantidad
@@ -69,6 +70,7 @@ public class WebServiceControlador {
 	    
 	    HashMap<String,Object> post = new HashMap<>();
 	    post.put("idPedidoVentas",nIdPedidoVentas);
+	    post.put("idInventarioVentas",nIdPedidoVentas);
 	    post.put("cliente", nCliente);
 	    post.put("idInventario",nIdInventario);
 	    post.put("cantidad", nCantidad);
