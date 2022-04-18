@@ -65,22 +65,25 @@ class Inventario extends React.Component{
     }
 
     aproveData=(datos)=>{
-       /* const url = 'http://localhost/scripts/solicitudes.php';
+        const url= 'http://localhost:8080/Dispositivos_individuales/Update'
 
         let formData = new FormData();
         console.log(datos);
 
-        formData.append('dpi', datos.dpi_empleado);
+        formData.append('nSerie', datos);
 
 
         axios.post(url, formData)
         .then((response) => {
             console.log(response);
             this.getData();
+            
         })
         .catch( (response) =>{
             console.log(response);
-        });*/
+        });
+
+        
     }
 
     deleteData=(datos)=>{
@@ -102,6 +105,26 @@ class Inventario extends React.Component{
         });*/
     }
 
+
+    getData=()=>{
+        const url= 'http://localhost:8080/Dispositivos_individuales/ObtenerTodos'
+      
+        axios.get(url).then(response => response.data)
+          .then((data) => {
+            this.setState({inventario: data});
+            
+            console.log(data);
+          });
+
+        const url2= 'http://localhost:8080/Dispositivos_individuales/ObtenerEntregados'
+      
+        axios.get(url2).then(response => response.data)
+          .then((data) => {
+            this.setState({inventario2: data});
+            
+            console.log(data);
+          });
+    }
     
 
     componentDidMount(){
@@ -115,6 +138,15 @@ class Inventario extends React.Component{
         axios.get(url).then(response => response.data)
           .then((data) => {
             this.setState({inventario: data});
+            
+            console.log(data);
+          });
+
+        const url2= 'http://localhost:8080/Dispositivos_individuales/ObtenerEntregados'
+      
+        axios.get(url2).then(response => response.data)
+          .then((data) => {
+            this.setState({inventario2: data});
             
             console.log(data);
           });
@@ -139,7 +171,6 @@ class Inventario extends React.Component{
                                         <StyledTableCell align="right">Serie</StyledTableCell>
                                         <StyledTableCell align="right">Producto</StyledTableCell>
                                         <StyledTableCell align="right">Dar de Alta</StyledTableCell>
-                                        <StyledTableCell align="right">Rechazar</StyledTableCell>
                                     </TableRow>:
                                     <TableRow className="table-header">
                                         <StyledTableCell align="right">Serie</StyledTableCell>
@@ -149,13 +180,12 @@ class Inventario extends React.Component{
                                     {this.state.tipo_usuario == 1?
                                     <TableBody>
                                     {this.state.inventario2.map((inv) => (
-                                        <TableRow key={inv.serie}>
+                                        <TableRow key={inv.serie_dispositivo}>
                                             <TableCell align="right" component="th" scope="row">
-                                                {inv.serie}
+                                                {inv.serie_dispositivo}
                                             </TableCell>
-                                        <TableCell align="right">{inv.producto}</TableCell>
-                                        <TableCell align="right"><Button id="aprobar" onClick={()=>this.aproveData(inv)}><CheckCircle/></Button></TableCell>
-                                        <TableCell align="right"><Button id="rechazar" onClick={()=>this.deleteData(inv)}><DeleteForever/></Button></TableCell>
+                                        <TableCell align="right">{inv.id_inventario}</TableCell>
+                                        <TableCell align="right"><Button id="aprobar" onClick={()=>this.aproveData(inv.serie_dispositivo)}><CheckCircle/></Button></TableCell>
                                         </TableRow>
                                     ))}
                                     </TableBody>:
@@ -163,9 +193,9 @@ class Inventario extends React.Component{
                                      {this.state.inventario2.map((inv) => (
                                          <TableRow key={inv.serie}>
                                              <TableCell align="right" component="th" scope="row">
-                                                 {inv.serie}
-                                             </TableCell>
-                                         <TableCell align="right">{inv.producto}</TableCell>
+                                                {inv.serie_dispositivo}
+                                            </TableCell>
+                                        <TableCell align="right">{inv.id_inventario}</TableCell>
                                          </TableRow>
                                      ))}
                                      </TableBody>}

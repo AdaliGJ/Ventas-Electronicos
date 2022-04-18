@@ -111,5 +111,18 @@ public class Dispositivos_individualesControlador {
 	}
 	
 	
+	@GetMapping("/ObtenerEntregados")
+	public @ResponseBody Iterable<Dispositivos_individuales> getAllEntregados(){
+		return repositorioDispositivosIndividuales.findByVendido(3);
+	}
+	
+	
+	@PostMapping("/Update")
+	@ResponseBody
+	public void update(@RequestParam String nSerie) {
+		String Sql = "call actualizardisp(?)";
+		jdbcTemplate.update(Sql, nSerie);
+		
+	}
 	
 }

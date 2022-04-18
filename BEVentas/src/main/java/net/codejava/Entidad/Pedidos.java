@@ -85,6 +85,8 @@ public class Pedidos{
 		return "Pedidos [idpedido=" + idpedido + ", fecha=" + fecha + ", idInventario=" + idInventario + ", cantidad="
 				+ cantidad + ", estado=" + estado + ", fechaEntrega=" + fechaEntrega + "]";
 	}
+
+	public Pedidos() {}
 	
 	
 	

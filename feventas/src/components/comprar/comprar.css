@@ -22,3 +22,8 @@
 /*.box{
    overflow-y: scroll;
 }*/
+
+.aclic:hover{
+    cursor: pointer;
+    color: rgb(148, 0, 0);
+}

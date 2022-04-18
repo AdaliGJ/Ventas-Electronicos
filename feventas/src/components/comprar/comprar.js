@@ -67,7 +67,8 @@ class Comprar extends React.Component {
   }
   
   handleOpen=(e)=>{
-       this.setState({open: !this.state.open})  
+       this.setState({open: !this.state.open});
+       this.setState({cantidad:this.props.cantidad-this.props.existencias});  
   }
 
   autenticar=(e)=>{
@@ -213,6 +214,7 @@ addItem = ()=>{
    const url2= 'http://localhost:8080/Ventas/Orden2'
    const url3= 'http://localhost:8080/Dispositivos_individuales/ObtenerSerie'
    const url4= 'http://localhost:8080/Reporteria'
+   var contador = 0;
     for(var i = 0; i<this.props.cantidad;i++){
       if(this.props.existencias>=i){
         formData.delete('nSuma');
@@ -258,9 +260,11 @@ addItem = ()=>{
             
         });
       }
-      this.setState({cantidad:this.state.cantidad-1});
+      //this.setState({cantidad:this.state.cantidad-1});
+      contador=contador +1;
     }
 
+    this.setState({cantidad:this.state.cantidad-contador});
     console.log(this.props.cantidad);
     console.log(this.props.existencias);
 
@@ -372,13 +376,6 @@ console.log(this.props.total);
 
     });
 
-    if(this.state.cantidad>this.props.existencias){
-      this.setState({pedido:true});
-
-     
-
-
-    }
 
     console.log(this.state.cantidad);
     console.log(this.state.existencias);
@@ -393,6 +390,8 @@ console.log(this.props.total);
               }).catch((response)=>{
                 this.setState({idVentas: 0});
             });
+
+    this.setState({cantidad:this.props.cantidad-this.props.existencias});
 
  }
 
@@ -429,10 +428,10 @@ console.log(this.props.total);
                         <MenuItem value={'1'}>Sí</MenuItem>
                     </Select>
                 </FormControl> </Grid>:null}
-                <h3>¿Faltan existencias? <a onClick={e=>this.setState({pedido: !this.state.pedido})}>Encárguelas a Fábrica</a></h3>
+                <h3>¿Faltan existencias? <a className='aclic' onClick={e=>this.setState({pedido: !this.state.pedido})}>Encárguelas a Fábrica</a></h3>
                 {this.state.pedido == true?
                 <div>
-                  
+                  <h3>Autenticarse</h3>
                 <Grid item> 
                   <TextField className="outlined-required" label="Cliente" type="text"  onInput={e=>this.setState({cl: e.target.value})}  value={this.state.cl}/>
                   <TextField className="outlined-required" label="Contraseña" type="password"  onInput={e=>this.setState({pass: e.target.value})}  value={this.state.pass}/>

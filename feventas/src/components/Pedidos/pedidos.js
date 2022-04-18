@@ -11,6 +11,7 @@ import TableRow from '@material-ui/core/TableRow';
 import {CheckCircle, DeleteForever} from '@material-ui/icons/';
 import {Edit} from '@material-ui/icons/';
 import axios from 'axios';
+import EstadoPedido from './estadoPedido';
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -60,6 +61,22 @@ class Pedidos extends React.Component{
         const context = this.context;
         this.setState({usuario: context.username,
             tipo_usuario: context.tipoUsuario});
+
+        const url= 'http://localhost:8080/Pedidos/ObtenerRegistrados'
+      
+        axios.get(url, {params: {nEstado: 'entregado'}}).then(response => response.data)
+          .then((data) => {
+            this.setState({inventario: data});
+            
+            console.log(data);
+          });
+
+          axios.get(url, {params: {nEstado: 'registrado'}}).then(response => response.data)
+          .then((data) => {
+            this.setState({inventario2: data});
+            
+            console.log(data);
+          });
         
     }
 
@@ -103,13 +120,13 @@ class Pedidos extends React.Component{
 
     
 
-    componentDidMount(){
+     /*componentDidMount(){
         const context = this.context;
         this.setState({usuario: context.username,
             tipo_usuario: context.tipoUsuario});
 
       
-        const url= 'http://localhost:8080/Dispositivos_individuales/ObtenerTodos'
+        /*const url= 'http://localhost:8080/Dispositivos_individuales/ObtenerTodos'
       
         axios.get(url).then(response => response.data)
           .then((data) => {
@@ -118,51 +135,53 @@ class Pedidos extends React.Component{
             console.log(data);
           });
       
-       }
+       }*/
     
     render(){
         return(
             <div>
                 <div className="page">
-                <h2>Inventario</h2>
+                <h2>Pedidos</h2>
                     <Grid container spacing={1}>
                         <Grid item xs={6}>
                             <Paper className="container">
-                                <h3>Pedidos recibidos</h3>
+                                <h3>Pedidos Creados</h3>
                                 <StyledTable className="customized-table">
                                     <TableHead >
                                     {this.state.tipo_usuario == 1?
                                     <TableRow className="table-header">
-                                        <StyledTableCell align="right">Serie</StyledTableCell>
+                                        <StyledTableCell align="right">Pedido</StyledTableCell>
                                         <StyledTableCell align="right">Producto</StyledTableCell>
-                                        <StyledTableCell align="right">Dar de Alta</StyledTableCell>
-                                        <StyledTableCell align="right">Rechazar</StyledTableCell>
+                                        <StyledTableCell align="right">Cantidad</StyledTableCell>
+                                        <StyledTableCell align="right">Cancelar</StyledTableCell>
                                     </TableRow>:
                                     <TableRow className="table-header">
-                                        <StyledTableCell align="right">Serie</StyledTableCell>
+                                        <StyledTableCell align="right">Pedido</StyledTableCell>
                                         <StyledTableCell align="right">Producto</StyledTableCell>
+                                        <StyledTableCell align="right">Cantidad</StyledTableCell>
                                     </TableRow>}
                                     </TableHead>
                                     {this.state.tipo_usuario == 1?
                                     <TableBody>
                                     {this.state.inventario2.map((inv) => (
-                                        <TableRow key={inv.serie}>
+                                        <TableRow key={inv.idpedido}>
                                             <TableCell align="right" component="th" scope="row">
-                                                {inv.serie}
+                                                {inv.idpedido}
                                             </TableCell>
-                                        <TableCell align="right">{inv.producto}</TableCell>
-                                        <TableCell align="right"><Button id="aprobar" onClick={()=>this.aproveData(inv)}><CheckCircle/></Button></TableCell>
-                                        <TableCell align="right"><Button id="rechazar" onClick={()=>this.deleteData(inv)}><DeleteForever/></Button></TableCell>
+                                        <TableCell align="right">{inv.idInventario}</TableCell>
+                                        <TableCell align="right">{inv.cantidad}</TableCell>
+                                        <TableCell align="right"><EstadoPedido titulo={<DeleteForever/>} id={inv.idpedido} estado={'cancelado'}/></TableCell>
                                         </TableRow>
                                     ))}
                                     </TableBody>:
                                      <TableBody>
                                      {this.state.inventario2.map((inv) => (
-                                         <TableRow key={inv.serie}>
+                                         <TableRow key={inv.idpedido}>
                                              <TableCell align="right" component="th" scope="row">
-                                                 {inv.serie}
+                                                {inv.idpedido}
                                              </TableCell>
-                                         <TableCell align="right">{inv.producto}</TableCell>
+                                             <TableCell align="right">{inv.idInventario}</TableCell>
+                                        <TableCell align="right">{inv.cantidad}</TableCell>
                                          </TableRow>
                                      ))}
                                      </TableBody>}
@@ -171,26 +190,46 @@ class Pedidos extends React.Component{
                         </Grid>
                         <Grid item xs={6}>
                             <Paper className="container">
-                                <h3>Inventario Actual</h3>
+                                <h3>Pedidos Recibidos</h3>
                                 <StyledTable className="customized-table">
                                     <TableHead >
+                                    {this.state.tipo_usuario == 1?
                                     <TableRow className="table-header">
-                                        <StyledTableCell align="right">Serie</StyledTableCell>
+                                        <StyledTableCell align="right">Pedido</StyledTableCell>
                                         <StyledTableCell align="right">Producto</StyledTableCell>
-                                    
-                                    </TableRow>
+                                        <StyledTableCell align="right">Cantidad</StyledTableCell>
+                                        <StyledTableCell align="right">Confirmar Recibido</StyledTableCell>
+                                    </TableRow>:
+                                    <TableRow className="table-header">
+                                        <StyledTableCell align="right">Pedido</StyledTableCell>
+                                        <StyledTableCell align="right">Producto</StyledTableCell>
+                                        <StyledTableCell align="right">Cantidad</StyledTableCell>
+                                    </TableRow>}
                                     </TableHead>
+                                    {this.state.tipo_usuario == 1?
                                     <TableBody>
                                     {this.state.inventario.map((inv) => (
-                                        <TableRow key={inv.serie_dispositivo}>
+                                        <TableRow key={inv.idpedido}>
                                             <TableCell align="right" component="th" scope="row">
-                                                {inv.serie_dispositivo}
+                                                {inv.idpedido}
                                             </TableCell>
-                                        <TableCell align="right">{inv.id_inventario}</TableCell>
-                                        
+                                        <TableCell align="right">{inv.idInventario}</TableCell>
+                                        <TableCell align="right">{inv.cantidad}</TableCell>
+                                        <TableCell align="right"><EstadoPedido titulo={<CheckCircle/>} id={inv.idpedido} estado={'recibido'}/></TableCell>
                                         </TableRow>
                                     ))}
-                                    </TableBody>
+                                    </TableBody>:
+                                     <TableBody>
+                                     {this.state.inventario.map((inv) => (
+                                         <TableRow key={inv.idpedido}>
+                                         <TableCell align="right" component="th" scope="row">
+                                             {inv.idpedido}
+                                         </TableCell>
+                                         <TableCell align="right">{inv.idInventario}</TableCell>
+                                         <TableCell align="right">{inv.cantidad}</TableCell>
+                                         </TableRow>
+                                     ))}
+                                     </TableBody>}
                                 </StyledTable>
                             </Paper>
                         </Grid>

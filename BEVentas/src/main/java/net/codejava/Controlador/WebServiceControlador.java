@@ -149,12 +149,14 @@ public class WebServiceControlador {
 	    return restTemplate.postForObject(url, body, Object.class);
 	}
 	
+
 	@PostMapping("/EstadoPedido")
-	public Object estadoPedidos(@RequestParam String nIdPedido,@RequestParam String nEstado,@RequestParam String nResponsable) {
+	public Object estadoPedidos(@RequestParam String nIdPedido, @RequestParam String nCliente,@RequestParam String nEstado,@RequestParam String nResponsable) {
 		
 		HashMap<String,String> body = new HashMap<>();
 		
-		body.put("idPedidos", nIdPedido);
+		body.put("idPedidoVentas", nIdPedido);
+		body.put("cliente", nCliente);
 		body.put("estado", nEstado);
 		body.put("responsable", nResponsable);
 		

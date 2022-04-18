@@ -1,6 +1,9 @@
 package net.codejava.Controlador;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+
+import net.codejava.Entidad.Dispositivos_individuales;
 import net.codejava.Entidad.Marcas;
 import net.codejava.Entidad.Pedidos;
 import net.codejava.Repositorio.RepositorioPedidos;
@@ -50,6 +55,21 @@ public class PedidosControlador {
 		String Sql = "call insertpedido(?, ?, ?, ?, ?, ?)";
 		jdbcTemplate.update(Sql, nidpedido, nfecha, nidInventario, ncantidad, nestado, nfechaEntrega);
 	}
+	
+	@GetMapping("/ObtenerRegistrados")
+	public @ResponseBody Iterable<Pedidos> getAllE(@RequestParam String nEstado){
+		
+		String s1 = "SELECT * FROM pedidos where estado = '" + nEstado+"'";
+		
+		String sql =s1;
+		
+		Iterable<Pedidos> pedidos = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Pedidos.class));
+		return pedidos;
+	}
+	
+	
+	
+
 	
 	
 	
