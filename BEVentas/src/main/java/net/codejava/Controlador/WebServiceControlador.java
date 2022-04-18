@@ -71,7 +71,7 @@ public class WebServiceControlador {
 	    
 	    HashMap<String,Object> post = new HashMap<>();
 	    post.put("idPedidoVentas",nIdPedidoVentas);
-	    post.put("idInventarioVentas",nIdPedidoVentas);
+	    post.put("idInventarioVentas",nIdInventarioVentas);
 	    post.put("cliente", nCliente);
 	    post.put("idInventario",nIdInventario);
 	    post.put("cantidad", nCantidad);

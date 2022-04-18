@@ -12,6 +12,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
+import UsersTable from './tablaUsers';
 
 
 
@@ -136,6 +137,7 @@ class SignUp extends React.Component{
                             <Button id="enviar" variant="contained" onClick={this.register}>Registrar</Button>
                         </Grid>
                     </Grid>
+                    <UsersTable/>
             </div>
         );
     }

@@ -27,6 +27,16 @@ public class ProcedimientosControlador {
 		jdbcTemplate.update(Sql, nIdInventario, nDescripcion);
 		
 	}
+	
+	@PostMapping("/CambioPermisos")
+	@ResponseBody
+	public void cambio(@RequestParam int nId, @RequestParam String nAccion) {
+		String Sql = "call cambiopermisos(?, ?)";
+		jdbcTemplate.update(Sql, nId, nAccion);
+		
+	}
+	
+	
 	/**
 	 * Procedimiento almacenado para insertar electronicos en el catalogo ingresando los datos en todas las tablas necesarias
 	 * @param nCategoriaDispositivo
