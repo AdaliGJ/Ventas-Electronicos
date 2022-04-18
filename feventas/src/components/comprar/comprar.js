@@ -40,14 +40,14 @@ class Comprar extends React.Component {
           nit: 0,
           cantidad: this.props.cantidad,
           existencias: this.props.existencias,
-          pedido: true,
+          pedido: false,
 
           cl: '',
           pass: '',
           ip: '',
           port:'',
 
-          serie: '',
+          serie: [],
 
           error: false,
           succ: false,
@@ -180,6 +180,35 @@ addItem = ()=>{
         
     });
 
+    /*const url2= 'http://localhost:8080/Ventas/Orden3'
+    const url3= 'http://localhost:8080/Dispositivos_individuales/ObtenerSeries'
+
+    axios.get(url3, {params: {nId: this.props.tipo}}).then(response => response.data)
+        .then((data) => {
+          this.setState({serie: data});
+          let formData2 = new FormData();
+          formData2.append("nSeries", data);
+          formData2.append("nCredito", this.state.credito);
+          formData2.append("nFecha", this.state.today.getDate().toString()+'-'+this.state.today.getMonth().toString()+'-'+this.state.today.getFullYear().toString());
+          formData2.append("nPrecioVenta", this.props.total/this.props.cantidad);
+          formData2.append("nCantidad", this.props.cantidad);
+
+          axios.post(url2, formData2,  {
+              headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+              }})
+          .then((response)=>{
+              console.log(response);
+              
+          })
+          .catch((response)=>{
+              console.log(response);
+              
+          });
+
+
+        });*/
+
    /*Cambiar*/
    const url2= 'http://localhost:8080/Ventas/Orden2'
    const url3= 'http://localhost:8080/Dispositivos_individuales/ObtenerSerie'
@@ -188,6 +217,8 @@ addItem = ()=>{
       if(this.props.existencias>=i){
         formData.delete('nSuma');
         formData.append('nSuma', i+1);
+        formData.delete('nOff');
+        formData.append('nOff', i);
 
         
         axios.get(url3, {params: {nId: this.props.tipo}}).then(response => response.data)
@@ -259,7 +290,7 @@ addItem = ()=>{
       let formData6 = new FormData();
       formData6.append('nidpedido', this.state.idVentas + 1);
       formData6.append('nfecha', this.state.today.getDate().toString()+'-'+this.state.today.getMonth().toString()+'-'+this.state.today.getFullYear().toString());
-      formData6.append('nidInventario', this.state.idFab);
+      formData6.append('nidInventario', this.props.tipo);
       formData6.append('ncantidad', this.state.cantidad);
       formData6.append('nestado', 'registrado');
       formData6.append('nfechaEntrega', '');
@@ -398,8 +429,10 @@ console.log(this.props.total);
                         <MenuItem value={'1'}>Sí</MenuItem>
                     </Select>
                 </FormControl> </Grid>:null}
+                <h3>¿Faltan existencias? <a onClick={e=>this.setState({pedido: !this.state.pedido})}>Encárguelas a Fábrica</a></h3>
                 {this.state.pedido == true?
                 <div>
+                  
                 <Grid item> 
                   <TextField className="outlined-required" label="Cliente" type="text"  onInput={e=>this.setState({cl: e.target.value})}  value={this.state.cl}/>
                   <TextField className="outlined-required" label="Contraseña" type="password"  onInput={e=>this.setState({pass: e.target.value})}  value={this.state.pass}/>

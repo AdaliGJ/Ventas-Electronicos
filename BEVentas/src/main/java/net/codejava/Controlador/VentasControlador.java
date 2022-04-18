@@ -1,5 +1,8 @@
 package net.codejava.Controlador;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import net.codejava.Entidad.Clientes;
 import net.codejava.Entidad.Dispositivos_individuales;
 import net.codejava.Entidad.Prueba;
 import net.codejava.Entidad.Ventas;
@@ -22,6 +31,8 @@ import net.codejava.Repositorio.RepositorioVentas;
 @RequestMapping(path="/Ventas")
 public class VentasControlador {
 
+	private final RestTemplate restTemplate = new RestTemplate();
+	
 	@Autowired
 	private RepositorioVentas repositorioVentas;
 	
@@ -90,12 +101,71 @@ public class VentasControlador {
 			@RequestParam int nCliente,
 			@RequestParam String nPrecio,
 			@RequestParam String nFactura,
-			@RequestParam String nSuma
+			@RequestParam String nSuma,
+			@RequestParam int nOff
 			) {
 	
-		String Sql = "call venta(?, ?, ?, ?, ?, ?, ?)";
-		jdbcTemplate.update(Sql, nCredito, nFecha, nCategoria, nCliente, nPrecio, nFactura, nSuma);
+		String Sql = "call venta(?, ?, ?, ?, ?, ?, ?, ?)";
+		jdbcTemplate.update(Sql, nCredito, nFecha, nCategoria, nCliente, nPrecio, nFactura, nSuma, nOff);
 	}
+	
+	
+	@PostMapping("/Orden3")
+	@ResponseBody
+	public int ordenar3(
+			@RequestParam char nCredito,
+			@RequestParam String nSeries,
+			@RequestParam String nFecha,
+			@RequestParam String nPrecioVenta,
+			@RequestParam int nCantidad
+			) throws JsonMappingException, JsonProcessingException {
+		
+		ObjectMapper mapper = new ObjectMapper();
+		Dispositivos_individuales[] responseG = mapper.readValue(nSeries, Dispositivos_individuales[].class);
+		
+		
+		if(responseG.length <= nCantidad) {
+	
+			for(int i = 0; i < responseG.length ;i++) {
+			
+			String Sql = "call ventas2(?, ?, ?)";
+			jdbcTemplate.update(Sql, responseG[i].getSerie_dispositivo(), nFecha, nCredito);
+			
+			HashMap<String,String> body = new HashMap<>();
+					
+					body.put("serie", responseG[i].getSerie_dispositivo());
+					body.put("precioVenta", nPrecioVenta);
+					
+				    String url = "http://localhost:4000/api/reporteria";
+			
+				    restTemplate.postForObject(url, body, Object.class);
+				    
+				   
+			
+			}
+			 return nCantidad - responseG.length;
+		}else {
+			for(int i = 0; i < nCantidad ;i++) {
+				
+				String Sql = "call ventas2(?, ?, ?)";
+				jdbcTemplate.update(Sql, responseG[i].getSerie_dispositivo(), nFecha, nCredito);
+				
+				HashMap<String,String> body = new HashMap<>();
+						
+						body.put("serie", responseG[i].getSerie_dispositivo());
+						body.put("precioVenta", nPrecioVenta);
+						
+					    String url = "http://localhost:4000/api/reporteria";
+				
+					    restTemplate.postForObject(url, body, Object.class);
+				
+				}
+			return 0;
+			
+		}
+	}
+	
+	
 	
 	
 }

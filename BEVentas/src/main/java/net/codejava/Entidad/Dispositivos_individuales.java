@@ -14,8 +14,8 @@ public class Dispositivos_individuales {
 	@Id
 	@Column(name="serie_dispositivo")
 	private String serie;
-	@Column
-	private int id_inventario;
+	@Column(name="id_inventario")
+	private int idInventario;
 	@Column
 	private int vendido;
 	
@@ -39,10 +39,10 @@ public class Dispositivos_individuales {
 		this.serie= serie_dispositivo;
 	}
 	public int getId_inventario() {
-		return id_inventario;
+		return idInventario;
 	}
 	public void setId_inventario(int id_inventario) {
-		this.id_inventario = id_inventario;
+		this.idInventario = id_inventario;
 	}
 	/*public Dispositivos_individuales(String serie, int id_inventario) {
 		super();
@@ -53,14 +53,14 @@ public class Dispositivos_individuales {
 	public Dispositivos_individuales(String serie, int id_inventario, int vendido) {
 		super();
 		this.serie = serie;
-		this.id_inventario = id_inventario;
+		this.idInventario = id_inventario;
 		this.vendido = vendido;
 	}
 
 
 	@Override
 	public String toString() {
-		return "Dispositivos_individuales [serie=" + serie + ", id_inventario=" + id_inventario + ", vendido=" + vendido
+		return "Dispositivos_individuales [serie=" + serie + ", id_inventario=" + idInventario + ", vendido=" + vendido
 				+ "]";
 	}
 	
