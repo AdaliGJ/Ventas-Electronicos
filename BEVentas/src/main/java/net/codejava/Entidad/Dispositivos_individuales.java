@@ -12,7 +12,6 @@ import javax.persistence.Table;
 public class Dispositivos_individuales {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="serie_dispositivo")
 	private String serie;
 	@Column

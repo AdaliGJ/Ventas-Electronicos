@@ -76,7 +76,7 @@ public class Dispositivos_individualesControlador {
 			@RequestParam String nSerie
 			) {
 	
-		Dispositivos_individuales n = new Dispositivos_individuales(nSerie,nId,0);
+		Dispositivos_individuales n = new Dispositivos_individuales(nSerie,nId,3);
 		
 		return repositorioDispositivosIndividuales.save(n);
 	}
