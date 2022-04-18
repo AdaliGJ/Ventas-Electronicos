@@ -105,6 +105,11 @@ public class Dispositivos_individualesControlador {
 	                sql, new Object[]{nId}, String.class);
 	}
 	
+	@GetMapping("/ObtenerSeries")
+	public @ResponseBody Iterable<Dispositivos_individuales> getSeries(@RequestParam int nId){
+		return repositorioDispositivosIndividuales.findByVendidoAndIdInventario(0,nId);
+	}
+	
 	
 	
 }
