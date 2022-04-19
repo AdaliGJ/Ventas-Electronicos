@@ -40,7 +40,7 @@ public class TelevisoresControlador {
 		return repositorioTelevisores.findById(nIdInventario);
 	}
 	/**
-	 * Creacion de un elemento en la tabla INVENTARIO en la tabla en la base de datos
+	 * Creacion de un elemento en la tabla TELEVISORES en la tabla en la base de datos
 	 * @param nIdInventario
 	 * @param nResolucion
 	 * @param nBitsProfundidad

@@ -30,6 +30,13 @@ public class PedidosControlador {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
+	
+	/**
+	 * Actualizar el Estado de un pedido
+	 * @param nEstado Nuevo Estado a utilizar
+	 * @param nFecha Fecha De la actualización
+	 * @param nId Identificador del pedido
+	 */
 	@PostMapping("/Estado")
 	@ResponseBody
 	public void insertarP(@RequestParam String nEstado, @RequestParam String nFecha, @RequestParam int nId) {
@@ -40,6 +47,10 @@ public class PedidosControlador {
 		
 	}
 	
+	/**
+	 * Obtener el ID del último pedido registrado en el sistema de ventas
+	 * @return ID del pedido
+	 */
 	@GetMapping("/ObtenerId")
 	public @ResponseBody int getId(){
 		 String sql = "SELECT max(idpedido) FROM pedidos";
@@ -48,6 +59,15 @@ public class PedidosControlador {
 	                sql, new Object[]{}, int.class);
 	}
 	
+	/**
+	 * Creación de un nuevo pedido
+	 * @param nidpedido Identificador del nuevo pedido
+	 * @param nfecha Fecha de realización del pedido
+	 * @param nidInventario Tipo de producto a encargar
+	 * @param ncantidad Cantidad de dispositivos en el pedido
+	 * @param nestado Estado del pedido
+	 * @param nfechaEntrega Entrega estimada del pedido
+	 */
 	@PostMapping("/Insertar")
 	@ResponseBody 
 	public void insertar(@RequestParam int nidpedido, @RequestParam String nfecha, @RequestParam int nidInventario, @RequestParam int ncantidad, @RequestParam String nestado, @RequestParam String nfechaEntrega) {
@@ -56,6 +76,11 @@ public class PedidosControlador {
 		jdbcTemplate.update(Sql, nidpedido, nfecha, nidInventario, ncantidad, nestado, nfechaEntrega);
 	}
 	
+	/**
+	 * Obtener los pedidos hechos a fábrica de acuerdo con su estado
+	 * @param nEstado Estado por el que se desea filtrar
+	 * @return Array de pedidos
+	 */
 	@GetMapping("/ObtenerRegistrados")
 	public @ResponseBody Iterable<Pedidos> getAllE(@RequestParam String nEstado){
 		

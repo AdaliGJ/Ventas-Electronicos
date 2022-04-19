@@ -66,7 +66,7 @@ public class Dispositivos_individualesControlador {
 	/**
 	 * Creacion de un nuevo DISPOSITIVOS_INDIVIDUAL en la tabla en la base de datos
 	 * @param nId Identificador del DISPOSITIVOS_INDIVIDUAL
-	 * @param nSerie Numero de serie del  DISPOSITIVOS_INDIVIDUAL
+	 * @param nSerie Numero de serie del  DISPOSITIVO_INDIVIDUAL
 	 * @return
 	 */
 	
@@ -81,6 +81,12 @@ public class Dispositivos_individualesControlador {
 		return repositorioDispositivosIndividuales.save(n);
 	}
 
+	/**
+	 * Creación de un nuevo DISPOSITIVOS_INDIVIDUAL en la tabla en la base de datos
+	 * @param nSerie Número de serie del  DISPOSITIVO_INDIVIDUAL
+	 * @param nId Identificador del DISPOSITIVO_INDIVIDUAL
+	 * @param nVendido Identificador del estado del DISPOSITIVO_INDIVIDUAL
+	 */
 	@PostMapping("/Prueba")
 	@ResponseBody
 	public void prueba(@RequestParam String nSerie, @RequestParam String nId, @RequestParam int nVendido) {
@@ -89,6 +95,11 @@ public class Dispositivos_individualesControlador {
 		
 	}
 	
+	/**
+	 * Obtención de las existencias de un DISPOSITIVO_INDIVIDUAL en el inventario
+	 * @param nId Identificador del DISPOSITIVO_INDIVIDUAL
+	 * @return Array de dispositivos
+	 */
 	@GetMapping("/ObtenerCantidad")
 	public @ResponseBody int getCant(@RequestParam int nId){
 		 String sql = "SELECT count(*) FROM dispositivos_individuales where vendido = 0 and id_inventario = ?";
@@ -97,6 +108,11 @@ public class Dispositivos_individualesControlador {
 	                sql, new Object[]{nId}, int.class);
 	}
 	
+	/**
+	 * Obtener los números de serie de los DISPOSITIVOS_INDIVIDUALES de un tipo de producto que no han sido vendidos
+	 * @param nId Identificador del Inventario
+	 * @return  Array de dispositivos
+	 */
 	@GetMapping("/ObtenerSerie")
 	public @ResponseBody String getSerie(@RequestParam int nId){
 		 String sql = "SELECT serie_dispositivo FROM dispositivos_individuales where vendido = 0 and id_inventario = ? FETCH NEXT 1 ROWS ONLY";
@@ -105,18 +121,31 @@ public class Dispositivos_individualesControlador {
 	                sql, new Object[]{nId}, String.class);
 	}
 	
+	/**
+	 * Obtener los números de serie de los DISPOSITIVOS_INDIVIDUALES de un tipo de producto que no han sido vendidos
+	 * @param nId Identificador del Inventario
+	 * @return  Array de dispositivos
+	 */
+	
 	@GetMapping("/ObtenerSeries")
 	public @ResponseBody Iterable<Dispositivos_individuales> getSeries(@RequestParam int nId){
 		return repositorioDispositivosIndividuales.findByVendidoAndIdInventario(0,nId);
 	}
 	
-	
+	/**
+	 * Obtener DISPOSITIVOS_INDIVIDUALES que han sido entregados a ventas desde fábrica
+	 * @return Array de dispositivos
+	 */
 	@GetMapping("/ObtenerEntregados")
 	public @ResponseBody Iterable<Dispositivos_individuales> getAllEntregados(){
 		return repositorioDispositivosIndividuales.findByVendido(3);
 	}
 	
 	
+	/**
+	 * Actualizar estado de un DISPOSITIVO_INDIVIDUAL
+	 * @param nSerie Serie del dispositivo
+	 */
 	@PostMapping("/Update")
 	@ResponseBody
 	public void update(@RequestParam String nSerie) {

@@ -77,6 +77,15 @@ public class VentasControlador {
 		return repositorioVentas.save(n);
 	}
 	
+	/**
+	 * Creación de una nueva orden de compra y factura
+	 * @param nCredito Booleano que indica si la venta es al crédito o al contado
+	 * @param nFecha Fecha de la orden
+	 * @param nCategoria Tipo de dispositivo
+	 * @param nCliente Identificador del cliente que hizo la compra
+	 * @param nPrecio Precio total de la orden
+	 * @param nFactura Identificador de la factura
+	 */
 	@PostMapping("/Orden")
 	@ResponseBody
 	public void ordenar(
@@ -92,6 +101,17 @@ public class VentasControlador {
 		jdbcTemplate.update(Sql, nCredito, nFecha, nCategoria, nCliente, nPrecio, nFactura);
 	}
 	
+	/**
+	 * Creación de una nueva venta y actualización de inventario a vendidos
+	 * @param nCredito Booleano que indica si la venta es al crédito o al contado
+	 * @param nFecha Fecha de la orden
+	 * @param nCategoria Tipo de dispositivo
+	 * @param nCliente Identificador del cliente que hizo la compra
+	 * @param nPrecio Precio total de la orden
+	 * @param nFactura Identificador de la factura
+	 * @param nSuma 
+	 * @param nOff Identificador del Offset
+	 */
 	@PostMapping("/Orden2")
 	@ResponseBody
 	public void ordenar2(
@@ -110,7 +130,7 @@ public class VentasControlador {
 	}
 	
 	
-	@PostMapping("/Orden3")
+	/*@PostMapping("/Orden3")
 	@ResponseBody
 	public int ordenar3(
 			@RequestParam char nCredito,
@@ -163,7 +183,7 @@ public class VentasControlador {
 			return 0;
 			
 		}
-	}
+	}*/
 	
 	
 	

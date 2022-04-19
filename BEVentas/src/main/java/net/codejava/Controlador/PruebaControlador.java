@@ -15,6 +15,12 @@ import net.codejava.Entidad.Prueba;
 import net.codejava.Entidad.Usuarios;
 import net.codejava.Repositorio.RepositorioPrueba;
 
+/**
+ * Repositorio de prueba de CRUD
+ * @author Adalí Garrán, Jorge Guerrero, Javier López
+ *
+ */
+
 @CrossOrigin
 @RestController
 @RequestMapping(path="/api")

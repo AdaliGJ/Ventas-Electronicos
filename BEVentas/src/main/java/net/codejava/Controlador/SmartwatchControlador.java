@@ -24,16 +24,34 @@ public class SmartwatchControlador {
 	@Autowired
 	private RepositorioSmartwatch repositorioSmartwatch;
 	
+	/**
+	 * Query a la tabla SMARTWATCH para obtener todos los datos de la tabla SMARTWATCH
+	 * @return objeto JSON con todos los registros
+	 */
 	@GetMapping("/ObtenerTodos")
 	public @ResponseBody Iterable<Smartwatch> getAll(){
 		return repositorioSmartwatch.findAll();
 	}
 	
+	/**
+	 * Obtener un solo registro de la tabla SMARTWATCH con la ayuda de su identificador
+	 * @param nIdInventario
+	 * @return Un solo objeto de la tabla
+	 */
 	@GetMapping("/Obtener")
 	public @ResponseBody Optional<Smartwatch> getOne(@RequestParam int nIdInventario){
 		return repositorioSmartwatch.findById(nIdInventario);
 	}
 	
+	/**
+	 * Creacion de un elemento en la tabla SMARTWATCH en la tabla en la base de datos
+	 * @param nIdInventario
+	 * @param nPulgadasPantalla
+	 * @param nSistemaOperativo
+	 * @param nRamMB
+	 * @param nMemoriaGB
+	 * @return
+	 */
 	@PostMapping("/Insertar")
 	public @ResponseBody Smartwatch insertar(
 			@RequestParam int nIdInventario,

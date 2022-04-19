@@ -20,6 +20,11 @@ public class ProcedimientosControlador {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
+	/**
+	 * Prueba de POST
+	 * @param nIdInventario
+	 * @param nDescripcion
+	 */
 	@PostMapping("/Prueba")
 	@ResponseBody
 	public void prueba(@RequestParam int nIdInventario, @RequestParam String nDescripcion) {
@@ -28,6 +33,11 @@ public class ProcedimientosControlador {
 		
 	}
 	
+	/**
+	 * Administración de usuarios del sistema de ventas
+	 * @param nId Identificador del usuario
+	 * @param nAccion Acción a realizar (eliminar o cambiar permisos de usuario)
+	 */
 	@PostMapping("/CambioPermisos")
 	@ResponseBody
 	public void cambio(@RequestParam int nId, @RequestParam String nAccion) {

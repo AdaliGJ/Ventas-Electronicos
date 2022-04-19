@@ -29,6 +29,12 @@ public class WebServiceControlador {
 		this.restTemplate = restTemplate;
 	}
 	
+	/**
+	 * Web service para obtener clientes de fábrica
+	 * @param nIP Dirección IP a conectarse
+	 * @param nPort Puerto a conectarse
+	 * @return Clientes de Fábrica
+	 */
 	@GetMapping("/WebService")
 	public Object getApi(@RequestParam String nIP, @RequestParam String nPort) {
 		String url = "http://"+nIP+":"+nPort+"/api/cliente";
@@ -38,6 +44,12 @@ public class WebServiceControlador {
 		
 	}
 	
+	/**
+	 * Web service para obtener clientes de fábrica
+	 * @param nIP Dirección IP a conectarse
+	 * @param nPort Puerto a conectarse
+	 * @return Clientes de Fábrica
+	 */
 	@GetMapping("/WebService2")
 	public Iterable<Object> getApi2(@RequestParam String nIP) {
 		String url = "http://"+nIP+":4000/api/cliente";
@@ -47,6 +59,15 @@ public class WebServiceControlador {
 	}
 	
 	
+	/**
+	 * Web Service de envío de un pedido a fábrica
+	 * @param nIdPedidoVentas
+	 * @param nIdInventarioVentas
+	 * @param nCliente
+	 * @param nIdInventario
+	 * @param nCantidad
+	 * @return
+	 */
 	@PostMapping("/WebServicePost")
 	public Object createPedidos(//@RequestParam String nfecha,
 			@RequestParam int nIdPedidoVentas,
@@ -83,7 +104,14 @@ public class WebServiceControlador {
 	    return restTemplate.postForObject(url, post, Object.class);
 	}
 	
-	
+	/**
+	 * Web Service de autenticación desde ventas a fábrica como cliente
+	 * @param nCliente Identificador del cliente
+	 * @param nPassword Contraseña del cliente
+	 * @param nIP Dirección IP a conectarse
+	 * @param nPort Puerto a conectarse
+	 * @return Aceptación o rechazo en la autenticación
+	 */
 	@PostMapping("/AutCliente")
 	public Object autCliente(
 			@RequestParam String nCliente,
@@ -113,6 +141,10 @@ public class WebServiceControlador {
 	    return loginObj;
 	}
 	
+	/**
+	 * Web service para obtención del catálogo de dispositivos de una fábrica
+	 * @return catálogo de fábrica
+	 */
 	@GetMapping("/CatalogoFabrica")
 	public Iterable<Object> getElectronicos() {
 		 String url = "http://localhost:4000/api/electronico";
@@ -126,6 +158,10 @@ public class WebServiceControlador {
 	
 	
 	//Electronicos
+	/**
+	 * Web service para obtención del catálogo de dispositivos de una fábrica
+	 * @return catálogo de fábrica
+	 */
 	@GetMapping("/Electronicos")
 	public Object getElectronicos(@RequestParam String nIP) {
 		String url = "http://"+nIP+":4000/api/electronico";
@@ -135,7 +171,12 @@ public class WebServiceControlador {
 		
 	}
 	
-	
+	/**
+	 * Web service de envío de ventas de dispositivos realizadas a fábrica correspondiente
+	 * @param nSerie Identificador del dispositivo vendido
+	 * @param nPrecioVenta Precio del dispositivo
+	 * @return
+	 */
 	@PostMapping("/Reporteria")
 	public Object createPedidos(@RequestParam String nSerie, @RequestParam String nPrecioVenta ) {
 		
@@ -150,6 +191,14 @@ public class WebServiceControlador {
 	}
 	
 
+	/**
+	 * Web Service de actualización de estado de un pedido en fábrica
+	 * @param nIdPedido Identificador del pedido
+	 * @param nCliente Identificador de la tienda que realizó el pedido
+	 * @param nEstado Estado a enviar
+	 * @param nResponsable Identificador del usuario que realizó el cambio
+	 * @return Respuesta de la solicitud
+	 */
 	@PostMapping("/EstadoPedido")
 	public Object estadoPedidos(@RequestParam String nIdPedido, @RequestParam String nCliente,@RequestParam String nEstado,@RequestParam String nResponsable) {
 		
@@ -165,7 +214,12 @@ public class WebServiceControlador {
 	    return restTemplate.postForObject(url, body, Object.class);
 	}
 	
-	
+	/**
+	 * Web Service para validación de la garantía de un dispoitivo 
+	 * @param nIP Dirección IP a conectarse
+	 * @param nSerie Identificador del dispositivo
+	 * @return Respuesta de la solicitud
+	 */
 	@GetMapping("/ValidarGarantia")
 	public Object validarGarantia(@RequestParam String nIP, @RequestParam String nSerie) {
 		String url = "http://"+nIP+":4000/api/garantia/devolver/" + nSerie;
