@@ -6,6 +6,13 @@ import org.springframework.data.repository.query.Param;
 
 import net.codejava.Entidad.VistaCatalogo;
 
+
+
+/**
+ * Esta Interfaz permite agregar funcionalidades CRUD a la entidad VistaCatalogo permitiendo definir tambien sus propios querys hacia la DB de Oracle por medio de la sintaxis que define JDBC
+ *
+ */
+
 public interface RepositorioVistaCatalogo extends CrudRepository<VistaCatalogo, Integer>{
 	
 	Iterable<VistaCatalogo> findByOrderByIdinventarioAsc();
