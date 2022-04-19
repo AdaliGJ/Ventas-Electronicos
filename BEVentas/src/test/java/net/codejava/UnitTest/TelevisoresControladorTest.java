@@ -16,10 +16,12 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.util.LinkedMultiValueMap;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import net.codejava.Controlador.TelevisoresControlador;
+import net.codejava.Entidad.Smartwatch;
 import net.codejava.Entidad.Televisores;
 import net.codejava.Repositorio.RepositorioTelevisores;
 
@@ -49,5 +51,39 @@ public class TelevisoresControladorTest {
 	            .contentType(APPLICATION_JSON))
 	            .andExpect(status().isOk())
 	            .andExpect(jsonPath("$[2].resolucion", is("8k")));
+	}
+	
+	@Test
+	public void insertarRegistro() throws Exception {
+	    
+	    LinkedMultiValueMap<String,String> params = new LinkedMultiValueMap<>();		
+		params.add("nIdInventario","1");
+		params.add("nPulgadasPantalla","55");
+		params.add("nBitsProfundidad", "80");
+		params.add("nResolucion","40");
+		params.add("nEntradasHDMI", "3");
+		
+		
+	    
+	    mockMvc.perform(MockMvcRequestBuilders
+	            .post("/Televisores/Insertar")
+	            .params(params)
+	            .contentType(APPLICATION_JSON))
+	            .andExpect(status().isOk());
+	}
+	
+	@Test
+	public void obtener_success() throws Exception {
+	    List<Televisores> records = new ArrayList<>(Arrays.asList(RECORD_1, RECORD_2, RECORD_3));
+	    
+	    
+	    
+	    Mockito.when(repositorio.findAll()).thenReturn(records);
+	    
+	    mockMvc.perform(MockMvcRequestBuilders
+	            .get("/Televisores/Obtener")
+	            .param("nIdInventario", "1")
+	            .contentType(APPLICATION_JSON))
+	            .andExpect(status().isOk());
 	}
 }

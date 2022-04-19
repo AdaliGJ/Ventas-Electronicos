@@ -35,145 +35,80 @@ public class Inventario {
 	
 	public Inventario() {}
 
-	/**
-	 * Obtener id del objeto en el inventario
-	 * @return id del objeto del inventario
-	 */
+	
 	public int getIdInventario() {
 		return idInventario;
 	}
-	/**
-	 * Agregregar id del inventario
-	 * @param idInventario
-	 */
+
 	public void setIdInventario(int idInventario) {
 		this.idInventario = idInventario;
 	}
-	/**
-	 * Obtener categoria del dispositivo
-	 * @return categoria del dispositivo
-	 */
+
 	public int getCategoriaDispositivo() {
 		return categoriaDispositivo;
 	}
-	/**
-	 * Agregar categoria del dispositivo
-	 * @param categoriaDispositivo
-	 */
+
 	public void setCategoriaDispositivo(int categoriaDispositivo) {
 		this.categoriaDispositivo = categoriaDispositivo;
 	}
-	/**
-	 * Obtener marca del dispositivo
-	 * @return marca del dispositivo
-	 */
+
 	public int getMarca() {
 		return marca;
 	}
-	/**
-	 * Agregar marca del dispositivo
-	 * @param marca
-	 */
+
 	public void setMarca(int marca) {
 		this.marca = marca;
 	}
-	/**
-	 * Obtener ecistencias del dispositivo
-	 * @return Existencias del dispositivo
-	 */
+
 	public int getExistencias() {
 		return existencias;
 	}
-	/**
-	 * Agregar existencias del dispositivo
-	 * @param existencias
-	 */
+
 	public void setExistencias(int existencias) {
 		this.existencias = existencias;
 	}
-/**
- * Obtener precio 
- * @return Precio
- */
+
 	public float getPrecioLista() {
 		return precioLista;
 	}
-	/**
-	 * Agregar precio
-	 * @param precioLista
-	 */
+
 	public void setPrecioLista(float precioLista) {
 		this.precioLista = precioLista;
 	}
-	/**
-	 * Obtener color del dispositivo
-	 * @return color del dispositivo
-	 */
+
 	public String getColor() {
 		return color;
 	}
-	/**
-	 * Agregar color del dispositivo
-	 * @param color
-	 */
+
 	public void setColor(String color) {
 		this.color = color;
 	}
-	/**
-	 * Obtener descripcion del dispositivo
-	 * @return Descripcion del dispositivo
-	 */
+
 	public String getDescripcion() {
 		return descripcion;
 	}
-	/**
-	 * Agregar descripcion del dispositivo
-	 * @param descripcion
-	 */
+
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	/**
-	 * Obtener modelo del dispositivo
-	 * @return Modelo del dispositivo
-	 */
+
 	public String getModelo() {
 		return modelo;
 	}
-	/**
-	 * Agregar modelo del dispositivo
-	 * @param modelo
-	 */
+
 	public void setModelo(String modelo) {
 		this.modelo = modelo;
 	}
-	/**
-	 * Agregar modelo del dispositivo
-	 * @return modelo del dispositivo
-	 */
+
 	public int getMesesGarantia() {
 		return mesesGarantia;
 	}
-	/**
-	 * Agregar Meses de garantia
-	 * @param mesesGarantia
-	 */
+
 	public void setMesesGarantia(int mesesGarantia) {
 		this.mesesGarantia = mesesGarantia;
 	}
 
-	/**
-	 * Creacion de la clase Inventario
-	 * @param idInventario
-	 * @param categoriaDispositivo
-	 * @param marca
-	 * @param existencias
-	 * @param precioLista
-	 * @param color
-	 * @param descripcion
-	 * @param modelo
-	 * @param mesesGarantia
-	 */
+
 	public Inventario(int idInventario, int categoriaDispositivo, int marca, int existencias, float precioLista,
 			String color, String descripcion, String modelo, int mesesGarantia) {
 		super();
@@ -188,9 +123,7 @@ public class Inventario {
 		this.mesesGarantia = mesesGarantia;
 	}
 
-	/**
-	 * Volver string objeto el objeto Inventario
-	 */
+
 	@Override
 	public String toString() {
 		return "Inventario [idInventario=" + idInventario + ", categoriaDispositivo=" + categoriaDispositivo

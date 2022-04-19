@@ -80,5 +80,20 @@ public class OrdenesCompraControladorTest {
 	            .andExpect(status().isOk());
 	}
 	
+	@Test
+	public void obtener_success() throws Exception {
+	    List<Ordenes_compra> records = new ArrayList<>(Arrays.asList(RECORD_1, RECORD_2, RECORD_3));
+	    
+	    
+	    
+	    Mockito.when(repositorioOrdenes_compra.findAll()).thenReturn(records);
+	    
+	    mockMvc.perform(MockMvcRequestBuilders
+	            .get("/Ordenes_compra/Obtener")
+	            .param("nIdOrden", "1")
+	            .contentType(APPLICATION_JSON))
+	            .andExpect(status().isOk());
+	}
+	
 	
 }

@@ -77,10 +77,10 @@ class Footer extends Component{
                                      <div>
                                         <FooterBox link='/pedir' title="Pedir"/>
                                         <FooterBox link='/pedidos' title="Pedidos"/>
-                                    </div>:
+                                    </div>:this.context.tipoUsuario==2?
                                      <div>
                                         <FooterBox link='/pedidos' title="Pedidos"/>
-                                    </div>
+                                    </div>:null
                                     }
                                     
                             </Grid>

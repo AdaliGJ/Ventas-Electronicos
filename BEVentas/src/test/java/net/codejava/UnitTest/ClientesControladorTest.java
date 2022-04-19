@@ -80,5 +80,18 @@ public class ClientesControladorTest {
 	            .andExpect(status().isOk());
 	}
 	
+	@Test
+	public void obtener_success() throws Exception {
+	   
+	    
+	    
+	    mockMvc.perform(MockMvcRequestBuilders
+	            .get("/Clientes/Obtener")
+	            .param("nNit", "8434832")
+	            .contentType(APPLICATION_JSON))
+	            .andExpect(status().isOk())
+	            .andReturn();
+	}
+	
 	
 }

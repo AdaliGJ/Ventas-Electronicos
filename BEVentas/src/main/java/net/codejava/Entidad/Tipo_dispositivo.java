@@ -22,50 +22,25 @@ public class Tipo_dispositivo {
 	public Tipo_dispositivo() {} 
 	
 	
-	/**
-	 * Obtener id del tipo de dispositivo
-	 * @return  id del tipo del dispositivo
-	 */
 	public int getId_tipo_dispositivo() {
 		return id_tipo_dispositivo;
 	}
-	/**
-	 * Agregar tipo de dispositivo
-	 * @param id_tipo_dispositivo
-	 */
 	public void setId_tipo_dispositivo(int id_tipo_dispositivo) {
 		this.id_tipo_dispositivo = id_tipo_dispositivo;
 	}
-	/**
-	 * Obtener nombre 
-	 * @return nombre
-	 */
 	public String getNombre() {
 		return nombre;
 	}
-	
-	/**
-	 * Agregar nombre
-	 * @param nombre
-	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 	
-	/**
-	 * Creacion de clase Tipo_dispositivo
-	 * @param id_tipo_dispositivo
-	 * @param nombre
-	 */
 	public Tipo_dispositivo(int id_tipo_dispositivo, String nombre) {
 		super();
 		this.id_tipo_dispositivo = id_tipo_dispositivo;
 		this.nombre = nombre;
 	}
 	@Override
-	/**
-	 * Convertir a stgring la clase Tipo_dispositivo
-	 */
 	public String toString() {
 		return "Tipo_dispositivo [id_tipo_dispositivo=" + id_tipo_dispositivo + ", nombre=" + nombre + "]";
 	}

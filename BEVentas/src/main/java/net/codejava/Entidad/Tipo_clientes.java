@@ -22,60 +22,37 @@ public class Tipo_clientes {
 	
 	public Tipo_clientes() {}
 
-	/**
-	 * Obtener id del cliente
-	 * @return id del cliente
-	 */
+
 	public int getId() {
 		return id;
 	}
 
-	/**
-	 * Agregar id del cliente
-	 * @param id
-	 */
+
 	public void setId(int id) {
 		this.id = id;
 	}
 
-	/**
-	 * Obtener nombre del cliente
-	 * @return nombre del cliente
-	 */
+
 	public String getNombre() {
 		return nombre;
 	}
 
-	/**
-	 * Agregar nombre del cliente
-	 * @param nombre
-	 */
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
-	/**
-	 * Obtener descuento segun tipo de cliente
-	 * @return descuento segun tipo de cliente
-	 */
+
 	public int getDescuento() {
 		return descuento;
 	}
 
-	/**
-	 * Agregar descuento segun tipo de cliente
-	 * @param descuento
-	 */
+
 	public void setDescuento(int descuento) {
 		this.descuento = descuento;
 	}
 
-	/**
-	 * Creacion de clase Tipo_clientes
-	 * @param id
-	 * @param nombre
-	 * @param descuento
-	 */
+
 	public Tipo_clientes(int id, String nombre, int descuento) {
 		super();
 		this.id = id;
@@ -83,9 +60,7 @@ public class Tipo_clientes {
 		this.descuento = descuento;
 	}
 
-	/**
-	 * Convertir a string el objeto Tipo_cliente
-	 */
+
 	@Override
 	public String toString() {
 		return "Tipo_clientes [id=" + id + ", nombre=" + nombre + ", descuento=" + descuento + "]";

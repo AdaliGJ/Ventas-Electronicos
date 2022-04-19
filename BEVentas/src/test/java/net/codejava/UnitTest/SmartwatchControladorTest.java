@@ -16,10 +16,13 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import net.codejava.Controlador.SmartwatchControlador;
+import net.codejava.Entidad.Prueba;
 import net.codejava.Entidad.Smartwatch;
 import net.codejava.Repositorio.RepositorioSmartwatch;
 
@@ -49,5 +52,39 @@ public class SmartwatchControladorTest {
 	            .contentType(APPLICATION_JSON))
 	            .andExpect(status().isOk())
 	            .andExpect(jsonPath("$[2].ram_MB", is(4096)));
+	}
+	
+	@Test
+	public void insertarRegistro() throws Exception {
+	    
+	    LinkedMultiValueMap<String,String> params = new LinkedMultiValueMap<>();		
+		params.add("nIdInventario","1");
+		params.add("nPulgadasPantalla","55");
+		params.add("nSistemaOperativo", "IOS");
+		params.add("nRamMB","40");
+		params.add("nMemoriaGB", "750");
+		
+		
+	    
+	    mockMvc.perform(MockMvcRequestBuilders
+	            .post("/Smartwatch/Insertar")
+	            .params(params)
+	            .contentType(APPLICATION_JSON))
+	            .andExpect(status().isOk());
+	}
+	
+	@Test
+	public void obtener_success() throws Exception {
+	    List<Smartwatch> records = new ArrayList<>(Arrays.asList(RECORD_1, RECORD_2, RECORD_3));
+	    
+	    
+	    
+	    Mockito.when(repositorio.findAll()).thenReturn(records);
+	    
+	    mockMvc.perform(MockMvcRequestBuilders
+	            .get("/Smartwatch/Obtener")
+	            .param("nIdInventario", "1")
+	            .contentType(APPLICATION_JSON))
+	            .andExpect(status().isOk());
 	}
 }

@@ -22,6 +22,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -80,6 +81,22 @@ public class FacturaControladorTest {
 	            .params(params)
 	            .contentType(APPLICATION_JSON))
 	            .andExpect(status().isOk());
+	}
+	
+	@Test
+	public void obtener_success() throws Exception {
+	    
+		 List<Factura> records = new ArrayList<>(Arrays.asList(RECORD_1, RECORD_2, RECORD_3));
+		    
+		    
+		    
+		    Mockito.when(repositorioFactura.findAll()).thenReturn(records);
+		    
+		    mockMvc.perform(MockMvcRequestBuilders
+		            .get("/Factura/Obtener")
+		            .param("nIdEntradaFactura", "1")
+		            .contentType(APPLICATION_JSON))
+		            .andExpect(status().isOk());
 	}
 	
 	

@@ -84,4 +84,37 @@ public class InventarioControladorTest {
 	}
 	
 	
+	@Test
+	public void obtenerCategoria_success() throws Exception {
+	    List<Inventario> records = new ArrayList<>(Arrays.asList(RECORD_1, RECORD_2, RECORD_3));
+	    
+	    
+	    
+	    Mockito.when(repositorioInventario.findAllByCategoriaDispositivo(1)).thenReturn(records);
+	    
+	    mockMvc.perform(MockMvcRequestBuilders
+	            .get("/Inventario/ObtenerCategoria")
+	            .param("nCategoriaDispositivo", "1")
+	            .contentType(APPLICATION_JSON))
+	            .andExpect(status().isOk())
+	            .andExpect(jsonPath("$[2].categoriaDispositivo", is(1)));
+	}
+	
+	@Test
+	public void obtenerMenor_success() throws Exception {
+	    List<Inventario> records2 = new ArrayList<>(Arrays.asList(RECORD_1, RECORD_2, RECORD_3));
+	    
+	    
+	    
+	    Mockito.when(repositorioInventario.findByOrderByCategoriaDispositivoDesc()).thenReturn(records2);
+	    
+	    mockMvc.perform(MockMvcRequestBuilders
+	            .get("/Inventario/ObtenerCategoriaMenor")
+	            .contentType(APPLICATION_JSON))
+	            .andExpect(status().isOk())
+	            .andExpect(jsonPath("$[2].categoriaDispositivo", is(1)));
+	}
+	
+	
+	
 }

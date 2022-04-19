@@ -84,5 +84,20 @@ public class FichasClienteControladorTest {
 	            .andExpect(status().isOk());
 	}
 	
+	@Test
+	public void obtener_success() throws Exception {
+	    List<Fichas_clientes> records = new ArrayList<>(Arrays.asList(RECORD_1, RECORD_2, RECORD_3));
+	    
+	    
+	    
+	    Mockito.when(repositorioFichas_cliente.findAll()).thenReturn(records);
+	    
+	    mockMvc.perform(MockMvcRequestBuilders
+	            .get("/Fichas_clientes/Obtener")
+	            .param("nNit", "9887675")
+	            .contentType(APPLICATION_JSON))
+	            .andExpect(status().isOk());
+	}
+	
 	
 }

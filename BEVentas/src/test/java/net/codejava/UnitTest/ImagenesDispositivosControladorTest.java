@@ -77,5 +77,20 @@ public class ImagenesDispositivosControladorTest {
 	            .andExpect(status().isOk());
 	}
 	
+	@Test
+	public void obtener_success() throws Exception {
+	    List<Imagenes_dispositivos> records1 = new ArrayList<>(Arrays.asList(RECORD_1, RECORD_2, RECORD_3));
+	    
+	    
+	    
+	    Mockito.when(repositorioImagenes_dispositivos.findAll()).thenReturn(records1);
+	    
+	    mockMvc.perform(MockMvcRequestBuilders
+	            .get("/Imagenes_dispositivos/Obtener")
+	            .param("nIdImagen", "1")
+	            .contentType(APPLICATION_JSON))
+	            .andExpect(status().isOk());
+	}
+	
 	
 }
