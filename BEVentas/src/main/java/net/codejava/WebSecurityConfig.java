@@ -7,7 +7,11 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-
+/**
+ * Esta clase se encarga de aplicar diversas configuraciones a la aplicacion relacionadas con el entorno web
+ * Por medio de esta clase se habilita la configuracion CORS para la comunicacion del servidor y los browsers donde correra la Vista de la aplicacion
+ *
+ */
 @Configuration
 @EnableWebMvc
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {

@@ -11,7 +11,11 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
+/**
+ * Esta clase es la encargada de realizar la ejecucion de la instancia de la aplicacion cargando toda la configuracion y las clases de los otros paquetes
+ * Se cargan las configuraciones de Springboot, Tomcat, los drivers de Oracle, JUnit4/JUnit5, etc.
+ *
+ */
 @SpringBootApplication
 public class VentasApplication {
 
