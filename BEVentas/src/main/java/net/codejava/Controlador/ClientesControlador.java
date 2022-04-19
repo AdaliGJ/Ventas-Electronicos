@@ -29,6 +29,7 @@ public class ClientesControlador {
 	 * Realizacion de query a la tabla CLIENTES para obtener todos los datos de la tabla CLIENTES
 	 * @return objeto JSON con todos los registros
 	 */
+	 
 	@GetMapping("/ObtenerTodos")
 	public @ResponseBody Iterable<Clientes> getAll(){
 		return repositorioClientes.findAll();
