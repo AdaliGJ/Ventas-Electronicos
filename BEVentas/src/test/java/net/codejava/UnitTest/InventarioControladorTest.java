@@ -10,6 +10,7 @@ import java.awt.PageAttributes.MediaType;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -19,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,6 +29,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import net.codejava.Controlador.InventarioControlador;
 import net.codejava.Entidad.Inventario;
+import net.codejava.Entidad.Tipo_usuarios;
 import net.codejava.Repositorio.RepositorioInventario;
 
 @WebMvcTest(InventarioControlador.class)
@@ -83,6 +86,26 @@ public class InventarioControladorTest {
 	            .andExpect(status().isOk());
 	}
 	
+	@Test
+	public void obtener_success() throws Exception {
+		
+		Mockito.when(repositorioInventario.findById(RECORD_3.getIdInventario())).thenReturn(Optional.of(RECORD_3));
+		
+	    MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders
+	            .get("/Inventario/Obtener")
+	            .param("nId", Integer.toString(RECORD_3.getIdInventario()))
+	            .contentType(APPLICATION_JSON))
+	            .andExpect(status().isOk())
+	            .andReturn();
+	    
+	    ObjectMapper mapperGet = new ObjectMapper();
+		Inventario responseGet = mapperGet.readValue(mvcResult.getResponse().getContentAsString(), Inventario.class);
+		
+		assertThat(RECORD_3.getColor()).isEqualTo(responseGet.getColor());
+	    
+	    //System.out.println(mvcResult.getResponse().getContentAsString());
+	    
+	}
 	
 	@Test
 	public void obtenerCategoria_success() throws Exception {

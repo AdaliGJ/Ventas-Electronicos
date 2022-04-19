@@ -16,6 +16,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.util.LinkedMultiValueMap;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -49,5 +50,18 @@ public class VistaInfoClienteControladorTest {
 	            .contentType(APPLICATION_JSON))
 	            .andExpect(status().isOk())
 	            .andExpect(jsonPath("$[0].nombretipocliente", is("Cliente Individual")));
+	}
+	
+	@Test
+	public void obtener_success() throws Exception {
+	   
+	    
+	    
+	    mockMvc.perform(MockMvcRequestBuilders
+	            .get("/VistaInfoCliente/Obtener")
+	            .param("nNit", "8434832")
+	            .contentType(APPLICATION_JSON))
+	            .andExpect(status().isOk())
+	            .andReturn();
 	}
 }

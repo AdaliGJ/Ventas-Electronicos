@@ -53,4 +53,17 @@ public class VistaImgsControladorTest {
 	            .andExpect(status().isOk())
 	            .andExpect(jsonPath("$[1].nombremarca", is("Apple")));
 	}
+	
+	@Test
+	public void obtener_success() throws Exception {
+	   
+	    
+	    
+	    mockMvc.perform(MockMvcRequestBuilders
+	            .get("/VistaImgs/Obtener")
+	            .param("nIdInventario", "12")
+	            .contentType(APPLICATION_JSON))
+	            .andExpect(status().isOk())
+	            .andReturn();
+	}
 }

@@ -1,5 +1,6 @@
 package net.codejava.UnitTest;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -8,6 +9,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -15,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.util.LinkedMultiValueMap;
 
@@ -23,6 +26,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import net.codejava.Controlador.PruebaControlador;
 import net.codejava.Entidad.Ordenes_compra;
 import net.codejava.Entidad.Prueba;
+import net.codejava.Entidad.Tipo_usuarios;
 import net.codejava.Repositorio.RepositorioPrueba;
 
 @WebMvcTest(PruebaControlador.class)
@@ -85,17 +89,23 @@ public class PruebaControladorTest {
 	
 	@Test
 	public void obtener_success() throws Exception {
-	    List<Prueba> records = new ArrayList<>(Arrays.asList(RECORD_1, RECORD_2, RECORD_3));
-	    
-	    
-	    
-	    Mockito.when(repositorio.findAll()).thenReturn(records);
-	    
-	    mockMvc.perform(MockMvcRequestBuilders
+		
+		Mockito.when(repositorio.findByValor2(RECORD_3.getValor2())).thenReturn(Optional.of(RECORD_3));
+		
+	    MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders
 	            .get("/api/Obtener")
-	            .param("nValor2", "1")
+	            .param("nValor2", RECORD_3.getValor2())
 	            .contentType(APPLICATION_JSON))
-	            .andExpect(status().isOk());
+	            .andExpect(status().isOk())
+	            .andReturn();
+	    
+	    ObjectMapper mapperGet = new ObjectMapper();
+		Prueba responseGet = mapperGet.readValue(mvcResult.getResponse().getContentAsString(), Prueba.class);
+		
+		assertThat(RECORD_3.getValor1()).isEqualTo(responseGet.getValor1());
+	    
+	    //System.out.println(mvcResult.getResponse().getContentAsString());
+	    
 	}
 	
 	@Test

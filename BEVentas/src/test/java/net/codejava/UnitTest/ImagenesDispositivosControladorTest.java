@@ -10,6 +10,7 @@ import java.awt.PageAttributes.MediaType;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -19,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,6 +29,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import net.codejava.Controlador.Imagenes_dispositivosControlador;
 import net.codejava.Entidad.Imagenes_dispositivos;
+import net.codejava.Entidad.Tipo_usuarios;
 import net.codejava.Repositorio.RepositorioImagenes_dispositivos;
 
 @WebMvcTest(Imagenes_dispositivosControlador.class)
@@ -78,18 +81,46 @@ public class ImagenesDispositivosControladorTest {
 	}
 	
 	@Test
-	public void obtener_success() throws Exception {
-	    List<Imagenes_dispositivos> records1 = new ArrayList<>(Arrays.asList(RECORD_1, RECORD_2, RECORD_3));
-	    
-	    
-	    
-	    Mockito.when(repositorioImagenes_dispositivos.findAll()).thenReturn(records1);
-	    
-	    mockMvc.perform(MockMvcRequestBuilders
+	public void obtenerPorImagen_success() throws Exception {
+		
+		Mockito.when(repositorioImagenes_dispositivos.findById(RECORD_3.getId_imagen())).thenReturn(Optional.of(RECORD_3));
+		
+	    MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders
 	            .get("/Imagenes_dispositivos/Obtener")
-	            .param("nIdImagen", "1")
+	            .param("nIdImagen", Integer.toString(RECORD_3.getId_imagen()))
 	            .contentType(APPLICATION_JSON))
-	            .andExpect(status().isOk());
+	            .andExpect(status().isOk())
+	            .andReturn();
+	    
+	    ObjectMapper mapperGet = new ObjectMapper();
+	    Imagenes_dispositivos responseGet = mapperGet.readValue(mvcResult.getResponse().getContentAsString(), Imagenes_dispositivos.class);
+		
+		assertThat(RECORD_3.getImagen()).isEqualTo(responseGet.getImagen());
+	    
+	    //System.out.println(mvcResult.getResponse().getContentAsString());
+	    
+	}
+	
+	@Test
+	public void obtenerPorInventario_success() throws Exception {
+		List<Imagenes_dispositivos> records = new ArrayList<>(Arrays.asList(RECORD_1, RECORD_2, RECORD_3));
+		
+		Mockito.when(repositorioImagenes_dispositivos.findByidInventario(RECORD_3.getId_inventario())).thenReturn(records);
+		
+	    MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders
+	            .get("/Imagenes_dispositivos/ObtenerA")
+	            .param("nIdInventario", Integer.toString(RECORD_3.getId_inventario()))
+	            .contentType(APPLICATION_JSON))
+	            .andExpect(status().isOk())
+	            .andReturn();
+	    
+	    ObjectMapper mapperGet = new ObjectMapper();
+	    Imagenes_dispositivos[] responseGet = mapperGet.readValue(mvcResult.getResponse().getContentAsString(), Imagenes_dispositivos[].class);
+		
+		assertThat(RECORD_3.getImagen()).isEqualTo(responseGet[2].getImagen());
+	    
+	    System.out.println(mvcResult.getResponse().getContentAsString());
+	    
 	}
 	
 	

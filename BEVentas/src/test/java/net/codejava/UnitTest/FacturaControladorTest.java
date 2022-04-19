@@ -10,6 +10,7 @@ import java.awt.PageAttributes.MediaType;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -30,6 +31,7 @@ import net.codejava.Controlador.ClientesControlador;
 import net.codejava.Controlador.Factura_controlador;
 import net.codejava.Entidad.Clientes;
 import net.codejava.Entidad.Factura;
+import net.codejava.Entidad.Tipo_usuarios;
 import net.codejava.Repositorio.RepositorioClientes;
 import net.codejava.Repositorio.RepositorioFactura;
 
@@ -85,18 +87,23 @@ public class FacturaControladorTest {
 	
 	@Test
 	public void obtener_success() throws Exception {
+		
+		Mockito.when(repositorioFactura.findById(RECORD_3.getId_entrada_factura())).thenReturn(Optional.of(RECORD_3));
+		
+	    MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders
+	            .get("/Factura/Obtener")
+	            .param("nIdEntradaFactura", Integer.toString(RECORD_3.getId_entrada_factura()))
+	            .contentType(APPLICATION_JSON))
+	            .andExpect(status().isOk())
+	            .andReturn();
 	    
-		 List<Factura> records = new ArrayList<>(Arrays.asList(RECORD_1, RECORD_2, RECORD_3));
-		    
-		    
-		    
-		    Mockito.when(repositorioFactura.findAll()).thenReturn(records);
-		    
-		    mockMvc.perform(MockMvcRequestBuilders
-		            .get("/Factura/Obtener")
-		            .param("nIdEntradaFactura", "1")
-		            .contentType(APPLICATION_JSON))
-		            .andExpect(status().isOk());
+	    ObjectMapper mapperGet = new ObjectMapper();
+	    Factura responseGet = mapperGet.readValue(mvcResult.getResponse().getContentAsString(), Factura.class);
+		
+		assertThat(RECORD_3.getId_venta()).isEqualTo(responseGet.getId_venta());
+	    
+	    //System.out.println(mvcResult.getResponse().getContentAsString());
+	    
 	}
 	
 	
