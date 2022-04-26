@@ -51,8 +51,8 @@ public class WebServiceControlador {
 	 * @return Clientes de Fábrica
 	 */
 	@GetMapping("/WebService2")
-	public Iterable<Object> getApi2(@RequestParam String nIP) {
-		String url = "http://"+nIP+":4000/api/cliente";
+	public Iterable<Object> getApi2(@RequestParam String nIP, @RequestParam String nPort) {
+		String url = "http://"+nIP+":"+nPort+"/api/cliente";
 		Object[] forObject = restTemplate.getForObject(url, Object[].class);
 		System.out.println("Result: "+ forObject);
 		return Arrays.asList(forObject);
@@ -74,11 +74,11 @@ public class WebServiceControlador {
 			@RequestParam int nIdInventarioVentas,
 			@RequestParam String nCliente,
 			@RequestParam String nIdInventario,
-			@RequestParam int nCantidad
-			//@RequestParam String nEstado,
-			/*@RequestParam String nFechaEntrega*/) {
+			@RequestParam int nCantidad,
+			@RequestParam String nIP,
+			@RequestParam String nPort) {
 		
-	    String url = "http://localhost:4000/api/pedidos";
+	    String url = "http://"+nIP+":"+nPort+"4000/api/pedidos";
 
 	    HttpHeaders headers;
 	   // headers.setContentType(APPLICATION_JSON);
@@ -119,7 +119,7 @@ public class WebServiceControlador {
 			@RequestParam String nIP,
 			@RequestParam String nPort) {
 		
-	    String url = "http://localhost:4000/api/cliente/login";
+	    String url = "http://"+nIP+":"+nPort+"/api/cliente/login";
 
 	    HttpHeaders headers;
 	   // headers.setContentType(APPLICATION_JSON);
@@ -146,8 +146,9 @@ public class WebServiceControlador {
 	 * @return catálogo de fábrica
 	 */
 	@GetMapping("/CatalogoFabrica")
-	public Iterable<Object> getElectronicos() {
-		 String url = "http://localhost:4000/api/electronico";
+	public Iterable<Object> getElectronicos(@RequestParam String nIP,
+			@RequestParam String nPort) {
+		String url = "http://"+nIP+":"+nPort+"/api/electronico";
 		Object[] forObject = restTemplate.getForObject(url, Object[].class);
 		System.out.println("Result: "+ forObject);
 		return Arrays.asList(forObject);
@@ -178,14 +179,15 @@ public class WebServiceControlador {
 	 * @return
 	 */
 	@PostMapping("/Reporteria")
-	public Object createPedidos(@RequestParam String nSerie, @RequestParam String nPrecioVenta ) {
+	public Object createPedidos(@RequestParam String nSerie, @RequestParam String nPrecioVenta, @RequestParam String nIP,
+			@RequestParam String nPort ) {
 		
 		HashMap<String,String> body = new HashMap<>();
 		
 		body.put("serie", nSerie);
 		body.put("precioVenta", nPrecioVenta);
 		
-	    String url = "http://localhost:4000/api/reporteria";
+	    String url = "http://"+nIP+":"+nPort+"/api/reporteria";
 
 	    return restTemplate.postForObject(url, body, Object.class);
 	}
@@ -200,7 +202,8 @@ public class WebServiceControlador {
 	 * @return Respuesta de la solicitud
 	 */
 	@PostMapping("/EstadoPedido")
-	public Object estadoPedidos(@RequestParam String nIdPedido, @RequestParam String nCliente,@RequestParam String nEstado,@RequestParam String nResponsable) {
+	public Object estadoPedidos(@RequestParam String nIdPedido, @RequestParam String nCliente,@RequestParam String nEstado,@RequestParam String nResponsable, @RequestParam String nIP,
+			@RequestParam String nPort) {
 		
 		HashMap<String,String> body = new HashMap<>();
 		
@@ -209,7 +212,7 @@ public class WebServiceControlador {
 		body.put("estado", nEstado);
 		body.put("responsable", nResponsable);
 		
-	    String url = "http://localhost:4000/api/pedidos/estado/";
+	    String url = "http://"+nIP+":"+nPort+"/api/pedidos/estado/";
 
 	    return restTemplate.postForObject(url, body, Object.class);
 	}

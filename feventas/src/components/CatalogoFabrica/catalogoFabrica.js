@@ -56,7 +56,7 @@ class CatalogoFabrica extends React.Component{
 
             const url= 'http://localhost:8080/CatalogoFabrica'
             
-            axios.get(url).then(response => response.data)
+            axios.get(url, {params: {nIP: "localhost", nPort: "4000"}}).then(response => response.data)
               .then((data) => {
                     this.setState({inventario: data});
                     console.log(data);

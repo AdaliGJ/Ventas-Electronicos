@@ -62,6 +62,8 @@ addItem = ()=>{
   formData.append('nIdInventario', this.props.id);
   formData.append('nCantidad', this.state.cantidad);
   formData.append('nIdInventarioVentas', this.state.producto);
+  formData.append('nIP', "localhost");
+  formData.append('nPort', "4000");
  
 
 

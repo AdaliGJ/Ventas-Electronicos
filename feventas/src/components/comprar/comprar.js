@@ -99,7 +99,7 @@ class Comprar extends React.Component {
 
                  const url= 'http://localhost:8080/CatalogoFabrica'
             
-                 axios.get(url).then(response => response.data)
+                 axios.get(url, {params: {nIP: "localhost", nPort: "4000"}}).then(response => response.data)
                    .then((data) => {
                          this.setState({inv: data});
                          console.log(data);
@@ -229,6 +229,9 @@ addItem = ()=>{
           let formData2 = new FormData();
           formData2.append("nSerie", data);
           formData2.append("nPrecioVenta", this.props.total/this.props.cantidad);
+          formData.append('nIP', "localhost");
+          formData.append('nPort', "4000");
+ 
 
           axios.post(url4, formData2,  {
               headers: {
@@ -277,6 +280,8 @@ addItem = ()=>{
       formData5.append('nIdInventario', this.state.idFab);
       formData5.append('nCantidad', this.state.cantidad);
       formData5.append('nIdInventarioVentas', this.props.tipo);
+      formData.append('nIP', "localhost");
+      formData.append('nPort', "4000");
      
     
     

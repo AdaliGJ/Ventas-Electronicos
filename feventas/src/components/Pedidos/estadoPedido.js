@@ -55,6 +55,9 @@ addItem = ()=>{
   formData.append('nCliente', this.state.cliente);
   formData.append('nEstado', this.props.estado);
   formData.append('nResponsable', this.context.username);
+  formData.append('nIP', "localhost");
+  formData.append('nPort', "4000");
+ 
  
 
   axios.post(url, formData, {headers: {"Content-Type": "application/json"}})
