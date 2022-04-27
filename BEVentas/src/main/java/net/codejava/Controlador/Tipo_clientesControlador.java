@@ -15,6 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 import net.codejava.Entidad.Tipo_clientes;
 import net.codejava.Repositorio.RepositorioTipo_clientes;
 
+/**
+ * La siguiente clase es el controlador que conforma todos los metodos que iteractuan con la tabla Tipo_clientes en Oracle
+ * Por medio de la entidad y el repositorio correspondiente podemos interactuar con la base de datos a traves de servicios RESTfull
+ * Por lo que las respuestas otorgadas seran en un formato compatible siendo mayormente Json's
+ *
+ */
 @CrossOrigin
 @RestController
 @RequestMapping(path="/Tipo_clientes")

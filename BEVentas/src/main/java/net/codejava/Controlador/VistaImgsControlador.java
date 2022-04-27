@@ -13,6 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 import net.codejava.Entidad.VistaImgs;
 import net.codejava.Repositorio.RepositorioVistaImgs;
 
+/**
+ * La siguiente clase es el controlador que conforma todos los metodos que iteractuan con la vista VistaImgs en Oracle
+ * Por medio de la entidad y el repositorio correspondiente podemos interactuar con la base de datos a traves de servicios RESTfull
+ * Las acciones que podemos realizar estan limitadas a solo selects debido a que las vistas no se pueden modificar
+ * Las respuestas otorgadas seran en un formato compatible siendo mayormente Json's
+ *
+ */
 @CrossOrigin
 @RestController
 @RequestMapping(path="/VistaImgs")

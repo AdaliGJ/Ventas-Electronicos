@@ -16,6 +16,11 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableWebMvc
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
+	
+	/**
+	 * En esta clase se establecen todas las configuraciones y los valores permitidos para la interaccion con los browsers
+	 * Estos valores podran ser configurables en cualquier momento dependiendo de la necesidad del servidor
+	 */
 	protected void configure(HttpSecurity http) throws Exception {
 		CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.setAllowedHeaders(List.of("Authorization", "Cache-Control", "Content-Type", "Access-Control-Allow-Origin",

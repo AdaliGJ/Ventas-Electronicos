@@ -16,6 +16,12 @@ import net.codejava.Entidad.Marcas;
 import net.codejava.Entidad.Ordenes_compra;
 import net.codejava.Repositorio.RepositorioOrdenes_compra;
 
+/**
+ * La siguiente clase es el controlador que conforma todos los metodos que iteractuan con la tabla Ordenes_compra en Oracle
+ * Por medio de la entidad y el repositorio correspondiente podemos interactuar con la base de datos a traves de servicios RESTfull
+ * Por lo que las respuestas otorgadas seran en un formato compatible siendo mayormente Json's
+ *
+ */
 @CrossOrigin
 @RestController
 @RequestMapping(path="/Ordenes_compra")

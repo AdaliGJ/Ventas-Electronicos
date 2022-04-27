@@ -7,6 +7,12 @@ import javax.persistence.Table;
 
 import org.springframework.data.annotation.Immutable;
 
+/**
+ * Esta clase replica la estructura de la vista infocliente definida en Oracle
+ * Esta entidad permitira formar la estructura con los key/values para las respuestas Json
+ * Y permitira la obtencion y modificacion del objeto a traves de sus metodos publicos 
+ *
+ */
 @Entity
 @Immutable
 @Table(name = "infocliente")

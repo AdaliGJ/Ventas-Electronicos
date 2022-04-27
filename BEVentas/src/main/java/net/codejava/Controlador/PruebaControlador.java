@@ -16,11 +16,10 @@ import net.codejava.Entidad.Usuarios;
 import net.codejava.Repositorio.RepositorioPrueba;
 
 /**
- * Repositorio de prueba de CRUD
+ * Controlador de prueba de CRUD con Oracle
  * @author Adalí Garrán, Jorge Guerrero, Javier López
  *
  */
-
 @CrossOrigin
 @RestController
 @RequestMapping(path="/api")

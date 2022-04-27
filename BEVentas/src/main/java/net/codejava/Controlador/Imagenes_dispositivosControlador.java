@@ -16,6 +16,12 @@ import net.codejava.Entidad.Fichas_clientes;
 import net.codejava.Entidad.Imagenes_dispositivos;
 import net.codejava.Repositorio.RepositorioImagenes_dispositivos;
 
+/**
+ * La siguiente clase es el controlador que conforma todos los metodos que iteractuan con la tabla Imagenes_dispositivos en Oracle
+ * Por medio de la entidad y el repositorio correspondiente podemos interactuar con la base de datos a traves de servicios RESTfull
+ * Por lo que las respuestas otorgadas seran en un formato compatible siendo mayormente Json's
+ *
+ */
 @CrossOrigin
 @RestController
 @RequestMapping(path="/Imagenes_dispositivos")

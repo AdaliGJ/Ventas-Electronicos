@@ -18,6 +18,12 @@ import net.codejava.Entidad.Dispositivos_individuales;
 import net.codejava.Entidad.Ventas;
 import net.codejava.Repositorio.RepositorioDispositivos_individuales;
 
+/**
+ * La siguiente clase es el controlador que conforma todos los metodos que iteractuan con la tabla Dispositivos_individuales en Oracle
+ * Por medio de la entidad y el repositorio correspondiente podemos interactuar con la base de datos a traves de servicios RESTfull
+ * Por lo que las respuestas otorgadas seran en un formato compatible siendo mayormente Json's
+ *
+ */
 @CrossOrigin
 @RestController
 @RequestMapping(path="/Dispositivos_individuales")
@@ -33,7 +39,6 @@ public class Dispositivos_individualesControlador {
 	 * Query a la tabla DISPOSITIVOS_INDIVIDUALES para obtener todos los datos de la tabla DISPOSITIVOS_INDIVIDUALES
 	 * @return objeto JSON con todos los registros
 	 */
-	
 	@GetMapping("/ObtenerTodos")
 	public @ResponseBody Iterable<Dispositivos_individuales> getAll(){
 		return repositorioDispositivosIndividuales.findByVendido(0);
