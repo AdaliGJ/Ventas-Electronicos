@@ -19,6 +19,13 @@ import static org.springframework.http.MediaType.APPLICATION_JSON;
 
 import net.codejava.Entidad.Pedidos;
 
+/**
+ * Esta clase se encuentran los metodos Webservice para realizar la comunicacion con los servidores BE de las fabricas
+ * Los servidores BE de cada sistema deberan ser los reguladores de la comunicacion entre sistemas
+ * Esta clase esta definida que la comunicacion sera via REST por lo que las respuestas y peticiones seran en un formato compatible mayormente siendo Json's
+ * En esta clase podran existir interacciones con la base de datos por lo que se deberan importar las entidades y repositorios necesarios
+ *
+ */
 @RestController
 public class WebServiceControlador {
 	
@@ -223,9 +230,9 @@ public class WebServiceControlador {
 	 * @param nSerie Identificador del dispositivo
 	 * @return Respuesta de la solicitud
 	 */
-	@GetMapping("/ValidarGarantia")
-	public Object validarGarantia(@RequestParam String nIP, @RequestParam String nSerie) {
-		String url = "http://"+nIP+":4000/api/garantia/devolver/" + nSerie;
+	@GetMapping("/DevolucionGarantia")
+	public Object devolucionGarantia(@RequestParam String nIP, @RequestParam String nSerie,@RequestParam String nPort) {
+		String url = "http://"+nIP+":"+nPort+"/api/garantia/devolver/" + nSerie;
 		Object forObject = restTemplate.getForObject(url, Object.class);
 		System.out.println("Result: "+ forObject);
 		return forObject;

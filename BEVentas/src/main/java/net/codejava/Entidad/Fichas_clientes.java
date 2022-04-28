@@ -7,6 +7,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * Esta clase replica la estructura de la tabla fichas_clientes definida en Oracle
+ * Esta entidad permitira formar la estructura con los key/values para las respuestas Json
+ * Y permitira la obtencion y modificacion del objeto a traves de sus metodos publicos 
+ *
+ */
 @Entity
 @Table(name = "fichas_clientes")
 public class Fichas_clientes {

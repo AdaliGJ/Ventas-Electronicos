@@ -7,6 +7,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * Entidad de prueba para el manejo de objetos y respuestas Json
+ *
+ */
 @Entity
 @Table(name = "prueba")
 public class Prueba {

@@ -15,6 +15,12 @@ import net.codejava.Entidad.Clientes;
 import net.codejava.Entidad.Fichas_clientes;
 import net.codejava.Repositorio.RepositorioFicha_clientes;
 
+/**
+ * La siguiente clase es el controlador que conforma todos los metodos que iteractuan con la tabla Fichas_cliente en Oracle
+ * Por medio de la entidad y el repositorio correspondiente podemos interactuar con la base de datos a traves de servicios RESTfull
+ * Por lo que las respuestas otorgadas seran en un formato compatible siendo mayormente Json's
+ *
+ */
 @CrossOrigin
 @RestController
 @RequestMapping(path="/Fichas_clientes")

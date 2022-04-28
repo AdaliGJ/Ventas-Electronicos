@@ -19,11 +19,18 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @SpringBootApplication
 public class VentasApplication {
 
-	
+	/**
+	 * Esta clase es la encargade de levantar la instancia de la aplicacion cargando todas las dependencias
+	 * 
+	 */
 	public static void main(String[] args) {
 		SpringApplication.run(VentasApplication.class, args);
 	}
 
+	/**
+	 * Esta clase es una configuracion adicional la cual busca resolver el problema de Cross-Origin 
+	 * @return Devuelve la configuracion establecida permitiendo los mapping, metodos, headers y origenes en los browsers
+	 */
 	@Bean
 	public WebMvcConfigurer corsConfigurer() {
 		return new WebMvcConfigurer() {

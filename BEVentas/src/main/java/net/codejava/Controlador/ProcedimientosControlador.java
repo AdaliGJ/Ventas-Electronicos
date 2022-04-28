@@ -11,6 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import net.codejava.Entidad.Ventas;
 
+/**
+ * Esta clase es un controlador conformado por metodos que implementan procedimientos almacenados definidos en la BD de Oracle
+ * Permite la interaccion con Oracle sin realizar manejo de entidades ni repositorios
+ *
+ */
 @CrossOrigin
 @RestController
 @RequestMapping(path="/Procedimiento")

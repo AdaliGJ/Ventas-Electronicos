@@ -9,8 +9,9 @@ import javax.persistence.Table;
 
 
 /**
- * Entidad de clientes utilizada para elementos de la tabla clientes
- * @author Adalí Garrán
+ * Esta clase replica la estructura de la tabla clientes definida en Oracle
+ * Esta entidad permitira formar la estructura con los key/values para las respuestas Json
+ * Y permitira la obtencion y modificacion del objeto a traves de sus metodos publicos 
  *
  */
 

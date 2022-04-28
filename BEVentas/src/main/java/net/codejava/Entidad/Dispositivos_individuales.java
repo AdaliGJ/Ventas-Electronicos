@@ -8,8 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * Entidad de clientes utilizada para elementos de la tabla DISPOSITIVOS_INDIVIDUALES
- * @author javie
+ * Esta clase replica la estructura de la tabla dipositivos_individuales definida en Oracle
+ * Esta entidad permitira formar la estructura con los key/values para las respuestas Json
+ * Y permitira la obtencion y modificacion del objeto a traves de sus metodos publicos 
  *
  */
 @Entity
@@ -90,8 +91,6 @@ public class Dispositivos_individuales {
 	/**
 	 * Mètodo para volver string al objeto Dispositivos_individuales
 	 */
-
-	
 	@Override
 	public String toString() {
 		return "Dispositivos_individuales [serie=" + serie + ", id_inventario=" + idInventario + ", vendido=" + vendido

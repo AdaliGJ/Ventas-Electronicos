@@ -19,6 +19,12 @@ import net.codejava.Entidad.Marcas;
 import net.codejava.Entidad.Pedidos;
 import net.codejava.Repositorio.RepositorioPedidos;
 
+/**
+ * La siguiente clase es el controlador que conforma todos los metodos que iteractuan con la tabla Pedidos en Oracle
+ * Por medio de la entidad y el repositorio correspondiente podemos interactuar con la base de datos a traves de servicios RESTfull
+ * Por lo que las respuestas otorgadas seran en un formato compatible siendo mayormente Json's
+ *
+ */
 @CrossOrigin
 @RestController 
 @RequestMapping(path="/Pedidos")
@@ -60,7 +66,7 @@ public class PedidosControlador {
 	}
 	
 	/**
-	 * Creación de un nuevo pedido
+	 * Creación de un nuevo pedido por medio de un procedimiento almacenado
 	 * @param nidpedido Identificador del nuevo pedido
 	 * @param nfecha Fecha de realización del pedido
 	 * @param nidInventario Tipo de producto a encargar

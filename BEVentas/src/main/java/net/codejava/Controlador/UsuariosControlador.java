@@ -17,6 +17,12 @@ import net.codejava.Entidad.Clientes;
 import net.codejava.Entidad.Usuarios;
 import net.codejava.Repositorio.RepositorioUsuarios;
 
+/**
+ * La siguiente clase es el controlador que conforma todos los metodos que iteractuan con la tabla Usuarios en Oracle
+ * Por medio de la entidad y el repositorio correspondiente podemos interactuar con la base de datos a traves de servicios RESTfull
+ * Por lo que las respuestas otorgadas seran en un formato compatible siendo mayormente Json's
+ *
+ */
 @CrossOrigin
 @RestController
 @RequestMapping(path="/Usuarios")
