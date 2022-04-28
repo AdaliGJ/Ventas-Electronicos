@@ -37,8 +37,8 @@ function FabricaLog(props){
         let formData = new FormData();
         formData.append('nCliente', usuarioRef.current.value);
         formData.append('nPassword', contRef.current.value);
-        formData.append('nIP', ipRef.current.value);
-        formData.append('nPort', portRef.current.value);
+        formData.append('nIP', dirip);
+        formData.append('nPort', port);
                
         axios.post(url, formData,  {
             headers: {
@@ -89,7 +89,7 @@ function FabricaLog(props){
                               }} inputRef={contRef}/>
                         </Grid>
                         <Grid item>
-                            <TextField className="standard-basic" label="Dirección IP de la Fábrica" onChange={e=>setDirIp(e.target.value)}/>
+                            <TextField className="standard-basic" label="Dirección IP de la Fábrica" onChange={e=>setDirIp(e.target.value)} />
                         </Grid>
                         <Grid item>
                             <TextField className="standard-basic" label="Puerto a conectarse" type="text" onChange={e=>setPort(e.target.value)}/>

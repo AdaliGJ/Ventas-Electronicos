@@ -12,7 +12,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { LoginContext } from '../../context/LoginContext.js';
 import Alert from '@material-ui/lab/Alert';
 import './clientes.css';
-import axios from 'axios'
+import axios from 'axios';
+import ClientsTable from './tablaClientes';
 
 
 class Clientes extends React.Component{
@@ -152,6 +153,7 @@ class Clientes extends React.Component{
     render(){
         return(
             <div className="data">
+                {this.context.tipoUsuario==1?
                 <Card className="data_form" mt={5}>
                 <CardContent className="content">
                     <h1>Registrar cliente</h1>
@@ -196,7 +198,8 @@ class Clientes extends React.Component{
 
                     </Grid>
                 </CardActions>
-                </Card>
+                </Card>:null }
+                <ClientsTable/>
             </div>
         );
     }

@@ -65,9 +65,11 @@ class Footer extends Component{
                                     <div>
                                         <FooterBox link='/cliente_nuevo' title="Clientes"/>
                                         <FooterBox link='/signUp' title="Usuarios"/>
+                                        <FooterBox link='/credito' title="Ventas Crédito"/>
                                     </div>:
                                     <div>
                                         <FooterBox link='/cliente_nuevo' title="Clientes"/>
+                                        <FooterBox link='/credito' title="Ventas Crédito"/>
                                     </div>
                                     }
                             </Grid>

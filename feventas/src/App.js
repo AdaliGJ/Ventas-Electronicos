@@ -14,6 +14,7 @@ import Inventario from "./components/Inventario/inventario.js";
 import FabricaLog from "./components/FabricaLog/fabricaLog.js";
 import CatalogoFabrica from "./components/CatalogoFabrica/catalogoFabrica.js";
 import Pedidos from "./components/Pedidos/pedidos.js";
+import Credito from "./components/Credito/credito.js";
 
 function App() {
   const getUsername=()=>{
@@ -70,6 +71,7 @@ function App() {
           <Route exact path="/pedir" component={FabricaLog}/>
           <Route exact path="/catalogo-fabrica" component={CatalogoFabrica}/>
           <Route exact path="/pedidos" component={Pedidos}/>
+          <Route exact path="/credito" component={Credito}/>
           <Redirect path="/" to="/home"></Redirect>
         </Switch>
         : tipoUsuario == 2 ?
@@ -79,6 +81,8 @@ function App() {
           <Route exact path="/marcas" component={Marcas}/>
           <Route exact path="/inventario" component={Inventario}/>
           <Route exact path="/pedidos" component={Pedidos}/>
+          <Route exact path="/cliente_nuevo" component={Clientes}/>
+          <Route exact path="/credito" component={Credito}/>
           <Redirect path="/" to="/home"></Redirect>
         </Switch>: <Switch> 
           <Route exact path="/login" component={Login}/>
