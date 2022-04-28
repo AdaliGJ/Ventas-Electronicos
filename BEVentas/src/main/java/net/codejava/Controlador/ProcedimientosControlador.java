@@ -1,8 +1,12 @@
 package net.codejava.Controlador;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,11 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import net.codejava.Entidad.Ventas;
 
-/**
- * Esta clase es un controlador conformado por metodos que implementan procedimientos almacenados definidos en la BD de Oracle
- * Permite la interaccion con Oracle sin realizar manejo de entidades ni repositorios
- *
- */
 @CrossOrigin
 @RestController
 @RequestMapping(path="/Procedimiento")
@@ -49,6 +48,21 @@ public class ProcedimientosControlador {
 		String Sql = "call cambiopermisos(?, ?)";
 		jdbcTemplate.update(Sql, nId, nAccion);
 		
+	}
+	
+	@PostMapping("/CambioFecha")
+	@ResponseBody
+	public void cambioF(@RequestParam int nId, @RequestParam int nAccion, @RequestParam String nFecha) {
+		String Sql = "call clientesuscrito(?, ?, ?)";
+		jdbcTemplate.update(Sql, nId, nAccion, nFecha);
+		
+	}
+	
+	@GetMapping("/Credito")
+	public @ResponseBody List<Map<String, Object>> getCant(){
+		 String sql = "select deuda(id_cliente), id_cliente from ordenes_compra group by id_cliente having deuda(id_cliente)>0";
+		
+		 return jdbcTemplate.queryForList("select deuda(id_cliente) deuda, id_cliente from ordenes_compra group by id_cliente having deuda(id_cliente)>0");
 	}
 	
 	
