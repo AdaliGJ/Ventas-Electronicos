@@ -27,6 +27,12 @@ public class PruebaControlador {
 
 	@Autowired
 	private RepositorioPrueba repositorioPrueba;
+	
+	/**
+	 * Constructor de la clase PruebaControlador
+	 */
+	public PruebaControlador(){}
+	
 	/*
 	@Autowired
 	private JdbcTemplate jdbcTemplate;

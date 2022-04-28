@@ -29,6 +29,11 @@ public class TelevisoresControlador {
 	private RepositorioTelevisores repositorioTelevisores;
 	
 	/**
+	 * Constructor de la clase TelevisoresControlador
+	 */
+	public TelevisoresControlador(){}
+	
+	/**
 	 * Query a la tabla TELEVISORES para obtener todos los datos de la tabla TELEVISORES
 	 * @return objeto JSON con todos los registros
 	 */

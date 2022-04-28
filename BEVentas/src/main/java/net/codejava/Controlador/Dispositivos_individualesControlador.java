@@ -36,6 +36,11 @@ public class Dispositivos_individualesControlador {
 	private RepositorioDispositivos_individuales repositorioDispositivosIndividuales;
 	
 	/**
+	 * Constructor de la clase Dispositivos_individualesControlador
+	 */
+	public Dispositivos_individualesControlador(){}
+	
+	/**
 	 * Query a la tabla DISPOSITIVOS_INDIVIDUALES para obtener todos los datos de la tabla DISPOSITIVOS_INDIVIDUALES
 	 * @return objeto JSON con todos los registros
 	 */

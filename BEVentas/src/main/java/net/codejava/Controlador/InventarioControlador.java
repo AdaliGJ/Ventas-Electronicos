@@ -30,6 +30,11 @@ public class InventarioControlador {
 	private RepositorioInventario repositorioInventario;
 	
 	/**
+	 * Constructor de la clase InventarioControlador
+	 */
+	public InventarioControlador(){}
+	
+	/**
 	 * Query a la tabla INVENTARIO para obtener todos los datos de la tabla INVENTARIO
 	 * @return objeto JSON con todos los registros
 	 */

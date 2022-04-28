@@ -30,6 +30,11 @@ public class Tipo_clientesControlador {
 	private RepositorioTipo_clientes repositorioTipoClientes;
 	
 	/**
+	 * Constructor de la clase Tipo_clientesControlador
+	 */
+	public Tipo_clientesControlador(){}
+	
+	/**
 	 * Query a la tabla TIPO_CLIENTES para obtener todos los datos de la tabla TIPO_CLIENTES
 	 * @return objeto JSON con todos los registros
 	 */

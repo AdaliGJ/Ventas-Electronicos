@@ -30,6 +30,11 @@ public class VistaCatalogoControlador {
 	private RepositorioVistaCatalogo repositorioVistaCatalogo;
 	
 	/**
+	 * Constructor de la clase VistaCatalogoControlador
+	 */
+	public VistaCatalogoControlador(){}
+	
+	/**
 	 * Obtener catálogo de dispositivos de menor a mayor
 	 * @return Catálogo ordenado
 	 */

@@ -30,6 +30,11 @@ public class Fichas_clienteControlador {
 	private RepositorioFicha_clientes repositorioFichasClientes;
 	
 	/**
+	 * Constructor de la clase Fichas_clienteControlador
+	 */
+	public Fichas_clienteControlador(){}
+	
+	/**
 	 * Query a la tabla FICHAS_CLIENTES para obtener todos los datos de la tabla FICHAS_CLIENTES
 	 * @return objeto JSON con todos los registros
 	 */

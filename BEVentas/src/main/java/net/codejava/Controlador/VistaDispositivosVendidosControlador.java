@@ -29,6 +29,11 @@ public class VistaDispositivosVendidosControlador {
 	private RepositorioVistaDispositivosVendidos repositorioVistaDispositivosVendidos;
 	
 	/**
+	 * Constructor de la clase VistaDispositivosVendidosControlador
+	 */
+	public VistaDispositivosVendidosControlador(){}
+	
+	/**
 	 *  Query a la tabla VISTA_DISPOSITIVOS_VENDIDOS para obtener todos los datos de la tabla VISTA_DISPOSITIVOS_VENDIDOS
 	 * @return objeto JSON con todos los registros
 	 */

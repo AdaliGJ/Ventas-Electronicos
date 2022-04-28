@@ -32,6 +32,12 @@ public class MarcasControlador {
 	private JdbcTemplate jdbcTemplate;
 	
 	/**
+	 * Constructor de la clase MarcasControlador
+	 */
+	public MarcasControlador(){}
+	
+	
+	/**
 	 * Query a la tabla MARCAS para obtener todos los datos de la tabla MARCAS
 	 * @return objeto JSON con todos los registros
 	 */

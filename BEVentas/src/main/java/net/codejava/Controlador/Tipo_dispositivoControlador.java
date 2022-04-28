@@ -29,6 +29,11 @@ public class Tipo_dispositivoControlador {
 	private RepositorioTipo_dispositivo repositorioTipoDispositivo;
 	
 	/**
+	 * Constructor de la clase Tipo_dispositivoControlador
+	 */
+	public Tipo_dispositivoControlador(){}
+	
+	/**
 	 * Query a la tabla TIPO_DISPOSITIVO para obtener todos los datos de la tabla TIPO_DISPOSITIVO
 	 * @return objeto JSON con todos los registros
 	 */

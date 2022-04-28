@@ -27,6 +27,10 @@ public class Tipo_usuarioControlador {
 	@Autowired
 	private RepositorioTipo_usuarios repositorioTipoUsuario;
 	
+	/**
+	 * Constructor de la clase Tipo_usuarioControlador
+	 */
+	public Tipo_usuarioControlador(){}
 	
 	/**
 	 * Query a la tabla TIPO_USUARIO para obtener todos los datos de la tabla TIPO_USUARIO

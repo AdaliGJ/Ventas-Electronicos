@@ -25,6 +25,11 @@ public class ProcedimientosControlador {
 	private JdbcTemplate jdbcTemplate;
 	
 	/**
+	 * Constructor de la clase ProcedimientosControlador
+	 */
+	public ProcedimientosControlador(){}
+	
+	/**
 	 * Prueba de POST
 	 * @param nIdInventario
 	 * @param nDescripcion

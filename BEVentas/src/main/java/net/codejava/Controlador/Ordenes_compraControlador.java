@@ -31,6 +31,11 @@ public class Ordenes_compraControlador {
 	private RepositorioOrdenes_compra repositorioOrdenesCompra;
 	
 	/**
+	 * Constructor de la clase Ordenes_compraControlador
+	 */
+	public Ordenes_compraControlador(){}
+	
+	/**
 	 * Query a la tabla ORDENES_COMPRA para obtener todos los datos de la tabla ORDENES_COMPRA
 	 * @return objeto JSON con todos los registros
 	 */

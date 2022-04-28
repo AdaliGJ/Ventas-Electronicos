@@ -31,6 +31,10 @@ public class UsuariosControlador {
 	@Autowired
 	private RepositorioUsuarios repositorioUsuarios;
 	
+	/**
+	 * Constructor de la clase UsuariosControlador
+	 */
+	public UsuariosControlador(){}
 	
 	/**]
 	 * Query a la tabla USUARIOS para obtener todos los datos de la tabla USUARIOS

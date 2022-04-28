@@ -28,6 +28,10 @@ public class Factura_controlador {
 	@Autowired
 	private RepositorioFactura repositorioFactura;
 	
+	/**
+	 * Constructor de la clase Factura_controlador
+	 */
+	public Factura_controlador(){}
 	
 	/**
 	 * Query a la tabla FACTURA para obtener todos los datos de la tabla FACTURA

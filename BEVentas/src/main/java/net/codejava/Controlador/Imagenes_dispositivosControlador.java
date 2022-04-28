@@ -26,6 +26,11 @@ import net.codejava.Repositorio.RepositorioImagenes_dispositivos;
 @RestController
 @RequestMapping(path="/Imagenes_dispositivos")
 public class Imagenes_dispositivosControlador {
+	
+	/**
+	 * Constructor de la clase Imagenes_dispositivosControlador
+	 */
+	public Imagenes_dispositivosControlador(){}
 
 
 	@Autowired

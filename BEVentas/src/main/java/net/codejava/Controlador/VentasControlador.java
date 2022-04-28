@@ -46,6 +46,11 @@ public class VentasControlador {
 	private JdbcTemplate jdbcTemplate;
 	
 	/**
+	 * Constructor de la clase VentasControlador
+	 */
+	public VentasControlador(){}
+	
+	/**
 	 * Query a la tabla VENTAS para obtener todos los datos de la tabla VENTAS
 	 * @return objeto JSON con todos los registros
 	 */

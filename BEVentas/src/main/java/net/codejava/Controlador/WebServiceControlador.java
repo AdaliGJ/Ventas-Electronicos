@@ -24,6 +24,7 @@ public class WebServiceControlador {
 	
 	private final RestTemplate restTemplate;
 	
+	
 	@Autowired
 	public WebServiceControlador(RestTemplate restTemplate) {
 		this.restTemplate = restTemplate;

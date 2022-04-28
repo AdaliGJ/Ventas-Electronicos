@@ -29,6 +29,10 @@ public class ClientesControlador {
 	@Autowired
 	private RepositorioClientes repositorioClientes;
 	
+	/**
+	 * Constructor de la clase ClientesControlador
+	 */
+	public ClientesControlador(){}
 	
 	/**
 	 * Realizacion de query a la tabla CLIENTES para obtener todos los datos de la tabla CLIENTES

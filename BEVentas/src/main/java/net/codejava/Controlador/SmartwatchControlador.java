@@ -30,6 +30,11 @@ public class SmartwatchControlador {
 	private RepositorioSmartwatch repositorioSmartwatch;
 	
 	/**
+	 * Constructor de la clase SmartwatchControlador
+	 */
+	public SmartwatchControlador(){}
+	
+	/**
 	 * Query a la tabla SMARTWATCH para obtener todos los datos de la tabla SMARTWATCH
 	 * @return objeto JSON con todos los registros
 	 */

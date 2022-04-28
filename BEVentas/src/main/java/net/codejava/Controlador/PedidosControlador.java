@@ -36,6 +36,11 @@ public class PedidosControlador {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
+	/**
+	 * Constructor de la clase PedidosControlador
+	 */
+	public PedidosControlador(){}
+	
 	
 	/**
 	 * Actualizar el Estado de un pedido

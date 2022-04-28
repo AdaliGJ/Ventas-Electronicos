@@ -29,6 +29,11 @@ public class VistaImgsControlador {
 	private RepositorioVistaImgs repositorioVistaImgs;
 	
 	/**
+	 * Constructor de la clase VistaImgsControlador
+	 */
+	public VistaImgsControlador(){}
+	
+	/**
 	 * Query a la tabla VISTAIMGS para obtener todos los datos de la tabla VISTAIMGS
 	 * @return objeto JSON con todos los registros
 	 */

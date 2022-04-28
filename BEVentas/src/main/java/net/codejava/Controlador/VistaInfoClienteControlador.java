@@ -30,6 +30,11 @@ public class VistaInfoClienteControlador {
 	private RepositorioVistaInfoCliente repositorioVistaInfoCliente;
 	
 	/**
+	 * Constructor de la clase VistaInfoClienteControlador
+	 */
+	public VistaInfoClienteControlador(){}
+	
+	/**
 	 *  Query a la tabla VISTAINFO para obtener todos los datos de la tabla VISTAINFO
 	 * @return objeto JSON con todos los registros
 	 */

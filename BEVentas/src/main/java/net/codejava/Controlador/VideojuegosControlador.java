@@ -29,6 +29,11 @@ public class VideojuegosControlador {
 	private RepositorioVideojuegos repositorioVideojuegos;
 	
 	/**
+	 * Constructor de la clase VideojuegosControlador
+	 */
+	public VideojuegosControlador(){}
+	
+	/**
 	 * Query a la tabla VIDEOJUEGOS para obtener todos los datos de la tabla VIDEOJUEGOS
 	 * @return objeto JSON con todos los registros
 	 */
