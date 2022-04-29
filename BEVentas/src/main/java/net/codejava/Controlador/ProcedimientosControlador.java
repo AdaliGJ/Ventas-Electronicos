@@ -71,12 +71,6 @@ public class ProcedimientosControlador {
 		
 	}
 	
-	@GetMapping("/Credito")
-	public @ResponseBody List<Map<String, Object>> getCant(){
-		 String sql = "select deuda(id_cliente), id_cliente from ordenes_compra group by id_cliente having deuda(id_cliente)>0";
-		
-		 return jdbcTemplate.queryForList("select deuda(id_cliente) deuda, id_cliente from ordenes_compra group by id_cliente having deuda(id_cliente)>0");
-	}
 	
 	
 	/**
@@ -138,7 +132,40 @@ public class ProcedimientosControlador {
 		
 	}
 	
+	@GetMapping("/Credito")
+	public @ResponseBody List<Map<String, Object>> getCant(){
+		 String sql = "select deuda(id_cliente), id_cliente from ordenes_compra group by id_cliente having deuda(id_cliente)>0";
+		
+		 return jdbcTemplate.queryForList("select deuda(id_cliente) deuda, id_cliente from ordenes_compra group by id_cliente having deuda(id_cliente)>0");
+	}
 	
+	
+	@GetMapping("/GetMap")
+	public @ResponseBody int getVenta(@RequestParam String nId){
+		 String sql = "SELECT idinventario from mapeotabla where idfabrica = ? FETCH NEXT 1 ROWS ONLY";
+		
+		 return jdbcTemplate.queryForObject(
+	                sql, new Object[]{nId}, int.class);
+	}
+	
+	@GetMapping("/GetIP")
+	public @ResponseBody String getIp(@RequestParam int nId){
+		
+		 String sql1 = "SELECT count(*) from mapeotabla where idinventario = ? FETCH NEXT 1 ROWS ONLY";
+			
+		 int count= jdbcTemplate.queryForObject(
+	                sql1, new Object[]{nId}, int.class);
+		 
+		 if(count == 1) {
+		
+		 String sql = "SELECT ip from mapeotabla inner join marcas on marca = id_marca where idinventario = ? FETCH NEXT 1 ROWS ONLY";
+		
+		 return jdbcTemplate.queryForObject(
+	                sql, new Object[]{nId}, String.class);
+		 }else {
+			 return "no";
+		 }
+	}
 	
 	
 }

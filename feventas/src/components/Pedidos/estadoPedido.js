@@ -26,7 +26,9 @@ class EstadoPedido extends React.Component {
           producto: null,
           id: props.comp? props.prod:null,
           usuario: null,
-          cliente: ''
+          cliente: '',
+          ip: '',
+          registrado: false
           
       }
       this.handleOpen=this.handleOpen.bind(this);
@@ -55,7 +57,7 @@ addItem = ()=>{
   formData.append('nCliente', this.state.cliente);
   formData.append('nEstado', this.props.estado);
   formData.append('nResponsable', this.context.username);
-  formData.append('nIP', "localhost");
+  formData.append('nIP', this.state.ip);
   formData.append('nPort', "4000");
  
  
@@ -102,6 +104,20 @@ updateItem = ()=> {
   const context = this.context;
   this.setState({usuario: context.tipoUsuario});
 
+  const url= 'http://localhost:8080/Procedimiento/GetIP';
+
+  axios.get(url, {params: {nId: this.props.id2}}).then(response => response.data)
+    .then((data) => {
+        if(data=="no"){
+          this.setState({registrado: true})
+        }else{
+          this.setState({ip: data})
+          this.setState({registrado: false})
+        }
+        
+        //console.log(data);
+  });
+
  }
 
   render(){
@@ -116,6 +132,10 @@ updateItem = ()=> {
             <Grid item>
               <TextField className="modalfield" label="ID Cliente" type="text" variant="outlined" onInput={e=>this.setState({cliente: e.target.value})}  value={this.state.cliente}/> 
             </Grid>
+            {this.state.registrado?
+            <Grid item>
+              <TextField className="modalfield" label="IP Marca" type="text" variant="outlined" onInput={e=>this.setState({ip: e.target.value})}  value={this.state.ip}/> 
+            </Grid>:null}
             
               <Button id="agregarInv" onClick={this.addItem}>Agregar</Button>
           

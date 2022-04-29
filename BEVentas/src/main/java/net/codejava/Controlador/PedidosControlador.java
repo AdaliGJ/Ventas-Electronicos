@@ -70,6 +70,14 @@ public class PedidosControlador {
 	                sql, new Object[]{}, int.class);
 	}
 	
+	@GetMapping("/ContarMap")
+	public @ResponseBody int getContar(@RequestParam String nId){
+		 String sql = "SELECT count(*) from mapeotabla where idfabrica = ?";
+		
+		 return jdbcTemplate.queryForObject(
+	                sql, new Object[]{nId}, int.class);
+	}
+	
 	/**
 	 * Creación de un nuevo pedido por medio de un procedimiento almacenado
 	 * @param nidpedido Identificador del nuevo pedido

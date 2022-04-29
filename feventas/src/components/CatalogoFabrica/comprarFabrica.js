@@ -31,7 +31,8 @@ class ComprarFabrica extends React.Component {
           today: new Date(),
           cliente: '',
           inventario:  [ ],
-          producto:''
+          producto:'',
+          contar: false
           
       }
       this.handleOpen=this.handleOpen.bind(this);
@@ -62,7 +63,7 @@ addItem = ()=>{
   formData.append('nIdInventario', this.props.id);
   formData.append('nCantidad', this.state.cantidad);
   formData.append('nIdInventarioVentas', this.state.producto);
-  formData.append('nIP', "localhost");
+  formData.append('nIP', this.props.ip);
   formData.append('nPort', "4000");
  
 
@@ -103,6 +104,7 @@ addItem = ()=>{
     cliente: context.cliente});
 
     const url= 'http://localhost:8080/Pedidos/ObtenerId'
+   
           
             axios.get(url).then(response => response.data)
               .then((data) => {
@@ -123,6 +125,29 @@ addItem = ()=>{
                 console.log(this.state.inventario);
               });
 
+            const url3= 'http://localhost:8080/Pedidos/ContarMap'
+            axios.get(url3, {params: {nId: this.props.id}}).then(response => response.data)
+            .then((data) => {
+              if(data == 0){
+                  this.setState({contar: true})
+              }else
+              {
+                this.setState({contar: false})
+                const url4= 'http://localhost:8080/Procedimiento/GetMap';
+
+                axios.get(url4, {params: {nId: this.props.id}}).then(response => response.data)
+                .then((data2) => {
+                  this.setState({producto: data2})
+                  console.log(data2);
+                });
+
+                
+              }
+              
+              console.log(data);
+             
+            });
+
  }
 
   render(){
@@ -137,6 +162,7 @@ addItem = ()=>{
             <Grid item>
               <TextField className="modalfield" label="ID Producto" type="text" variant="outlined" onInput={e=>this.setState({id: e.target.value})}  value={this.state.id}/> 
             </Grid>
+            {this.state.contar?
             <Grid item>
               <FormControl className="modalfield" variant ="outlined">
                     <InputLabel>ID Inventario</InputLabel>
@@ -146,7 +172,7 @@ addItem = ()=>{
                     ))}
                     </Select>
                 </FormControl>
-            </Grid>
+            </Grid>:null}
             <Grid item>
               <TextField className="modalfield" label="Cantidad" type="number" variant="outlined" onInput={e=>this.setState({cantidad: e.target.value})}  value={this.state.cantidad}/> 
             </Grid>

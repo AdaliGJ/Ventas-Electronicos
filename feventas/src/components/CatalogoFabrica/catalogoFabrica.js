@@ -149,7 +149,7 @@ class CatalogoFabrica extends React.Component{
                                                                                     <li>{"Sistema Operativo: "+inv.sistemaOperativo}</li></ul>}</TableCell>
 
                                             :<TableCell></TableCell>}
-                                            <StyledTableCell align="right">{<ComprarFabrica id={inv._id}/>}</StyledTableCell>
+                                            <StyledTableCell align="right">{<ComprarFabrica id={inv._id} ip={this.state.marca.ip}/>}</StyledTableCell>
                                             {inv.categoria=="Televisor"?
                                              <StyledTableCell align="right">{<NuevoCatalogo comp={false} titulo={"Añadir"} edit={true}
                                                     color={inv.color}

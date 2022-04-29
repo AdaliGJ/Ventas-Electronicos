@@ -77,7 +77,7 @@ class Footer extends Component{
                                 <Box borderBottom={1}>Pedidos</Box>
                                 {this.context.tipoUsuario==1?
                                      <div>
-                                        <FooterBox link='/pedir' title="Pedir"/>
+                                        <FooterBox link='/catalogo-fabrica' title="Pedir"/>
                                         <FooterBox link='/pedidos' title="Pedidos"/>
                                     </div>:this.context.tipoUsuario==2?
                                      <div>

@@ -170,7 +170,7 @@ class Pedidos extends React.Component{
                                             </TableCell>
                                         <TableCell align="right">{inv.idInventario}</TableCell>
                                         <TableCell align="right">{inv.cantidad}</TableCell>
-                                        <TableCell align="right"><EstadoPedido titulo={<DeleteForever/>} id={inv.idpedido} estado={'cancelado'}/></TableCell>
+                                        <TableCell align="right"><EstadoPedido titulo={<DeleteForever/>} id2={inv.idInventario} id={inv.idpedido} estado={'cancelado'}/></TableCell>
                                         </TableRow>
                                     ))}
                                     </TableBody>:
@@ -215,7 +215,7 @@ class Pedidos extends React.Component{
                                             </TableCell>
                                         <TableCell align="right">{inv.idInventario}</TableCell>
                                         <TableCell align="right">{inv.cantidad}</TableCell>
-                                        <TableCell align="right"><EstadoPedido titulo={<CheckCircle/>} id={inv.idpedido} estado={'recibido'}/></TableCell>
+                                        <TableCell align="right"><EstadoPedido titulo={<CheckCircle/>} id={inv.idpedido} id2={inv.idInventario} estado={'recibido'}/></TableCell>
                                         </TableRow>
                                     ))}
                                     </TableBody>:
