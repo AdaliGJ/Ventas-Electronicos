@@ -79,9 +79,11 @@ class Footer extends Component{
                                      <div>
                                         <FooterBox link='/catalogo-fabrica' title="Pedir"/>
                                         <FooterBox link='/pedidos' title="Pedidos"/>
+                                        <FooterBox link='/garantias' title="Garantías"/>
                                     </div>:this.context.tipoUsuario==2?
                                      <div>
                                         <FooterBox link='/pedidos' title="Pedidos"/>
+                                        <FooterBox link='/garantias' title="Garantías"/>
                                     </div>:null
                                     }
                                     
