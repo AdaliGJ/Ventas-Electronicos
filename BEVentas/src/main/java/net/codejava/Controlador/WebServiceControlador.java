@@ -79,7 +79,7 @@ public class WebServiceControlador {
 			@RequestParam String nIP,
 			@RequestParam String nPort) {
 		
-	    String url = "http://"+nIP+":"+nPort+"4000/api/pedidos";
+	    String url = "http://"+nIP+":"+nPort+"/api/pedidos";
 
 	    HttpHeaders headers;
 	   // headers.setContentType(APPLICATION_JSON);
