@@ -16,6 +16,13 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import ComprarFabrica from './comprarFabrica'
 import Icon from '@mui/material/Icon';
+import NuevoCatalogo from '../NuevoCatalogo/nuevoCatalogo';
+
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import SearchIcon from '@material-ui/icons/Search';
 
 const StyledTableCell = withStyles({
     root: {
@@ -40,34 +47,63 @@ class CatalogoFabrica extends React.Component{
         this.state={
             id: this.props.match.params.id,
             marca: "",
+            ip: "",
             tipo_disp: '3',
             total: 0,
             inventario: '',
             televisor:'',
             imgs: [{imagen: ''}],
-            inventario: [{}]
+            inventario: [{}],
+            marcas:  [{}]
         }
     } 
    
+    buscar=()=>{
+        const url= 'http://localhost:8080/CatalogoFabrica'
+            
+        axios.get(url, {params: {nIP: this.state.marca.ip, nPort: "4000"}}).then(response => response.data)
+          .then((data) => {
+                this.setState({inventario: data});
+                console.log(data);
+            }
+        
+          );
+        console.log(this.state.marca);
+    }
+
+    
+
     componentDidMount(){
         const context = this.context;
         this.setState({usuario: context.username,
             tipo_usuario: context.tipoUsuario});
 
-            const url= 'http://localhost:8080/CatalogoFabrica'
-            
-            axios.get(url, {params: {nIP: "localhost", nPort: "4000"}}).then(response => response.data)
+            const url= 'http://localhost:8080/Marca/ObtenerTodos'
+
+            axios.get(url).then(response => response.data)
               .then((data) => {
-                    this.setState({inventario: data});
-                    console.log(data);
-                }
-            
-              );
+                this.setState({marcas: data});
+                
+                console.log(data);
+              });
+
+           
     }
     
     render(){
         return(
             <div className='page'>
+                <div className="searchbar">
+                    <h1>Escoger Fábrica</h1>
+                        <FormControl className="outlined-short">
+                            <InputLabel>Fábrica</InputLabel>
+                            <Select label="Orden de precio" displayEmpty onChange={e=>this.setState({marca: e.target.value})}  value={this.state.marca}>
+                            {this.state.marcas.map((m) => (
+                                <MenuItem value={m}>{m.id_marca+" - "+m.nombre}</MenuItem>))  }
+                            </Select>
+                        </FormControl>
+                        <Button onClick={this.buscar}><SearchIcon/></Button>
+                    </div>
                 <Card className="detalle">
                 <h3>Catálogo Fábrica</h3>
                                 <StyledTable className="customized-table">
@@ -83,6 +119,7 @@ class CatalogoFabrica extends React.Component{
                                         <StyledTableCell align="right">Meses Garantía</StyledTableCell>
                                         <StyledTableCell align="center">Extras</StyledTableCell>
                                         <StyledTableCell align="right">Comprar</StyledTableCell>
+                                        <StyledTableCell align="right">Añadir a Catálogo</StyledTableCell>
                                     </TableRow>
                                     </TableHead>
                                     <TableBody>
@@ -113,6 +150,72 @@ class CatalogoFabrica extends React.Component{
 
                                             :<TableCell></TableCell>}
                                             <StyledTableCell align="right">{<ComprarFabrica id={inv._id}/>}</StyledTableCell>
+                                            {inv.categoria=="Televisor"?
+                                             <StyledTableCell align="right">{<NuevoCatalogo comp={false} titulo={"Añadir"} edit={true}
+                                                    color={inv.color}
+                                                    descripcion={inv.descripcion}
+                                                    garantia={inv.garantia}
+                                                    precio={inv.precio}
+                                                    modelo={inv.modelo}
+                                                    marca={this.state.marca.id_marca}
+                                                    categoria={1}
+
+                                                    res={inv.resolucion}
+                                                    bits={inv.bits}
+                                                    pulgadas={inv.pulgadas}
+                                                    hdmi={inv.hdmi}
+
+                                                    idFab={inv._id}
+                                            
+                                            />}</StyledTableCell>
+                                            :inv.categoria=="Videojuego"?
+                                            <StyledTableCell align="right">{<NuevoCatalogo comp={false} titulo={"Añadir"} edit={true}
+                                                    color={inv.color}
+                                                    descripcion={inv.descripcion}
+                                                    garantia={inv.garantia}
+                                                    precio={inv.precio}
+                                                    modelo={inv.modelo}
+                                                    marca={this.state.marca.id_marca}
+                                                    categoria={2}
+
+
+                                                    max_jug={inv.maximoJugadores}
+                                                    graficos={inv.graficos}
+                                                    consola={inv.consola}
+
+                                                    idFab={inv._id}
+                                            
+                                            />}</StyledTableCell>
+                                            :inv.categoria=="Smartwatch"?
+                                            <StyledTableCell align="right">{ <NuevoCatalogo comp={false} titulo={"Añadir"} edit={true}
+                                                    color={inv.color}
+                                                    descripcion={inv.descripcion}
+                                                    garantia={inv.garantia}
+                                                    precio={inv.precio}
+                                                    modelo={inv.modelo}
+                                                    marca={this.state.marca.id_marca}
+                                                    categoria={3}
+
+                                                    so={inv.sistemaOperativo}
+                                                    ram={inv.ram}
+                                                    memoria={inv.memoria}
+                                                    pulgadas={inv.pulgadasReloj}
+
+                                                    idFab={inv._id}
+                                                    
+                                            />}</StyledTableCell>
+                                            :<StyledTableCell align="right">{<NuevoCatalogo comp={false} titulo={"Añadir"} edit={true}
+                                                    color={inv.color}
+                                                    descripcion={inv.descripcion}
+                                                    garantia={inv.garantia}
+                                                    precio={inv.precio}
+                                                    modelo={inv.modelo}
+                                                    marca={this.state.marca.id_marca}
+                                                    categoria={0}
+
+                                                    idFab={inv._id}
+                                            
+                                            />}</StyledTableCell>}
                                         </TableRow>
                                     ))}
                                     </TableBody>
@@ -124,3 +227,4 @@ class CatalogoFabrica extends React.Component{
 }
 
 export default CatalogoFabrica;
+

@@ -63,6 +63,14 @@ public class ProcedimientosControlador {
 		
 	}
 	
+	@PostMapping("/Mapeo")
+	@ResponseBody
+	public void mapeo(@RequestParam String nId, @RequestParam int nMarca, @RequestParam int nCategoria) {
+		String Sql = "insert into mapeotabla values (?, ?, ?)";
+		jdbcTemplate.update(Sql, nCategoria, nId, nMarca);
+		
+	}
+	
 	@GetMapping("/Credito")
 	public @ResponseBody List<Map<String, Object>> getCant(){
 		 String sql = "select deuda(id_cliente), id_cliente from ordenes_compra group by id_cliente having deuda(id_cliente)>0";

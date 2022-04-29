@@ -23,13 +23,13 @@ class NuevoCatalogo extends React.Component {
       this.state={
           open: false,
 
-          color:"",
-          descripcion:"",
-          garantia: 0,
-          precio:'',
-          modelo: "",
-          marca:0,
-          categoria: 0,
+          color:this.props.edit? this.props.color:"",
+          descripcion:this.props.edit? this.props.descripcion:"",
+          garantia: this.props.edit? this.props.garantia:0,
+          precio:this.props.edit? this.props.precio:'',
+          modelo: this.props.edit? this.props.modelo: "",
+          marca: this.props.edit? this.props.marca:0,
+          categoria: this.props.edit? this.props.categoria:0,
           marcas: [{id: 1, nombre: "Samsung"}, {id: 2, nombre: "Amazon"}],
           tipo_productos: [],
 
@@ -37,18 +37,18 @@ class NuevoCatalogo extends React.Component {
           archivos: '',
 
          
-          res: '',
-          bits: 0,
-          pulgadas:0,
-          hdmi: 0,
+          res: this.props.res? this.props.res:'',
+          bits: this.props.bits? this.props.bits:0,
+          pulgadas: this.props.pulgadas? this.props.pulgadas:0,
+          hdmi: this.props.hdmi? this.props.hdmi:0,
 
-          max_jug: 0,
-          graficos: '',
-          consola: '',
+          max_jug:  this.props.max_jug? this.props.max_jug:0,
+          graficos:  this.props.graficos? this.props.graficos:'',
+          consola:  this.props.consola? this.props.consola:'',
 
-          so: '',
-          ram:0,
-          memoria: 0,
+          so:  this.props.so? this.props.so:'',
+          ram: this.props.ram? this.props.ram:0,
+          memoria:  this.props.memoria? this.props.memoria:0,
 
           img1: '',
           img2: '',
@@ -135,7 +135,28 @@ addItem = ()=>{
         console.log(response);
         });
 
-   
+        if(this.props.edit){
+          const url2 = 'http://localhost:8080/Procedimiento/Mapeo';
+
+        
+          let formData2 = new FormData();
+          formData2.append('nId', this.props.idFab);
+          formData2.append('nMarca', this.state.marca);
+          formData2.append('nCategoria', this.props.categoria);
+
+          axios.post(url2, formData2,  {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            }})
+            .then((response)=>{
+            console.log(response);
+            
+            })
+            .catch((response)=>{
+            console.log(response);
+            });
+
+        }
 
         
 
@@ -266,7 +287,6 @@ updateItem = ()=> {
             </Grid>:null
               
             }
-
             <Grid item>
             {this.props.comp?
               <Button id="actualizarCat" onClick={this.updateItem}>Actualizar</Button> :

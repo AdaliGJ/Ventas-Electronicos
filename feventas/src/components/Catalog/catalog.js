@@ -115,7 +115,7 @@ class Catalog extends React.Component{
                         <Button onClick={this.buscar}><SearchIcon/></Button>
                     </div>
                     {this.state.tipo_usuario == 1?
-                    <NuevoCatalogo comp={false} titulo={"Añadir producto"}/>:null}
+                    <NuevoCatalogo comp={false} titulo={"Añadir producto"} edit={false} />:null}
                     <div className="catalog">
                     <Grid container spacing={2}>
                     {this.state.inventario.map((inv) => (
