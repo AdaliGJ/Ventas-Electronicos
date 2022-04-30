@@ -278,7 +278,7 @@ addItem = ()=>{
 
       let formData5 = new FormData();
       formData5.append('nIdPedidoVentas', this.state.idVentas + 1);
-      formData5.append('nCliente', this.context.cliente);
+      formData5.append('nCliente', this.state.clienteFab);
       formData5.append('nIdInventario', this.state.idFab);
       formData5.append('nCantidad', this.state.cantidad);
       formData5.append('nIdInventarioVentas', this.props.tipo);
