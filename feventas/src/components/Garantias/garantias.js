@@ -116,9 +116,9 @@ class Garantias extends React.Component{
       const url2 = 'http://localhost:8080/Dispositivos_individuales/Prueba';
 
       let formData2 = new FormData();
-      formData.append('nId', this.state.idIV);
-      formData.append('nSerie', this.state.serie);
-      formData.append('nVendido', 2);
+      formData2.append('nId', this.state.idIV);
+      formData2.append('nSerie', this.state.serie);
+      formData2.append('nVendido', 2);
 
       axios.post(url2, formData2, {headers: {"Content-Type": "application/json"}})
       .then((response)=>{
