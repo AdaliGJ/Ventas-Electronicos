@@ -28,7 +28,21 @@ class Garantias extends React.Component{
          ip: '',
          serie: '',
          marcas: [],
-         marca: ''
+         marca: '',
+
+         today: new Date(),
+
+         idPV: '',
+         idIV: '',
+         cl: '',
+         idInv: '',
+         cantidad: '',
+         fechaEntrega: '',
+         port:'4000',
+         pedir: false,
+         vencida: false,
+         idVentas: ''
+  
       }
 
     }
@@ -46,8 +60,77 @@ class Garantias extends React.Component{
           
           console.log(data);
         });
+
+
+        const url2= 'http://localhost:8080/Pedidos/ObtenerId'
+   
+          
+        axios.get(url2).then(response => response.data)
+          .then((data) => {
+            this.setState({idVentas: data});
+            
+            console.log(data);
+          }).catch((response)=>{
+            this.setState({idVentas: 0});
+        });
     
      }
+
+  pedir=()=> {  
+    const url = 'http://localhost:8080/PedidoGarantia';
+
+    let formData = new FormData();
+    formData.append('nIdPedidoVentas', this.state.idVentas +1);
+    formData.append('nIdInventarioVentas', this.state.idIV);
+    formData.append('nCliente', this.state.cl);
+    formData.append('nIdInventario', this.state.idInv);
+    formData.append('nCantidad', this.state.cantidad);
+    formData.append('nIP', this.state.marca.ip);
+    formData.append('nPort', '4000');
+
+    axios.post(url, formData, {headers: {"Content-Type": "application/json"}})
+      .then((response)=>{
+          console.log(response);
+      })
+      .catch((response)=>{
+        console.log(response);
+      });
+
+      const url6 = 'http://localhost:8080/Pedidos/Insertar';
+      let formData6 = new FormData();
+      formData6.append('nidpedido', this.state.idVentas + 1);
+      formData6.append('nfecha', this.state.today.getDate().toString()+'-'+this.state.today.getMonth().toString()+'-'+this.state.today.getFullYear().toString());
+      formData6.append('nidInventario', this.state.idIV);
+      formData6.append('ncantidad', '1');
+      formData6.append('nestado', 'registrado');
+      formData6.append('nfechaEntrega', '');
+    
+      axios.post(url6, formData6, {headers: {"Content-Type": "application/json"}})
+      .then((response)=>{
+          console.log(response);
+      })
+      .catch((response)=>{
+        console.log(response);
+      });
+
+      const url2 = 'http://localhost:8080/Dispositivos_individuales/Prueba';
+
+      let formData2 = new FormData();
+      formData.append('nId', this.state.idIV);
+      formData.append('nSerie', this.state.serie);
+      formData.append('nVendido', 2);
+
+      axios.post(url2, formData, {headers: {"Content-Type": "application/json"}})
+      .then((response)=>{
+          console.log(response);
+          this.setState({serie: ''});
+      })
+      .catch((response)=>{
+        console.log(response);
+    });
+ 
+
+  }
 
   register=()=>{
 
@@ -59,8 +142,19 @@ class Garantias extends React.Component{
 
     axios.get(url, {params: {nSerie: this.state.serie, nIP:this.state.marca.ip }}).then(response => response.data)
     .then((data) => {
-      this.setState({ip: '', marca: ''});
-      
+      if(data.Garantia == "Devuelto"){
+          this.setState({
+            idPV: data.Pedido.idPedidoVentas,
+            idIV: data.Pedido.idInventarioVentas,
+            cl: data.Pedido.cliente,
+            idInv: data.Pedido.idInventario,
+            cantidad: '1',
+            fechaEntrega: data.Pedido.fechaEntrega,
+            pedir: true
+          })
+      }else{
+        this.setState({vencida: true})
+      }
       console.log(data);
     });
 
@@ -92,6 +186,12 @@ class Garantias extends React.Component{
                         <Grid item>
                             <Button id="enviar" variant="contained" onClick={this.register}>ValidarGarantia</Button>
                         </Grid>
+                        {this.state.pedir?
+                        <Grid item>
+                            <Button id="pedir" variant="contained" onClick={this.pedir}>Pedir Devolución a Fábrica</Button>
+                        </Grid>: null}
+                        {this.state.vencida?
+                        <p>Error la Garantía ya venció</p>: null}
                     </Grid>
             </div>
         );
