@@ -1,0 +1,54 @@
+Cluster - Javier
+
+empresa:Max
+
+id:624515c69a5f7b0b8edd04f9
+
+encargado:"Javier López"
+correo:"jlopez@gmail.com"
+
+
+empresa:"El duende"
+
+id:6247a55de3679b9210c5165b
+
+encargado:"Arturo Robles"
+correo:"arturo@gmail.com"
+
+
+empresa:"Cemaco"
+
+id:626ca9aeb64d540012106471
+
+encargado:"Valentina"
+correo:"vale@gmail.com"
+
+
+
+
+
+
+Cluster - Jorge
+
+empresa:Max
+
+id:626cac28a7a4281e55031762
+
+encargado:"Javier López"
+correo:"jlopez@gmail.com"
+
+
+empresa:"El duende"
+
+id:626b5a503ded07a786aace1e
+
+encargado:"Arturo Robles"
+correo:"arturo@gmail.com"
+
+
+empresa:"Cemaco"
+
+id:626b7e1b8e1cdcce11c48f00
+
+encargado:"Valentina"
+correo:"vale@gmail.com"
