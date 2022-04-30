@@ -105,6 +105,43 @@ public class WebServiceControlador {
 	    return restTemplate.postForObject(url, post, Object.class);
 	}
 	
+	@PostMapping("/PedidoGarantia")
+	public Object createPedidoGarantia(//@RequestParam String nfecha,
+			@RequestParam int nIdPedidoVentas,
+			@RequestParam int nIdInventarioVentas,
+			@RequestParam String nCliente,
+			@RequestParam String nIdInventario,
+			@RequestParam int nCantidad,
+			@RequestParam String nIP,
+			@RequestParam String nPort) {
+		
+	    String url = "http://"+nIP+":"+nPort+"/api/pedidos";
+
+	    HttpHeaders headers;
+	   // headers.setContentType(APPLICATION_JSON);
+	   // headers.setAccept(Collections.singletonList(APPLICATION_JSON));
+
+	    // create a post object
+	    //Pedidos post = new Pedidos(nfecha, nCliente, nIdInventario, nCantidad, nEstado, nEntrega, nFechaEntrega);
+
+	    // build the request
+	    //HttpEntity<Pedidos> entity = new HttpEntity<>(post);
+	    
+	    HashMap<String,Object> post = new HashMap<>();
+	    post.put("idPedidoVentas",nIdPedidoVentas);
+	    post.put("idInventarioVentas",nIdInventarioVentas);
+	    post.put("cliente", nCliente);
+	    post.put("idInventario",nIdInventario);
+	    post.put("cantidad", nCantidad);
+	    //post.put("estado", nEstado);
+	    post.put("fechaEntrega","");
+	    post.put("pedidoGarantia",true);
+	    
+
+	    // send POST request
+	    return restTemplate.postForObject(url, post, Object.class);
+	}
+	
 	/**
 	 * Web Service de autenticación desde ventas a fábrica como cliente
 	 * @param nCliente Identificador del cliente
