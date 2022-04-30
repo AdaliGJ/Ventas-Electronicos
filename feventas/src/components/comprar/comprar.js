@@ -99,7 +99,7 @@ class Comprar extends React.Component {
 
                  const url= 'http://localhost:8080/CatalogoFabrica'
             
-                 axios.get(url, {params: {nIP: "localhost", nPort: "4000"}}).then(response => response.data)
+                 axios.get(url, {params: {nIP: this.state.ip, nPort: this.state.port}}).then(response => response.data)
                    .then((data) => {
                          this.setState({inv: data});
                          console.log(data);
