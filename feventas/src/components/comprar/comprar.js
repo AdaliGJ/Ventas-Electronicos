@@ -57,7 +57,9 @@ class Comprar extends React.Component {
           inv: [],
           idFab: '',
 
-          idVentas:0
+          idVentas:0,
+
+          no: false
           
       }
       this.handleOpen=this.handleOpen.bind(this);
@@ -216,7 +218,7 @@ addItem = ()=>{
    const url4= 'http://localhost:8080/Reporteria'
    var contador = 0;
     for(var i = 0; i<this.props.cantidad;i++){
-      if(this.props.existencias>=i){
+      if(this.props.existencias>=i && this.state.no){
         formData.delete('nSuma');
         formData.append('nSuma', i+1);
         formData.delete('nOff');
@@ -229,7 +231,7 @@ addItem = ()=>{
           let formData2 = new FormData();
           formData2.append("nSerie", data);
           formData2.append("nPrecioVenta", this.props.total/this.props.cantidad);
-          formData.append('nIP', "localhost");
+          formData.append('nIP', this.state.ip);
           formData.append('nPort', "4000");
  
 
@@ -271,7 +273,7 @@ addItem = ()=>{
     console.log(this.props.cantidad);
     console.log(this.props.existencias);
 
-    if(this.state.cantidad>0){
+    if(this.state.cantidad>0 && this.state.no){
       const url5 = 'http://localhost:8080/WebServicePost';
 
       let formData5 = new FormData();
@@ -280,7 +282,7 @@ addItem = ()=>{
       formData5.append('nIdInventario', this.state.idFab);
       formData5.append('nCantidad', this.state.cantidad);
       formData5.append('nIdInventarioVentas', this.props.tipo);
-      formData.append('nIP', "localhost");
+      formData.append('nIP', this.state.ip);
       formData.append('nPort', "4000");
      
     
@@ -398,6 +400,21 @@ console.log(this.props.total);
 
     this.setState({cantidad:this.props.cantidad-this.props.existencias});
 
+
+    const url5= 'http://localhost:8080/Procedimiento/GetIP'
+
+    axios.get(url5, {params: {nId: this.props.id2}}).then(response => response.data)
+    .then((data) => {
+        if(data=="no"){
+          this.setState({no: false})
+        }else{
+          this.setState({ip: data})
+          this.setState({no: true})
+        }
+        
+        //console.log(data);
+  });
+
  }
 
   render(){
@@ -424,6 +441,9 @@ console.log(this.props.total);
             <Grid item> 
                 <TextField className="outlined-required" label="Cliente" type="text"  onInput={e=>this.setState({nombre: e.target.value})}  value={this.state.nombre}/>
             </Grid>
+            <Grid item> 
+                <TextField className="outlined-required" label="Usuario en Fábrica" type="text"  onInput={e=>this.setState({clienteFab: e.target.value})}  value={this.state.clienteFab}/>
+            </Grid>
             {this.state.tipo_cliente == 15?
             <Grid item> 
                <FormControl className="outlined-required">
@@ -433,7 +453,7 @@ console.log(this.props.total);
                         <MenuItem value={'1'}>Sí</MenuItem>
                     </Select>
                 </FormControl> </Grid>:null}
-                <h3>¿Faltan existencias? <a className='aclic' onClick={e=>this.setState({pedido: !this.state.pedido})}>Encárguelas a Fábrica</a></h3>
+                <h3>¿Faltan existencias? <a className='aclic' /*onClick={e=>this.setState({pedido: !this.state.pedido})}*/>Encárguelas a Fábrica</a></h3>
                 {this.state.pedido == true?
                 <div>
                   <h3>Autenticarse</h3>
