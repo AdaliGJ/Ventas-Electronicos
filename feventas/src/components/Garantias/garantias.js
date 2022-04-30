@@ -120,7 +120,7 @@ class Garantias extends React.Component{
       formData.append('nSerie', this.state.serie);
       formData.append('nVendido', 2);
 
-      axios.post(url2, formData, {headers: {"Content-Type": "application/json"}})
+      axios.post(url2, formData2, {headers: {"Content-Type": "application/json"}})
       .then((response)=>{
           console.log(response);
           this.setState({serie: ''});
