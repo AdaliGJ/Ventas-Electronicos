@@ -177,6 +177,9 @@ addItem = ()=>{
               <TextField className="modalfield" label="Cantidad" type="number" variant="outlined" onInput={e=>this.setState({cantidad: e.target.value})}  value={this.state.cantidad}/> 
             </Grid>
             <Grid item>
+              <TextField className="modalfield" label="Cliente" type="text" variant="outlined" onInput={e=>this.setState({cliente: e.target.value})}  value={this.state.cliente}/> 
+            </Grid>
+            <Grid item>
               <Button id="agregarPed" onClick={this.addItem}>Agregar</Button>
               <Button id="cancelarPed" onClick={this.cancel }>Cancelar</Button>
             </Grid>

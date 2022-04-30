@@ -48,6 +48,16 @@ class Credito extends React.Component{
     }
 
 
+    insert=()=>{
+        const url= 'http://localhost:8080/Email/Insertar';
+
+        axios.post(url).then(response => response.data)
+          .then((data) => {
+            
+            console.log(data);
+          });
+
+    }
 
    
     componentDidMount(){
@@ -71,6 +81,7 @@ class Credito extends React.Component{
         return(
             <div>
                 <div className="page">
+                    <Button id='not' onClick={this.insert}>Notificar clientes</Button>
                             <Paper className="container">
                             <h2>Deudas Ventas al Crédito</h2>
                                 <StyledTable className="customized-table">
@@ -87,7 +98,6 @@ class Credito extends React.Component{
                                                 {m.ID_CLIENTE}
                                             </TableCell>
                                         <TableCell align="right">{"Q"+m.DEUDA}</TableCell>
-                                        
                                         </TableRow>
                                     ))}
                                     </TableBody>
