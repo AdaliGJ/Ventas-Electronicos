@@ -55,7 +55,7 @@ class UsersTable extends React.Component{
 
 
     aproveData=(d1, d2)=>{
-        const url= 'http://localhost:8080/Procedimiento/CambioPermisos'
+        const url= 'http://'+process.env.REACT_APP_IP+':8080/Procedimiento/CambioPermisos'
 
         
 
@@ -77,7 +77,7 @@ class UsersTable extends React.Component{
     }
 
     deleteData=(datos)=>{
-       /* const url = 'http://localhost/scripts/eliminar_solicitudes.php';
+       /* const url = 'http://'+process.env.REACT_APP_IP+'/scripts/eliminar_solicitudes.php';
 
         let formData = new FormData();
         console.log(datos);
@@ -96,7 +96,7 @@ class UsersTable extends React.Component{
     }
 
     getData=()=>{
-        const url= 'http://localhost:8080/Usuarios/ObtenerTodos'
+        const url= 'http://'+process.env.REACT_APP_IP+':8080/Usuarios/ObtenerTodos'
       
         axios.get(url).then(response => response.data)
           .then((data) => {
@@ -112,7 +112,7 @@ class UsersTable extends React.Component{
             tipo_usuario: context.tipoUsuario});
 
       
-        const url= 'http://localhost:8080/Usuarios/ObtenerTodos'
+        const url= 'http://'+process.env.REACT_APP_IP+':8080/Usuarios/ObtenerTodos'
       
         axios.get(url).then(response => response.data)
           .then((data) => {

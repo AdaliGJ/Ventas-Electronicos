@@ -49,7 +49,7 @@ class Credito extends React.Component{
 
 
     insert=()=>{
-        const url= 'http://localhost:8080/Email/Insertar';
+        const url= 'http://'+process.env.REACT_APP_IP+':8080/Email/Insertar';
 
         axios.post(url).then(response => response.data)
           .then((data) => {
@@ -66,7 +66,7 @@ class Credito extends React.Component{
             tipo_usuario: context.tipoUsuario});
 
       
-        const url= 'http://localhost:8080/Procedimiento/Credito'
+        const url= 'http://'+process.env.REACT_APP_IP+':8080/Procedimiento/Credito'
       
         axios.get(url).then(response => response.data)
           .then((data) => {

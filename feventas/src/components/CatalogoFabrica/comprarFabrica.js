@@ -55,7 +55,7 @@ class ComprarFabrica extends React.Component {
 
 
 addItem = ()=>{
-  const url = 'http://localhost:8080/WebServicePost';
+  const url = 'http://'+process.env.REACT_APP_IP+':8080/WebServicePost';
 
   let formData = new FormData();
   formData.append('nIdPedidoVentas', this.state.idVentas + 1);
@@ -78,7 +78,7 @@ addItem = ()=>{
     console.log(response);
   });
 
-  const url2 = 'http://localhost:8080/Pedidos/Insertar';
+  const url2 = 'http://'+process.env.REACT_APP_IP+':8080/Pedidos/Insertar';
   let formData2 = new FormData();
   formData2.append('nidpedido', this.state.idVentas + 1);
   formData2.append('nfecha', this.state.today.getDate().toString()+'-'+this.state.today.getMonth().toString()+'-'+this.state.today.getFullYear().toString());
@@ -103,7 +103,7 @@ addItem = ()=>{
   this.setState({usuario: context.tipoUsuario,
     cliente: context.cliente});
 
-    const url= 'http://localhost:8080/Pedidos/ObtenerId'
+    const url= 'http://'+process.env.REACT_APP_IP+':8080/Pedidos/ObtenerId'
    
           
             axios.get(url).then(response => response.data)
@@ -115,7 +115,7 @@ addItem = ()=>{
                 this.setState({idVentas: 0});
             });
 
-            const url2= 'http://localhost:8080/VistaCatalogo/ObtenerInventarioAsc'
+            const url2= 'http://'+process.env.REACT_APP_IP+':8080/VistaCatalogo/ObtenerInventarioAsc'
       
             axios.get(url2).then(response => response.data)
               .then((data) => {
@@ -125,7 +125,7 @@ addItem = ()=>{
                 console.log(this.state.inventario);
               });
 
-            const url3= 'http://localhost:8080/Pedidos/ContarMap'
+            const url3= 'http://'+process.env.REACT_APP_IP+':8080/Pedidos/ContarMap'
             axios.get(url3, {params: {nId: this.props.id}}).then(response => response.data)
             .then((data) => {
               if(data == 0){
@@ -133,7 +133,7 @@ addItem = ()=>{
               }else
               {
                 this.setState({contar: false})
-                const url4= 'http://localhost:8080/Procedimiento/GetMap';
+                const url4= 'http://'+process.env.REACT_APP_IP+':8080/Procedimiento/GetMap';
 
                 axios.get(url4, {params: {nId: this.props.id}}).then(response => response.data)
                 .then((data2) => {

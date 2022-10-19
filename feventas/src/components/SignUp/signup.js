@@ -42,7 +42,7 @@ class SignUp extends React.Component{
       this.setState({usuario: context.username,
         tipo_usuario: context.tipoUsuario});
     
-      const url= 'http://localhost:8080/Tipo_usuario/ObtenerTodos'
+      const url= 'http://'+process.env.REACT_APP_IP+':8080/Tipo_usuario/ObtenerTodos'
     
       axios.get(url).then(response => response.data)
         .then((data) => {
@@ -55,7 +55,7 @@ class SignUp extends React.Component{
 
   register=()=>{
 
-    const url = 'http://localhost:8080/Usuarios/Insertar';
+    const url = 'http://'+process.env.REACT_APP_IP+':8080/Usuarios/Insertar';
 
     let formData = new FormData();
     formData.append('nNit', this.state.nit);

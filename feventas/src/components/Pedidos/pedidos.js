@@ -62,7 +62,7 @@ class Pedidos extends React.Component{
         this.setState({usuario: context.username,
             tipo_usuario: context.tipoUsuario});
 
-        const url= 'http://localhost:8080/Pedidos/ObtenerRegistrados'
+        const url= 'http://'+process.env.REACT_APP_IP+':8080/Pedidos/ObtenerRegistrados'
       
         axios.get(url, {params: {nEstado: 'entregado'}}).then(response => response.data)
           .then((data) => {
@@ -81,7 +81,7 @@ class Pedidos extends React.Component{
     }
 
     aproveData=(datos)=>{
-       /* const url = 'http://localhost/scripts/solicitudes.php';
+       /* const url = 'http://'+process.env.REACT_APP_IP+'/scripts/solicitudes.php';
 
         let formData = new FormData();
         console.log(datos);
@@ -100,7 +100,7 @@ class Pedidos extends React.Component{
     }
 
     deleteData=(datos)=>{
-       /* const url = 'http://localhost/scripts/eliminar_solicitudes.php';
+       /* const url = 'http://'+process.env.REACT_APP_IP+'/scripts/eliminar_solicitudes.php';
 
         let formData = new FormData();
         console.log(datos);
@@ -126,7 +126,7 @@ class Pedidos extends React.Component{
             tipo_usuario: context.tipoUsuario});
 
       
-        /*const url= 'http://localhost:8080/Dispositivos_individuales/ObtenerTodos'
+        /*const url= 'http://'+process.env.REACT_APP_IP+':8080/Dispositivos_individuales/ObtenerTodos'
       
         axios.get(url).then(response => response.data)
           .then((data) => {

@@ -30,8 +30,8 @@ function FabricaLog(props){
 
        const handleLogin=()=>{
                 
-        const url = 'http://localhost:8080/AutCliente';
-       //const url2 = 'http://localhost:8080/Usuarios/Obtener';
+        const url = 'http://'+process.env.REACT_APP_IP+':8080/AutCliente';
+       //const url2 = 'http://'+process.env.REACT_APP_IP+':8080/Usuarios/Obtener';
 
         
         let formData = new FormData();

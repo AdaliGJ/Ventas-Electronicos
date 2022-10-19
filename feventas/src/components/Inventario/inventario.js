@@ -65,7 +65,7 @@ class Inventario extends React.Component{
     }
 
     aproveData=(datos)=>{
-        const url= 'http://localhost:8080/Dispositivos_individuales/Update'
+        const url= 'http://'+process.env.REACT_APP_IP+':8080/Dispositivos_individuales/Update'
 
         let formData = new FormData();
         console.log(datos);
@@ -87,7 +87,7 @@ class Inventario extends React.Component{
     }
 
     deleteData=(datos)=>{
-       /* const url = 'http://localhost/scripts/eliminar_solicitudes.php';
+       /* const url = 'http://'+process.env.REACT_APP_IP+'/scripts/eliminar_solicitudes.php';
 
         let formData = new FormData();
         console.log(datos);
@@ -107,7 +107,7 @@ class Inventario extends React.Component{
 
 
     getData=()=>{
-        const url= 'http://localhost:8080/Dispositivos_individuales/ObtenerTodos'
+        const url= 'http://'+process.env.REACT_APP_IP+':8080/Dispositivos_individuales/ObtenerTodos'
       
         axios.get(url).then(response => response.data)
           .then((data) => {
@@ -116,7 +116,7 @@ class Inventario extends React.Component{
             console.log(data);
           });
 
-        const url2= 'http://localhost:8080/Dispositivos_individuales/ObtenerEntregados'
+        const url2= 'http://'+process.env.REACT_APP_IP+':8080/Dispositivos_individuales/ObtenerEntregados'
       
         axios.get(url2).then(response => response.data)
           .then((data) => {
@@ -133,7 +133,7 @@ class Inventario extends React.Component{
             tipo_usuario: context.tipoUsuario});
 
       
-        const url= 'http://localhost:8080/Dispositivos_individuales/ObtenerTodos'
+        const url= 'http://'+process.env.REACT_APP_IP+':8080/Dispositivos_individuales/ObtenerTodos'
       
         axios.get(url).then(response => response.data)
           .then((data) => {
@@ -142,7 +142,7 @@ class Inventario extends React.Component{
             console.log(data);
           });
 
-        const url2= 'http://localhost:8080/Dispositivos_individuales/ObtenerEntregados'
+        const url2= 'http://'+process.env.REACT_APP_IP+':8080/Dispositivos_individuales/ObtenerEntregados'
       
         axios.get(url2).then(response => response.data)
           .then((data) => {

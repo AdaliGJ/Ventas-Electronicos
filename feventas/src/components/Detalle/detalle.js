@@ -52,11 +52,11 @@ class Detalle extends React.Component{
             precio: "Q"+this.state.precionum}); 
             console.log(SliderData);
 
-            const url= 'http://localhost:8080/Inventario/Obtener'
-            const url2= 'http://localhost:8080/Marca/Obtener'
-            const url3= 'http://localhost:8080/Tipo_dispositivo/Obtener'
-            const url5= 'http://localhost:8080/Imagenes_dispositivos/ObtenerA'
-            const url6= 'http://localhost:8080/Dispositivos_individuales/ObtenerCantidad'
+            const url= 'http://'+process.env.REACT_APP_IP+':8080/Inventario/Obtener'
+            const url2= 'http://'+process.env.REACT_APP_IP+':8080/Marca/Obtener'
+            const url3= 'http://'+process.env.REACT_APP_IP+':8080/Tipo_dispositivo/Obtener'
+            const url5= 'http://'+process.env.REACT_APP_IP+':8080/Imagenes_dispositivos/ObtenerA'
+            const url6= 'http://'+process.env.REACT_APP_IP+':8080/Dispositivos_individuales/ObtenerCantidad'
       
             axios.get(url, {params: {nId: this.state.id}}).then(response => response.data)
               .then((data) => {
@@ -84,19 +84,19 @@ class Detalle extends React.Component{
                     
                 });
                 if(data.categoriaDispositivo==1){
-                  const url4='http://localhost:8080/Televisores/Obtener'
+                  const url4='http://'+process.env.REACT_APP_IP+':8080/Televisores/Obtener'
                     axios.get(url4, {params: {nIdInventario: data.idInventario}}).then((data4) => {
                         this.setState({televisor: data4.data});
                         //console.log(data4);
                     });
                 }else if(data.categoriaDispositivo==2){
-                    const url4='http://localhost:8080/Videojuegos/Obtener'
+                    const url4='http://'+process.env.REACT_APP_IP+':8080/Videojuegos/Obtener'
                     axios.get(url4, {params: {nIdInventario: data.idInventario}}).then((data4) => {
                         this.setState({televisor: data4.data});
                         //console.log(data4);
                     });
                 }else if(data.categoriaDispositivo==3){
-                    const url4='http://localhost:8080/Smartwatch/Obtener'
+                    const url4='http://'+process.env.REACT_APP_IP+':8080/Smartwatch/Obtener'
                     axios.get(url4, {params: {nIdInventario: data.idInventario}}).then((data4) => {
                         this.setState({televisor: data4.data});
                         //console.log(data4);

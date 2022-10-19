@@ -34,10 +34,10 @@ class Products extends React.Component{
     this.setState({usuario: context.username,
         tipo_usuario: context.tipoUsuario}); 
 
-        const url= 'http://localhost:8080/Inventario/Obtener'
-        const url2= 'http://localhost:8080/Marca/Obtener'
-        const url3= 'http://localhost:8080/Tipo_dispositivo/Obtener'
-        const url6= 'http://localhost:8080/Dispositivos_individuales/ObtenerCantidad'
+        const url= 'http://'+process.env.REACT_APP_IP+':8080/Inventario/Obtener'
+        const url2= 'http://'+process.env.REACT_APP_IP+':8080/Marca/Obtener'
+        const url3= 'http://'+process.env.REACT_APP_IP+':8080/Tipo_dispositivo/Obtener'
+        const url6= 'http://'+process.env.REACT_APP_IP+':8080/Dispositivos_individuales/ObtenerCantidad'
   
         axios.get(url, {params: {nIdInventario: this.props.id}}).then(response => response.data)
           .then((data) => {

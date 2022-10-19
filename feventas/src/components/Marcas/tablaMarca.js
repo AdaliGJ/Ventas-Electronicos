@@ -60,7 +60,7 @@ class MarcasCat extends React.Component{
     }
 
     aproveData=(datos)=>{
-       /* const url = 'http://localhost/scripts/solicitudes.php';
+       /* const url = 'http://'+process.env.REACT_APP_IP+'/scripts/solicitudes.php';
 
         let formData = new FormData();
         console.log(datos);
@@ -79,7 +79,7 @@ class MarcasCat extends React.Component{
     }
 
     deleteData=(datos)=>{
-       /* const url = 'http://localhost/scripts/eliminar_solicitudes.php';
+       /* const url = 'http://'+process.env.REACT_APP_IP+'/scripts/eliminar_solicitudes.php';
 
         let formData = new FormData();
         console.log(datos);
@@ -103,7 +103,7 @@ class MarcasCat extends React.Component{
             tipo_usuario: context.tipoUsuario});
 
       
-        const url= 'http://localhost:8080/Marca/ObtenerTodos'
+        const url= 'http://'+process.env.REACT_APP_IP+':8080/Marca/ObtenerTodos'
       
         axios.get(url).then(response => response.data)
           .then((data) => {

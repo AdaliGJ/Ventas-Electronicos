@@ -56,7 +56,7 @@ class ClientsTable extends React.Component{
 
 
     aproveData=(d1, d2)=>{
-        const url= 'http://localhost:8080/Procedimiento/CambioFecha'
+        const url= 'http://'+process.env.REACT_APP_IP+':8080/Procedimiento/CambioFecha'
 
         
 
@@ -79,7 +79,7 @@ class ClientsTable extends React.Component{
     }
 
     deleteData=(datos)=>{
-       /* const url = 'http://localhost/scripts/eliminar_solicitudes.php';
+       /* const url = 'http://'+process.env.REACT_APP_IP+'/scripts/eliminar_solicitudes.php';
 
         let formData = new FormData();
         console.log(datos);
@@ -98,7 +98,7 @@ class ClientsTable extends React.Component{
     }
 
     getData=()=>{
-        const url= 'http://localhost:8080/VistaInfoCliente/ObtenerTodos'
+        const url= 'http://'+process.env.REACT_APP_IP+':8080/VistaInfoCliente/ObtenerTodos'
       
         axios.get(url).then(response => response.data)
           .then((data) => {

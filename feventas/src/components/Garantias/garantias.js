@@ -52,7 +52,7 @@ class Garantias extends React.Component{
       this.setState({usuario: context.username,
         tipo_usuario: context.tipoUsuario});
     
-      const url= 'http://localhost:8080/Marca/ObtenerTodos'
+      const url= 'http://'+process.env.REACT_APP_IP+':8080/Marca/ObtenerTodos'
     
       axios.get(url).then(response => response.data)
         .then((data) => {
@@ -62,7 +62,7 @@ class Garantias extends React.Component{
         });
 
 
-        const url2= 'http://localhost:8080/Pedidos/ObtenerId'
+        const url2= 'http://'+process.env.REACT_APP_IP+':8080/Pedidos/ObtenerId'
    
           
         axios.get(url2).then(response => response.data)
@@ -77,7 +77,7 @@ class Garantias extends React.Component{
      }
 
   pedir=()=> {  
-    const url = 'http://localhost:8080/PedidoGarantia';
+    const url = 'http://'+process.env.REACT_APP_IP+':8080/PedidoGarantia';
 
     let formData = new FormData();
     formData.append('nIdPedidoVentas', this.state.idVentas +1);
@@ -96,7 +96,7 @@ class Garantias extends React.Component{
         console.log(response);
       });
 
-      const url6 = 'http://localhost:8080/Pedidos/Insertar';
+      const url6 = 'http://'+process.env.REACT_APP_IP+':8080/Pedidos/Insertar';
       let formData6 = new FormData();
       formData6.append('nidpedido', this.state.idVentas + 1);
       formData6.append('nfecha', this.state.today.getDate().toString()+'-'+this.state.today.getMonth().toString()+'-'+this.state.today.getFullYear().toString());
@@ -113,7 +113,7 @@ class Garantias extends React.Component{
         console.log(response);
       });
 
-      const url2 = 'http://localhost:8080/Dispositivos_individuales/Prueba';
+      const url2 = 'http://'+process.env.REACT_APP_IP+':8080/Dispositivos_individuales/Prueba';
 
       let formData2 = new FormData();
       formData2.append('nId', this.state.idIV);
@@ -134,7 +134,7 @@ class Garantias extends React.Component{
 
   register=()=>{
 
-    const url = 'http://localhost:8080/ValidarGarantia';
+    const url = 'http://'+process.env.REACT_APP_IP+':8080/ValidarGarantia';
 
     let formData = new FormData();
     formData.append('nSerie', this.state.serie);

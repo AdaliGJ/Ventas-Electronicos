@@ -54,7 +54,7 @@ class Marcas extends React.Component{
 
     handleLogin=()=>{
                 
-        const url = 'http://localhost:8080/Marca/Insertar2';
+        const url = 'http://'+process.env.REACT_APP_IP+':8080/Marca/Insertar2';
 
         let formData = new FormData();
         formData.append('nNombre', this.state.marca);
@@ -78,7 +78,7 @@ class Marcas extends React.Component{
         }
 
         getData=()=>{
-            const url= 'http://localhost:8080/Marca/ObtenerTodos'
+            const url= 'http://'+process.env.REACT_APP_IP+':8080/Marca/ObtenerTodos'
           
             axios.get(url).then(response => response.data)
               .then((data) => {

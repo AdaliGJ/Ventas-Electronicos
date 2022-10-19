@@ -28,8 +28,8 @@ function Login(props){
 
        const handleLogin=()=>{
                 
-        const url = 'http://localhost:8080/Usuarios/Login';
-        const url2 = 'http://localhost:8080/Usuarios/Obtener';
+        const url = 'http://'+process.env.REACT_APP_IP+':8080/Usuarios/Login';
+        const url2 = 'http://'+process.env.REACT_APP_IP+':8080/Usuarios/Obtener';
                
         axios.get(url, {params: {nIdUsuario: usuarioRef.current.value, nPassword: contRef.current.value}}).then(response => response.data)
         .then((data) => {

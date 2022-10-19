@@ -42,9 +42,9 @@ class Clientes extends React.Component{
 
 
     register(){
-        const url = 'http://localhost:8080/Clientes/Insertar';
+        const url = 'http://'+process.env.REACT_APP_IP+':8080/Clientes/Insertar';
 
-        const url2 = 'http://localhost:8080/Fichas_clientes/Insertar';
+        const url2 = 'http://'+process.env.REACT_APP_IP+':8080/Fichas_clientes/Insertar';
 
         let formData = new FormData();
         formData.append('nTipoCliente', this.state.tipo_suscricpion);
@@ -136,7 +136,7 @@ class Clientes extends React.Component{
 
 
 
-        const url = 'http://localhost:8080/Tipo_clientes/ObtenerTodos';
+        const url = 'http://'+process.env.REACT_APP_IP+':8080/Tipo_clientes/ObtenerTodos';
 
         axios.get(url).then(response => response.data)
         .then((data) => {

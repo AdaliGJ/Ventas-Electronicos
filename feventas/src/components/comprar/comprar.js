@@ -75,8 +75,8 @@ class Comprar extends React.Component {
 
   autenticar=(e)=>{
     const context = this.context;
-    const url2 = 'http://localhost:8080/AutCliente';
-    //const url2 = 'http://localhost:8080/Usuarios/Obtener';
+    const url2 = 'http://'+process.env.REACT_APP_IP+':8080/AutCliente';
+    //const url2 = 'http://'+process.env.REACT_APP_IP+':8080/Usuarios/Obtener';
 
      
      let formData = new FormData();
@@ -99,7 +99,7 @@ class Comprar extends React.Component {
                  context.setPuerto(this.state.port);
                  this.setState({succ: true});
 
-                 const url= 'http://localhost:8080/CatalogoFabrica'
+                 const url= 'http://'+process.env.REACT_APP_IP+':8080/CatalogoFabrica'
             
                  axios.get(url, {params: {nIP: this.state.ip, nPort: this.state.port}}).then(response => response.data)
                    .then((data) => {
@@ -130,9 +130,9 @@ class Comprar extends React.Component {
 
   change=()=>{
 
-    const url= 'http://localhost:8080/Clientes/Obtener'
-    const url2= 'http://localhost:8080/Fichas_clientes/Obtener'
-    const url3= 'http://localhost:8080/Tipo_clientes/Obtener'
+    const url= 'http://'+process.env.REACT_APP_IP+':8080/Clientes/Obtener'
+    const url2= 'http://'+process.env.REACT_APP_IP+':8080/Fichas_clientes/Obtener'
+    const url3= 'http://'+process.env.REACT_APP_IP+':8080/Tipo_clientes/Obtener'
     
 
     axios.get(url, {params: {nNit: this.state.nit}}).then(response => response.data)
@@ -156,7 +156,7 @@ class Comprar extends React.Component {
 
 
 addItem = ()=>{
-  const url= 'http://localhost:8080/Ventas/Orden'
+  const url= 'http://'+process.env.REACT_APP_IP+':8080/Ventas/Orden'
 
   console.log(this.state.today.getDate()+'-'+this.state.today.getMonth()+'-'+this.state.today.getFullYear());
   console.log(this.props.total-this.props.total*this.state.tipo_cliente*0.01.toString());
@@ -183,8 +183,8 @@ addItem = ()=>{
         
     });
 
-    /*const url2= 'http://localhost:8080/Ventas/Orden3'
-    const url3= 'http://localhost:8080/Dispositivos_individuales/ObtenerSeries'
+    /*const url2= 'http://'+process.env.REACT_APP_IP+':8080/Ventas/Orden3'
+    const url3= 'http://'+process.env.REACT_APP_IP+':8080/Dispositivos_individuales/ObtenerSeries'
 
     axios.get(url3, {params: {nId: this.props.tipo}}).then(response => response.data)
         .then((data) => {
@@ -213,9 +213,9 @@ addItem = ()=>{
         });*/
 
    /*Cambiar*/
-   const url2= 'http://localhost:8080/Ventas/Orden2'
-   const url3= 'http://localhost:8080/Dispositivos_individuales/ObtenerSerie'
-   const url4= 'http://localhost:8080/Reporteria'
+   const url2= 'http://'+process.env.REACT_APP_IP+':8080/Ventas/Orden2'
+   const url3= 'http://'+process.env.REACT_APP_IP+':8080/Dispositivos_individuales/ObtenerSerie'
+   const url4= 'http://'+process.env.REACT_APP_IP+':8080/Reporteria'
    var contador = 0;
     for(var i = 0; i<this.props.cantidad;i++){
       if(this.props.existencias>=i && this.state.no){
@@ -274,7 +274,7 @@ addItem = ()=>{
     console.log(this.props.existencias);
 
     if(this.state.cantidad>0 && this.state.no){
-      const url5 = 'http://localhost:8080/WebServicePost';
+      const url5 = 'http://'+process.env.REACT_APP_IP+':8080/WebServicePost';
 
       let formData5 = new FormData();
       formData5.append('nIdPedidoVentas', this.state.idVentas + 1);
@@ -297,7 +297,7 @@ addItem = ()=>{
         console.log(response);
       });
     
-      const url6 = 'http://localhost:8080/Pedidos/Insertar';
+      const url6 = 'http://'+process.env.REACT_APP_IP+':8080/Pedidos/Insertar';
       let formData6 = new FormData();
       formData6.append('nidpedido', this.state.idVentas + 1);
       formData6.append('nfecha', this.state.today.getDate().toString()+'-'+this.state.today.getMonth().toString()+'-'+this.state.today.getFullYear().toString());
@@ -372,7 +372,7 @@ generarFactura2 = ()=> {
   
 console.log(this.props.total);
 
-  const url= 'http://localhost:8080/Inventario/ObtenerTodos'
+  const url= 'http://'+process.env.REACT_APP_IP+':8080/Inventario/ObtenerTodos'
 
   axios.get(url).then(response => response.data)
     .then((data) => {
@@ -387,7 +387,7 @@ console.log(this.props.total);
     console.log(this.state.cantidad);
     console.log(this.state.existencias);
 
-    const url4= 'http://localhost:8080/Pedidos/ObtenerId'
+    const url4= 'http://'+process.env.REACT_APP_IP+':8080/Pedidos/ObtenerId'
           
             axios.get(url4).then(response => response.data)
               .then((data) => {
@@ -401,7 +401,7 @@ console.log(this.props.total);
     this.setState({cantidad:this.props.cantidad-this.props.existencias});
 
 
-    const url5= 'http://localhost:8080/Procedimiento/GetIP'
+    const url5= 'http://'+process.env.REACT_APP_IP+':8080/Procedimiento/GetIP'
 
     axios.get(url5, {params: {nId: this.props.id2}}).then(response => response.data)
     .then((data) => {

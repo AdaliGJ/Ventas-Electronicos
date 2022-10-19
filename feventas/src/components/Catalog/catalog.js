@@ -46,11 +46,11 @@ class Catalog extends React.Component{
             tipo_usuario: context.tipoUsuario});
 
       
-        /*const url= 'http://localhost:8080/Inventario/ObtenerTodos'*/
+        /*const url= 'http://'+process.env.REACT_APP_IP+':8080/Inventario/ObtenerTodos'*/
 
-        //const url= 'http://localhost:8080/VistaImgs/ObtenerTodos'
+        //const url= 'http://'+process.env.REACT_APP_IP+':8080/VistaImgs/ObtenerTodos'
 
-        const url= 'http://localhost:8080/VistaCatalogo/ObtenerInventarioAsc'
+        const url= 'http://'+process.env.REACT_APP_IP+':8080/VistaCatalogo/ObtenerInventarioAsc'
       
         axios.get(url).then(response => response.data)
           .then((data) => {
@@ -60,7 +60,7 @@ class Catalog extends React.Component{
             console.log(this.state.inventario);
           });
 
-        const url2 = 'http://localhost:8080/Inventario/PruebaPost';
+        const url2 = 'http://'+process.env.REACT_APP_IP+':8080/Inventario/PruebaPost';
       
         axios.post(url2)
         .then((response)=>{
@@ -75,7 +75,7 @@ class Catalog extends React.Component{
 
     buscar=()=>{
         if(this.state.orden==2){
-        const url= 'http://localhost:8080/VistaCatalogo/BuscarMenorMayor'
+        const url= 'http://'+process.env.REACT_APP_IP+':8080/VistaCatalogo/BuscarMenorMayor'
       
         axios.get(url, {params:{nBusqueda: this.state.busc}}).then(response => response.data)
           .then((data) => {
@@ -85,7 +85,7 @@ class Catalog extends React.Component{
             console.log(this.state.inventario);
           });
         }else{
-            const url= 'http://localhost:8080/VistaCatalogo/BuscarMayorMenor'
+            const url= 'http://'+process.env.REACT_APP_IP+':8080/VistaCatalogo/BuscarMayorMenor'
           
             axios.get(url, {params:{nBusqueda: this.state.busc}}).then(response => response.data)
               .then((data) => {

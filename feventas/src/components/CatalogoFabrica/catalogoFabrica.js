@@ -59,7 +59,7 @@ class CatalogoFabrica extends React.Component{
     } 
    
     buscar=()=>{
-        const url= 'http://localhost:8080/CatalogoFabrica'
+        const url= 'http://'+process.env.REACT_APP_IP+':8080/CatalogoFabrica'
             
         axios.get(url, {params: {nIP: this.state.marca.ip, nPort: "4000"}}).then(response => response.data)
           .then((data) => {
@@ -78,7 +78,7 @@ class CatalogoFabrica extends React.Component{
         this.setState({usuario: context.username,
             tipo_usuario: context.tipoUsuario});
 
-            const url= 'http://localhost:8080/Marca/ObtenerTodos'
+            const url= 'http://'+process.env.REACT_APP_IP+':8080/Marca/ObtenerTodos'
 
             axios.get(url).then(response => response.data)
               .then((data) => {

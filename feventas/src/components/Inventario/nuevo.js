@@ -49,7 +49,7 @@ class NuevoInventario extends React.Component {
 
 
 addItem = ()=>{
-  const url = 'http://localhost:8080/Dispositivos_individuales/Prueba';
+  const url = 'http://'+process.env.REACT_APP_IP+':8080/Dispositivos_individuales/Prueba';
 
   let formData = new FormData();
   formData.append('nId', this.state.id);
@@ -84,7 +84,7 @@ updateItem = ()=> {
   const context = this.context;
   this.setState({usuario: context.tipoUsuario});
 
-  const url= 'http://localhost:8080/Inventario/ObtenerTodos'
+  const url= 'http://'+process.env.REACT_APP_IP+':8080/Inventario/ObtenerTodos'
 
   axios.get(url).then(response => response.data)
     .then((data) => {

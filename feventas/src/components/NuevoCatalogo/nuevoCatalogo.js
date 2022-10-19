@@ -87,7 +87,7 @@ class NuevoCatalogo extends React.Component {
 addItem = ()=>{
    /* var submitItem = this.props.submit;
     submitItem(this.state.serie);*/
-    const url = 'http://localhost:8080/Procedimiento/Insertar';
+    const url = 'http://'+process.env.REACT_APP_IP+':8080/Procedimiento/Insertar';
 
         
         let formData = new FormData();
@@ -136,7 +136,7 @@ addItem = ()=>{
         });
 
         if(this.props.edit){
-          const url2 = 'http://localhost:8080/Procedimiento/Mapeo';
+          const url2 = 'http://'+process.env.REACT_APP_IP+':8080/Procedimiento/Mapeo';
 
         
           let formData2 = new FormData();
@@ -179,7 +179,7 @@ updateItem = ()=> {
   this.setState({usuario: context.username,
     tipo_usuario: context.tipoUsuario});
 
-  const url= 'http://localhost:8080/Tipo_dispositivo/ObtenerTodos'
+  const url= 'http://'+process.env.REACT_APP_IP+':8080/Tipo_dispositivo/ObtenerTodos'
 
   axios.get(url).then(response => response.data)
     .then((data) => {
@@ -188,7 +188,7 @@ updateItem = ()=> {
       console.log(data);
     });
 
-    const url2= 'http://localhost:8080/Marca/ObtenerTodos'
+    const url2= 'http://'+process.env.REACT_APP_IP+':8080/Marca/ObtenerTodos'
 
     axios.get(url2).then(response => response.data)
       .then((data) => {

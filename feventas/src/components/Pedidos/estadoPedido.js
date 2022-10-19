@@ -50,7 +50,7 @@ class EstadoPedido extends React.Component {
 
 
 addItem = ()=>{
-  const url = 'http://localhost:8080/EstadoPedido';
+  const url = 'http://'+process.env.REACT_APP_IP+':8080/EstadoPedido';
 
   let formData = new FormData();
   formData.append('nIdPedido', this.props.id);
@@ -71,7 +71,7 @@ addItem = ()=>{
     console.log(response);
 });
 
-const url2 = 'http://localhost:8080/Pedidos/Estado';
+const url2 = 'http://'+process.env.REACT_APP_IP+':8080/Pedidos/Estado';
 
   let formData2 = new FormData();
   formData2.append('nId', this.props.id);
@@ -104,7 +104,7 @@ updateItem = ()=> {
   const context = this.context;
   this.setState({usuario: context.tipoUsuario});
 
-  const url= 'http://localhost:8080/Procedimiento/GetIP';
+  const url= 'http://'+process.env.REACT_APP_IP+':8080/Procedimiento/GetIP';
 
   axios.get(url, {params: {nId: this.props.id2}}).then(response => response.data)
     .then((data) => {
