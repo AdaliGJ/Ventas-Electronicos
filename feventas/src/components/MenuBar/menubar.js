@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Box from '@material-ui/core/Box';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -10,10 +10,12 @@ import {useHistory} from "react-router-dom";
 import { LoginContext } from '../../context/LoginContext';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import './menubar.css'
+import axios from 'axios';
 
  function MenuBar() {
      const history = useHistory();
      const {tipoUsuario, setUsername, setTipoUsuario, username }=useContext(LoginContext);
+     const[branch, setBranch]=useState('-');
 
      const inicio = () =>{
         history.push('/home');
@@ -33,6 +35,15 @@ import './menubar.css'
         history.push('/home');
    } 
 
+   useEffect(() => {
+    const url = 'http://'+process.env.REACT_APP_IP+':8080/Usuarios/Branch';
+
+    axios.get(url).then(response => response.data)
+      .then((data) => {
+        setBranch(data.respuesta);
+      });
+  }, [])
+
     return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar id="appbar" position="static">
@@ -41,7 +52,7 @@ import './menubar.css'
             
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Sistema de ventas
+            {"Sistema de ventas "+ branch}
           </Typography>
           <ButtonGroup variant="contained" id="appbar_button">
             <Button id={tipoUsuario? "home_button":"nohome"} onClick={inicio}>Catálogo</Button>

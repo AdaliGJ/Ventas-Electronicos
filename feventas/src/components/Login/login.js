@@ -1,4 +1,4 @@
-import React, {useRef, useContext, useState} from 'react';
+import React, {useRef, useContext, useState, useEffect} from 'react';
 import {LoginContext} from "../../context/LoginContext.js";
 import { Link, useHistory} from "react-router-dom";
 import Alert from '@material-ui/lab/Alert';
@@ -20,6 +20,7 @@ function Login(props){
 
     const[error, setError]=useState(false);
     const { setUsername, username, tipoUsuario, setTipoUsuario }=useContext(LoginContext);
+    const[branch, setBranch]=useState('-');
         
     const usuarioRef = useRef(null);
     const contRef = useRef(null);
@@ -54,10 +55,18 @@ function Login(props){
 
         }
 
+        useEffect(() => {
+          const url = 'http://'+process.env.REACT_APP_IP+':8080/Usuarios/Branch';
+
+          axios.get(url).then(response => response.data)
+            .then((data) => {
+              setBranch(data.respuesta);
+            });
+        }, [])
 
         return(
             <div className="page">
-                    <h1 id="login_tit">Login</h1>
+                    <h1 id="login_tit">{"Login "+branch}</h1>
                     <Grid container direction={"column"} spacing={7}>
                         <Grid item>
                             <TextField className="standard-basic" label="NIT del usuario" placeholder="Usuario" InputProps={{
